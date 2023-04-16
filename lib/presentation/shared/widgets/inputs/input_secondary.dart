@@ -117,10 +117,11 @@ class _InputSecondaryState extends State<InputSecondary> {
                 prefixIcon: widget.prefixIcon,
                 suffixIcon: suffixIcons()),
             style: widget.textStyles ??
-                TextStyles.titleMedium.copyWith(
+                TextStyles.labelLarge.copyWith(
                     color: widget.isEnabled
                         ? AppColors.charcoal
-                        : AppColors.lightGrey),
+                        : AppColors.lightGrey,
+                    fontWeight: FontWeight.w400),
             keyboardType: widget.keyboardType,
             inputFormatters: widget.inputFormatters,
             validator: widget.validator,

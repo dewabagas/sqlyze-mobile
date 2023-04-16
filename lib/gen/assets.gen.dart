@@ -96,6 +96,12 @@ class $AssetsIconsGen {
   /// File path: assets/icons/ic_cross_red.svg
   String get icCrossRed => 'assets/icons/ic_cross_red.svg';
 
+  /// File path: assets/icons/ic_dashboard.svg
+  String get icDashboard => 'assets/icons/ic_dashboard.svg';
+
+  /// File path: assets/icons/ic_dashboard_active.svg
+  String get icDashboardActive => 'assets/icons/ic_dashboard_active.svg';
+
   /// File path: assets/icons/ic_eye_off_blue.svg
   String get icEyeOffBlue => 'assets/icons/ic_eye_off_blue.svg';
 
@@ -141,6 +147,12 @@ class $AssetsIconsGen {
   /// File path: assets/icons/ic_my_account.svg
   String get icMyAccount => 'assets/icons/ic_my_account.svg';
 
+  /// File path: assets/icons/ic_profile.svg
+  String get icProfile => 'assets/icons/ic_profile.svg';
+
+  /// File path: assets/icons/ic_profile_active.svg
+  String get icProfileActive => 'assets/icons/ic_profile_active.svg';
+
   /// File path: assets/icons/ic_profile_blue.svg
   String get icProfileBlue => 'assets/icons/ic_profile_blue.svg';
 
@@ -173,6 +185,8 @@ class $AssetsIconsGen {
         icConsultationGrey,
         icCrossGrey,
         icCrossRed,
+        icDashboard,
+        icDashboardActive,
         icEyeOffBlue,
         icEyeOffRed,
         icEyeOn,
@@ -188,6 +202,8 @@ class $AssetsIconsGen {
         icLogout,
         icMapMarker,
         icMyAccount,
+        icProfile,
+        icProfileActive,
         icProfileBlue,
         icProfileGrey,
         icSetting,
