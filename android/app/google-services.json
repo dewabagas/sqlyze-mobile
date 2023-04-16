@@ -1,0 +1,82 @@
+{
+  "project_info": {
+    "project_number": "593989439104",
+    "project_id": "sqlyze-7eaca",
+    "storage_bucket": "sqlyze-7eaca.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:593989439104:android:8f5bec98ed2b32f664e065",
+        "android_client_info": {
+          "package_name": "com.example.sqlyze"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "593989439104-fqrovco7csp0rq2amed21tgiheqfm1q3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBM7_G-6N7KZVXF3HwtpjeYH6FWgC4kkQc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "593989439104-fqrovco7csp0rq2amed21tgiheqfm1q3.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "593989439104-cudehk5fscnioocj0n0619dm5nj771cv.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.verygoodcore.sqlyze"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:593989439104:android:bb0ef291545a990164e065",
+        "android_client_info": {
+          "package_name": "com.example.verygoodcore.sqlyze"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "593989439104-fqrovco7csp0rq2amed21tgiheqfm1q3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBM7_G-6N7KZVXF3HwtpjeYH6FWgC4kkQc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "593989439104-fqrovco7csp0rq2amed21tgiheqfm1q3.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "593989439104-cudehk5fscnioocj0n0619dm5nj771cv.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.verygoodcore.sqlyze"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
