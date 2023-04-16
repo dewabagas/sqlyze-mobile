@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:sqlyze/presentation/core/constants/styles.dart';
 import 'package:sqlyze/presentation/core/styles/app_colors.dart';
 
 class ButtonGradient extends StatelessWidget {
@@ -34,12 +35,12 @@ class ButtonGradient extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     BoxDecoration decoration = BoxDecoration(
-      borderRadius: BorderRadius.all(Radius.circular(30.r)),
+      borderRadius: BorderRadius.all(Radius.circular(10.r)),
       gradient: LinearGradient(
           begin: Alignment.topLeft,
           end: Alignment.topRight,
           tileMode: TileMode.clamp,
-          colors: [AppColors.primary, AppColors.primary.withOpacity(0.49)]),
+          colors: [AppColors.primary, AppColors.primary.withOpacity(0.59)]),
     );
     if (!enabled) {
       decoration = BoxDecoration(
@@ -77,10 +78,7 @@ class ButtonGradient extends StatelessWidget {
                     padding: const EdgeInsets.symmetric(vertical: 6.0),
                     child: Text(
                       title!,
-                      style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 14,
-                          color: textColor),
+                      style: TextStyles.labelLarge.copyWith(color: AppColors.white, fontWeight: FontWeight.w700),
                     ),
                   ),
                   if (suffixIcon != null) suffixIcon!,

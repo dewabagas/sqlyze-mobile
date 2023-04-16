@@ -64,11 +64,10 @@ class _InputSecondaryState extends State<InputSecondary> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Padding(
-          padding: EdgeInsets.only(top: 20.h, bottom: 12.h),
+          padding: EdgeInsets.only(top: 20.h, bottom: 8.h),
           child: Text(
             widget.label,
-            style: TextStyles.headlineSmall
-                .copyWith(color: AppColors.charcoal, fontSize: 16.sp),
+            style: TextStyles.labelMedium,
           ),
         ),
         Focus(

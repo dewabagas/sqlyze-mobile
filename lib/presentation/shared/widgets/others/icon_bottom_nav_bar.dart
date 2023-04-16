@@ -22,7 +22,7 @@ class IconBottomAppNavBar extends StatefulWidget {
     this.onTabSelected,
     this.initialPage,
   }) : super(key: key) {
-    assert(items!.length == 4);
+    assert(items!.length == 2);
   }
 
   final List<IconBottomNavBarItem>? items;

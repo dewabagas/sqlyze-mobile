@@ -4,7 +4,7 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:sqlyze/presentation/core/constants/styles.dart';
 import 'package:sqlyze/presentation/core/styles/app_colors.dart';
 
-class ButtonPrimary extends StatelessWidget {
+class ButtonSecondary extends StatelessWidget {
   final String? title;
   final Function? onPressed;
   final bool enabled;
@@ -18,7 +18,7 @@ class ButtonPrimary extends StatelessWidget {
   final EdgeInsets? margin;
   final Color? color;
 
-  const ButtonPrimary(
+  const ButtonSecondary(
       {Key? key,
       required this.title,
       required this.onPressed,
@@ -37,13 +37,13 @@ class ButtonPrimary extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     BoxDecoration decoration = BoxDecoration(
-      color: color ?? AppColors.primary,
-      borderRadius: BorderRadius.all(Radius.circular(10.r)),
+      color: color ?? AppColors.lightGrey3,
+      borderRadius: BorderRadius.all(Radius.circular(5.r)),
     );
     if (!enabled) {
       decoration = BoxDecoration(
         color: AppColors.grey,
-        borderRadius: BorderRadius.circular(10.r),
+        borderRadius: BorderRadius.circular(5.r),
       );
     }
     Color textColor = enabled ? AppColors.white : AppColors.black;
@@ -76,7 +76,7 @@ class ButtonPrimary extends StatelessWidget {
                     padding: const EdgeInsets.symmetric(vertical: 6.0),
                     child: Text(
                       title!,
-                      style: textStyle ?? TextStyles.labelLarge
+                      style: TextStyles.labelSmall
                           .copyWith(color: AppColors.white),
                     ),
                   ),

@@ -34,6 +34,13 @@ class AppIcons {
   static const String icIndonesia = 'assets/icons/ic_indonesia.svg';
 }
 
+class BottomBar {
+  static const String icDashboard = 'assets/icons/ic_dashboard.svg';
+  static const String icDashboardActive = 'assets/icons/ic_dashboard_active.svg';
+  static const String icProfile = 'assets/icons/ic_profile.svg';
+  static const String icProfileActive = 'assets/icons/ic_profile_active.svg';
+}
+
 class AppIllustrations {
   static const String illLearning1 = 'assets/illustrations/ill_learning1.svg';
   static const String illLearning2 = 'assets/illustrations/ill_learning2.svg';
