@@ -12,8 +12,8 @@ class IconBottomNavBarItem {
   String? label;
 }
 
-class IconBottomAppNavBar extends StatefulWidget {
-  IconBottomAppNavBar({
+class IconBottomNavBarStudent extends StatefulWidget {
+  IconBottomNavBarStudent({
     Key? key,
     this.items,
     this.centerItemText,
@@ -22,7 +22,7 @@ class IconBottomAppNavBar extends StatefulWidget {
     this.onTabSelected,
     this.initialPage,
   }) : super(key: key) {
-    assert(items!.length == 2);
+    assert(items!.length == 4);
   }
 
   final List<IconBottomNavBarItem>? items;
@@ -33,10 +33,11 @@ class IconBottomAppNavBar extends StatefulWidget {
   final int? initialPage;
 
   @override
-  _IconBottomAppNavBarState createState() => _IconBottomAppNavBarState();
+  _IconBottomNavBarStudentState createState() =>
+      _IconBottomNavBarStudentState();
 }
 
-class _IconBottomAppNavBarState extends State<IconBottomAppNavBar> {
+class _IconBottomNavBarStudentState extends State<IconBottomNavBarStudent> {
   int? _selectedIndex = 0;
 
   _updateIndex(int? index) async {
@@ -60,7 +61,7 @@ class _IconBottomAppNavBarState extends State<IconBottomAppNavBar> {
     });
 
     return Container(
-      decoration: BoxDecoration(boxShadow: [
+      decoration: BoxDecoration(color: Colors.transparent, boxShadow: [
         BoxShadow(
             offset: const Offset(0, 0),
             blurRadius: 15,

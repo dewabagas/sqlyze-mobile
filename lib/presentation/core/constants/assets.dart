@@ -32,22 +32,37 @@ class AppIcons {
   static const String icCrossGrey = 'assets/icons/ic_cross_grey.svg';
   static const String icChecklist = 'assets/icons/ic_checklist.svg';
   static const String icIndonesia = 'assets/icons/ic_indonesia.svg';
+  static const String icGuestAvatar = 'assets/icons/ic_guest_avatar.svg';
+}
+
+class AppLogo {
+  static const String sqlyze = 'assets/icons/sqlyze.svg';
+  static const String sqlyzeVertical = 'assets/icons/sqlyze_vertical.svg';
+  static const String sqlyzeHorizontal = 'assets/icons/sqlyze_horizontal.svg';
 }
 
 class BottomBar {
   static const String icDashboard = 'assets/icons/ic_dashboard.svg';
-  static const String icDashboardActive = 'assets/icons/ic_dashboard_active.svg';
+  static const String icDashboardActive =
+      'assets/icons/ic_dashboard_active.svg';
   static const String icProfile = 'assets/icons/ic_profile.svg';
   static const String icProfileActive = 'assets/icons/ic_profile_active.svg';
+  static const String icCourse = 'assets/icons/ic_course.svg';
+  static const String icCourseActive = 'assets/icons/ic_course_active.svg';
+  static const String icSql = 'assets/icons/ic_sql.svg';
+  static const String icSqlActive = 'assets/icons/ic_sql_active.svg';
 }
 
 class AppIllustrations {
   static const String illLearning1 = 'assets/illustrations/ill_learning1.svg';
   static const String illLearning2 = 'assets/illustrations/ill_learning2.svg';
+  static const String illLearning3 = 'assets/illustrations/ill_learning3.svg';
   static const String illReading1 = 'assets/illustrations/ill_reading1.svg';
-  static const String illConsultation = 'assets/illustrations/ill_consultation.svg';
+  static const String illConsultation =
+      'assets/illustrations/ill_consultation.svg';
   static const String illEducation1 = 'assets/illustrations/ill_education1.svg';
-  static const String illOnlineEducation = 'assets/illustrations/ill_online_education.svg';
+  static const String illOnlineEducation =
+      'assets/illustrations/ill_online_education.svg';
 }
 
 class AppImages {
@@ -58,6 +73,7 @@ class AppImages {
 class AppBanners {
   static const String bnrFreeConsultation =
       'assets/images/bnr_free_consultation.png';
+  static const String bnrWelcome = 'assets/images/bnr_welcome.png';
 }
 
 class BottomNavBar {

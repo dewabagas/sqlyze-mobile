@@ -1,9 +1,11 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:sqlyze/presentation/core/constants/assets.dart';
 import 'package:sqlyze/presentation/core/constants/styles.dart';
 import 'package:sqlyze/presentation/core/styles/app_colors.dart';
+import 'package:sqlyze/presentation/routes/router.gr.dart';
 import 'package:sqlyze/presentation/shared/widgets/buttons/button_gradient.dart';
 import 'package:sqlyze/presentation/shared/widgets/inputs/input_secondary.dart';
 import 'package:sqlyze/presentation/shared/widgets/pages/page_decoration_top.dart';
@@ -27,13 +29,13 @@ class _PageRegisterState extends State<PageRegister> {
   @override
   Widget build(BuildContext context) {
     return PageDecorationTop(
+        resizeToAvoidBottomInset: false,
         appBarTitle: 'Register',
         child: Stack(
           children: [
             Container(
               margin: EdgeInsets.symmetric(horizontal: 20.w),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
+              child: ListView(
                 children: [
                   SizedBox(height: 15.h),
                   InputSecondary(
@@ -48,6 +50,13 @@ class _PageRegisterState extends State<PageRegister> {
                     label: 'Email',
                     hintText: 'Enter Your Email',
                     keyboardType: TextInputType.emailAddress,
+                    onChanged: (String? val) {},
+                    onFocusChange: (hasFocus) {},
+                    onClear: () {},
+                  ),
+                  InputSecondary(
+                    label: 'NIS',
+                    hintText: 'Enter Your NIS',
                     onChanged: (String? val) {},
                     onFocusChange: (hasFocus) {},
                     onClear: () {},
@@ -95,7 +104,9 @@ class _PageRegisterState extends State<PageRegister> {
                               });
                             },
                           ),
-                          Text('Male', style: TextStyles.labelLarge.copyWith(fontWeight: FontWeight.w400)),
+                          Text('Male',
+                              style: TextStyles.labelLarge
+                                  .copyWith(fontWeight: FontWeight.w400)),
                         ],
                       ),
                       SizedBox(width: 40.w),
@@ -111,7 +122,9 @@ class _PageRegisterState extends State<PageRegister> {
                               });
                             },
                           ),
-                          Text('Female', style: TextStyles.labelLarge.copyWith(fontWeight: FontWeight.w400)),
+                          Text('Female',
+                              style: TextStyles.labelLarge
+                                  .copyWith(fontWeight: FontWeight.w400)),
                         ],
                       ),
                     ],
@@ -139,8 +152,10 @@ class _PageRegisterState extends State<PageRegister> {
                   ),
                 ),
                 child: ButtonGradient(
-                  onPressed: () {},
-                  title: 'Lanjut',
+                  onPressed: () {
+                    AutoRouter.of(context).push(const RouteOtp());
+                  },
+                  title: 'Continue',
                 ),
               ),
             )

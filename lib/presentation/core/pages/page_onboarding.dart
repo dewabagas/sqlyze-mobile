@@ -40,7 +40,7 @@ class _PageOnboardingState extends State<PageOnboarding> {
         children: [
           Container(
             height: screenHeight,
-            color: AppColors.primary,
+            color: AppColors.white,
             child: Padding(
               padding: EdgeInsets.only(bottom: 270.h),
               child: CarouselSlider(
@@ -121,8 +121,9 @@ class _PageOnboardingState extends State<PageOnboarding> {
                       SizedBox(
                         width: screenWidth / 1.2,
                         child: Text(listOnBoarding[currentIndex].desc ?? '',
-                            style: TextStyles.bodyMedium
-                                .copyWith(color: AppColors.paragraphColor),
+                            style: TextStyles.bodyMedium.copyWith(
+                                color: AppColors.paragraphColor,
+                                fontWeight: FontWeight.w400),
                             textAlign: TextAlign.center),
                       ),
                     ],
@@ -134,12 +135,13 @@ class _PageOnboardingState extends State<PageOnboarding> {
                       child: ButtonGradient(
                           suffixIcon: SvgPicture.asset(AppIcons.icArrowRight),
                           title: '',
-                          height: 50.h,
                           margin: EdgeInsets.symmetric(horizontal: 18.w),
                           width: double.infinity,
+                          borderRadius: BorderRadius.circular(100.r),
                           onPressed: () {
                             log('message');
-                            AutoRouter.of(context).push(const RouteGuestDashboard());
+                            AutoRouter.of(context)
+                                .push(const RouteStudentDashboard());
                           }),
                     ),
                   ),
@@ -155,19 +157,19 @@ class _PageOnboardingState extends State<PageOnboarding> {
   setupOnboarding() {
     listOnBoarding.add(Introduction(
         id: '0',
-        image: AppIllustrations.illConsultation,
+        image: AppIllustrations.illLearning1,
         title: 'Akses Mudah, Fleksibel, dan Efisien',
         desc:
             'Asah keterampilan database Anda melalui aplikasi e-learning yang menawarkan materi pelajaran, latihan, dan ujian secara interaktif.'));
     listOnBoarding.add(Introduction(
         id: '1',
-        image: AppIllustrations.illConsultation,
+        image: AppIllustrations.illLearning2,
         title: 'Belajar Database, Tingkatkan Kemampuan',
         desc:
             'Kuasai keterampilan manajemen database dan jadilah siswa SMK yang handal di bidang teknologi informasi.'));
     listOnBoarding.add(Introduction(
         id: '2',
-        image: AppIllustrations.illConsultation,
+        image: AppIllustrations.illLearning3,
         title: 'E-Learning Terstruktur, Pencapaian Optimal',
         desc:
             'Nikmati metode belajar yang terstruktur dan terarah, khusus dirancang untuk membantu siswa SMK menguasai ilmu database.'));

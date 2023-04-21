@@ -76,8 +76,9 @@ class ButtonPrimary extends StatelessWidget {
                     padding: const EdgeInsets.symmetric(vertical: 6.0),
                     child: Text(
                       title!,
-                      style: textStyle ?? TextStyles.labelLarge
-                          .copyWith(color: AppColors.white),
+                      style: textStyle ??
+                          TextStyles.labelLarge
+                              .copyWith(color: AppColors.white),
                     ),
                   ),
                   if (suffixIcon != null) suffixIcon!,

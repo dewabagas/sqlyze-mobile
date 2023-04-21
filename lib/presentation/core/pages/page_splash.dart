@@ -15,6 +15,7 @@ class _PageSplashState extends State<PageSplash> {
   @override
   void initState() {
     Future.delayed(const Duration(seconds: 1), () {
+      log('go to guest dashboard');
       AutoRouter.of(context).push(const RouteOnboarding());
     });
     super.initState();

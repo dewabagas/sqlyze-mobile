@@ -10,6 +10,7 @@ import 'package:sqlyze/presentation/shared/widgets/buttons/button_gradient.dart'
 import 'package:sqlyze/presentation/shared/widgets/buttons/button_primary.dart';
 import 'package:sqlyze/presentation/shared/widgets/inputs/input_secondary.dart';
 import 'package:sqlyze/presentation/shared/widgets/pages/page_decoration_top.dart';
+import 'package:sqlyze/presentation/student_dashboard/page_student_dashboard.dart';
 
 class TabGuestLogin extends StatefulWidget {
   const TabGuestLogin({super.key});
@@ -65,7 +66,12 @@ class _TabGuestLoginState extends State<TabGuestLogin> {
                 padding: EdgeInsets.only(bottom: 30.h),
                 child: Column(
                   children: [
-                    ButtonGradient(title: 'Login', onPressed: () {}),
+                    ButtonGradient(
+                        title: 'Login',
+                        onPressed: () {
+                          AutoRouter.of(context)
+                              .push(const RouteStudentDashboard());
+                        }),
                     SizedBox(height: 20.w),
                     Row(
                       children: [

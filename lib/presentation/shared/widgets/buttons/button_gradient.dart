@@ -16,6 +16,7 @@ class ButtonGradient extends StatelessWidget {
   final Widget? suffixIcon;
   final EdgeInsets? padding;
   final EdgeInsets? margin;
+  final BorderRadiusGeometry? borderRadius;
 
   const ButtonGradient(
       {Key? key,
@@ -29,13 +30,14 @@ class ButtonGradient extends StatelessWidget {
       this.prefixIcon,
       this.padding,
       this.margin,
-      this.suffixIcon})
+      this.suffixIcon,
+      this.borderRadius})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     BoxDecoration decoration = BoxDecoration(
-      borderRadius: BorderRadius.all(Radius.circular(10.r)),
+      borderRadius: borderRadius ?? BorderRadius.all(Radius.circular(10.r)),
       gradient: LinearGradient(
           begin: Alignment.topLeft,
           end: Alignment.topRight,
@@ -74,12 +76,10 @@ class ButtonGradient extends StatelessWidget {
                     : MainAxisAlignment.spaceBetween,
                 children: [
                   if (prefixIcon != null) prefixIcon!,
-                  Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 6.0),
-                    child: Text(
-                      title!,
-                      style: TextStyles.labelLarge.copyWith(color: AppColors.white, fontWeight: FontWeight.w700),
-                    ),
+                  Text(
+                    title!,
+                    style: TextStyles.labelLarge.copyWith(
+                        color: AppColors.white, fontWeight: FontWeight.w700),
                   ),
                   if (suffixIcon != null) suffixIcon!,
                 ],
