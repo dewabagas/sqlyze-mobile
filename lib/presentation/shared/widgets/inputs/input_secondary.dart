@@ -24,10 +24,13 @@ class InputSecondary extends StatefulWidget {
   final bool isFocused;
   final bool isEnabled;
   final EdgeInsetsGeometry? contentPadding;
+  final EdgeInsetsGeometry? labelPadding;
   final TextEditingController? controller;
   final FocusNode? focusNode;
   final TextStyle? textStyles;
   final int? maxLength;
+  final int? minLines;
+  final int? maxLines;
   const InputSecondary(
       {Key? key,
       this.validator,
@@ -40,6 +43,7 @@ class InputSecondary extends StatefulWidget {
       this.inputFormatters,
       this.isDense,
       this.contentPadding,
+      this.labelPadding,
       this.onSaved,
       this.onChanged,
       this.focusNode,
@@ -50,7 +54,9 @@ class InputSecondary extends StatefulWidget {
       this.onClear,
       this.textStyles,
       this.controller,
-      this.maxLength})
+      this.maxLength,
+      this.minLines,
+      this.maxLines})
       : super(key: key);
 
   @override
@@ -64,7 +70,8 @@ class _InputSecondaryState extends State<InputSecondary> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Padding(
-          padding: EdgeInsets.only(top: 20.h, bottom: 8.h),
+          padding:
+              widget.labelPadding ?? EdgeInsets.only(top: 20.h, bottom: 8.h),
           child: Text(
             widget.label,
             style: TextStyles.labelMedium,
@@ -127,6 +134,8 @@ class _InputSecondaryState extends State<InputSecondary> {
             validator: widget.validator,
             onSaved: widget.onSaved,
             onChanged: widget.onChanged,
+            minLines: widget.minLines,
+            maxLines: widget.maxLines,
           ),
         ),
       ],
