@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:sqlyze/presentation/core/constants/assets.dart';
 import 'package:sqlyze/presentation/core/styles/app_colors.dart';
-import 'package:sqlyze/presentation/guest_dashboard/tabs/tab_guest_home.dart';
-import 'package:sqlyze/presentation/guest_dashboard/tabs/tab_guest_login.dart';
 import 'package:sqlyze/presentation/shared/widgets/others/icon_bottom_nav_bar_student.dart';
 import 'package:sqlyze/presentation/student_dashboard/tabs/tab_student_courses.dart';
 import 'package:sqlyze/presentation/student_dashboard/tabs/tab_student_home.dart';
@@ -27,7 +25,7 @@ class _PageStudentDashboardState extends State<PageStudentDashboard> {
     IconBottomNavBarItem(
         iconActive: BottomBar.icCourseActive,
         iconInactive: BottomBar.icCourse,
-        label: 'My Courses'),
+        label: 'Analysis'),
     IconBottomNavBarItem(
         iconActive: BottomBar.icSqlActive,
         iconInactive: BottomBar.icSql,
@@ -54,14 +52,22 @@ class _PageStudentDashboardState extends State<PageStudentDashboard> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: widgetOptions.elementAt(_currentIndex),
-        // backgroundColor: Colors.transparent,
-        bottomNavigationBar: IconBottomNavBarStudent(
-          backgroundColor: AppColors.white,
-          notchedShape: const CircularNotchedRectangle(),
-          onTabSelected: _onItemTapped,
-          initialPage: _currentIndex,
-          items: items,
-        ));
+      body: widgetOptions.elementAt(_currentIndex),
+      bottomNavigationBar: IconBottomNavBarStudent(
+        backgroundColor: AppColors.white,
+        notchedShape: const CircularNotchedRectangle(),
+        onTabSelected: _onItemTapped,
+        initialPage: _currentIndex,
+        items: items,
+      ),
+      floatingActionButton: Visibility(
+        visible: _currentIndex == 0,
+        child: FloatingActionButton(
+          backgroundColor: AppColors.primary,
+          onPressed: () {},
+          child: const Icon(Icons.wechat, color: AppColors.white),
+        ),
+      ),
+    );
   }
 }

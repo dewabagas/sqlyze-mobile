@@ -35,11 +35,10 @@ AppBar appbarLogo(
             icon: const Icon(Icons.arrow_back, color: Colors.white),
             onPressed: onBackPressed as void Function()?)
         : const SizedBox.shrink(),
-    title: SvgPicture.asset(
+    title: Image.asset(
       AppLogo.sqlyze,
       width: 30.w,
       height: 30.w,
-      colorBlendMode: BlendMode.color,
     ),
     centerTitle: true,
     backgroundColor: AppColors.primary,

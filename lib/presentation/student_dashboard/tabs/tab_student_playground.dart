@@ -11,6 +11,7 @@ class TabStudentPlayground extends StatefulWidget {
 class _TabStudentPlaygroundState extends State<TabStudentPlayground> {
   @override
   Widget build(BuildContext context) {
-    return PageDecorationTop(child: Container());
+    return PageDecorationTop(
+        appBarTitle: 'SQL Playground', hasBack: false, child: Container());
   }
 }

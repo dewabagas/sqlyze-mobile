@@ -31,9 +31,8 @@ class AppbarLogo extends StatelessWidget implements PreferredSizeWidget {
       systemOverlayStyle: SystemUiOverlayStyle(
         statusBarColor: statusBarColor,
       ),
-      title: SvgPicture.asset(
-        AppLogo.sqlyze,
-        width: 30.w,
+      title: Image.asset(
+        AppLogo.sqlyzeHorizontal,
         height: 30.w,
       ),
       centerTitle: true,

@@ -12,6 +12,6 @@ class _TabStudentCoursesState extends State<TabStudentCourses> {
   @override
   Widget build(BuildContext context) {
     return PageDecorationTop(
-        appBarTitle: 'Learning Analysis', child: Container());
+        hasBack: false, appBarTitle: 'Learning Analysis', child: Container());
   }
 }

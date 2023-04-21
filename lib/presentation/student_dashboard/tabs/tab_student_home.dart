@@ -8,6 +8,7 @@ import 'package:sqlyze/presentation/shared/widgets/appbars/appbar_label.dart';
 import 'package:sqlyze/presentation/shared/widgets/appbars/appbar_logo.dart';
 import 'package:sqlyze/presentation/shared/widgets/pages/page_decoration_top.dart';
 import 'package:sqlyze/presentation/student_dashboard/components/greetings_section.dart';
+import 'package:sqlyze/presentation/student_dashboard/components/subject_section.dart';
 
 class TabStudentHome extends StatefulWidget {
   const TabStudentHome({super.key});
@@ -32,7 +33,8 @@ class _TabStudentHomeState extends State<TabStudentHome> {
       ),
       child: Column(
         children: [
-          AppbarLogo(appBar: AppBar(), backgroundColor: Colors.transparent),
+          SizedBox(height: 50.h),
+          // AppbarLogo(appBar: AppBar(), backgroundColor: Colors.transparent),
           Expanded(
               child: ListView(
             physics: const ClampingScrollPhysics(),
@@ -46,6 +48,7 @@ class _TabStudentHomeState extends State<TabStudentHome> {
                     width: screenWidth,
                     height: screenHeight,
                     margin: EdgeInsets.only(top: 0.h),
+                    padding: EdgeInsets.symmetric(horizontal: 0.w),
                     decoration: BoxDecoration(
                         color: Colors.white,
                         borderRadius: BorderRadius.only(
@@ -53,7 +56,14 @@ class _TabStudentHomeState extends State<TabStudentHome> {
                           topRight: Radius.circular(25.r),
                         )),
                     child: Column(
-                      children: [Image.asset(AppBanners.bnrWelcome)],
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Image.asset(
+                          AppBanners.bnrWelcome,
+                          width: double.infinity,
+                        ),
+                        SubjectSection()
+                      ],
                     ),
                   ),
                 ],

@@ -33,12 +33,13 @@ class AppIcons {
   static const String icChecklist = 'assets/icons/ic_checklist.svg';
   static const String icIndonesia = 'assets/icons/ic_indonesia.svg';
   static const String icGuestAvatar = 'assets/icons/ic_guest_avatar.svg';
+  static const String icHelpCenter = 'assets/icons/ic_help_center.svg';
 }
 
 class AppLogo {
-  static const String sqlyze = 'assets/icons/sqlyze.svg';
+  static const String sqlyze = 'assets/icons/sqlyze.png';
   static const String sqlyzeVertical = 'assets/icons/sqlyze_vertical.svg';
-  static const String sqlyzeHorizontal = 'assets/icons/sqlyze_horizontal.svg';
+  static const String sqlyzeHorizontal = 'assets/icons/sqlyze_horizontal.png';
 }
 
 class BottomBar {
@@ -57,6 +58,7 @@ class AppIllustrations {
   static const String illLearning1 = 'assets/illustrations/ill_learning1.svg';
   static const String illLearning2 = 'assets/illustrations/ill_learning2.svg';
   static const String illLearning3 = 'assets/illustrations/ill_learning3.svg';
+  static const String illLearning4 = 'assets/illustrations/ill_learning4.svg';
   static const String illReading1 = 'assets/illustrations/ill_reading1.svg';
   static const String illConsultation =
       'assets/illustrations/ill_consultation.svg';
@@ -74,6 +76,8 @@ class AppBanners {
   static const String bnrFreeConsultation =
       'assets/images/bnr_free_consultation.png';
   static const String bnrWelcome = 'assets/images/bnr_welcome.png';
+  static const String bnrDdl = 'assets/images/bnr_ddl.svg';
+  static const String bnrDml = 'assets/images/bnr_dml.svg';
 }
 
 class BottomNavBar {
