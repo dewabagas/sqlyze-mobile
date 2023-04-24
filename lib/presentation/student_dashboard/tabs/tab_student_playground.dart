@@ -1,5 +1,7 @@
 import 'dart:developer';
 
+import 'package:date_format/date_format.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:sqflite/sqflite.dart';
@@ -8,7 +10,11 @@ import 'package:sqlyze/presentation/core/helpers/database_helper.dart';
 import 'package:sqlyze/presentation/core/styles/app_colors.dart';
 import 'package:sqlyze/presentation/shared/widgets/buttons/button_primary.dart';
 import 'package:sqlyze/presentation/shared/widgets/inputs/input_secondary.dart';
+import 'package:sqlyze/presentation/shared/widgets/others/expandable_page_view/expandable_page_view.dart';
 import 'package:sqlyze/presentation/shared/widgets/pages/page_decoration_top.dart';
+import 'package:sqlyze/presentation/student_dashboard/components/tab_playground_query.dart';
+import 'package:sqlyze/presentation/student_dashboard/components/tab_query_result.dart';
+import 'package:sqlyze/presentation/student_dashboard/components/tab_query_table.dart';
 
 class TabStudentPlayground extends StatefulWidget {
   const TabStudentPlayground({super.key});
@@ -18,6 +24,8 @@ class TabStudentPlayground extends StatefulWidget {
 }
 
 class _TabStudentPlaygroundState extends State<TabStudentPlayground> {
+  int selectedIndex = 0;
+  late PageController pageController;
   TextEditingController queryController = TextEditingController();
   Future<List<Map<String, dynamic>>>? queryResults;
   Future<List<String>>? tables;
@@ -30,7 +38,14 @@ class _TabStudentPlaygroundState extends State<TabStudentPlayground> {
 
   @override
   void initState() {
+    pageController = PageController(initialPage: 0);
     super.initState();
+  }
+
+  @override
+  void dispose() {
+    pageController.dispose();
+    super.dispose();
   }
 
   @override
@@ -38,157 +53,126 @@ class _TabStudentPlaygroundState extends State<TabStudentPlayground> {
     return PageDecorationTop(
         appBarTitle: 'SQL Playground',
         hasBack: false,
-        child: Container(
-          padding: EdgeInsets.symmetric(horizontal: 16.w),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              SizedBox(height: 20.h),
-              ExpansionTile(
-                shape: const RoundedRectangleBorder(),
-                childrenPadding: EdgeInsets.zero,
-                tilePadding: EdgeInsets.zero,
-                backgroundColor: Colors.transparent,
-                collapsedIconColor: AppColors.charcoal,
-                iconColor: AppColors.primary,
-                title: Text('Tap to use on of these Queries !',
-                    style: TextStyles.labelMedium
-                        .copyWith(color: AppColors.charcoal)),
-                children: [
-                  Container(
-                    padding:
-                        EdgeInsets.symmetric(horizontal: 4.w, vertical: 10.h),
-                    decoration: BoxDecoration(
-                      color: AppColors.lightGrey4,
-                      border: Border.all(color: AppColors.lightGrey4),
-                      borderRadius: BorderRadius.circular(10.r),
-                    ),
-                    child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
-                        children: List.generate(4, (index) {
-                          return InkWell(
-                            onTap: () {
-                              setState(() {
-                                if (queryController.text.isEmpty) {
-                                  queryController.text = queryItems[index];
-                                } else {
-                                  queryController.text =
-                                      '${queryController.text} ${queryItems[index]}';
-                                }
-                              });
-                            },
-                            child: Container(
-                              padding: EdgeInsets.symmetric(
-                                  horizontal: 12.w, vertical: 4.h),
-                              decoration: BoxDecoration(
-                                color: AppColors.secondary,
-                                borderRadius: BorderRadius.circular(30.r),
-                              ),
-                              child: Text(queryItems[index],
-                                  style: TextStyles.bodyMedium
-                                      .copyWith(color: AppColors.white)),
-                            ),
-                          );
-                        })),
-                  ),
-                ],
-              ),
-              SizedBox(height: 10.h),
-              Text('Or you can manually type it here !',
-                  style: TextStyles.labelMedium
-                      .copyWith(color: AppColors.charcoal)),
-              InputSecondary(
-                controller: queryController,
-                hintText: 'Enter SQL Query',
-                labelPadding: EdgeInsets.zero,
-                keyboardType: TextInputType.multiline,
-                minLines: 1,
-                maxLines: 5,
-              ),
-              Align(
-                alignment: Alignment.centerRight,
-                child: InkWell(
-                    onTap: () {
-                      queryController.text = '';
-                    },
-                    child: Text('Clear Query',
-                        style: TextStyles.bodyVerySmall.copyWith(
-                            color: AppColors.primary,
-                            fontWeight: FontWeight.w700))),
-              ),
-              SizedBox(height: 10.h),
-              ButtonPrimary(
-                title: 'Execute Query',
-                onPressed: executeQuery,
-              ),
-              SizedBox(height: 10.h),
-              InkWell(
-                  onTap: () {
-                    setState(() {
-                      tables = getAllTables();
-                    });
-                  },
-                  child: Text('Show Tables',
-                      style: TextStyles.bodyVerySmall.copyWith(
-                          color: AppColors.primary,
-                          fontWeight: FontWeight.w700))),
-              Expanded(child: buildTableList()),
-              Expanded(
-                child: buildQueryResult(),
-              ),
-            ],
-          ),
-        ));
-  }
-
-  Widget buildTableList() {
-    return FutureBuilder<List<String>>(
-      future: tables,
-      builder: (context, snapshot) {
-        if (snapshot.connectionState == ConnectionState.done) {
-          if (snapshot.hasError) {
-            return Center(child: Text('Error: ${snapshot.error}'));
-          } else {
-            final tables = snapshot.data!;
-            return ListView.builder(
-              itemCount: tables.length,
-              itemBuilder: (context, index) {
-                return ExpansionTile(
-                  title: Text(tables[index]),
+        child: SingleChildScrollView(
+          child: Container(
+            padding: EdgeInsets.symmetric(horizontal: 16.w),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                SizedBox(height: 20.h),
+                ExpansionTile(
+                  shape: const RoundedRectangleBorder(),
+                  childrenPadding: EdgeInsets.zero,
+                  tilePadding: EdgeInsets.zero,
+                  backgroundColor: Colors.transparent,
+                  collapsedIconColor: AppColors.charcoal,
+                  iconColor: AppColors.primary,
+                  title: Text('Tap to use on of these Queries !',
+                      style: TextStyles.labelMedium
+                          .copyWith(color: AppColors.charcoal)),
                   children: [
-                    FutureBuilder<List<Map<String, dynamic>>>(
-                      future: getTableProperties(tables[index]),
-                      builder: (context, snapshot) {
-                        if (snapshot.connectionState == ConnectionState.done) {
-                          if (snapshot.hasError) {
-                            return Text('Error: ${snapshot.error}');
-                          } else {
-                            final properties = snapshot.data!;
-                            return Column(
-                              children: properties.map((property) {
-                                return ListTile(
-                                  title: Text(property['name'].toString()),
-                                  subtitle: Text(
-                                      'Type: ' + property['type'].toString()),
-                                );
-                              }).toList(),
+                    Container(
+                      padding:
+                          EdgeInsets.symmetric(horizontal: 4.w, vertical: 10.h),
+                      decoration: BoxDecoration(
+                        color: AppColors.lightGrey4,
+                        border: Border.all(color: AppColors.lightGrey4),
+                        borderRadius: BorderRadius.circular(10.r),
+                      ),
+                      child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          children: List.generate(4, (index) {
+                            return InkWell(
+                              onTap: () {
+                                setState(() {
+                                  if (queryController.text.isEmpty) {
+                                    queryController.text = queryItems[index];
+                                  } else {
+                                    queryController.text =
+                                        '${queryController.text} ${queryItems[index]}';
+                                  }
+                                });
+                              },
+                              child: Container(
+                                padding: EdgeInsets.symmetric(
+                                    horizontal: 12.w, vertical: 4.h),
+                                decoration: BoxDecoration(
+                                  color: AppColors.secondary,
+                                  borderRadius: BorderRadius.circular(30.r),
+                                ),
+                                child: Text(queryItems[index],
+                                    style: TextStyles.bodyMedium
+                                        .copyWith(color: AppColors.white)),
+                              ),
                             );
-                          }
-                        } else {
-                          return const SizedBox.shrink();
-                        }
-                      },
+                          })),
                     ),
                   ],
-                );
-              },
-            );
-          }
-        } else {
-          return const SizedBox.shrink();
-        }
-      },
-    );
+                ),
+                SizedBox(height: 10.h),
+                Text('Or you can manually type it here !',
+                    style: TextStyles.labelMedium
+                        .copyWith(color: AppColors.charcoal)),
+                InputSecondary(
+                  controller: queryController,
+                  hintText: 'Enter SQL Query',
+                  labelPadding: EdgeInsets.zero,
+                  keyboardType: TextInputType.multiline,
+                  minLines: 1,
+                  maxLines: 5,
+                ),
+                Align(
+                  alignment: Alignment.centerRight,
+                  child: InkWell(
+                      onTap: () {
+                        queryController.text = '';
+                      },
+                      child: Text('Clear Query',
+                          style: TextStyles.bodyVerySmall.copyWith(
+                              color: AppColors.primary,
+                              fontWeight: FontWeight.w700))),
+                ),
+                SizedBox(height: 10.h),
+                ButtonPrimary(
+                  title: 'Execute Query',
+                  onPressed: executeQuery,
+                ),
+                SizedBox(height: 10.h),
+                TabPlaygroundQuery(
+                  selectedIndex: selectedIndex,
+                  onValueChanged: (i) {
+                    pageController.animateToPage(
+                      i,
+                      duration: const Duration(milliseconds: 250),
+                      curve: Curves.ease,
+                    );
+                    setState(() {
+                      selectedIndex = i;
+                    });
+                  },
+                ),
+                ExpandablePageView(
+                  dragStartBehavior: DragStartBehavior.start,
+                  controller: pageController,
+                  physics: PageScrollPhysics()
+                      .applyTo(const ClampingScrollPhysics()),
+                  animateFirstPage: true,
+                  onPageChanged: (pageIndex) {
+                    setState(() {
+                      selectedIndex = pageIndex;
+                    });
+                  },
+                  children: [
+                    TabQueryTable(),
+                    TabQueryResult(
+                      queryResults: queryResults,
+                    )
+                  ],
+                ),
+              ],
+            ),
+          ),
+        ));
   }
 
   Widget buildQueryResult() {
@@ -226,28 +210,17 @@ class _TabStudentPlaygroundState extends State<TabStudentPlayground> {
       List<Map<String, dynamic>> results = await db.rawQuery(query);
       setState(() {
         queryResults = Future.value(results);
+        selectedIndex = 1;
       });
+      pageController.animateToPage(
+        1,
+        duration: const Duration(milliseconds: 250),
+        curve: Curves.ease,
+      );
     } catch (e) {
       setState(() {
         queryResults = Future.error(e.toString());
       });
     }
-  }
-
-  Future<List<String>> getAllTables() async {
-    log('getAllTables');
-    Database db = await DatabaseHelper().database;
-    final List<Map<String, dynamic>> tables =
-        await db.rawQuery("SELECT name FROM sqlite_master WHERE type='table'");
-    final tableNames = tables.map((table) => table['name'] as String).toList();
-    return tableNames;
-  }
-
-  Future<List<Map<String, dynamic>>> getTableProperties(
-      String tableName) async {
-    Database db = await DatabaseHelper().database;
-    final List<Map<String, dynamic>> columns =
-        await db.rawQuery('PRAGMA table_info($tableName)');
-    return columns;
   }
 }
