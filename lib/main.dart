@@ -5,7 +5,10 @@ import 'package:flutter/services.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
+import 'package:injectable/injectable.dart';
+import 'package:sqlyze/injection.dart';
 import 'package:sqlyze/presentation/core/app.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 void main() async {
   // WidgetsFlutterBinding.ensureInitialized();
@@ -14,6 +17,8 @@ void main() async {
   SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
   await Firebase.initializeApp();
   await _initializeCrashlytics();
+  await dotenv.load(fileName: ".env");
+  configureInjection(Environment.dev);
   runApp(App());
 }
 

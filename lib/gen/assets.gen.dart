@@ -90,6 +90,12 @@ class $AssetsIconsGen {
   /// File path: assets/icons/ic_consultation_grey.svg
   String get icConsultationGrey => 'assets/icons/ic_consultation_grey.svg';
 
+  /// File path: assets/icons/ic_course.svg
+  String get icCourse => 'assets/icons/ic_course.svg';
+
+  /// File path: assets/icons/ic_course_active.svg
+  String get icCourseActive => 'assets/icons/ic_course_active.svg';
+
   /// File path: assets/icons/ic_cross_grey.svg
   String get icCrossGrey => 'assets/icons/ic_cross_grey.svg';
 
@@ -125,6 +131,12 @@ class $AssetsIconsGen {
 
   /// File path: assets/icons/ic_gopay.svg
   String get icGopay => 'assets/icons/ic_gopay.svg';
+
+  /// File path: assets/icons/ic_guest_avatar.svg
+  String get icGuestAvatar => 'assets/icons/ic_guest_avatar.svg';
+
+  /// File path: assets/icons/ic_help_center.svg
+  String get icHelpCenter => 'assets/icons/ic_help_center.svg';
 
   /// File path: assets/icons/ic_history.svg
   String get icHistory => 'assets/icons/ic_history.svg';
@@ -162,6 +174,12 @@ class $AssetsIconsGen {
   /// File path: assets/icons/ic_setting.svg
   String get icSetting => 'assets/icons/ic_setting.svg';
 
+  /// File path: assets/icons/ic_sql.svg
+  String get icSql => 'assets/icons/ic_sql.svg';
+
+  /// File path: assets/icons/ic_sql_active.svg
+  String get icSqlActive => 'assets/icons/ic_sql_active.svg';
+
   /// File path: assets/icons/ic_star.svg
   String get icStar => 'assets/icons/ic_star.svg';
 
@@ -171,8 +189,24 @@ class $AssetsIconsGen {
   /// File path: assets/icons/ic_tips_grey.svg
   String get icTipsGrey => 'assets/icons/ic_tips_grey.svg';
 
+  /// File path: assets/icons/sqlyze.png
+  AssetGenImage get sqlyzePng => const AssetGenImage('assets/icons/sqlyze.png');
+
+  /// File path: assets/icons/sqlyze.svg
+  String get sqlyzeSvg => 'assets/icons/sqlyze.svg';
+
+  /// File path: assets/icons/sqlyze_horizontal.png
+  AssetGenImage get sqlyzeHorizontalPng =>
+      const AssetGenImage('assets/icons/sqlyze_horizontal.png');
+
+  /// File path: assets/icons/sqlyze_horizontal.svg
+  String get sqlyzeHorizontalSvg => 'assets/icons/sqlyze_horizontal.svg';
+
+  /// File path: assets/icons/sqlyze_vertical.svg
+  String get sqlyzeVertical => 'assets/icons/sqlyze_vertical.svg';
+
   /// List of all assets
-  List<String> get values => [
+  List<dynamic> get values => [
         icArrowRight,
         icCalendar,
         icCase,
@@ -183,6 +217,8 @@ class $AssetsIconsGen {
         icClock,
         icConsultationBlue,
         icConsultationGrey,
+        icCourse,
+        icCourseActive,
         icCrossGrey,
         icCrossRed,
         icDashboard,
@@ -195,6 +231,8 @@ class $AssetsIconsGen {
         icFilter,
         icGoogleRound,
         icGopay,
+        icGuestAvatar,
+        icHelpCenter,
         icHistory,
         icHomeBlue,
         icHomeGrey,
@@ -207,9 +245,16 @@ class $AssetsIconsGen {
         icProfileBlue,
         icProfileGrey,
         icSetting,
+        icSql,
+        icSqlActive,
         icStar,
         icTipsBlue,
-        icTipsGrey
+        icTipsGrey,
+        sqlyzePng,
+        sqlyzeSvg,
+        sqlyzeHorizontalPng,
+        sqlyzeHorizontalSvg,
+        sqlyzeVertical
       ];
 }
 
@@ -227,6 +272,12 @@ class $AssetsIllustrationsGen {
 
   /// File path: assets/illustrations/ill_learning2.svg
   String get illLearning2 => 'assets/illustrations/ill_learning2.svg';
+
+  /// File path: assets/illustrations/ill_learning3.svg
+  String get illLearning3 => 'assets/illustrations/ill_learning3.svg';
+
+  /// File path: assets/illustrations/ill_learning4.svg
+  String get illLearning4 => 'assets/illustrations/ill_learning4.svg';
 
   /// File path: assets/illustrations/ill_online_education.svg
   String get illOnlineEducation =>
@@ -247,11 +298,37 @@ class $AssetsIllustrationsGen {
         illEducation1,
         illLearning1,
         illLearning2,
+        illLearning3,
+        illLearning4,
         illOnlineEducation,
         illReading1,
         illTexting,
         illWaiting
       ];
+}
+
+class $AssetsImagesGen {
+  const $AssetsImagesGen();
+
+  /// File path: assets/images/bnr_ddl.svg
+  String get bnrDdl => 'assets/images/bnr_ddl.svg';
+
+  /// File path: assets/images/bnr_dml.svg
+  String get bnrDml => 'assets/images/bnr_dml.svg';
+
+  /// File path: assets/images/bnr_welcome.png
+  AssetGenImage get bnrWelcomePng =>
+      const AssetGenImage('assets/images/bnr_welcome.png');
+
+  /// File path: assets/images/bnr_welcome.svg
+  String get bnrWelcomeSvg => 'assets/images/bnr_welcome.svg';
+
+  /// File path: assets/images/bnr_welcome2.svg
+  String get bnrWelcome2 => 'assets/images/bnr_welcome2.svg';
+
+  /// List of all assets
+  List<dynamic> get values =>
+      [bnrDdl, bnrDml, bnrWelcomePng, bnrWelcomeSvg, bnrWelcome2];
 }
 
 class Assets {
@@ -261,6 +338,7 @@ class Assets {
   static const $AssetsIconsGen icons = $AssetsIconsGen();
   static const $AssetsIllustrationsGen illustrations =
       $AssetsIllustrationsGen();
+  static const $AssetsImagesGen images = $AssetsImagesGen();
 }
 
 class AssetGenImage {
