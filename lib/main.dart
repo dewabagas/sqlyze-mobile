@@ -7,6 +7,7 @@ import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:injectable/injectable.dart';
 import 'package:sqlyze/injection.dart';
+import 'package:sqlyze/locator.dart';
 import 'package:sqlyze/presentation/core/app.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 
@@ -19,6 +20,7 @@ void main() async {
   await _initializeCrashlytics();
   await dotenv.load(fileName: ".env");
   configureInjection(Environment.dev);
+  await initializeDependencies();
   runApp(App());
 }
 

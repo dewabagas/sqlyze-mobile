@@ -31,6 +31,7 @@ class InputSecondary extends StatefulWidget {
   final int? maxLength;
   final int? minLines;
   final int? maxLines;
+  final TextCapitalization textCapitalization;
   const InputSecondary(
       {Key? key,
       this.validator,
@@ -56,7 +57,8 @@ class InputSecondary extends StatefulWidget {
       this.controller,
       this.maxLength,
       this.minLines,
-      this.maxLines})
+      this.maxLines,
+      this.textCapitalization = TextCapitalization.none})
       : super(key: key);
 
   @override
@@ -80,6 +82,7 @@ class _InputSecondaryState extends State<InputSecondary> {
         Focus(
           onFocusChange: widget.onFocusChange,
           child: TextFormField(
+            textCapitalization: widget.textCapitalization,
             maxLength: widget.maxLength,
             controller: widget.controller,
             initialValue: widget.initialValue,

@@ -65,6 +65,8 @@ class AppIllustrations {
   static const String illEducation1 = 'assets/illustrations/ill_education1.svg';
   static const String illOnlineEducation =
       'assets/illustrations/ill_online_education.svg';
+  static const String illSad = 'assets/illustrations/ill_sad.svg';
+  static const String illSmile = 'assets/illustrations/ill_smile.svg';
 }
 
 class AppImages {
