@@ -1,10 +1,14 @@
 import 'dart:developer';
 
+import 'package:ars_dialog/ars_dialog.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:sqlyze/application/bloc/auth_bloc.dart';
 import 'package:sqlyze/domain/auth/requests/auth_request.dart';
+import 'package:sqlyze/domain/core/constants/preference_constants.dart';
+import 'package:sqlyze/domain/core/helpers/preference_helper.dart';
 import 'package:sqlyze/injection.dart';
 import 'package:sqlyze/presentation/core/constants/styles.dart';
 import 'package:sqlyze/presentation/core/styles/app_colors.dart';
@@ -12,6 +16,7 @@ import 'package:sqlyze/presentation/routes/router.gr.dart';
 import 'package:sqlyze/presentation/shared/widgets/buttons/button_gradient.dart';
 import 'package:sqlyze/presentation/shared/widgets/buttons/button_primary.dart';
 import 'package:sqlyze/presentation/shared/widgets/inputs/input_secondary.dart';
+import 'package:sqlyze/presentation/shared/widgets/loaders/custom_loader.dart';
 import 'package:sqlyze/presentation/shared/widgets/others/show_dialog.dart';
 import 'package:sqlyze/presentation/shared/widgets/pages/page_decoration_top.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -28,6 +33,15 @@ class _TabGuestLoginState extends State<TabGuestLogin> {
 
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
+  late CustomProgressDialog progressDialog;
+
+  @override
+  void initState() {
+    progressDialog = CustomProgressDialog(context,
+        dismissable: true, loadingWidget: customSpinkit, blur: 3);
+
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -37,11 +51,20 @@ class _TabGuestLoginState extends State<TabGuestLogin> {
         listener: (context, state) {
           state.map(
               initial: (value) => const SizedBox.shrink(),
-              loadInProgress: (value) => const SizedBox.shrink(),
-              loadSuccess: (value) {
-                log('value success ${value.user}');
+              loadInProgress: (value) {
+                progressDialog.show();
+              },
+              loadSuccess: (value) async {
+                log('valueee success ${value}');
+                progressDialog.dismiss();
+                await addBoolToPreference(
+                    key: PreferenceConstants.isLoggedIn, value: true);
+                AutoRouter.of(context).pushAndPopUntil(
+                    const RouteStudentDashboard(),
+                    predicate: (route) => false);
               },
               loadFailure: (value) {
+                progressDialog.dismiss();
                 showErrorDialog(context: context, message: value.message);
               });
         },

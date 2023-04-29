@@ -20,6 +20,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       try {
         emit(const AuthState.loadInProgress());
         final data = await iAuthRepository.login(event.authRequest);
+        log('response bloc ${data}');
         data.fold(
           (l) => emit(AuthState.loadFailure(l.message)),
           (r) => emit(AuthState.loadSuccess(r)),

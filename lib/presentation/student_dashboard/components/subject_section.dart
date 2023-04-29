@@ -30,11 +30,15 @@ class _SubjectSectionState extends State<SubjectSection> {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              InkWell(
-                child: SvgPicture.asset(AppBanners.bnrDdl),
+              Expanded(
+                child: InkWell(
+                  child: SvgPicture.asset(AppBanners.bnrDdl, width: 150.w),
+                ),
               ),
-              InkWell(
-                child: SvgPicture.asset(AppBanners.bnrDml),
+              Expanded(
+                child: InkWell(
+                  child: SvgPicture.asset(AppBanners.bnrDml, width: 150.w),
+                ),
               ),
             ],
           )
