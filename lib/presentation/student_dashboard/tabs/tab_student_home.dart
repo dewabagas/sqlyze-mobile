@@ -1,12 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:sqlyze/presentation/core/constants/assets.dart';
 import 'package:sqlyze/presentation/core/constants/styles.dart';
 import 'package:sqlyze/presentation/core/styles/app_colors.dart';
-import 'package:sqlyze/presentation/shared/widgets/appbars/appbar_label.dart';
-import 'package:sqlyze/presentation/shared/widgets/appbars/appbar_logo.dart';
-import 'package:sqlyze/presentation/shared/widgets/pages/page_decoration_top.dart';
 import 'package:sqlyze/presentation/student_dashboard/components/greetings_section.dart';
 import 'package:sqlyze/presentation/student_dashboard/components/subject_section.dart';
 
@@ -62,7 +58,7 @@ class _TabStudentHomeState extends State<TabStudentHome> {
                           AppBanners.bnrWelcome,
                           width: double.infinity,
                         ),
-                        SubjectSection()
+                        const SubjectSection()
                       ],
                     ),
                   ),

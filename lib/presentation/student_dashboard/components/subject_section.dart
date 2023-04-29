@@ -1,3 +1,4 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
@@ -6,6 +7,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:sqlyze/presentation/core/constants/assets.dart';
 import 'package:sqlyze/presentation/core/constants/styles.dart';
 import 'package:sqlyze/presentation/core/styles/app_colors.dart';
+import 'package:sqlyze/presentation/routes/router.gr.dart';
 import 'package:sqlyze/presentation/student_dashboard/components/card_subject.dart';
 
 class SubjectSection extends StatefulWidget {
@@ -23,20 +25,34 @@ class _SubjectSectionState extends State<SubjectSection> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text('Materi',
-              style: TextStyles.titleSmall.copyWith(
-                  fontWeight: FontWeight.w700, color: AppColors.charcoal)),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text('Materi',
+                  style: TextStyles.titleSmall.copyWith(
+                      fontWeight: FontWeight.w700, color: AppColors.charcoal)),
+              InkWell(
+                child: Text('Lihat Semua',
+                    style: TextStyles.bodyVerySmall.copyWith(
+                        color: AppColors.primary, fontWeight: FontWeight.w600)),
+              )
+            ],
+          ),
           SizedBox(height: 10.h),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Expanded(
                 child: InkWell(
+                  onTap: () =>
+                      AutoRouter.of(context).push(const RouteLessonDetail()),
                   child: SvgPicture.asset(AppBanners.bnrDdl, width: 150.w),
                 ),
               ),
               Expanded(
                 child: InkWell(
+                  onTap: () =>
+                      AutoRouter.of(context).push(const RouteLessonDetail()),
                   child: SvgPicture.asset(AppBanners.bnrDml, width: 150.w),
                 ),
               ),
