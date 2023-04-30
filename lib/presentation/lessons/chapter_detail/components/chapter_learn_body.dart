@@ -4,7 +4,9 @@ import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:sqlyze/presentation/core/constants/styles.dart';
 import 'package:sqlyze/presentation/core/styles/app_colors.dart';
+import 'package:sqlyze/presentation/lessons/chapter_detail/components/podcast_player.dart';
 import 'package:sqlyze/presentation/shared/widgets/cards/card_expansion.dart';
+import 'package:sqlyze/presentation/shared/widgets/others/pdf_viewer.dart';
 
 class ChapterLearnBody extends StatefulWidget {
   const ChapterLearnBody({super.key});
@@ -33,10 +35,24 @@ class _ChapterLearnBodyState extends State<ChapterLearnBody> {
           SizedBox(height: 10.h),
           CardExpansion(
             title: 'Materi',
-            children: [],
+            children: [
+              Container(
+                height: 200.h,
+                child: PDFViewer(
+                  url:
+                      'https://drive.google.com/uc?id=1NcV5Pq0wje6xTO1taiWTGjqIP-uMXGO6',
+                ),
+              ),
+            ],
           ),
           SizedBox(height: 10.h),
-          CardExpansion(title: 'Podcast', children: [])
+          CardExpansion(title: 'Podcast', children: [
+            Container(
+                child: PodcastPlayer(
+                    title: 'DDL',
+                    audioUrl:
+                        'https://s3.amazonaws.com/scifri-episodes/scifri20181123-episode.mp3'))
+          ])
         ],
       ),
     );

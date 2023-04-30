@@ -41,58 +41,61 @@ class _PageChapterDetailState extends State<PageChapterDetail> {
     const player = YoutubePlayerIFrame();
     return PageDecorationTop(
         appBarTitle: 'Data Definition Language',
-        child: YoutubePlayerControllerProvider(
-          controller: youtubePlayerController,
-          child: Column(
-            children: [
-              SizedBox(height: 20.h),
-              Container(
-                  margin: EdgeInsets.symmetric(horizontal: 16.w),
-                  padding:
-                      EdgeInsets.symmetric(vertical: 12.h, horizontal: 14.h),
-                  decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(8.r),
-                      boxShadow: [
-                        BoxShadow(
-                            offset: const Offset(0, 0),
-                            blurRadius: 4,
-                            spreadRadius: 0,
-                            color: const Color(0xFF3A3A3A).withOpacity(0.25))
-                      ]),
-                  child: player),
-              SizedBox(height: 15.h),
-              Padding(
-                padding: EdgeInsets.symmetric(horizontal: 16.w),
-                child: TabChapterDetail(
-                  selectedIndex: selectedIndex,
-                  onValueChanged: (i) {
-                    pageController.animateToPage(
-                      i,
-                      duration: const Duration(milliseconds: 250),
-                      curve: Curves.ease,
-                    );
+        child: SingleChildScrollView(
+          child: YoutubePlayerControllerProvider(
+            controller: youtubePlayerController,
+            child: Column(
+              children: [
+                SizedBox(height: 20.h),
+                Container(
+                    margin: EdgeInsets.symmetric(horizontal: 16.w),
+                    padding:
+                        EdgeInsets.symmetric(vertical: 8.h, horizontal: 8.h),
+                    decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(10.r),
+                        boxShadow: [
+                          BoxShadow(
+                              offset: const Offset(0, 0),
+                              blurRadius: 4,
+                              spreadRadius: 0,
+                              color: const Color(0xFF3A3A3A).withOpacity(0.25))
+                        ]),
+                    child: ClipRRect(
+                        borderRadius: BorderRadius.circular(10.r),
+                        child: player)),
+                SizedBox(height: 15.h),
+                Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 16.w),
+                  child: TabChapterDetail(
+                    selectedIndex: selectedIndex,
+                    onValueChanged: (i) {
+                      pageController.animateToPage(
+                        i,
+                        duration: const Duration(milliseconds: 250),
+                        curve: Curves.ease,
+                      );
+                      setState(() {
+                        selectedIndex = i;
+                      });
+                    },
+                  ),
+                ),
+                SizedBox(height: 10.h),
+                ExpandablePageView(
+                  dragStartBehavior: DragStartBehavior.start,
+                  controller: pageController,
+                  physics: const NeverScrollableScrollPhysics(),
+                  animateFirstPage: true,
+                  onPageChanged: (pageIndex) {
                     setState(() {
-                      selectedIndex = i;
+                      selectedIndex = pageIndex;
                     });
                   },
+                  children: const [ChapterLearnBody(), ChapterExerciseBody()],
                 ),
-              ),
-              SizedBox(height: 10.h),
-              ExpandablePageView(
-                dragStartBehavior: DragStartBehavior.start,
-                controller: pageController,
-                physics: const PageScrollPhysics()
-                    .applyTo(const ClampingScrollPhysics()),
-                animateFirstPage: true,
-                onPageChanged: (pageIndex) {
-                  setState(() {
-                    selectedIndex = pageIndex;
-                  });
-                },
-                children: const [ChapterLearnBody(), ChapterExerciseBody()],
-              ),
-            ],
+              ],
+            ),
           ),
         ));
   }

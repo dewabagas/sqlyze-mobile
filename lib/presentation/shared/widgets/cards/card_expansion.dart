@@ -6,22 +6,32 @@ import 'package:sqlyze/presentation/core/styles/app_colors.dart';
 class CardExpansion extends StatelessWidget {
   final String title;
   final List<Widget> children;
+  final bool hasShadow;
+  final Color backgroundColor;
 
-  const CardExpansion({super.key, required this.title, required this.children});
+  const CardExpansion(
+      {super.key,
+      required this.title,
+      required this.children,
+      this.hasShadow = true,
+      this.backgroundColor = AppColors.white});
   @override
   Widget build(BuildContext context) {
     return Container(
       margin: EdgeInsets.zero,
       padding: EdgeInsets.zero,
       decoration: BoxDecoration(
-          color: Colors.white,
+          color: backgroundColor,
           borderRadius: BorderRadius.circular(20.r),
           boxShadow: [
-            BoxShadow(
-                offset: const Offset(0, 0),
-                blurRadius: 4,
-                spreadRadius: 0,
-                color: const Color(0xFF3A3A3A).withOpacity(0.25))
+            hasShadow
+                ? BoxShadow(
+                    offset: const Offset(0, 0),
+                    blurRadius: 4,
+                    spreadRadius: 0,
+                    color: const Color(0xFF3A3A3A).withOpacity(0.25))
+                : const BoxShadow(
+                    blurRadius: 0, color: Colors.transparent, spreadRadius: 0)
           ]),
       child: ClipRRect(
         borderRadius: BorderRadius.circular(20.r),

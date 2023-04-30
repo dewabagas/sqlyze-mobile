@@ -23,7 +23,8 @@ class _PageLessonDetailState extends State<PageLessonDetail> {
     return DraggablePage(
         title: Text('Data Definition Language',
             style: TextStyles.headlineSmall.copyWith(fontSize: 14.sp)),
-        headerExpandedHeight: 0.25,
+        headerExpandedHeight: 0.28,
+        backgroundColor: AppColors.white,
         headerWidget: const LessonHeader(),
         body: [buildLessonBody()]);
   }

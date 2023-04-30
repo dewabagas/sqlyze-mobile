@@ -4,6 +4,8 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
+import 'package:sqlyze/presentation/core/constants/styles.dart';
+import 'package:sqlyze/presentation/core/styles/app_colors.dart';
 
 class TabQueryResult extends StatefulWidget {
   Future<List<Map<String, dynamic>>>? queryResults;
@@ -43,9 +45,13 @@ class _TabQueryResultState extends State<TabQueryResult> {
             itemCount: snapshot.data!.length,
             shrinkWrap: true,
             itemBuilder: (BuildContext context, int index) {
-              log('snapshot ${snapshot.data}');
+              log('snapshot query ${snapshot.data}');
               return ListTile(
-                title: Text(snapshot.data![index].toString()),
+                tileColor: AppColors.charcoal,
+                title: Text(
+                  snapshot.data![index].toString(),
+                  style: TextStyles.bodySmall,
+                ),
               );
             },
           );

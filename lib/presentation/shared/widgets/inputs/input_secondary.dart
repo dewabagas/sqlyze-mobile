@@ -91,6 +91,8 @@ class _InputSecondaryState extends State<InputSecondary> {
             focusNode: widget.focusNode,
             decoration: InputDecoration(
                 hintText: widget.hintText,
+                hintStyle: TextStyles.labelLarge.copyWith(
+                    fontWeight: FontWeight.w400, color: AppColors.grey),
                 fillColor: AppColors.lightGrey4,
                 filled: true,
                 counter: const SizedBox.shrink(),

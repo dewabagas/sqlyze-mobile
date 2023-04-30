@@ -1,13 +1,12 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:sqlyze/presentation/core/constants/styles.dart';
 import 'package:sqlyze/presentation/core/helpers/database_helper.dart';
-
-import '../../core/styles/app_colors.dart';
+import 'package:sqlyze/presentation/core/styles/app_colors.dart';
+import 'package:sqlyze/presentation/shared/widgets/cards/card_expansion.dart';
 
 class TabQueryTable extends StatefulWidget {
   const TabQueryTable({super.key});
@@ -30,6 +29,7 @@ class _TabQueryTableState extends State<TabQueryTable> {
     return Container(
       child: Column(
         children: [
+          SizedBox(height: 10.h),
           buildTableList(),
         ],
       ),
@@ -49,34 +49,43 @@ class _TabQueryTableState extends State<TabQueryTable> {
               itemCount: tables.length,
               shrinkWrap: true,
               itemBuilder: (context, index) {
-                return ExpansionTile(
-                  title: Text(tables[index],
-                      style: TextStyles.labelMedium
-                          .copyWith(color: AppColors.charcoal)),
-                  children: [
-                    FutureBuilder<List<Map<String, dynamic>>>(
-                      future: getTableProperties(tables[index]),
-                      builder: (context, snapshot) {
-                        if (snapshot.connectionState == ConnectionState.done) {
-                          if (snapshot.hasError) {
-                            return Text('Error: ${snapshot.error}');
+                return Padding(
+                  padding: EdgeInsets.only(bottom: 5.h),
+                  child: CardExpansion(
+                    title: tables[index],
+                    hasShadow: false,
+                    backgroundColor: AppColors.secondary.withOpacity(.1),
+                    children: [
+                      FutureBuilder<List<Map<String, dynamic>>>(
+                        future: getTableProperties(tables[index]),
+                        builder: (context, snapshot) {
+                          if (snapshot.connectionState ==
+                              ConnectionState.done) {
+                            if (snapshot.hasError) {
+                              return Text('Error: ${snapshot.error}');
+                            } else {
+                              final properties = snapshot.data!;
+                              return Column(
+                                children: properties.map((property) {
+                                  return ListTile(
+                                    leading: const Icon(Icons.chevron_right,
+                                        color: AppColors.charcoal),
+                                    title: Text(property['name'].toString(),
+                                        style: TextStyles.bodySmall),
+                                    subtitle: Text('Type: ${property['type']}',
+                                        style: TextStyles.bodyVerySmall),
+                                    textColor: AppColors.charcoal,
+                                  );
+                                }).toList(),
+                              );
+                            }
                           } else {
-                            final properties = snapshot.data!;
-                            return Column(
-                              children: properties.map((property) {
-                                return ListTile(
-                                  title: Text(property['name'].toString()),
-                                  subtitle: Text('Type: ${property['type']}'),
-                                );
-                              }).toList(),
-                            );
+                            return const SizedBox.shrink();
                           }
-                        } else {
-                          return const SizedBox.shrink();
-                        }
-                      },
-                    ),
-                  ],
+                        },
+                      ),
+                    ],
+                  ),
                 );
               },
             );

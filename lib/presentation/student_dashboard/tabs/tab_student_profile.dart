@@ -22,6 +22,7 @@ class _TabProfileState extends State<TabStudentProfile> {
         title: Text('Bagas Dewanggono',
             style: TextStyles.headlineSmall.copyWith(fontSize: 14.sp)),
         headerExpandedHeight: 0.25,
+        backgroundColor: AppColors.white,
         headerWidget: buildProfileHeader(),
         body: [buildProfileBody()]);
   }

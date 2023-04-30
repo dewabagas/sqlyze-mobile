@@ -36,7 +36,10 @@ class _LessonHeaderState extends State<LessonHeader> {
           SizedBox(height: 50.h),
           InkWell(
               onTap: () => AutoRouter.of(context).pop(),
-              child: const Icon(Icons.arrow_back)),
+              child: const Icon(
+                Icons.arrow_back,
+                color: AppColors.charcoal,
+              )),
           SizedBox(height: 30.h),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
