@@ -15,7 +15,7 @@ class AppColors {
   static const Color white = Color(0xFFFFFFFF);
   static const Color brokenWhite = Color(0xFFFAFAFA);
   static const Color black = Color(0xFF000000);
-  static const Color green = Color(0xFF23FF53);
+  static const Color green = Color(0xFF28CC9E);
   static const Color lightGrey = Color(0xFFDFDFDF);
   static const Color lightGrey2 = Color(0xFFEFEFEF);
   static const Color lightGrey3 = Color(0xFFF3F6F9);
@@ -33,4 +33,8 @@ class AppColors {
   static const Color borderColor = Color(0xFFE8E8E8);
   static const Color paragraphColor = Color(0xFF555555);
   static const Color dividerColor = Color(0xFFE0E0E0);
+  static const Color navy = Color(0xFF172441);
+  static const Color blue = Color(0xFF376AED);
+  static const Color softBlue = Color(0xFF9ADCFF);
+  static const Color darkTosca = Color(0xFF00ADB5);
 }

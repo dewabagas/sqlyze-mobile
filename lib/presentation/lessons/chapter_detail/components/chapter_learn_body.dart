@@ -48,10 +48,11 @@ class _ChapterLearnBodyState extends State<ChapterLearnBody> {
           SizedBox(height: 10.h),
           CardExpansion(title: 'Podcast', children: [
             Container(
+                margin: EdgeInsets.symmetric(horizontal: 8.w, vertical: 6.h),
                 child: PodcastPlayer(
-                    title: 'DDL',
+                    title: 'Data Definition Language',
                     audioUrl:
-                        'https://s3.amazonaws.com/scifri-episodes/scifri20181123-episode.mp3'))
+                        'https://d3ctxlq1ktw2nl.cloudfront.net/staging/2023-3-30/326855912-22050-1-691c58ede8252.m4a'))
           ])
         ],
       ),

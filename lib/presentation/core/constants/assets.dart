@@ -34,6 +34,11 @@ class AppIcons {
   static const String icIndonesia = 'assets/icons/ic_indonesia.svg';
   static const String icGuestAvatar = 'assets/icons/ic_guest_avatar.svg';
   static const String icHelpCenter = 'assets/icons/ic_help_center.svg';
+  static const String icPodcast = 'assets/icons/ic_podcast.svg';
+  static const String icPodcastApple = 'assets/icons/ic_podcast_apple.svg';
+  static const String icPodcastColorful =
+      'assets/icons/ic_podcast_colorful.svg';
+  static const String icPodcastTosca = 'assets/icons/ic_podcast_tosca.svg';
 }
 
 class AppLogo {
