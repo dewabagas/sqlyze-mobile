@@ -139,10 +139,10 @@ class _PageOnboardingState extends State<PageOnboarding> {
                           width: double.infinity,
                           borderRadius: BorderRadius.circular(100.r),
                           onPressed: () {
-                            // AutoRouter.of(context)
-                            //     .push(const RouteGuestDashboard());
                             AutoRouter.of(context)
-                                .push(const RouteStudentDashboard());
+                                .push(const RouteGuestDashboard());
+                            // AutoRouter.of(context)
+                            //     .push(const RouteStudentDashboard());
                           }),
                     ),
                   ),

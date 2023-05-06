@@ -25,6 +25,7 @@ class _PageLessonDetailState extends State<PageLessonDetail> {
             style: TextStyles.headlineSmall.copyWith(fontSize: 14.sp)),
         headerExpandedHeight: 0.28,
         backgroundColor: AppColors.white,
+        appBarColor: AppColors.white,
         headerWidget: const LessonHeader(),
         body: [buildLessonBody()]);
   }

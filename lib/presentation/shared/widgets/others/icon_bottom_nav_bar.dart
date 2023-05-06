@@ -68,10 +68,10 @@ class _IconBottomAppNavBarState extends State<IconBottomAppNavBar> {
             color: const Color(0xFF3A3A3A).withOpacity(0.15))
       ]),
       child: ClipRRect(
-        borderRadius: BorderRadius.only(
-          topLeft: Radius.circular(30.r),
-          topRight: Radius.circular(30.r),
-        ),
+        // borderRadius: BorderRadius.only(
+        //   topLeft: Radius.circular(30.r),
+        //   topRight: Radius.circular(30.r),
+        // ),
         child: BottomAppBar(
           shape: widget.notchedShape,
           color: widget.backgroundColor,

@@ -22,6 +22,7 @@ class _TabProfileState extends State<TabStudentProfile> {
         title: Text('Bagas Dewanggono',
             style: TextStyles.headlineSmall.copyWith(fontSize: 14.sp)),
         headerExpandedHeight: 0.25,
+        appBarColor: AppColors.white,
         backgroundColor: AppColors.white,
         headerWidget: buildProfileHeader(),
         body: [buildProfileBody()]);
@@ -81,7 +82,7 @@ class _TabProfileState extends State<TabStudentProfile> {
             },
           ),
           CardProfileItem(
-            label: 'Riwayat Konsultasi',
+            label: 'Help Center',
             hasDivider: true,
             icon: AppIcons.icHistory,
             onTap: () {

@@ -90,44 +90,49 @@ class _PageRegisterState extends State<PageRegister> {
                           .copyWith(color: AppColors.charcoal),
                     ),
                   ),
-                  Row(
-                    children: <Widget>[
-                      Row(
-                        children: <Widget>[
-                          Radio(
-                            value: 'male',
-                            groupValue: radioValue,
-                            activeColor: AppColors.primary,
-                            onChanged: (value) {
-                              setState(() {
-                                radioValue = value;
-                              });
-                            },
-                          ),
-                          Text('Male',
-                              style: TextStyles.labelLarge
-                                  .copyWith(fontWeight: FontWeight.w400)),
-                        ],
-                      ),
-                      SizedBox(width: 40.w),
-                      Row(
-                        children: <Widget>[
-                          Radio(
-                            value: 'female',
-                            groupValue: radioValue,
-                            activeColor: AppColors.primary,
-                            onChanged: (value) {
-                              setState(() {
-                                radioValue = value;
-                              });
-                            },
-                          ),
-                          Text('Female',
-                              style: TextStyles.labelLarge
-                                  .copyWith(fontWeight: FontWeight.w400)),
-                        ],
-                      ),
-                    ],
+                  Theme(
+                    data: ThemeData(
+                      unselectedWidgetColor: AppColors.charcoal,
+                    ),
+                    child: Row(
+                      children: <Widget>[
+                        Row(
+                          children: <Widget>[
+                            Radio(
+                              value: 'male',
+                              groupValue: radioValue,
+                              activeColor: AppColors.primary,
+                              onChanged: (value) {
+                                setState(() {
+                                  radioValue = value;
+                                });
+                              },
+                            ),
+                            Text('Male',
+                                style: TextStyles.labelLarge
+                                    .copyWith(fontWeight: FontWeight.w400)),
+                          ],
+                        ),
+                        SizedBox(width: 40.w),
+                        Row(
+                          children: <Widget>[
+                            Radio(
+                              value: 'female',
+                              groupValue: radioValue,
+                              activeColor: AppColors.primary,
+                              onChanged: (value) {
+                                setState(() {
+                                  radioValue = value;
+                                });
+                              },
+                            ),
+                            Text('Female',
+                                style: TextStyles.labelLarge
+                                    .copyWith(fontWeight: FontWeight.w400)),
+                          ],
+                        ),
+                      ],
+                    ),
                   )
                 ],
               ),

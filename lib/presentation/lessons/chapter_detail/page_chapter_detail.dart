@@ -24,7 +24,7 @@ class _PageChapterDetailState extends State<PageChapterDetail> {
   void initState() {
     pageController = PageController(initialPage: 0);
     youtubePlayerController = YoutubePlayerController(
-        initialVideoId: 'Ly6ZhQVnVow',
+        initialVideoId: 'U4z3KvWeMOc',
         params: YoutubePlayerParams(showFullscreenButton: true));
     super.initState();
   }

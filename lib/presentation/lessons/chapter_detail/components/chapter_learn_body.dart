@@ -34,10 +34,23 @@ class _ChapterLearnBodyState extends State<ChapterLearnBody> {
           ),
           SizedBox(height: 10.h),
           CardExpansion(
-            title: 'Materi',
+            title: 'Modul Materi',
             children: [
               Container(
-                height: 200.h,
+                height: 500.h,
+                child: PDFViewer(
+                  url:
+                      'https://drive.google.com/uc?id=1dQflASwaosA_R2oOfTvsimoB1Rxtvgra',
+                ),
+              ),
+            ],
+          ),
+          SizedBox(height: 10.h),
+          CardExpansion(
+            title: 'PPT',
+            children: [
+              Container(
+                height: 250.h,
                 child: PDFViewer(
                   url:
                       'https://drive.google.com/uc?id=1NcV5Pq0wje6xTO1taiWTGjqIP-uMXGO6',
@@ -52,7 +65,7 @@ class _ChapterLearnBodyState extends State<ChapterLearnBody> {
                 child: PodcastPlayer(
                     title: 'Data Definition Language',
                     audioUrl:
-                        'https://d3ctxlq1ktw2nl.cloudfront.net/staging/2023-3-30/326855912-22050-1-691c58ede8252.m4a'))
+                        'https://d3ctxlq1ktw2nl.cloudfront.net/staging/2023-4-1/326982564-22050-1-b3f2b4a2326c3.m4a'))
           ])
         ],
       ),

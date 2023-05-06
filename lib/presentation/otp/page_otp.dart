@@ -70,7 +70,7 @@ class _PageOtpState extends State<PageOtp> {
                       keyboardType: TextInputType.number,
                       maxLength: 1,
                       textAlign: TextAlign.center,
-                      style: const TextStyle(fontSize: 24),
+                      style: TextStyles.bodyLarge,
                       decoration: InputDecoration(
                         counterText: '',
                         contentPadding: EdgeInsets.symmetric(vertical: 10.h),
