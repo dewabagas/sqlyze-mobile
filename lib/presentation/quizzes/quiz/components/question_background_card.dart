@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:sqlyze/presentation/core/styles/app_colors.dart';
 
 class QuestionBackgroundCard extends StatelessWidget {
   final double opacity;
@@ -24,8 +26,7 @@ class QuestionBackgroundCard extends StatelessWidget {
         width: MediaQuery.of(context).size.width * widthPercentage,
         height: MediaQuery.of(context).size.height * heightPercentage,
         decoration: BoxDecoration(
-            color: Theme.of(context).backgroundColor,
-            borderRadius: BorderRadius.circular(25)),
+            color: AppColors.white, borderRadius: BorderRadius.circular(25.r)),
       ),
     );
   }

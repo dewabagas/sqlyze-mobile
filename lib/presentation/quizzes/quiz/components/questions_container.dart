@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:sqlyze/presentation/core/constants/styles.dart';
+import 'package:sqlyze/presentation/core/styles/app_colors.dart';
 import 'package:sqlyze/presentation/quizzes/quiz/components/horizontal_timer_container.dart';
 import 'package:sqlyze/presentation/quizzes/quiz/components/option_container.dart';
 import 'package:sqlyze/presentation/quizzes/quiz/components/question_background_card.dart';
@@ -45,26 +44,32 @@ class _QuestionsContainerState extends State<QuestionsContainer> {
 
   @override
   Widget build(BuildContext context) {
-    return Stack(
-      alignment: Alignment.topCenter,
-      children: [
-        QuestionBackgroundCard(
-          heightPercentage: 0.725,
-          opacity: 0.7,
-          topMarginPercentage: 0.02,
-          widthPercentage: 0.65,
-        ),
-        QuestionBackgroundCard(
-          heightPercentage: 0.725,
-          opacity: 0.85,
-          topMarginPercentage: 0.01,
-          widthPercentage: 0.75,
-        ),
-      ],
+    return Padding(
+      padding: EdgeInsets.only(
+        top: 60.h,
+      ),
+      child: Stack(
+        alignment: Alignment.topCenter,
+        children: [
+          QuestionBackgroundCard(
+            heightPercentage: 0.725,
+            opacity: 0.7,
+            topMarginPercentage: 0.02,
+            widthPercentage: 0.65,
+          ),
+          QuestionBackgroundCard(
+            heightPercentage: 0.725,
+            opacity: 0.85,
+            topMarginPercentage: 0.01,
+            widthPercentage: 0.75,
+          ),
+          ..._buildQuestions(context)
+        ],
+      ),
     );
   }
 
-  List<Widget> _buildQuesitons(BuildContext context) {
+  List<Widget> _buildQuestions(BuildContext context) {
     List<Widget> children = [];
 
     //loop terminate condition will be questions.length instead of 4
@@ -135,7 +140,7 @@ class _QuestionsContainerState extends State<QuestionsContainer> {
             ),
           ),
           Divider(
-            color: Theme.of(context).colorScheme.secondary,
+            color: AppColors.white,
           ),
           SizedBox(
             height: 5.0,

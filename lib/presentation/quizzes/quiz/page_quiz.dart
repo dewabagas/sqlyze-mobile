@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/svg.dart';
+import 'package:sqlyze/presentation/core/constants/assets.dart';
 import 'package:sqlyze/presentation/core/styles/app_colors.dart';
 import 'package:sqlyze/presentation/quizzes/quiz/components/questions_container.dart';
 import 'package:sqlyze/presentation/quizzes/quiz/components/quiz_background.dart';
+import 'package:sqlyze/presentation/shared/widgets/buttons/button_circle.dart';
 
 class PageQuiz extends StatefulWidget {
   const PageQuiz({super.key});
@@ -82,6 +86,21 @@ class _PageQuizState extends State<PageQuiz> with TickerProviderStateMixin {
                 questions: [],
                 timerAnimationController: timerAnimationController,
               )),
+          Align(
+            alignment: Alignment.bottomCenter,
+            child: Container(
+              padding: EdgeInsets.only(bottom: 20.h, right: 20.w, left: 20.w),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  ButtonCircle(
+                    child: Icon(Icons.skip_next, color: AppColors.white),
+                    color: AppColors.primary,
+                  )
+                ],
+              ),
+            ),
+          ),
           buildTopMenu()
         ],
       ),
@@ -92,11 +111,14 @@ class _PageQuizState extends State<PageQuiz> with TickerProviderStateMixin {
     return Align(
       alignment: Alignment.topCenter,
       child: Container(
+        margin: EdgeInsets.only(
+            top: MediaQuery.of(context).padding.top, left: 16.w),
         child: Row(
           children: [
             Icon(
               Icons.chevron_left,
-              color: AppColors.black,
+              color: AppColors.white,
+              size: 30.w,
             )
           ],
         ),

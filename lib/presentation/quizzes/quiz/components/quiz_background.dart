@@ -12,7 +12,7 @@ class QuizBackground extends StatelessWidget {
       width: MediaQuery.of(context).size.width,
       decoration: BoxDecoration(
         // color: Theme.of(context).colorScheme.secondary,
-        color: AppColors.secondary,
+        color: AppColors.primary,
         borderRadius:
             BorderRadiusDirectional.only(bottomEnd: Radius.circular(100)),
         boxShadow: [
