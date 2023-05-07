@@ -159,6 +159,18 @@ class $AssetsIconsGen {
   /// File path: assets/icons/ic_my_account.svg
   String get icMyAccount => 'assets/icons/ic_my_account.svg';
 
+  /// File path: assets/icons/ic_podcast.svg
+  String get icPodcast => 'assets/icons/ic_podcast.svg';
+
+  /// File path: assets/icons/ic_podcast_apple.svg
+  String get icPodcastApple => 'assets/icons/ic_podcast_apple.svg';
+
+  /// File path: assets/icons/ic_podcast_colorful.svg
+  String get icPodcastColorful => 'assets/icons/ic_podcast_colorful.svg';
+
+  /// File path: assets/icons/ic_podcast_tosca.svg
+  String get icPodcastTosca => 'assets/icons/ic_podcast_tosca.svg';
+
   /// File path: assets/icons/ic_profile.svg
   String get icProfile => 'assets/icons/ic_profile.svg';
 
@@ -240,6 +252,10 @@ class $AssetsIconsGen {
         icLogout,
         icMapMarker,
         icMyAccount,
+        icPodcast,
+        icPodcastApple,
+        icPodcastColorful,
+        icPodcastTosca,
         icProfile,
         icProfileActive,
         icProfileBlue,

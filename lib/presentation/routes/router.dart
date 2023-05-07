@@ -6,6 +6,7 @@ import 'package:sqlyze/presentation/lessons/chapter_detail/page_chapter_detail.d
 import 'package:sqlyze/presentation/lessons/lesson_detail/page_lesson_detail.dart';
 import 'package:sqlyze/presentation/lessons/lesson_list/page_lesson_list.dart';
 import 'package:sqlyze/presentation/otp/page_otp.dart';
+import 'package:sqlyze/presentation/quizzes/quiz/page_quiz.dart';
 import 'package:sqlyze/presentation/register/page_register.dart';
 import 'package:sqlyze/presentation/student_dashboard/page_student_dashboard.dart';
 
@@ -26,5 +27,8 @@ import 'package:sqlyze/presentation/student_dashboard/page_student_dashboard.dar
   AutoRoute(page: PageLessonList),
   AutoRoute(page: PageLessonDetail),
   AutoRoute(page: PageChapterDetail),
+
+  // QUIZZES
+  AutoRoute(page: PageQuiz),
 ])
 class $AppRouter {}

@@ -596,6 +596,10 @@ PODS:
     - abseil/base/base_internal
     - abseil/base/config
     - abseil/meta/type_traits
+  - assets_audio_player (0.0.1):
+    - Flutter
+  - assets_audio_player_web (0.0.1):
+    - Flutter
   - audio_session (0.0.1):
     - Flutter
   - BoringSSL-GRPC (0.0.24):
@@ -937,6 +941,8 @@ PODS:
     - Flutter
 
 DEPENDENCIES:
+  - assets_audio_player (from `.symlinks/plugins/assets_audio_player/ios`)
+  - assets_audio_player_web (from `.symlinks/plugins/assets_audio_player_web/ios`)
   - audio_session (from `.symlinks/plugins/audio_session/ios`)
   - cloud_firestore (from `.symlinks/plugins/cloud_firestore/ios`)
   - cloud_functions (from `.symlinks/plugins/cloud_functions/ios`)
@@ -1011,6 +1017,10 @@ SPEC REPOS:
     - Toast
 
 EXTERNAL SOURCES:
+  assets_audio_player:
+    :path: ".symlinks/plugins/assets_audio_player/ios"
+  assets_audio_player_web:
+    :path: ".symlinks/plugins/assets_audio_player_web/ios"
   audio_session:
     :path: ".symlinks/plugins/audio_session/ios"
   cloud_firestore:
@@ -1074,6 +1084,8 @@ EXTERNAL SOURCES:
 
 SPEC CHECKSUMS:
   abseil: ebe5b5529fb05d93a8bdb7951607be08b7fa71bc
+  assets_audio_player: edee322b9cb625571b830b35872ead1a295fd917
+  assets_audio_player_web: 19826380c44375761aa0b9053665c1e3fbc3b86b
   audio_session: 4f3e461722055d21515cf3261b64c973c062f345
   BoringSSL-GRPC: 3175b25143e648463a56daeaaa499c6cb86dad33
   cloud_firestore: 996fbe17886e254538f5bc51c1606ee9fb524997

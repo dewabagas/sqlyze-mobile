@@ -22,15 +22,36 @@ class PageOnboarding extends StatefulWidget {
   State<PageOnboarding> createState() => _PageOnboardingState();
 }
 
-class _PageOnboardingState extends State<PageOnboarding> {
+class _PageOnboardingState extends State<PageOnboarding>
+    with SingleTickerProviderStateMixin {
   List<Introduction> listOnBoarding = [];
   int currentIndex = 0;
   CarouselController buttonCarouselController = CarouselController();
+  late AnimationController _animationController;
+  late Animation<double> _animation;
+
   @override
   void initState() {
     super.initState();
     setupOnboarding();
+    initializeAnimation();
     FlutterNativeSplash.remove();
+  }
+
+  initializeAnimation() {
+    _animationController = AnimationController(
+      duration: const Duration(seconds: 2),
+      vsync: this,
+    )..repeat(reverse: true);
+
+    _animation =
+        Tween<double>(begin: -10, end: 10).animate(_animationController);
+  }
+
+  @override
+  dispose() {
+    _animationController.dispose();
+    super.dispose();
   }
 
   @override
@@ -45,8 +66,17 @@ class _PageOnboardingState extends State<PageOnboarding> {
               padding: EdgeInsets.only(bottom: 270.h),
               child: CarouselSlider(
                 items: listOnBoarding.map((onBoarding) {
-                  return SvgPicture.asset(onBoarding.image ?? '',
-                      fit: BoxFit.contain);
+                  return AnimatedBuilder(
+                    animation: _animationController,
+                    builder: (context, child) {
+                      return Transform.translate(
+                        offset: Offset(0, _animation.value),
+                        child: child,
+                      );
+                    },
+                    child: SvgPicture.asset(onBoarding.image ?? '',
+                        fit: BoxFit.contain),
+                  );
                 }).toList(),
                 carouselController: buttonCarouselController,
                 options: CarouselOptions(
@@ -139,10 +169,10 @@ class _PageOnboardingState extends State<PageOnboarding> {
                           width: double.infinity,
                           borderRadius: BorderRadius.circular(100.r),
                           onPressed: () {
-                            AutoRouter.of(context)
-                                .push(const RouteGuestDashboard());
                             // AutoRouter.of(context)
-                            //     .push(const RouteStudentDashboard());
+                            //     .push(const RouteGuestDashboard());
+                            AutoRouter.of(context)
+                                .push(const RouteChapterDetail());
                           }),
                     ),
                   ),
