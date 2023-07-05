@@ -117,7 +117,7 @@ class _PageQuizState extends State<PageQuiz> with TickerProviderStateMixin {
         child: Row(
           children: [
             InkWell(
-              onTap: () { 
+              onTap: () {
                 AutoRouter.of(context).pop();
               },
               child: Icon(

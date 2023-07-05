@@ -32,7 +32,7 @@ class _TabGuestLoginState extends State<TabGuestLogin> {
   bool? isSecured;
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
-  
+
   // late CustomProgressDialog progressDialog;
 
   @override
@@ -103,7 +103,9 @@ class _TabGuestLoginState extends State<TabGuestLogin> {
                           },
                           onFocusChange: (hasFocus) {},
                           onClear: () {},
-                          suffixIcon: isSecured == true ? Icon(Icons.remove_red_eye_outlined) : Icon(Icons.remove_red_eye_rounded),
+                          suffixIcon: isSecured == true
+                              ? Icon(Icons.remove_red_eye_outlined)
+                              : Icon(Icons.remove_red_eye_rounded),
                         ),
                         SizedBox(height: 30.h),
                         Align(
