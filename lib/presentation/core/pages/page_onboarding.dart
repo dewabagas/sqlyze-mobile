@@ -11,9 +11,7 @@ import 'package:sqlyze/presentation/core/constants/assets.dart';
 import 'package:sqlyze/presentation/core/constants/styles.dart';
 import 'package:sqlyze/presentation/core/styles/app_colors.dart';
 import 'package:sqlyze/presentation/routes/router.gr.dart';
-import 'package:sqlyze/presentation/shared/widgets/appbars/appbar_label.dart';
 import 'package:sqlyze/presentation/shared/widgets/buttons/button_gradient.dart';
-import 'package:sqlyze/presentation/shared/widgets/pages/page_arc_bottom.dart';
 
 class PageOnboarding extends StatefulWidget {
   const PageOnboarding({super.key});
@@ -169,10 +167,10 @@ class _PageOnboardingState extends State<PageOnboarding>
                           width: double.infinity,
                           borderRadius: BorderRadius.circular(100.r),
                           onPressed: () {
-                            // AutoRouter.of(context)
-                            //     .push(const RouteGuestDashboard());
                             AutoRouter.of(context)
-                                .push(const RouteChapterDetail());
+                                .push(const RouteGuestDashboard());
+                            // AutoRouter.of(context)
+                            //     .push(const RouteStudentDashboard());
                           }),
                     ),
                   ),

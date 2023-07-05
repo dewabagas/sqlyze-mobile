@@ -1,6 +1,5 @@
 import 'dart:developer';
 
-import 'package:ars_dialog/ars_dialog.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
@@ -30,15 +29,16 @@ class TabGuestLogin extends StatefulWidget {
 
 class _TabGuestLoginState extends State<TabGuestLogin> {
   String? email, password;
-
+  bool? isSecured;
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
-  late CustomProgressDialog progressDialog;
+  
+  // late CustomProgressDialog progressDialog;
 
   @override
   void initState() {
-    progressDialog = CustomProgressDialog(context,
-        dismissable: true, loadingWidget: customSpinkit, blur: 3);
+    // progressDialog = CustomProgressDialog(context,
+    //     dismissable: true, loadingWidget: customSpinkit, blur: 3);
 
     super.initState();
   }
@@ -52,11 +52,11 @@ class _TabGuestLoginState extends State<TabGuestLogin> {
           state.map(
               initial: (value) => const SizedBox.shrink(),
               loadInProgress: (value) {
-                progressDialog.show();
+                // progressDialog.show();
               },
               loadSuccess: (value) async {
                 log('valueee success ${value}');
-                progressDialog.dismiss();
+                // progressDialog.dismiss();
                 await addBoolToPreference(
                     key: PreferenceConstants.isLoggedIn, value: true);
                 AutoRouter.of(context).pushAndPopUntil(
@@ -64,7 +64,7 @@ class _TabGuestLoginState extends State<TabGuestLogin> {
                     predicate: (route) => false);
               },
               loadFailure: (value) {
-                progressDialog.dismiss();
+                // progressDialog.dismiss();
                 showErrorDialog(context: context, message: value.message);
               });
         },
@@ -103,6 +103,7 @@ class _TabGuestLoginState extends State<TabGuestLogin> {
                           },
                           onFocusChange: (hasFocus) {},
                           onClear: () {},
+                          suffixIcon: isSecured == true ? Icon(Icons.remove_red_eye_outlined) : Icon(Icons.remove_red_eye_rounded),
                         ),
                         SizedBox(height: 30.h),
                         Align(

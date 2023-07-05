@@ -89,6 +89,7 @@ class _InputSecondaryState extends State<InputSecondary> {
             textAlign: TextAlign.left,
             enabled: widget.isEnabled,
             focusNode: widget.focusNode,
+            autocorrect: false,
             decoration: InputDecoration(
                 hintText: widget.hintText,
                 hintStyle: TextStyles.labelLarge.copyWith(

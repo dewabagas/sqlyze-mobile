@@ -1,3 +1,4 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
@@ -115,10 +116,15 @@ class _PageQuizState extends State<PageQuiz> with TickerProviderStateMixin {
             top: MediaQuery.of(context).padding.top, left: 16.w),
         child: Row(
           children: [
-            Icon(
-              Icons.chevron_left,
-              color: AppColors.white,
-              size: 30.w,
+            InkWell(
+              onTap: () { 
+                AutoRouter.of(context).pop();
+              },
+              child: Icon(
+                Icons.chevron_left,
+                color: AppColors.white,
+                size: 30.w,
+              ),
             )
           ],
         ),
