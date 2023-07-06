@@ -7,7 +7,10 @@
         {
             "name": "sqlyze",
             "request": "launch",
-            "type": "dart"
+            "type": "dart",
+            "args":[
+                "--debug",
+			]
         },
         {
             "name": "sqlyze (profile mode)",

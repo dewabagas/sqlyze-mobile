@@ -1,6 +1,12 @@
+import 'dart:developer';
+
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:sqlyze/application/user_profile_bloc/user_profile_bloc.dart';
+import 'package:sqlyze/domain/user/entities/user_profile.dart';
+import 'package:sqlyze/injection.dart';
 import 'package:sqlyze/presentation/core/constants/assets.dart';
 import 'package:sqlyze/presentation/core/constants/styles.dart';
 import 'package:sqlyze/presentation/core/styles/app_colors.dart';
@@ -18,17 +24,35 @@ class TabStudentProfile extends StatefulWidget {
 class _TabProfileState extends State<TabStudentProfile> {
   @override
   Widget build(BuildContext context) {
-    return DraggablePage(
-        title: Text('Bagas Dewanggono',
-            style: TextStyles.headlineSmall.copyWith(fontSize: 14.sp)),
-        headerExpandedHeight: 0.25,
-        appBarColor: AppColors.white,
-        backgroundColor: AppColors.white,
-        headerWidget: buildProfileHeader(),
-        body: [buildProfileBody()]);
+    return BlocProvider<UserProfileBloc>(
+      create: (context) =>
+          getIt<UserProfileBloc>()..add(const UserProfileEvent.getProfile()),
+      child: BlocBuilder<UserProfileBloc, UserProfileState>(
+        builder: (context, state) {
+          return state.map(
+              initial: (value) => const SizedBox.shrink(),
+              loadInProgress: (value) => const SizedBox.shrink(),
+              loadSuccess: (value) {
+                log('cussess profile ${value.user}');
+                return DraggablePage(
+                    title: Text('${value.user?.fullName}',
+                        style:
+                            TextStyles.headlineSmall.copyWith(fontSize: 14.sp)),
+                    headerExpandedHeight: 0.25,
+                    appBarColor: AppColors.white,
+                    backgroundColor: AppColors.white,
+                    headerWidget: buildProfileHeader(value.user!),
+                    body: [buildProfileBody(value.user!)]);
+              },
+              loadFailure: (value) {
+                return SizedBox.shrink();
+              });
+        },
+      ),
+    );
   }
 
-  Widget buildProfileHeader() {
+  Widget buildProfileHeader(UserProfile userProfile) {
     return Container(
       color: AppColors.primary,
       child: Column(
@@ -39,20 +63,19 @@ class _TabProfileState extends State<TabStudentProfile> {
             child: ImageCircle(
               width: 70.w,
               height: 70.w,
-              image:
-                  'https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/cd31a73a-791d-418a-83fd-8a67d6675b5d/defblg5-83ef5606-1c1f-415f-bc17-b92294b39a01.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcL2NkMzFhNzNhLTc5MWQtNDE4YS04M2ZkLThhNjdkNjY3NWI1ZFwvZGVmYmxnNS04M2VmNTYwNi0xYzFmLTQxNWYtYmMxNy1iOTIyOTRiMzlhMDEuanBnIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.X9OJ4FrFBKSoGILFvz0_g0y34KbbNAkhsL1o0JKRg_o',
+              image: '${userProfile.profileImageUrl}',
             ),
           ),
           SizedBox(height: 5.h),
-          Text('Bagas Dewanggono',
+          Text('${userProfile.fullName}',
               style:
                   TextStyles.titleSmall.copyWith(color: AppColors.brokenWhite)),
           SizedBox(height: 5.h),
-          Text('+6285158046944',
+          Text('${userProfile.msisdn}',
               style: TextStyles.bodyVerySmall.copyWith(
                   color: AppColors.brokenWhite, fontWeight: FontWeight.w300)),
           SizedBox(height: 5.h),
-          Text('bagas.dewa@upi.edu',
+          Text('${userProfile.email}',
               style: TextStyles.bodyVerySmall.copyWith(
                   color: AppColors.brokenWhite, fontWeight: FontWeight.w300))
         ],
@@ -60,7 +83,7 @@ class _TabProfileState extends State<TabStudentProfile> {
     );
   }
 
-  Widget buildProfileBody() {
+  Widget buildProfileBody(UserProfile userProfile) {
     return Container(
       margin: EdgeInsets.symmetric(horizontal: 10.w),
       child: Column(

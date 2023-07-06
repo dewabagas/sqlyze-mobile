@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:developer';
 
 import 'package:dartz/dartz.dart';
+import 'package:flutter/material.dart';
 import 'package:injectable/injectable.dart';
 import 'package:sqlyze/domain/core/common/error/failure.dart';
 import 'package:sqlyze/domain/core/constants/preference_constants.dart';
@@ -20,22 +21,21 @@ class UserRepository implements IUserRepository {
   Future<Either<Failure, UserProfile?>> getProfile() async {
     try {
       UserProfile? user;
+      debugPrint('userREpo');
       var response = await userApiService.getProfile();
-      log('response repo');
-      log('${response.data}');
+      debugPrint('response repo');
+      debugPrint('${response.data}');
       if (response.data['code'] == 200) {
         final body = response.data;
         final result = body is String ? jsonDecode(body) : body;
         user = ProfileDto.fromJson(result['result']).toDomain();
-        await addStringToPreference(
-            key: PreferenceConstants.accessToken, value: body['token']);
       } else {
-        log('error woy');
+        debugPrint('error woy');
         throw GeneralException(message: 'Invalid Request');
       }
       return Right(user);
     } on GeneralException catch (e) {
-      log('general ${e.message}');
+      debugPrint('general ${e.message}');
       return Left(GeneralFailure(message: e.message));
     }
   }

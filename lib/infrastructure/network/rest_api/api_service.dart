@@ -1,6 +1,8 @@
 import 'package:dio/dio.dart';
+import 'package:logger/logger.dart';
 import 'package:sqlyze/domain/core/constants/api_constants.dart';
 import 'package:sqlyze/infrastructure/network/rest_api/api_error_interceptors.dart';
+import 'package:sqlyze/infrastructure/network/rest_api/authenticated_interceptor.dart';
 
 class ApiService {
   static final BaseOptions options = BaseOptions(
@@ -20,6 +22,7 @@ class ApiService {
     ..interceptors.addAll([
       LogInterceptor(),
       AppInterceptors(),
+      AuthenticatedInterceptor(Logger())
     ]);
 
   final interceptor = InterceptorsWrapper(

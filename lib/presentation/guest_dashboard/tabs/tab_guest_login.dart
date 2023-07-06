@@ -4,7 +4,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:sqlyze/application/bloc/auth_bloc.dart';
+import 'package:sqlyze/application/auth_bloc/auth_bloc.dart';
 import 'package:sqlyze/domain/auth/requests/auth_request.dart';
 import 'package:sqlyze/domain/core/constants/preference_constants.dart';
 import 'package:sqlyze/domain/core/helpers/preference_helper.dart';

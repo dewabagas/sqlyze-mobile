@@ -6,6 +6,7 @@ import 'package:sqlyze/presentation/student_dashboard/tabs/tab_student_courses.d
 import 'package:sqlyze/presentation/student_dashboard/tabs/tab_student_home.dart';
 import 'package:sqlyze/presentation/student_dashboard/tabs/tab_student_playground.dart';
 import 'package:sqlyze/presentation/student_dashboard/tabs/tab_student_profile.dart';
+import 'package:flutter_native_splash/flutter_native_splash.dart';
 
 class PageStudentDashboard extends StatefulWidget {
   const PageStudentDashboard({super.key});
@@ -47,6 +48,13 @@ class _PageStudentDashboardState extends State<PageStudentDashboard> {
     setState(() {
       _currentIndex = index!;
     });
+  }
+
+  @override
+  void initState() {
+    FlutterNativeSplash.remove();
+
+    super.initState();
   }
 
   @override

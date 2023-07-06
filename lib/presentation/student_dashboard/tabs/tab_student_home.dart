@@ -1,5 +1,10 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:sqlyze/application/user_profile_bloc/user_profile_bloc.dart';
+import 'package:sqlyze/injection.dart';
 import 'package:sqlyze/presentation/core/constants/assets.dart';
 import 'package:sqlyze/presentation/core/constants/styles.dart';
 import 'package:sqlyze/presentation/core/styles/app_colors.dart';
@@ -16,6 +21,28 @@ class TabStudentHome extends StatefulWidget {
 class _TabStudentHomeState extends State<TabStudentHome> {
   @override
   Widget build(BuildContext context) {
+    return BlocProvider<UserProfileBloc>(
+      create: (context) =>
+          getIt<UserProfileBloc>()..add(const UserProfileEvent.getProfile()),
+      child: BlocBuilder<UserProfileBloc, UserProfileState>(
+        builder: (context, state) {
+          return state.map(
+              initial: (value) => const SizedBox.shrink(),
+              loadInProgress: (value) => const SizedBox.shrink(),
+              loadSuccess: (value) {
+                debugPrint('succcess  profile ${value.user}');
+                return buildHome();
+              },
+              loadFailure: (value) {
+                debugPrint('errro profile ${value.message}');
+                return SizedBox();
+              });
+        },
+      ),
+    );
+  }
+
+  Widget buildHome() {
     return Container(
       decoration: BoxDecoration(
         gradient: LinearGradient(

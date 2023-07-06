@@ -1,6 +1,7 @@
 import 'dart:developer';
 
 import 'package:bloc/bloc.dart';
+import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
 import 'package:sqlyze/domain/user/entities/user_profile.dart';
@@ -18,9 +19,10 @@ class UserProfileBloc extends Bloc<UserProfileEvent, UserProfileState> {
       : super(const UserProfileState.initial()) {
     on<_$_GetProfile>((event, emit) async {
       try {
+        debugPrint('user bloc');
         emit(const UserProfileState.loadInProgress());
         final data = await iUserRepository.getProfile();
-        log('response bloc ${data}');
+        debugPrint('response bloc ${data}');
         data.fold(
           (l) => emit(UserProfileState.loadFailure(l.message)),
           (r) => emit(UserProfileState.loadSuccess(r)),
