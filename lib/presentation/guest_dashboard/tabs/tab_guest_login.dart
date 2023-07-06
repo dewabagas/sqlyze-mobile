@@ -52,7 +52,7 @@ class _TabGuestLoginState extends State<TabGuestLogin> {
           state.map(
               initial: (value) => const SizedBox.shrink(),
               loadInProgress: (value) {
-                // progressDialog.show();
+                EasyLoading.show(status: 'loading...');
               },
               loadSuccess: (value) async {
                 log('valueee success ${value}');
@@ -65,6 +65,7 @@ class _TabGuestLoginState extends State<TabGuestLogin> {
               },
               loadFailure: (value) {
                 // progressDialog.dismiss();
+                EasyLoading.dismiss();
                 showErrorDialog(context: context, message: value.message);
               });
         },

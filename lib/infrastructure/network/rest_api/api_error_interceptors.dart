@@ -1,4 +1,13 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:dio/dio.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:sqlyze/domain/core/constants/preference_constants.dart';
+import 'package:sqlyze/domain/core/helpers/preference_helper.dart';
+import 'package:sqlyze/domain/core/services/navigator_service.dart';
+import 'package:sqlyze/injection.dart';
+import 'package:sqlyze/locator.dart';
+import 'package:sqlyze/presentation/core/app.dart';
+import 'package:sqlyze/presentation/routes/router.gr.dart';
 
 class AppInterceptors extends Interceptor {
   @override
@@ -13,7 +22,13 @@ class AppInterceptors extends Interceptor {
           case 400:
             throw BadRequestException(err.requestOptions);
           case 401:
-            throw UnauthorizedException(err.requestOptions);
+            final responseMessage = err.response?.data['message'];
+            if (responseMessage == 'Token has expired') {
+              clearUserCredentials();
+              throw TokenExpiredException(err.requestOptions);
+            } else {
+              throw UnauthorizedException(err.requestOptions);
+            }
           case 404:
             throw NotFoundException(err.requestOptions);
           case 409:
@@ -30,6 +45,13 @@ class AppInterceptors extends Interceptor {
 
     return handler.next(err);
   }
+}
+
+void clearUserCredentials() async {
+  Fluttertoast.showToast(msg: 'Sesi Anda Telah Habis, Silahkan Masuk Kembali');
+  await removeValuesPreference(key: PreferenceConstants.accessToken);
+  await addBoolToPreference(key: PreferenceConstants.isLoggedIn, value: false);
+  await appRouter.replace(RouteGuestDashboard());
 }
 
 class BadRequestException extends DioError {
@@ -60,12 +82,19 @@ class ConflictException extends DioError {
 }
 
 class UnauthorizedException extends DioError {
-  UnauthorizedException(RequestOptions r) : super(requestOptions: r);
+  final String message;
+  UnauthorizedException(RequestOptions r, {this.message = 'Access denied'})
+      : super(requestOptions: r);
 
   @override
   String toString() {
-    return 'Access denied';
+    return message;
   }
+}
+
+class TokenExpiredException extends UnauthorizedException {
+  TokenExpiredException(RequestOptions r)
+      : super(r, message: 'Token has expired');
 }
 
 class NotFoundException extends DioError {
