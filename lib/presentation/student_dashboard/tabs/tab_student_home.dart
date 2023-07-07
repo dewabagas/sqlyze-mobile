@@ -4,11 +4,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:sqlyze/application/user_profile_bloc/user_profile_bloc.dart';
+import 'package:sqlyze/domain/user/entities/user_profile.dart';
 import 'package:sqlyze/injection.dart';
 import 'package:sqlyze/presentation/core/constants/assets.dart';
+import 'package:sqlyze/presentation/core/constants/strings.dart';
 import 'package:sqlyze/presentation/core/constants/styles.dart';
 import 'package:sqlyze/presentation/core/styles/app_colors.dart';
+import 'package:sqlyze/presentation/shared/widgets/pages/page_decoration_top.dart';
 import 'package:sqlyze/presentation/student_dashboard/components/greetings_section.dart';
+import 'package:sqlyze/presentation/student_dashboard/components/shimmer_home.dart';
 import 'package:sqlyze/presentation/student_dashboard/components/subject_section.dart';
 
 class TabStudentHome extends StatefulWidget {
@@ -27,22 +31,26 @@ class _TabStudentHomeState extends State<TabStudentHome> {
       child: BlocBuilder<UserProfileBloc, UserProfileState>(
         builder: (context, state) {
           return state.map(
-              initial: (value) => const SizedBox.shrink(),
-              loadInProgress: (value) => const SizedBox.shrink(),
+              initial: (value) => const ShimmerHome(),
+              loadInProgress: (value) => const ShimmerHome(),
               loadSuccess: (value) {
-                debugPrint('succcess  profile ${value.user}');
-                return buildHome();
+                return buildHome(value.user!);
               },
               loadFailure: (value) {
-                debugPrint('errro profile ${value.message}');
-                return SizedBox();
+                return PageDecorationTop(
+                  hasBack: false,
+                  appBarTitle: 'SQLyze',
+                  child: Center(
+                    child: Text(AppStrings.errorMessageGeneral),
+                  ),
+                );
               });
         },
       ),
     );
   }
 
-  Widget buildHome() {
+  Widget buildHome(UserProfile userProfile) {
     return Container(
       decoration: BoxDecoration(
         gradient: LinearGradient(
@@ -64,7 +72,7 @@ class _TabStudentHomeState extends State<TabStudentHome> {
             padding: EdgeInsets.zero,
             shrinkWrap: true,
             children: [
-              const GreetingsSection(),
+              GreetingsSection(userProfile: userProfile),
               Stack(
                 children: [
                   Container(

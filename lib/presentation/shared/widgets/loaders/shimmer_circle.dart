@@ -17,7 +17,7 @@ class _ShimmerCircleState extends State<ShimmerCircle> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: widget.padding ?? EdgeInsets.only(bottom: 16.h),
+      padding: widget.padding ?? EdgeInsets.zero,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [

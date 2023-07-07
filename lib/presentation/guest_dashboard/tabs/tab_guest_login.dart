@@ -15,7 +15,6 @@ import 'package:sqlyze/presentation/routes/router.gr.dart';
 import 'package:sqlyze/presentation/shared/widgets/buttons/button_gradient.dart';
 import 'package:sqlyze/presentation/shared/widgets/buttons/button_primary.dart';
 import 'package:sqlyze/presentation/shared/widgets/inputs/input_secondary.dart';
-import 'package:sqlyze/presentation/shared/widgets/loaders/custom_loader.dart';
 import 'package:sqlyze/presentation/shared/widgets/others/show_dialog.dart';
 import 'package:sqlyze/presentation/shared/widgets/pages/page_decoration_top.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -33,13 +32,8 @@ class _TabGuestLoginState extends State<TabGuestLogin> {
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
 
-  // late CustomProgressDialog progressDialog;
-
   @override
   void initState() {
-    // progressDialog = CustomProgressDialog(context,
-    //     dismissable: true, loadingWidget: customSpinkit, blur: 3);
-
     super.initState();
   }
 
@@ -51,12 +45,9 @@ class _TabGuestLoginState extends State<TabGuestLogin> {
         listener: (context, state) {
           state.map(
               initial: (value) => const SizedBox.shrink(),
-              loadInProgress: (value) {
-                EasyLoading.show(status: 'loading...');
-              },
+              loadInProgress: (value) => EasyLoading.show(status: 'loading...'),
               loadSuccess: (value) async {
-                log('valueee success ${value}');
-                // progressDialog.dismiss();
+                EasyLoading.dismiss();
                 await addBoolToPreference(
                     key: PreferenceConstants.isLoggedIn, value: true);
                 AutoRouter.of(context).pushAndPopUntil(
@@ -64,7 +55,6 @@ class _TabGuestLoginState extends State<TabGuestLogin> {
                     predicate: (route) => false);
               },
               loadFailure: (value) {
-                // progressDialog.dismiss();
                 EasyLoading.dismiss();
                 showErrorDialog(context: context, message: value.message);
               });
