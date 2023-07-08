@@ -3,13 +3,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
-import 'package:flutter_html/flutter_html.dart';
-import 'package:flutter_html_iframe/flutter_html_iframe.dart';
-import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:html2md/html2md.dart' as html2md;
 import 'package:webview_flutter/webview_flutter.dart';
 
 import 'package:sqlyze/presentation/core/constants/styles.dart';
@@ -29,7 +23,12 @@ class ChapterLearnBody extends StatefulWidget {
 class _ChapterLearnBodyState extends State<ChapterLearnBody> {
   final Completer<WebViewController> webController =
       Completer<WebViewController>();
+  final GlobalKey webViewKey = GlobalKey();
+  WebViewController? controller;
+
+  double webViewHeight = 1;
   String? htmlData;
+
   Future<String> loadAsset() async {
     return await rootBundle
         .loadString('assets/htmls/ddl_1_create_statement.html');
@@ -67,109 +66,76 @@ class _ChapterLearnBodyState extends State<ChapterLearnBody> {
 
   @override
   Widget build(BuildContext context) {
-    // return Container(
-    //   height: MediaQuery.of(context).size.height,
-    //   child: FutureBuilder(
-    //     future: _loadHtmlFromAssets('assets/htmls/ddl_1_create_statement.html'),
-    //     builder: (BuildContext context, AsyncSnapshot<void> snapshot) {
-    //       if (snapshot.connectionState == ConnectionState.done) {
-    //         return Padding(
-    //           padding: EdgeInsets.only(
-    //               left: 25.w, right: 25.w, top: 32.05.h, bottom: 5.h),
-    //           child: Stack(
-    //             children: [
-    //               WebView(
-    //                 backgroundColor: Colors.white,
-    //                 zoomEnabled: true,
-    //                 javascriptMode: JavascriptMode.unrestricted,
-    //                 onWebViewCreated: (WebViewController webViewController) {
-    //                   webController.complete(webViewController);
-    //                 },
-    //               ),
-    //             ],
-    //           ),
-    //         );
-    //       } else {
-    //         return CircularProgressIndicator();
-    //       }
-    //     },
-    //   ),
-    // );
-
     return Container(
       margin: EdgeInsets.only(left: 16.w, right: 16.w, bottom: 10.h),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Expanded(
-            child: Container(
-              height: screenHeight,
-              child: FutureBuilder(
-                future: _loadHtmlFromAssets(
-                    'assets/htmls/ddl_1_create_statement.html'),
-                builder: (BuildContext context, AsyncSnapshot<void> snapshot) {
-                  if (snapshot.connectionState == ConnectionState.done) {
-                    return Padding(
-                      padding: EdgeInsets.only(
-                          left: 25.w, right: 25.w, top: 32.05.h, bottom: 5.h),
-                      child: Stack(
-                        children: [
-                          WebView(
-                            backgroundColor: Colors.white,
-                            zoomEnabled: true,
-                            javascriptMode: JavascriptMode.unrestricted,
-                            onWebViewCreated:
-                                (WebViewController webViewController) {
-                              webController.complete(webViewController);
-                            },
-                          ),
-                        ],
-                      ),
-                    );
-                  } else {
-                    return CircularProgressIndicator();
-                  }
-                },
-              ),
+          Container(
+            height: webViewHeight,
+            child: WebView(
+              initialUrl:
+                  "http://10.0.2.2:3000/htmls/ddl_1_pengenalan_ddl.html",
+              backgroundColor: Colors.white,
+              zoomEnabled: true,
+              javascriptMode: JavascriptMode.unrestricted,
+              onPageFinished: (_) {
+                updateHeight();
+              },
+              onWebViewCreated: (WebViewController webViewController) {
+                webController.complete(webViewController);
+                controller = webViewController;
+              },
             ),
           ),
-          // SizedBox(height: 10.h),
-          // CardExpansion(
-          //   title: 'Modul Materi',
-          //   children: [
-          //     Container(
-          //       height: 500.h,
-          //       child: PDFViewer(
-          //         url:
-          //             'https://drive.google.com/uc?id=1dQflASwaosA_R2oOfTvsimoB1Rxtvgra',
-          //       ),
-          //     ),
-          //   ],
-          // ),
-          // SizedBox(height: 10.h),
-          // CardExpansion(
-          //   title: 'PPT',
-          //   children: [
-          //     Container(
-          //       height: 250.h,
-          //       child: PDFViewer(
-          //         url:
-          //             'https://drive.google.com/uc?id=1NcV5Pq0wje6xTO1taiWTGjqIP-uMXGO6',
-          //       ),
-          //     ),
-          //   ],
-          // ),
-          // SizedBox(height: 10.h),
-          // CardExpansion(title: 'Podcast', children: [
-          //   Container(
-          //       margin: EdgeInsets.symmetric(horizontal: 8.w, vertical: 6.h),
-          //       child: PodcastPlayer(
-          //           title: 'Data Definition Language',
-          //           audioUrl:
-          //               'https://d3ctxlq1ktw2nl.cloudfront.net/staging/2023-4-1/326982564-22050-1-b3f2b4a2326c3.m4a'))
-          // ])
+          CardExpansion(
+            title: 'Modul Materi',
+            children: [
+              Container(
+                height: 500.h,
+                child: PDFViewer(
+                  url:
+                      'https://drive.google.com/uc?id=1dQflASwaosA_R2oOfTvsimoB1Rxtvgra',
+                ),
+              ),
+            ],
+          ),
+          SizedBox(height: 10.h),
+          CardExpansion(
+            title: 'PPT',
+            children: [
+              Container(
+                height: 250.h,
+                child: PDFViewer(
+                  url:
+                      'https://drive.google.com/uc?id=1NcV5Pq0wje6xTO1taiWTGjqIP-uMXGO6',
+                ),
+              ),
+            ],
+          ),
+          SizedBox(height: 10.h),
+          CardExpansion(title: 'Podcast', children: [
+            Container(
+                margin: EdgeInsets.symmetric(horizontal: 8.w, vertical: 6.h),
+                child: PodcastPlayer(
+                    title: 'Data Definition Language',
+                    audioUrl:
+                        'https://d3ctxlq1ktw2nl.cloudfront.net/staging/2023-4-1/326982564-22050-1-b3f2b4a2326c3.m4a'))
+          ])
         ],
       ),
     );
   }
+
+  void updateHeight() async {
+    double height = double.parse(await controller!.runJavascriptReturningResult(
+        'document.documentElement.scrollHeight;'));
+    if (webViewHeight != height) {
+      setState(() {
+        webViewHeight = height;
+      });
+    }
+  }
+
+  bool get wantKeepAlive => true;
 }
