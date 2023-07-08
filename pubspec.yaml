@@ -67,6 +67,11 @@ dependencies:
   flutter_pdfview: ^1.3.0
   just_audio: ^0.9.32
   assets_audio_player: ^3.0.6
+  flutter_html: ^3.0.0-beta.2
+  webview_flutter: ^3.0.4
+  flutter_html_iframe: ^3.0.0-alpha.4
+  html2md: ^1.3.1
+  flutter_markdown: ^0.6.17
 
 dev_dependencies:
   flutter_test:
@@ -96,6 +101,7 @@ flutter:
     - assets/icons/
     - assets/images/
     - assets/illustrations/
+    - assets/htmls/
 
   fonts:
     - family: Poppins

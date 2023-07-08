@@ -10,6 +10,7 @@ import 'package:sqlyze/injection.dart';
 import 'package:sqlyze/presentation/core/constants/assets.dart';
 import 'package:sqlyze/presentation/core/constants/styles.dart';
 import 'package:sqlyze/presentation/core/styles/app_colors.dart';
+import 'package:sqlyze/presentation/shared/widgets/errors/error_page.dart';
 import 'package:sqlyze/presentation/shared/widgets/images/image_circle.dart';
 import 'package:sqlyze/presentation/shared/widgets/pages/draggable_page.dart';
 import 'package:sqlyze/presentation/student_dashboard/components/card_profile_item.dart';
@@ -45,7 +46,7 @@ class _TabProfileState extends State<TabStudentProfile> {
                     body: [buildProfileBody(value.user!)]);
               },
               loadFailure: (value) {
-                return SizedBox.shrink();
+                return ErrorPage(message: value.message);
               });
         },
       ),

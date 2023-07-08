@@ -10,6 +10,7 @@ import 'package:sqlyze/presentation/core/constants/assets.dart';
 import 'package:sqlyze/presentation/core/constants/strings.dart';
 import 'package:sqlyze/presentation/core/constants/styles.dart';
 import 'package:sqlyze/presentation/core/styles/app_colors.dart';
+import 'package:sqlyze/presentation/shared/widgets/errors/error_page.dart';
 import 'package:sqlyze/presentation/shared/widgets/pages/page_decoration_top.dart';
 import 'package:sqlyze/presentation/student_dashboard/components/greetings_section.dart';
 import 'package:sqlyze/presentation/student_dashboard/components/shimmer_home.dart';
@@ -37,13 +38,7 @@ class _TabStudentHomeState extends State<TabStudentHome> {
                 return buildHome(value.user!);
               },
               loadFailure: (value) {
-                return PageDecorationTop(
-                  hasBack: false,
-                  appBarTitle: 'SQLyze',
-                  child: Center(
-                    child: Text(AppStrings.errorMessageGeneral),
-                  ),
-                );
+                return ErrorPage(message: value.message);
               });
         },
       ),
