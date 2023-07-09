@@ -57,6 +57,16 @@ class $AssetsFontsGen {
       ];
 }
 
+class $AssetsHtmlsGen {
+  const $AssetsHtmlsGen();
+
+  /// File path: assets/htmls/ddl_1_create_statement.html
+  String get ddl1CreateStatement => 'assets/htmls/ddl_1_create_statement.html';
+
+  /// List of all assets
+  List<String> get values => [ddl1CreateStatement];
+}
+
 class $AssetsIconsGen {
   const $AssetsIconsGen();
 
@@ -359,6 +369,7 @@ class Assets {
   Assets._();
 
   static const $AssetsFontsGen fonts = $AssetsFontsGen();
+  static const $AssetsHtmlsGen htmls = $AssetsHtmlsGen();
   static const $AssetsIconsGen icons = $AssetsIconsGen();
   static const $AssetsIllustrationsGen illustrations =
       $AssetsIllustrationsGen();
