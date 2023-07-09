@@ -3,8 +3,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:sqlyze/presentation/core/constants/styles.dart';
 import 'package:sqlyze/presentation/core/styles/app_colors.dart';
 import 'package:sqlyze/presentation/shared/widgets/loaders/shimmer_primary.dart';
-import 'package:sqlyze/presentation/shared/widgets/pages/page_decoration_top.dart';
-import 'package:sqlyze/presentation/student_dashboard/components/greetings_section.dart';
 import 'package:sqlyze/presentation/student_dashboard/components/shimmer_greetings.dart';
 
 class ShimmerHome extends StatelessWidget {

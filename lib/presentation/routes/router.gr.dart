@@ -74,9 +74,14 @@ class AppRouter extends _i11.RootStackRouter {
       );
     },
     RouteLessonDetail.name: (routeData) {
+      final args = routeData.argsAs<RouteLessonDetailArgs>();
       return _i11.MaterialPageX<dynamic>(
         routeData: routeData,
-        child: const _i8.PageLessonDetail(),
+        child: _i8.PageLessonDetail(
+          key: args.key,
+          lessonName: args.lessonName,
+          lessonType: args.lessonType,
+        ),
       );
     },
     RouteChapterDetail.name: (routeData) {
@@ -224,14 +229,41 @@ class RouteLessonList extends _i11.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i8.PageLessonDetail]
-class RouteLessonDetail extends _i11.PageRouteInfo<void> {
-  const RouteLessonDetail()
-      : super(
+class RouteLessonDetail extends _i11.PageRouteInfo<RouteLessonDetailArgs> {
+  RouteLessonDetail({
+    _i12.Key? key,
+    required String lessonName,
+    required int lessonType,
+  }) : super(
           RouteLessonDetail.name,
           path: '/page-lesson-detail',
+          args: RouteLessonDetailArgs(
+            key: key,
+            lessonName: lessonName,
+            lessonType: lessonType,
+          ),
         );
 
   static const String name = 'RouteLessonDetail';
+}
+
+class RouteLessonDetailArgs {
+  const RouteLessonDetailArgs({
+    this.key,
+    required this.lessonName,
+    required this.lessonType,
+  });
+
+  final _i12.Key? key;
+
+  final String lessonName;
+
+  final int lessonType;
+
+  @override
+  String toString() {
+    return 'RouteLessonDetailArgs{key: $key, lessonName: $lessonName, lessonType: $lessonType}';
+  }
 }
 
 /// generated route for

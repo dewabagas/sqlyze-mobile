@@ -52,10 +52,10 @@ class _CardLessonState extends State<CardLesson> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text('Pengenalan Data Definition Language Dalam Database',
-                      style: TextStyles.labelMedium),
+                  Text(widget.title ?? 'Title', style: TextStyles.labelMedium),
                   SizedBox(height: 2.h),
-                  Text('Subtitle', style: TextStyles.bodyVerySmall),
+                  Text(widget.subtitle ?? 'Subtitle',
+                      style: TextStyles.bodyVerySmall),
                 ],
               ),
             )

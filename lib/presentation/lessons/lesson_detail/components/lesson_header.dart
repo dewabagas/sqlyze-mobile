@@ -9,7 +9,11 @@ import 'package:sqlyze/presentation/core/constants/styles.dart';
 import 'package:sqlyze/presentation/core/styles/app_colors.dart';
 
 class LessonHeader extends StatefulWidget {
-  const LessonHeader({super.key});
+  final String lessonName;
+  final int lessonAmount;
+  const LessonHeader(
+      {Key? key, required this.lessonName, required this.lessonAmount})
+      : super(key: key);
 
   @override
   State<LessonHeader> createState() => _LessonHeaderState();
@@ -48,10 +52,11 @@ class _LessonHeaderState extends State<LessonHeader> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    'Data Definition Language',
+                    widget.lessonName,
                     style: TextStyles.labelLarge,
                   ),
-                  Text('10 Chapters', style: TextStyles.bodySmall)
+                  Text('${widget.lessonAmount} Chapters',
+                      style: TextStyles.bodySmall)
                 ],
               ),
               SvgPicture.asset(AppIllustrations.illSad)

@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:sqlyze/presentation/core/constants/styles.dart';
 import 'package:sqlyze/presentation/core/styles/app_colors.dart';
-import 'package:sqlyze/presentation/shared/widgets/images/image_circle.dart';
 import 'package:sqlyze/presentation/shared/widgets/loaders/shimmer_circle.dart';
 import 'package:sqlyze/presentation/shared/widgets/loaders/shimmer_primary.dart';
 
