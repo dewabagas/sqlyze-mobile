@@ -68,8 +68,9 @@ dependencies:
   just_audio: ^0.9.32
   assets_audio_player: ^3.0.6
   flutter_html: ^3.0.0-beta.2
-  webview_flutter: ^3.0.4
   story: ^1.1.0
+  expandable_page_view: ^1.0.17
+  webview_flutter: ^4.2.2
 
 dev_dependencies:
   flutter_test:

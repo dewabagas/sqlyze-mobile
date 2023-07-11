@@ -10,6 +10,8 @@ import 'dart:ui' as ui;
 class CardGradient extends StatelessWidget {
   final String? title;
   final String? subtitle;
+  final String? buttonTitle;
+  final Function()? onPressed;
   final Widget? prefixImage;
   final bool hasShadow;
 
@@ -18,7 +20,9 @@ class CardGradient extends StatelessWidget {
       this.title,
       this.subtitle,
       this.prefixImage,
-      this.hasShadow = true});
+      this.hasShadow = true,
+      this.buttonTitle,
+      this.onPressed});
 
   @override
   Widget build(BuildContext context) {
@@ -72,24 +76,24 @@ class CardGradient extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          'Pengenalan DDL',
+                          title ?? 'Title',
                           style: TextStyles.labelMedium
                               .copyWith(color: Colors.white),
                         ),
                         Text(
-                          'Pengenalan Data Definition Language',
+                          subtitle ?? 'Subtitle',
                           style: TextStyles.bodyVerySmall
                               .copyWith(color: Colors.white),
                         ),
                         SizedBox(height: 10.h),
                         ButtonGradient(
                             height: 23.h,
-                            title: 'Belajar Sekarang',
+                            title: buttonTitle ?? 'Button',
                             textStyle: TextStyles.labelLarge.copyWith(
                                 color: AppColors.white,
                                 fontSize: 10.sp,
                                 fontWeight: FontWeight.w700),
-                            onPressed: () {}),
+                            onPressed: onPressed),
                       ],
                     ),
                   ),

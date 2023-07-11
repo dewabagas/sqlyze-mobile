@@ -1,14 +1,15 @@
 import 'dart:async';
 import 'dart:convert';
 
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:sqlyze/domain/lessons/entities/lesson_detail.dart';
 import 'package:sqlyze/presentation/core/constants/styles.dart';
 import 'package:sqlyze/presentation/core/styles/app_colors.dart';
+import 'package:sqlyze/presentation/routes/router.gr.dart';
 import 'package:sqlyze/presentation/shared/widgets/cards/card_gradient.dart';
-import 'package:webview_flutter/webview_flutter.dart';
 
 import 'package:sqlyze/presentation/lessons/chapter_detail/components/podcast_player.dart';
 import 'package:sqlyze/presentation/shared/widgets/cards/card_expansion.dart';
@@ -23,49 +24,6 @@ class ChapterLearnBody extends StatefulWidget {
 }
 
 class _ChapterLearnBodyState extends State<ChapterLearnBody> {
-  final Completer<WebViewController> webController =
-      Completer<WebViewController>();
-  final GlobalKey webViewKey = GlobalKey();
-  WebViewController? controller;
-
-  double webViewHeight = 1;
-  String? htmlData;
-
-  Future<String> loadAsset() async {
-    return await rootBundle
-        .loadString('assets/htmls/ddl_1_create_statement.html');
-  }
-
-  Future<void> _loadHtmlFromAssets(String file) async {
-    webController.future.then((controller) async {
-      String fileText = await rootBundle.loadString(file);
-      String completeHtml = await addFontToHtml(
-          fileText, "assets/fonts/Poppins-Regular.ttf", "font/ttf");
-      String theURI = Uri.dataFromString(completeHtml,
-              mimeType: 'text/html', encoding: Encoding.getByName('utf-8'))
-          .toString();
-
-      controller.loadUrl(theURI);
-    });
-  }
-
-  String getFontUri(ByteData data, String mime) {
-    final buffer = data.buffer;
-    return Uri.dataFromBytes(
-            buffer.asUint8List(data.offsetInBytes, data.lengthInBytes),
-            mimeType: mime)
-        .toString();
-  }
-
-  Future<String> addFontToHtml(
-      String htmlContent, String fontAssetPath, String fontMime) async {
-    final fontData = await rootBundle.load(fontAssetPath);
-    final fontUri = getFontUri(fontData, fontMime).toString();
-    final fontCss =
-        '@font-face { font-family: customFont; src: url($fontUri); } * { font-family: customFont; }';
-    return '<style>$fontCss</style>$htmlContent';
-  }
-
   @override
   Widget build(BuildContext context) {
     final LessonDetail lessonDetail = widget.lessonDetail;
@@ -82,25 +40,16 @@ class _ChapterLearnBodyState extends State<ChapterLearnBody> {
                 color: AppColors.paragraphColor, fontWeight: FontWeight.w400),
             textAlign: TextAlign.justify,
           ),
-          // Container(
-          //   height: webViewHeight,
-          //   child: WebView(
-          //     initialUrl:
-          //         "http://10.0.2.2:3000/htmls/ddl_1_pengenalan_ddl.html",
-          //     backgroundColor: Colors.white,
-          //     zoomEnabled: true,
-          //     javascriptMode: JavascriptMode.unrestricted,
-          //     onPageFinished: (_) {
-          //       updateHeight();
-          //     },
-          //     onWebViewCreated: (WebViewController webViewController) {
-          //       webController.complete(webViewController);
-          //       controller = webViewController;
-          //     },
-          //   ),
-          // ),
           SizedBox(height: 10.h),
-          CardGradient(),
+          CardGradient(
+            title: lessonDetail.title,
+            subtitle: lessonDetail.description,
+            buttonTitle: 'Belajar Sekarang',
+            onPressed: () {
+              AutoRouter.of(context)
+                  .push(RouteLessonStepDetail(lessonDetail: lessonDetail));
+            },
+          ),
           SizedBox(height: 16.h),
           CardExpansion(
             title: 'Modul Materi',
@@ -140,16 +89,4 @@ class _ChapterLearnBodyState extends State<ChapterLearnBody> {
       ),
     );
   }
-
-  void updateHeight() async {
-    double height = double.parse(await controller!.runJavascriptReturningResult(
-        'document.documentElement.scrollHeight;'));
-    if (webViewHeight != height) {
-      setState(() {
-        webViewHeight = height;
-      });
-    }
-  }
-
-  bool get wantKeepAlive => true;
 }
