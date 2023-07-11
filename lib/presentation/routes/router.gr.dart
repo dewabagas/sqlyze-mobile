@@ -11,71 +11,73 @@
 // ignore_for_file: type=lint
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
-import 'package:auto_route/auto_route.dart' as _i11;
-import 'package:flutter/material.dart' as _i12;
+import 'package:auto_route/auto_route.dart' as _i12;
+import 'package:flutter/material.dart' as _i13;
 
+import '../../domain/lessons/entities/lesson_detail.dart' as _i14;
 import '../core/pages/page_onboarding.dart' as _i2;
 import '../core/pages/page_splash.dart' as _i1;
 import '../guest_dashboard/page_guest_dashboard.dart' as _i3;
 import '../lessons/chapter_detail/page_chapter_detail.dart' as _i9;
 import '../lessons/lesson_detail/page_lesson_detail.dart' as _i8;
 import '../lessons/lesson_list/page_lesson_list.dart' as _i7;
+import '../lessons/lesson_step_detail/page_lesson_step_detail.dart' as _i10;
 import '../otp/page_otp.dart' as _i6;
-import '../quizzes/quiz/page_quiz.dart' as _i10;
+import '../quizzes/quiz/page_quiz.dart' as _i11;
 import '../register/page_register.dart' as _i5;
 import '../student_dashboard/page_student_dashboard.dart' as _i4;
 
-class AppRouter extends _i11.RootStackRouter {
-  AppRouter([_i12.GlobalKey<_i12.NavigatorState>? navigatorKey])
+class AppRouter extends _i12.RootStackRouter {
+  AppRouter([_i13.GlobalKey<_i13.NavigatorState>? navigatorKey])
       : super(navigatorKey);
 
   @override
-  final Map<String, _i11.PageFactory> pagesMap = {
+  final Map<String, _i12.PageFactory> pagesMap = {
     RouteSplash.name: (routeData) {
-      return _i11.MaterialPageX<dynamic>(
+      return _i12.MaterialPageX<dynamic>(
         routeData: routeData,
         child: const _i1.PageSplash(),
       );
     },
     RouteOnboarding.name: (routeData) {
-      return _i11.MaterialPageX<dynamic>(
+      return _i12.MaterialPageX<dynamic>(
         routeData: routeData,
         child: const _i2.PageOnboarding(),
       );
     },
     RouteGuestDashboard.name: (routeData) {
-      return _i11.MaterialPageX<dynamic>(
+      return _i12.MaterialPageX<dynamic>(
         routeData: routeData,
         child: const _i3.PageGuestDashboard(),
       );
     },
     RouteStudentDashboard.name: (routeData) {
-      return _i11.MaterialPageX<dynamic>(
+      return _i12.MaterialPageX<dynamic>(
         routeData: routeData,
         child: const _i4.PageStudentDashboard(),
       );
     },
     RouteRegister.name: (routeData) {
-      return _i11.MaterialPageX<dynamic>(
+      return _i12.MaterialPageX<dynamic>(
         routeData: routeData,
         child: const _i5.PageRegister(),
       );
     },
     RouteOtp.name: (routeData) {
-      return _i11.MaterialPageX<dynamic>(
+      return _i12.MaterialPageX<dynamic>(
         routeData: routeData,
         child: const _i6.PageOtp(),
       );
     },
     RouteLessonList.name: (routeData) {
-      return _i11.MaterialPageX<dynamic>(
+      return _i12.MaterialPageX<dynamic>(
         routeData: routeData,
         child: const _i7.PageLessonList(),
       );
     },
     RouteLessonDetail.name: (routeData) {
       final args = routeData.argsAs<RouteLessonDetailArgs>();
-      return _i11.MaterialPageX<dynamic>(
+      return _i12.MaterialPageX<dynamic>(
         routeData: routeData,
         child: _i8.PageLessonDetail(
           key: args.key,
@@ -85,58 +87,76 @@ class AppRouter extends _i11.RootStackRouter {
       );
     },
     RouteChapterDetail.name: (routeData) {
-      return _i11.MaterialPageX<dynamic>(
+      final args = routeData.argsAs<RouteChapterDetailArgs>();
+      return _i12.MaterialPageX<dynamic>(
         routeData: routeData,
-        child: const _i9.PageChapterDetail(),
+        child: _i9.PageChapterDetail(
+          key: args.key,
+          materialId: args.materialId,
+        ),
+      );
+    },
+    RouteLessonStepDetail.name: (routeData) {
+      final args = routeData.argsAs<RouteLessonStepDetailArgs>();
+      return _i12.MaterialPageX<dynamic>(
+        routeData: routeData,
+        child: _i10.PageLessonStepDetail(
+          key: args.key,
+          lessonDetail: args.lessonDetail,
+        ),
       );
     },
     RouteQuiz.name: (routeData) {
-      return _i11.MaterialPageX<dynamic>(
+      return _i12.MaterialPageX<dynamic>(
         routeData: routeData,
-        child: const _i10.PageQuiz(),
+        child: const _i11.PageQuiz(),
       );
     },
   };
 
   @override
-  List<_i11.RouteConfig> get routes => [
-        _i11.RouteConfig(
+  List<_i12.RouteConfig> get routes => [
+        _i12.RouteConfig(
           RouteSplash.name,
           path: '/',
         ),
-        _i11.RouteConfig(
+        _i12.RouteConfig(
           RouteOnboarding.name,
           path: '/page-onboarding',
         ),
-        _i11.RouteConfig(
+        _i12.RouteConfig(
           RouteGuestDashboard.name,
           path: '/page-guest-dashboard',
         ),
-        _i11.RouteConfig(
+        _i12.RouteConfig(
           RouteStudentDashboard.name,
           path: '/page-student-dashboard',
         ),
-        _i11.RouteConfig(
+        _i12.RouteConfig(
           RouteRegister.name,
           path: '/page-register',
         ),
-        _i11.RouteConfig(
+        _i12.RouteConfig(
           RouteOtp.name,
           path: '/page-otp',
         ),
-        _i11.RouteConfig(
+        _i12.RouteConfig(
           RouteLessonList.name,
           path: '/page-lesson-list',
         ),
-        _i11.RouteConfig(
+        _i12.RouteConfig(
           RouteLessonDetail.name,
           path: '/page-lesson-detail',
         ),
-        _i11.RouteConfig(
+        _i12.RouteConfig(
           RouteChapterDetail.name,
           path: '/page-chapter-detail',
         ),
-        _i11.RouteConfig(
+        _i12.RouteConfig(
+          RouteLessonStepDetail.name,
+          path: '/page-lesson-step-detail',
+        ),
+        _i12.RouteConfig(
           RouteQuiz.name,
           path: '/page-quiz',
         ),
@@ -145,7 +165,7 @@ class AppRouter extends _i11.RootStackRouter {
 
 /// generated route for
 /// [_i1.PageSplash]
-class RouteSplash extends _i11.PageRouteInfo<void> {
+class RouteSplash extends _i12.PageRouteInfo<void> {
   const RouteSplash()
       : super(
           RouteSplash.name,
@@ -157,7 +177,7 @@ class RouteSplash extends _i11.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i2.PageOnboarding]
-class RouteOnboarding extends _i11.PageRouteInfo<void> {
+class RouteOnboarding extends _i12.PageRouteInfo<void> {
   const RouteOnboarding()
       : super(
           RouteOnboarding.name,
@@ -169,7 +189,7 @@ class RouteOnboarding extends _i11.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i3.PageGuestDashboard]
-class RouteGuestDashboard extends _i11.PageRouteInfo<void> {
+class RouteGuestDashboard extends _i12.PageRouteInfo<void> {
   const RouteGuestDashboard()
       : super(
           RouteGuestDashboard.name,
@@ -181,7 +201,7 @@ class RouteGuestDashboard extends _i11.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i4.PageStudentDashboard]
-class RouteStudentDashboard extends _i11.PageRouteInfo<void> {
+class RouteStudentDashboard extends _i12.PageRouteInfo<void> {
   const RouteStudentDashboard()
       : super(
           RouteStudentDashboard.name,
@@ -193,7 +213,7 @@ class RouteStudentDashboard extends _i11.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i5.PageRegister]
-class RouteRegister extends _i11.PageRouteInfo<void> {
+class RouteRegister extends _i12.PageRouteInfo<void> {
   const RouteRegister()
       : super(
           RouteRegister.name,
@@ -205,7 +225,7 @@ class RouteRegister extends _i11.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i6.PageOtp]
-class RouteOtp extends _i11.PageRouteInfo<void> {
+class RouteOtp extends _i12.PageRouteInfo<void> {
   const RouteOtp()
       : super(
           RouteOtp.name,
@@ -217,7 +237,7 @@ class RouteOtp extends _i11.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i7.PageLessonList]
-class RouteLessonList extends _i11.PageRouteInfo<void> {
+class RouteLessonList extends _i12.PageRouteInfo<void> {
   const RouteLessonList()
       : super(
           RouteLessonList.name,
@@ -229,9 +249,9 @@ class RouteLessonList extends _i11.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i8.PageLessonDetail]
-class RouteLessonDetail extends _i11.PageRouteInfo<RouteLessonDetailArgs> {
+class RouteLessonDetail extends _i12.PageRouteInfo<RouteLessonDetailArgs> {
   RouteLessonDetail({
-    _i12.Key? key,
+    _i13.Key? key,
     required String lessonName,
     required int lessonType,
   }) : super(
@@ -254,7 +274,7 @@ class RouteLessonDetailArgs {
     required this.lessonType,
   });
 
-  final _i12.Key? key;
+  final _i13.Key? key;
 
   final String lessonName;
 
@@ -268,19 +288,76 @@ class RouteLessonDetailArgs {
 
 /// generated route for
 /// [_i9.PageChapterDetail]
-class RouteChapterDetail extends _i11.PageRouteInfo<void> {
-  const RouteChapterDetail()
-      : super(
+class RouteChapterDetail extends _i12.PageRouteInfo<RouteChapterDetailArgs> {
+  RouteChapterDetail({
+    _i13.Key? key,
+    required int materialId,
+  }) : super(
           RouteChapterDetail.name,
           path: '/page-chapter-detail',
+          args: RouteChapterDetailArgs(
+            key: key,
+            materialId: materialId,
+          ),
         );
 
   static const String name = 'RouteChapterDetail';
 }
 
+class RouteChapterDetailArgs {
+  const RouteChapterDetailArgs({
+    this.key,
+    required this.materialId,
+  });
+
+  final _i13.Key? key;
+
+  final int materialId;
+
+  @override
+  String toString() {
+    return 'RouteChapterDetailArgs{key: $key, materialId: $materialId}';
+  }
+}
+
 /// generated route for
-/// [_i10.PageQuiz]
-class RouteQuiz extends _i11.PageRouteInfo<void> {
+/// [_i10.PageLessonStepDetail]
+class RouteLessonStepDetail
+    extends _i12.PageRouteInfo<RouteLessonStepDetailArgs> {
+  RouteLessonStepDetail({
+    _i13.Key? key,
+    required _i14.LessonDetail lessonDetail,
+  }) : super(
+          RouteLessonStepDetail.name,
+          path: '/page-lesson-step-detail',
+          args: RouteLessonStepDetailArgs(
+            key: key,
+            lessonDetail: lessonDetail,
+          ),
+        );
+
+  static const String name = 'RouteLessonStepDetail';
+}
+
+class RouteLessonStepDetailArgs {
+  const RouteLessonStepDetailArgs({
+    this.key,
+    required this.lessonDetail,
+  });
+
+  final _i13.Key? key;
+
+  final _i14.LessonDetail lessonDetail;
+
+  @override
+  String toString() {
+    return 'RouteLessonStepDetailArgs{key: $key, lessonDetail: $lessonDetail}';
+  }
+}
+
+/// generated route for
+/// [_i11.PageQuiz]
+class RouteQuiz extends _i12.PageRouteInfo<void> {
   const RouteQuiz()
       : super(
           RouteQuiz.name,

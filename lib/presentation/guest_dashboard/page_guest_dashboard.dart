@@ -23,7 +23,7 @@ class _PageGuestDashboardState extends State<PageGuestDashboard> {
     IconBottomNavBarItem(
         iconActive: BottomBar.icProfileActive,
         iconInactive: BottomBar.icProfile,
-        label: 'Profile'),
+        label: 'Login'),
   ];
 
   static final List widgetOptions = [

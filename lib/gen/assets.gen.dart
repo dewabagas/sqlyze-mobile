@@ -287,6 +287,9 @@ class $AssetsIconsGen {
 class $AssetsIllustrationsGen {
   const $AssetsIllustrationsGen();
 
+  /// File path: assets/illustrations/ill_assessment.svg
+  String get illAssessment => 'assets/illustrations/ill_assessment.svg';
+
   /// File path: assets/illustrations/ill_consultation.svg
   String get illConsultation => 'assets/illustrations/ill_consultation.svg';
 
@@ -326,6 +329,7 @@ class $AssetsIllustrationsGen {
 
   /// List of all assets
   List<String> get values => [
+        illAssessment,
         illConsultation,
         illEducation1,
         illLearning1,

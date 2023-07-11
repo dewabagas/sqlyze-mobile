@@ -78,8 +78,10 @@ class ButtonGradient extends StatelessWidget {
                   if (prefixIcon != null) prefixIcon!,
                   Text(
                     title!,
-                    style: TextStyles.labelLarge.copyWith(
-                        color: AppColors.white, fontWeight: FontWeight.w700),
+                    style: textStyle ??
+                        TextStyles.labelLarge.copyWith(
+                            color: AppColors.white,
+                            fontWeight: FontWeight.w700),
                   ),
                   if (suffixIcon != null) suffixIcon!,
                 ],

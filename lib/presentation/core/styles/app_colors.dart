@@ -11,7 +11,7 @@ class AppColors {
   // static const Color primary = Color(0xFF40A796);
   // static const Color primary = Color(0xFF7D1E6A);
   // static const Color primary = Color(0xFF008A9F);
-  static const Color secondary = Color(0xFF0499BD);
+  static const Color secondary = Color(0xFF6DC8F3);
   static const Color white = Color(0xFFFFFFFF);
   static const Color brokenWhite = Color(0xFFFAFAFA);
   static const Color black = Color(0xFF000000);
@@ -36,5 +36,6 @@ class AppColors {
   static const Color navy = Color(0xFF172441);
   static const Color blue = Color(0xFF376AED);
   static const Color softBlue = Color(0xFF9ADCFF);
+  static const Color softBlue2 = Color(0xFF73A1F9);
   static const Color darkTosca = Color(0xFF00ADB5);
 }

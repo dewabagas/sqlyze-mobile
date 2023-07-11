@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -11,6 +9,7 @@ import 'package:sqlyze/presentation/core/constants/styles.dart';
 import 'package:sqlyze/presentation/core/styles/app_colors.dart';
 import 'package:sqlyze/presentation/lessons/lesson_detail/components/card_lesson.dart';
 import 'package:sqlyze/presentation/lessons/lesson_detail/components/lesson_header.dart';
+import 'package:sqlyze/presentation/lessons/lesson_detail/components/shimmer_lesson_detail.dart';
 import 'package:sqlyze/presentation/routes/router.gr.dart';
 import 'package:sqlyze/presentation/shared/widgets/errors/error_page.dart';
 import 'package:sqlyze/presentation/shared/widgets/pages/draggable_page.dart';
@@ -34,10 +33,9 @@ class _PageLessonDetailState extends State<PageLessonDetail> {
       child: BlocBuilder<LessonListBloc, LessonListState>(
         builder: (context, state) {
           return state.map(
-              initial: (value) => const SizedBox.shrink(),
-              loadInProgress: (value) => const SizedBox.shrink(),
+              initial: (value) => const ShimmerLessonDetail(),
+              loadInProgress: (value) => const ShimmerLessonDetail(),
               loadSuccess: (value) {
-                log('lesson lsit ${value.lessonList?.length}');
                 final lessonList = value.lessonList;
                 return DraggablePage(
                     title: Text('Data Definition Language',
@@ -67,7 +65,7 @@ class _PageLessonDetailState extends State<PageLessonDetail> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            'Chapters',
+            'Materi',
             style: TextStyles.labelLarge,
           ),
           SizedBox(height: 20.h),
@@ -83,8 +81,9 @@ class _PageLessonDetailState extends State<PageLessonDetail> {
                   child: CardLesson(
                       title: lessonItem?.title,
                       subtitle: lessonItem?.description,
-                      onTap: () => AutoRouter.of(context)
-                          .push(const RouteChapterDetail())));
+                      onTap: () => AutoRouter.of(context).push(
+                          RouteChapterDetail(
+                              materialId: lessonItem?.id ?? 0))));
             },
           ),
         ],

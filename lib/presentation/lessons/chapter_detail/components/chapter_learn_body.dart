@@ -4,17 +4,19 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:webview_flutter/webview_flutter.dart';
-
+import 'package:sqlyze/domain/lessons/entities/lesson_detail.dart';
 import 'package:sqlyze/presentation/core/constants/styles.dart';
 import 'package:sqlyze/presentation/core/styles/app_colors.dart';
+import 'package:sqlyze/presentation/shared/widgets/cards/card_gradient.dart';
+import 'package:webview_flutter/webview_flutter.dart';
+
 import 'package:sqlyze/presentation/lessons/chapter_detail/components/podcast_player.dart';
 import 'package:sqlyze/presentation/shared/widgets/cards/card_expansion.dart';
-import 'package:sqlyze/presentation/shared/widgets/others/custom_expansion_tile.dart';
 import 'package:sqlyze/presentation/shared/widgets/others/pdf_viewer.dart';
 
 class ChapterLearnBody extends StatefulWidget {
-  const ChapterLearnBody({super.key});
+  final LessonDetail lessonDetail;
+  const ChapterLearnBody({super.key, required this.lessonDetail});
 
   @override
   State<ChapterLearnBody> createState() => _ChapterLearnBodyState();
@@ -66,28 +68,40 @@ class _ChapterLearnBodyState extends State<ChapterLearnBody> {
 
   @override
   Widget build(BuildContext context) {
+    final LessonDetail lessonDetail = widget.lessonDetail;
     return Container(
       margin: EdgeInsets.only(left: 16.w, right: 16.w, bottom: 10.h),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Container(
-            height: webViewHeight,
-            child: WebView(
-              initialUrl:
-                  "http://10.0.2.2:3000/htmls/ddl_1_pengenalan_ddl.html",
-              backgroundColor: Colors.white,
-              zoomEnabled: true,
-              javascriptMode: JavascriptMode.unrestricted,
-              onPageFinished: (_) {
-                updateHeight();
-              },
-              onWebViewCreated: (WebViewController webViewController) {
-                webController.complete(webViewController);
-                controller = webViewController;
-              },
-            ),
+          Text(lessonDetail.title ?? 'Title', style: TextStyles.labelMedium),
+          SizedBox(height: 5.h),
+          Text(
+            lessonDetail.description ?? 'Description',
+            style: TextStyles.bodySmall.copyWith(
+                color: AppColors.paragraphColor, fontWeight: FontWeight.w400),
+            textAlign: TextAlign.justify,
           ),
+          // Container(
+          //   height: webViewHeight,
+          //   child: WebView(
+          //     initialUrl:
+          //         "http://10.0.2.2:3000/htmls/ddl_1_pengenalan_ddl.html",
+          //     backgroundColor: Colors.white,
+          //     zoomEnabled: true,
+          //     javascriptMode: JavascriptMode.unrestricted,
+          //     onPageFinished: (_) {
+          //       updateHeight();
+          //     },
+          //     onWebViewCreated: (WebViewController webViewController) {
+          //       webController.complete(webViewController);
+          //       controller = webViewController;
+          //     },
+          //   ),
+          // ),
+          SizedBox(height: 10.h),
+          CardGradient(),
+          SizedBox(height: 16.h),
           CardExpansion(
             title: 'Modul Materi',
             children: [
