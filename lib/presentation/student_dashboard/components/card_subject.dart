@@ -17,7 +17,6 @@ class CardSubject extends StatefulWidget {
 class _CardSubjectState extends State<CardSubject> {
   @override
   Widget build(BuildContext context) {
-    List<String> words = widget.label.split(' ');
     return Container(
       width: screenWidth / 2.3,
       padding: EdgeInsets.symmetric(horizontal: 14.w, vertical: 12.w),

@@ -46,7 +46,6 @@ class ButtonSecondary extends StatelessWidget {
         borderRadius: BorderRadius.circular(5.r),
       );
     }
-    Color textColor = enabled ? AppColors.white : AppColors.black;
     return Container(
       decoration: decoration,
       margin: margin ?? EdgeInsets.zero,

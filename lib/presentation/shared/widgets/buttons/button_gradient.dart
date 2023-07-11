@@ -50,7 +50,6 @@ class ButtonGradient extends StatelessWidget {
         borderRadius: BorderRadius.circular(10.r),
       );
     }
-    Color textColor = enabled ? AppColors.white : AppColors.black;
     return Container(
       decoration: decoration,
       margin: margin ?? EdgeInsets.zero,

@@ -1,11 +1,7 @@
-import 'package:auto_route/auto_route.dart';
 import 'package:dio/dio.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:sqlyze/domain/core/constants/preference_constants.dart';
 import 'package:sqlyze/domain/core/helpers/preference_helper.dart';
-import 'package:sqlyze/domain/core/services/navigator_service.dart';
-import 'package:sqlyze/injection.dart';
-import 'package:sqlyze/locator.dart';
 import 'package:sqlyze/presentation/core/app.dart';
 import 'package:sqlyze/presentation/routes/router.gr.dart';
 

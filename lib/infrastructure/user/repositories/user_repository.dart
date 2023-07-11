@@ -1,12 +1,9 @@
 import 'dart:convert';
-import 'dart:developer';
 
 import 'package:dartz/dartz.dart';
 import 'package:flutter/material.dart';
 import 'package:injectable/injectable.dart';
 import 'package:sqlyze/domain/core/common/error/failure.dart';
-import 'package:sqlyze/domain/core/constants/preference_constants.dart';
-import 'package:sqlyze/domain/core/helpers/preference_helper.dart';
 import 'package:sqlyze/domain/user/entities/user_profile.dart';
 import 'package:sqlyze/domain/user/interfaces/i_user_repository.dart';
 import 'package:sqlyze/infrastructure/user/data_sources/remotes/user_api_service.dart';

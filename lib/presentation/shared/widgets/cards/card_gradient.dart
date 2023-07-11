@@ -7,8 +7,6 @@ import 'package:sqlyze/presentation/core/styles/app_colors.dart';
 import 'package:sqlyze/presentation/shared/widgets/buttons/button_gradient.dart';
 import 'dart:ui' as ui;
 
-import 'package:sqlyze/presentation/shared/widgets/buttons/button_primary.dart';
-
 class CardGradient extends StatelessWidget {
   final String? title;
   final String? subtitle;

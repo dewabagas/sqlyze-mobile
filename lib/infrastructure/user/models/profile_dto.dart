@@ -1,5 +1,4 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:sqlyze/domain/auth/entities/user.dart';
 import 'package:sqlyze/domain/user/entities/user_profile.dart';
 
 part 'profile_dto.freezed.dart';

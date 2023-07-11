@@ -4,7 +4,6 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:sqlyze/presentation/core/constants/assets.dart';
 import 'package:sqlyze/presentation/core/constants/styles.dart';
 import 'package:sqlyze/presentation/core/styles/app_colors.dart';
-import 'package:sqlyze/presentation/lessons/lesson_detail/components/card_lesson.dart';
 import 'package:sqlyze/presentation/lessons/lesson_detail/components/lesson_header.dart';
 import 'package:sqlyze/presentation/shared/widgets/loaders/shimmer_primary.dart';
 import 'package:sqlyze/presentation/shared/widgets/pages/draggable_page.dart';
