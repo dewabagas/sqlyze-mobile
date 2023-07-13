@@ -39,7 +39,7 @@ Future<void> showErrorDialog(
           Padding(
             padding: EdgeInsets.only(bottom: 10.h),
             child: ButtonPrimary(
-              title: buttonText ?? 'I Understand',
+              title: buttonText ?? 'Aku Mengerti',
               onPressed: () => Navigator.of(context).pop(),
             ),
           )

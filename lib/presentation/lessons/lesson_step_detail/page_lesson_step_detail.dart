@@ -2,13 +2,19 @@ import 'dart:async';
 import 'dart:convert';
 import 'dart:developer';
 
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:sqlyze/domain/lessons/entities/lesson_detail.dart';
+import 'package:sqlyze/presentation/core/constants/assets.dart';
 import 'package:sqlyze/presentation/core/constants/styles.dart';
+import 'package:sqlyze/presentation/core/styles/app_colors.dart';
+import 'package:sqlyze/presentation/shared/widgets/buttons/button_gradient.dart';
+import 'package:sqlyze/presentation/shared/widgets/buttons/button_primary.dart';
 import 'package:sqlyze/presentation/shared/widgets/others/expandable_page_view/expandable_page_view.dart';
 import 'package:sqlyze/presentation/shared/widgets/pages/loop_page_view/loop_page_view.dart';
 import 'package:sqlyze/presentation/shared/widgets/pages/page_decoration_top.dart';
@@ -33,6 +39,13 @@ class _PageLessonStepDetailState extends State<PageLessonStepDetail>
   final Set<Factory<OneSequenceGestureRecognizer>> gestureRecognizers = {
     Factory<OneSequenceGestureRecognizer>(() => EagerGestureRecognizer()),
   };
+  final LoopPageController pageController = LoopPageController(
+      scrollMode: LoopScrollMode.shortest,
+      activationMode: LoopActivationMode.immediate);
+
+  ValueNotifier loadingProgress = ValueNotifier<dynamic>(0.0);
+  CarouselController buttonCarouselController = CarouselController();
+  int currentIndex = 0;
 
   double webViewHeight = 1;
   String? htmlData;
@@ -42,6 +55,7 @@ class _PageLessonStepDetailState extends State<PageLessonStepDetail>
   void initState() {
     indicatorAnimationController = ValueNotifier<IndicatorAnimationCommand>(
         IndicatorAnimationCommand.pause);
+    loadingProgress = ValueNotifier<dynamic>(0.0);
 
     for (var i = 0; i < widget.lessonDetail.learningSteps!.length; i++) {
       var controller = WebViewController()
@@ -50,7 +64,8 @@ class _PageLessonStepDetailState extends State<PageLessonStepDetail>
         ..setNavigationDelegate(
           NavigationDelegate(
             onProgress: (int progress) {
-              // Update loading bar.
+              log('progress $progress');
+              loadingProgress.value = progress.toDouble();
             },
             onPageStarted: (String url) {},
             onPageFinished: (String url) {},
@@ -79,25 +94,140 @@ class _PageLessonStepDetailState extends State<PageLessonStepDetail>
   @override
   Widget build(BuildContext context) {
     final LessonDetail lessonDetail = widget.lessonDetail;
+
     return PageDecorationTop(
-      child: LoopPageView.builder(
-        itemCount: lessonDetail.learningSteps!.length,
-        physics: ClampingScrollPhysics(),
-        itemBuilder: (context, index) {
-          final lessonStep = lessonDetail.learningSteps![index];
-          log('lessonStep : ${lessonStep.url}');
-          return Container(
-            padding: EdgeInsets.symmetric(horizontal: 6.w, vertical: 8.h),
-            width: screenWidth,
-            child: ClipRRect(
-              borderRadius: BorderRadius.circular(30.r),
-              child: WebViewWidget(
-                gestureRecognizers: gestureRecognizers,
-                controller: controllers[index],
+      appBarTitle: 'SQLyze',
+      child: Stack(
+        children: [
+          LoopPageView.builder(
+            controller: pageController,
+            itemCount: lessonDetail.learningSteps!.length,
+            onPageChanged: (index) {
+              setState(() {
+                currentIndex = index;
+              });
+            },
+            physics: ClampingScrollPhysics(),
+            itemBuilder: (context, index) {
+              final lessonStep = lessonDetail.learningSteps![index];
+              return Container(
+                padding: EdgeInsets.symmetric(horizontal: 6.w, vertical: 8.h),
+                width: screenWidth,
+                child: Column(
+                  children: [
+                    Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 10.w),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: lessonDetail.learningSteps!
+                            .asMap()
+                            .entries
+                            .map((entry) {
+                          return Expanded(
+                            child: GestureDetector(
+                              onTap: () => buttonCarouselController
+                                  .animateToPage(entry.key),
+                              child: Container(
+                                width: currentIndex == entry.key ? 43.w : 7.w,
+                                height: 7.w,
+                                margin: EdgeInsets.symmetric(horizontal: 3.w),
+                                decoration: BoxDecoration(
+                                  gradient: currentIndex >= entry.key
+                                      ? LinearGradient(
+                                          begin: Alignment.topLeft,
+                                          end: Alignment.bottomRight,
+                                          colors: [
+                                            AppColors.primary,
+                                            AppColors.primary,
+                                            AppColors.secondary
+                                          ],
+                                        )
+                                      : LinearGradient(
+                                          begin: Alignment.topLeft,
+                                          end: Alignment.bottomRight,
+                                          colors: [
+                                            AppColors.lightGrey5,
+                                            AppColors.lightGrey5
+                                          ],
+                                        ),
+                                  borderRadius: BorderRadius.circular(100.r),
+                                ),
+                              ),
+                            ),
+                          );
+                        }).toList(),
+                      ),
+                    ),
+                    Expanded(
+                      child: ClipRRect(
+                        // borderRadius: BorderRadius.circular(30.r),
+                        child: WebViewWidget(
+                          gestureRecognizers: gestureRecognizers,
+                          controller: controllers[index],
+                        ),
+                      ),
+                    ),
+                    SizedBox(height: 70.h)
+                  ],
+                ),
+              );
+            },
+          ),
+          Align(
+            alignment: Alignment.bottomCenter,
+            child: Container(
+              decoration: BoxDecoration(
+                color: Colors.white,
+                boxShadow: [
+                  BoxShadow(
+                      offset: const Offset(0, 4),
+                      blurRadius: 8,
+                      color: Colors.grey.shade200)
+                ],
+                border: Border.all(color: Colors.grey.shade200),
+                borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(15.r),
+                  topRight: Radius.circular(15.r),
+                ),
+              ),
+              padding: EdgeInsets.only(
+                  left: 16.w, right: 16.w, bottom: 20.h, top: 10.h),
+              child: Row(
+                children: [
+                  Expanded(
+                    child: ButtonPrimary(
+                      height: 30.h,
+                      title: 'Prev',
+                      onPressed: () {
+                        setState(() {
+                          currentIndex = currentIndex - 1;
+                        });
+                        pageController.animateToPage(currentIndex,
+                            duration: Duration(milliseconds: 400),
+                            curve: Curves.easeIn);
+                      },
+                    ),
+                  ),
+                  SizedBox(width: 10.w),
+                  Expanded(
+                    child: ButtonGradient(
+                      height: 30.h,
+                      title: 'Next',
+                      onPressed: () {
+                        setState(() {
+                          currentIndex = currentIndex + 1;
+                        });
+                        pageController.animateToPage(currentIndex,
+                            duration: Duration(milliseconds: 400),
+                            curve: Curves.easeIn);
+                      },
+                    ),
+                  ),
+                ],
               ),
             ),
-          );
-        },
+          ),
+        ],
       ),
     );
   }

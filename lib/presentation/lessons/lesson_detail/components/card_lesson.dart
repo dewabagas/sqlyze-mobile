@@ -4,6 +4,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:sqlyze/presentation/core/constants/assets.dart';
 import 'package:sqlyze/presentation/core/constants/styles.dart';
 import 'package:sqlyze/presentation/core/styles/app_colors.dart';
+import 'package:sqlyze/presentation/shared/widgets/others/show_dialog.dart';
 
 class CardLesson extends StatefulWidget {
   final String? title;
@@ -27,7 +28,14 @@ class _CardLessonState extends State<CardLesson> {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: widget.isLocked == true ? () {} : widget.onTap,
+      onTap: widget.isLocked == true
+          ? () {
+              showErrorDialog(
+                  context: context,
+                  message:
+                      'Anda harus menyelesaikan pembelajaran sebelumnya dulu');
+            }
+          : widget.onTap,
       child: Container(
         padding: EdgeInsets.symmetric(vertical: 6.h, horizontal: 8.h),
         decoration: BoxDecoration(

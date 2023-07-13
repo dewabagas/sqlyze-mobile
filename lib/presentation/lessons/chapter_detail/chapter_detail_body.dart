@@ -28,7 +28,8 @@ class _ChapterDetailBodyState extends State<ChapterDetailBody> {
     pageController = PageController(initialPage: 0);
     youtubePlayerController = YoutubePlayerController(
         initialVideoId: '${widget.lessonDetail.video!.url}',
-        params: YoutubePlayerParams(showFullscreenButton: true));
+        params:
+            YoutubePlayerParams(showFullscreenButton: true, autoPlay: false));
     super.initState();
   }
 

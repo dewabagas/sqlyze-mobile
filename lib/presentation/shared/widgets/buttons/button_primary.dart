@@ -71,14 +71,10 @@ class ButtonPrimary extends StatelessWidget {
                     : MainAxisAlignment.spaceBetween,
                 children: [
                   if (prefixIcon != null) prefixIcon!,
-                  Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 6.0),
-                    child: Text(
-                      title!,
-                      style: textStyle ??
-                          TextStyles.labelLarge
-                              .copyWith(color: AppColors.white),
-                    ),
+                  Text(
+                    title!,
+                    style: textStyle ??
+                        TextStyles.labelLarge.copyWith(color: AppColors.white),
                   ),
                   if (suffixIcon != null) suffixIcon!,
                 ],
