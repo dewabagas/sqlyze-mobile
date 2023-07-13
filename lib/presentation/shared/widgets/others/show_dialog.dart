@@ -16,11 +16,13 @@ Future<void> showErrorDialog(
     barrierDismissible: false,
     builder: (BuildContext context) {
       return AlertDialog(
+        backgroundColor: Colors.white,
         content: SingleChildScrollView(
-          child: Padding(
+          child: Container(
+            color: Colors.white,
             padding: EdgeInsets.symmetric(horizontal: 16.w),
             child: ListBody(
-              children: <Widget>[
+              children: [
                 SvgPicture.asset(AppIllustrations.illSad,
                     width: 120.w, height: 120.h),
                 SizedBox(height: 24.h),
@@ -33,7 +35,7 @@ Future<void> showErrorDialog(
             ),
           ),
         ),
-        actions: <Widget>[
+        actions: [
           Padding(
             padding: EdgeInsets.only(bottom: 10.h),
             child: ButtonPrimary(
@@ -59,11 +61,13 @@ Future<void> showPositiveDialog(
     barrierDismissible: false,
     builder: (BuildContext context) {
       return AlertDialog(
+        backgroundColor: Colors.white,
         content: SingleChildScrollView(
-          child: Padding(
+          child: Container(
+            color: Colors.white,
             padding: EdgeInsets.symmetric(horizontal: 16.w),
             child: ListBody(
-              children: <Widget>[
+              children: [
                 SizedBox(height: 10.h),
                 Text(
                   title ?? 'Title',
@@ -85,7 +89,7 @@ Future<void> showPositiveDialog(
             ),
           ),
         ),
-        actions: <Widget>[
+        actions: [
           Padding(
             padding: EdgeInsets.only(bottom: 10.h),
             child: ButtonGradient(

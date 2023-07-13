@@ -30,25 +30,13 @@ class _PageLessonStepDetailState extends State<PageLessonStepDetail>
       Completer<WebViewController>();
   final GlobalKey webViewKey = GlobalKey();
   WebViewController? controller;
-  final Set<Factory<OneSequenceGestureRecognizer>> gestureRecognizers = [
+  final Set<Factory<OneSequenceGestureRecognizer>> gestureRecognizers = {
     Factory<OneSequenceGestureRecognizer>(() => EagerGestureRecognizer()),
-  ].toSet();
+  };
 
   double webViewHeight = 1;
   String? htmlData;
   List<WebViewController> controllers = [];
-
-  // void updateHeight() async {
-  //   log('height awal $webViewHeight');
-  //   double height = double.parse(await controller!.runJavascriptReturningResult(
-  //       'document.documentElement.scrollHeight;'));
-  //   log('height $height');
-  //   if (webViewHeight != height) {
-  //     setState(() {
-  //       webViewHeight = height;
-  //     });
-  //   }
-  // }
 
   @override
   void initState() {
@@ -91,71 +79,6 @@ class _PageLessonStepDetailState extends State<PageLessonStepDetail>
   @override
   Widget build(BuildContext context) {
     final LessonDetail lessonDetail = widget.lessonDetail;
-    // return PageDecorationTop(
-    //   child: PageView.builder(
-    //     itemCount: lessonDetail.learningSteps!.length,
-    //     itemBuilder: (context, index) {
-    //       return Container(
-    //         padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 12.h),
-    //         width: screenWidth,
-    //         child: WebViewWidget(
-    //           gestureRecognizers: gestureRecognizers,
-    //           controller: controllers[index],
-    //         ),
-    //       );
-    //     },
-    //   ),
-    // );
-    // return PageDecorationTop(
-    //   child: Container(
-    //         padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 12.h),
-    //         height: webViewHeight,
-    //         width: screenWidth,
-    //         child: WebView(
-    //           initialUrl: lessonDetail.learningSteps![0].url,
-    //           backgroundColor: Colors.white,
-    //           zoomEnabled: true,
-    //           javascriptMode: JavascriptMode.unrestricted,
-    //           onPageFinished: (_) {
-    //             log('onPageFinished');
-    //             updateHeight();
-    //           },
-    //           onWebViewCreated: (WebViewController webViewController) {
-    //             webController.complete(webViewController);
-    //             controller = webViewController;
-    //           },
-    //         ),
-    //       )
-    // );
-    // return PageDecorationTop(
-    //   child: StoryPageView(
-    //     itemBuilder: (context, pageIndex, storyIndex) {
-    //       return Container(
-    //         padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 12.h),
-    //         height: webViewHeight,
-    //         width: screenWidth,
-    //         child: WebView(
-    //           initialUrl: lessonDetail.learningSteps![storyIndex].url,
-    //           backgroundColor: Colors.white,
-    //           zoomEnabled: true,
-    //           javascriptMode: JavascriptMode.unrestricted,
-    //           onPageFinished: (_) {
-    //             log('onPageFinished ${_}');
-    //             updateHeight();
-    //           },
-    //           onWebViewCreated: (WebViewController webViewController) {
-    //             webController.complete(webViewController);
-    //             controller = webViewController;
-    //           },
-    //         ),
-    //       );
-    //     },
-    //     storyLength: (pageIndex) {
-    //       return 3;
-    //     },
-    //     pageLength: 4,
-    //   ),
-    // );
     return PageDecorationTop(
       child: LoopPageView.builder(
         itemCount: lessonDetail.learningSteps!.length,
@@ -166,9 +89,12 @@ class _PageLessonStepDetailState extends State<PageLessonStepDetail>
           return Container(
             padding: EdgeInsets.symmetric(horizontal: 6.w, vertical: 8.h),
             width: screenWidth,
-            child: WebViewWidget(
-              gestureRecognizers: gestureRecognizers,
-              controller: controllers[index],
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(30.r),
+              child: WebViewWidget(
+                gestureRecognizers: gestureRecognizers,
+                controller: controllers[index],
+              ),
             ),
           );
         },

@@ -14,6 +14,7 @@ import 'package:sqlyze/presentation/shared/widgets/errors/error_page.dart';
 import 'package:sqlyze/presentation/shared/widgets/images/image_circle.dart';
 import 'package:sqlyze/presentation/shared/widgets/pages/draggable_page.dart';
 import 'package:sqlyze/presentation/student_dashboard/components/card_profile_item.dart';
+import 'package:sqlyze/presentation/student_dashboard/components/shimmer_profile.dart';
 
 class TabStudentProfile extends StatefulWidget {
   const TabStudentProfile({super.key});
@@ -31,10 +32,9 @@ class _TabProfileState extends State<TabStudentProfile> {
       child: BlocBuilder<UserProfileBloc, UserProfileState>(
         builder: (context, state) {
           return state.map(
-              initial: (value) => const SizedBox.shrink(),
-              loadInProgress: (value) => const SizedBox.shrink(),
+              initial: (value) => const ShimmerProfile(),
+              loadInProgress: (value) => const ShimmerProfile(),
               loadSuccess: (value) {
-                log('cussess profile ${value.user}');
                 return DraggablePage(
                     title: Text('${value.user?.fullName}',
                         style:

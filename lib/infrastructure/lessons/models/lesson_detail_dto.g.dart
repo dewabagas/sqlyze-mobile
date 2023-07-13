@@ -11,6 +11,8 @@ _$_LessonDetailDto _$$_LessonDetailDtoFromJson(Map<String, dynamic> json) =>
       id: json['id'] as int?,
       title: json['title'] as String?,
       description: json['description'] as String?,
+      materialType: json['material_type'] as int?,
+      isLocked: json['is_locked'] as bool?,
       createdAt: json['created_at'] as String?,
       updatedAt: json['updated_at'] as String?,
       video: json['video'] == null
@@ -38,6 +40,8 @@ Map<String, dynamic> _$$_LessonDetailDtoToJson(_$_LessonDetailDto instance) =>
       'id': instance.id,
       'title': instance.title,
       'description': instance.description,
+      'material_type': instance.materialType,
+      'is_locked': instance.isLocked,
       'created_at': instance.createdAt,
       'updated_at': instance.updatedAt,
       'video': instance.video,

@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -76,11 +78,13 @@ class _PageLessonDetailState extends State<PageLessonDetail> {
             physics: const NeverScrollableScrollPhysics(),
             itemBuilder: (BuildContext context, int index) {
               var lessonItem = lessonList?[index];
+              log('lessonItem ${lessonItem?.isLocked}');
               return Padding(
                   padding: EdgeInsets.only(bottom: 12.h),
                   child: CardLesson(
                       title: lessonItem?.title,
                       subtitle: lessonItem?.description,
+                      isLocked: lessonItem?.isLocked,
                       onTap: () => AutoRouter.of(context).push(
                           RouteChapterDetail(
                               materialId: lessonItem?.id ?? 0))));

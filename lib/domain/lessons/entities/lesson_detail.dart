@@ -13,6 +13,8 @@ class LessonDetail with _$LessonDetail {
       {int? id,
       String? title,
       String? description,
+      int? materialType,
+      bool? isLocked,
       String? createdAt,
       String? updatedAt,
       LearningVideo? video,

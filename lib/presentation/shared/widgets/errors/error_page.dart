@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:sqlyze/presentation/core/constants/strings.dart';
+import 'package:sqlyze/presentation/core/constants/styles.dart';
 import 'package:sqlyze/presentation/shared/widgets/pages/page_decoration_top.dart';
 
 class ErrorPage extends StatefulWidget {
@@ -17,7 +18,8 @@ class _ErrorPageState extends State<ErrorPage> {
       hasBack: false,
       appBarTitle: 'SQLyze',
       child: Center(
-        child: Text(widget.message ?? AppStrings.errorMessageGeneral),
+        child: Text(widget.message ?? AppStrings.errorMessageGeneral,
+            textAlign: TextAlign.center, style: TextStyles.labelMedium),
       ),
     );
   }

@@ -23,6 +23,10 @@ mixin _$LessonDetailDto {
   int? get id => throw _privateConstructorUsedError;
   String? get title => throw _privateConstructorUsedError;
   String? get description => throw _privateConstructorUsedError;
+  @JsonKey(name: 'material_type')
+  int? get materialType => throw _privateConstructorUsedError;
+  @JsonKey(name: 'is_locked')
+  bool? get isLocked => throw _privateConstructorUsedError;
   @JsonKey(name: 'created_at')
   String? get createdAt => throw _privateConstructorUsedError;
   @JsonKey(name: 'updated_at')
@@ -55,6 +59,8 @@ abstract class $LessonDetailDtoCopyWith<$Res> {
       {int? id,
       String? title,
       String? description,
+      @JsonKey(name: 'material_type') int? materialType,
+      @JsonKey(name: 'is_locked') bool? isLocked,
       @JsonKey(name: 'created_at') String? createdAt,
       @JsonKey(name: 'updated_at') String? updatedAt,
       LearningVideoDto? video,
@@ -86,6 +92,8 @@ class _$LessonDetailDtoCopyWithImpl<$Res, $Val extends LessonDetailDto>
     Object? id = freezed,
     Object? title = freezed,
     Object? description = freezed,
+    Object? materialType = freezed,
+    Object? isLocked = freezed,
     Object? createdAt = freezed,
     Object? updatedAt = freezed,
     Object? video = freezed,
@@ -107,6 +115,14 @@ class _$LessonDetailDtoCopyWithImpl<$Res, $Val extends LessonDetailDto>
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
               as String?,
+      materialType: freezed == materialType
+          ? _value.materialType
+          : materialType // ignore: cast_nullable_to_non_nullable
+              as int?,
+      isLocked: freezed == isLocked
+          ? _value.isLocked
+          : isLocked // ignore: cast_nullable_to_non_nullable
+              as bool?,
       createdAt: freezed == createdAt
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
@@ -201,6 +217,8 @@ abstract class _$$_LessonDetailDtoCopyWith<$Res>
       {int? id,
       String? title,
       String? description,
+      @JsonKey(name: 'material_type') int? materialType,
+      @JsonKey(name: 'is_locked') bool? isLocked,
       @JsonKey(name: 'created_at') String? createdAt,
       @JsonKey(name: 'updated_at') String? updatedAt,
       LearningVideoDto? video,
@@ -234,6 +252,8 @@ class __$$_LessonDetailDtoCopyWithImpl<$Res>
     Object? id = freezed,
     Object? title = freezed,
     Object? description = freezed,
+    Object? materialType = freezed,
+    Object? isLocked = freezed,
     Object? createdAt = freezed,
     Object? updatedAt = freezed,
     Object? video = freezed,
@@ -255,6 +275,14 @@ class __$$_LessonDetailDtoCopyWithImpl<$Res>
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
               as String?,
+      materialType: freezed == materialType
+          ? _value.materialType
+          : materialType // ignore: cast_nullable_to_non_nullable
+              as int?,
+      isLocked: freezed == isLocked
+          ? _value.isLocked
+          : isLocked // ignore: cast_nullable_to_non_nullable
+              as bool?,
       createdAt: freezed == createdAt
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
@@ -294,6 +322,8 @@ class _$_LessonDetailDto extends _LessonDetailDto {
       {this.id,
       this.title,
       this.description,
+      @JsonKey(name: 'material_type') this.materialType,
+      @JsonKey(name: 'is_locked') this.isLocked,
       @JsonKey(name: 'created_at') this.createdAt,
       @JsonKey(name: 'updated_at') this.updatedAt,
       this.video,
@@ -314,6 +344,12 @@ class _$_LessonDetailDto extends _LessonDetailDto {
   final String? title;
   @override
   final String? description;
+  @override
+  @JsonKey(name: 'material_type')
+  final int? materialType;
+  @override
+  @JsonKey(name: 'is_locked')
+  final bool? isLocked;
   @override
   @JsonKey(name: 'created_at')
   final String? createdAt;
@@ -343,7 +379,7 @@ class _$_LessonDetailDto extends _LessonDetailDto {
 
   @override
   String toString() {
-    return 'LessonDetailDto(id: $id, title: $title, description: $description, createdAt: $createdAt, updatedAt: $updatedAt, video: $video, podcast: $podcast, learningDocument: $learningDocument, learningPresentation: $learningPresentation, learningSteps: $learningSteps)';
+    return 'LessonDetailDto(id: $id, title: $title, description: $description, materialType: $materialType, isLocked: $isLocked, createdAt: $createdAt, updatedAt: $updatedAt, video: $video, podcast: $podcast, learningDocument: $learningDocument, learningPresentation: $learningPresentation, learningSteps: $learningSteps)';
   }
 
   @override
@@ -355,6 +391,10 @@ class _$_LessonDetailDto extends _LessonDetailDto {
             (identical(other.title, title) || other.title == title) &&
             (identical(other.description, description) ||
                 other.description == description) &&
+            (identical(other.materialType, materialType) ||
+                other.materialType == materialType) &&
+            (identical(other.isLocked, isLocked) ||
+                other.isLocked == isLocked) &&
             (identical(other.createdAt, createdAt) ||
                 other.createdAt == createdAt) &&
             (identical(other.updatedAt, updatedAt) ||
@@ -376,6 +416,8 @@ class _$_LessonDetailDto extends _LessonDetailDto {
       id,
       title,
       description,
+      materialType,
+      isLocked,
       createdAt,
       updatedAt,
       video,
@@ -403,6 +445,8 @@ abstract class _LessonDetailDto extends LessonDetailDto {
       {final int? id,
       final String? title,
       final String? description,
+      @JsonKey(name: 'material_type') final int? materialType,
+      @JsonKey(name: 'is_locked') final bool? isLocked,
       @JsonKey(name: 'created_at') final String? createdAt,
       @JsonKey(name: 'updated_at') final String? updatedAt,
       final LearningVideoDto? video,
@@ -424,6 +468,12 @@ abstract class _LessonDetailDto extends LessonDetailDto {
   String? get title;
   @override
   String? get description;
+  @override
+  @JsonKey(name: 'material_type')
+  int? get materialType;
+  @override
+  @JsonKey(name: 'is_locked')
+  bool? get isLocked;
   @override
   @JsonKey(name: 'created_at')
   String? get createdAt;
