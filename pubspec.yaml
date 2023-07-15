@@ -71,6 +71,7 @@ dependencies:
   story: ^1.1.0
   expandable_page_view: ^1.0.17
   webview_flutter: ^4.2.2
+  fl_chart: ^0.63.0
 
 dev_dependencies:
   flutter_test:

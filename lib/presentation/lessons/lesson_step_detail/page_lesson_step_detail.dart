@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:convert';
 import 'dart:developer';
 
+import 'package:auto_route/auto_route.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/gestures.dart';
@@ -133,7 +134,7 @@ class _PageLessonStepDetailState extends State<PageLessonStepDetail>
                                 margin: EdgeInsets.symmetric(horizontal: 3.w),
                                 decoration: BoxDecoration(
                                   gradient: currentIndex >= entry.key
-                                      ? LinearGradient(
+                                      ? const LinearGradient(
                                           begin: Alignment.topLeft,
                                           end: Alignment.bottomRight,
                                           colors: [
@@ -142,7 +143,7 @@ class _PageLessonStepDetailState extends State<PageLessonStepDetail>
                                             AppColors.secondary
                                           ],
                                         )
-                                      : LinearGradient(
+                                      : const LinearGradient(
                                           begin: Alignment.topLeft,
                                           end: Alignment.bottomRight,
                                           colors: [
@@ -160,7 +161,6 @@ class _PageLessonStepDetailState extends State<PageLessonStepDetail>
                     ),
                     Expanded(
                       child: ClipRRect(
-                        // borderRadius: BorderRadius.circular(30.r),
                         child: WebViewWidget(
                           gestureRecognizers: gestureRecognizers,
                           controller: controllers[index],
@@ -212,14 +212,20 @@ class _PageLessonStepDetailState extends State<PageLessonStepDetail>
                   Expanded(
                     child: ButtonGradient(
                       height: 30.h,
-                      title: 'Next',
+                      title:
+                          currentIndex == lessonDetail.learningSteps!.length - 1
+                              ? 'Selesai'
+                              : 'Next',
                       onPressed: () {
-                        setState(() {
+                        if (currentIndex <
+                            lessonDetail.learningSteps!.length - 1) {
                           currentIndex = currentIndex + 1;
-                        });
-                        pageController.animateToPage(currentIndex,
-                            duration: Duration(milliseconds: 400),
-                            curve: Curves.easeIn);
+                          pageController.animateToPage(currentIndex,
+                              duration: Duration(milliseconds: 400),
+                              curve: Curves.easeIn);
+                        } else {
+                          AutoRouter.of(context).pop();
+                        }
                       },
                     ),
                   ),

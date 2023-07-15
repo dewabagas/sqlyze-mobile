@@ -55,13 +55,13 @@ class _QuestionsContainerState extends State<QuestionsContainer> {
             heightPercentage: 0.725,
             opacity: 0.7,
             topMarginPercentage: 0.02,
-            widthPercentage: 0.65,
+            widthPercentage: 0.75,
           ),
           QuestionBackgroundCard(
             heightPercentage: 0.725,
             opacity: 0.85,
             topMarginPercentage: 0.01,
-            widthPercentage: 0.75,
+            widthPercentage: 0.85,
           ),
           ..._buildQuestions(context)
         ],
@@ -71,23 +71,15 @@ class _QuestionsContainerState extends State<QuestionsContainer> {
 
   List<Widget> _buildQuestions(BuildContext context) {
     List<Widget> children = [];
-
-    //loop terminate condition will be questions.length instead of 4
     for (var i = 0; i < getQuestionsLength(); i++) {
-      //add question
       children.add(_buildQuestion(i, context));
     }
-    //need to reverse the list in order to display 1st question in top
     children = children.reversed.toList();
 
     return children;
   }
 
   Widget _buildQuestion(int questionIndex, BuildContext context) {
-    //print(questionIndex);
-    //if current question index is same as question index means
-    //it is current question and will be on top
-    //so we need to add animation that slide and fade this question
     if (widget.currentQuestionIndex == questionIndex) {
       return FadeTransition(
           opacity: widget.questionSlideAnimation
@@ -96,12 +88,7 @@ class _QuestionsContainerState extends State<QuestionsContainer> {
               child: _buildQuesitonContainer(1.0, questionIndex, true, context),
               position: widget.questionSlideAnimation.drive(
                   Tween<Offset>(begin: Offset.zero, end: Offset(-1.5, 0.0)))));
-    }
-    //if the question is second or after current question
-    //so we need to animation that scale this question
-    //initial scale of this question is 0.95
-
-    else if (questionIndex > widget.currentQuestionIndex &&
+    } else if (questionIndex > widget.currentQuestionIndex &&
         (questionIndex == widget.currentQuestionIndex + 1)) {
       return AnimatedBuilder(
           animation: widget.questionAnimationController,
@@ -112,13 +99,9 @@ class _QuestionsContainerState extends State<QuestionsContainer> {
             return _buildQuesitonContainer(
                 scale, questionIndex, false, context);
           });
-    }
-    //to build question except top 2
-
-    else if (questionIndex > widget.currentQuestionIndex) {
+    } else if (questionIndex > widget.currentQuestionIndex) {
       return _buildQuesitonContainer(1.0, questionIndex, false, context);
     }
-    //if the question is already animated that show empty container
     return Container();
   }
 
