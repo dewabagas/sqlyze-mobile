@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:sqlyze/presentation/core/constants/assets.dart';
 import 'package:sqlyze/presentation/core/styles/app_colors.dart';
 import 'package:sqlyze/presentation/shared/widgets/others/icon_bottom_nav_bar_student.dart';
-import 'package:sqlyze/presentation/student_dashboard/tabs/tab_student_courses.dart';
+import 'package:sqlyze/presentation/student_dashboard/tabs/tab_student_analytics.dart';
 import 'package:sqlyze/presentation/student_dashboard/tabs/tab_student_home.dart';
 import 'package:sqlyze/presentation/student_dashboard/tabs/tab_student_playground.dart';
 import 'package:sqlyze/presentation/student_dashboard/tabs/tab_student_profile.dart';
@@ -39,7 +39,7 @@ class _PageStudentDashboardState extends State<PageStudentDashboard> {
 
   static final List widgetOptions = [
     const TabStudentHome(),
-    const TabStudentCourses(),
+    const TabStudentAnalytics(),
     const TabStudentPlayground(),
     const TabStudentProfile(),
   ];

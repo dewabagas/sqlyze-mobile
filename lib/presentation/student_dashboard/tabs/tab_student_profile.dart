@@ -5,13 +5,18 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:sqlyze/application/user_profile_bloc/user_profile_bloc.dart';
+import 'package:sqlyze/domain/core/constants/preference_constants.dart';
+import 'package:sqlyze/domain/core/helpers/preference_helper.dart';
 import 'package:sqlyze/domain/user/entities/user_profile.dart';
 import 'package:sqlyze/injection.dart';
 import 'package:sqlyze/presentation/core/constants/assets.dart';
 import 'package:sqlyze/presentation/core/constants/styles.dart';
 import 'package:sqlyze/presentation/core/styles/app_colors.dart';
+import 'package:sqlyze/presentation/routes/router.gr.dart';
+import 'package:sqlyze/presentation/shared/widgets/dialogs/custom_dialog_confirmation.dart';
 import 'package:sqlyze/presentation/shared/widgets/errors/error_page.dart';
 import 'package:sqlyze/presentation/shared/widgets/images/image_circle.dart';
+import 'package:sqlyze/presentation/shared/widgets/others/show_dialog.dart';
 import 'package:sqlyze/presentation/shared/widgets/pages/draggable_page.dart';
 import 'package:sqlyze/presentation/student_dashboard/components/card_profile_item.dart';
 import 'package:sqlyze/presentation/student_dashboard/components/shimmer_profile.dart';
@@ -125,10 +130,39 @@ class _TabProfileState extends State<TabStudentProfile> {
             label: 'Logout',
             hasDivider: false,
             icon: AppIcons.icLogout,
-            onTap: () {},
+            onTap: showLogoutPopup,
           ),
         ],
       ),
     );
+  }
+
+  void showLogoutPopup() {
+    showDialog(
+        context: context,
+        builder: (context) {
+          return CustomDialogConfirmation(
+            title: 'Keluar dari SQLyze Fun Learning',
+            message: 'Apakah anda yakin ingin keluar?',
+            positiveText: 'Logout',
+            negativeText: 'Cancel',
+            actionNegative: () {
+              Navigator.pop(context);
+            },
+            actionPositiveButton: () async {
+              Navigator.of(context).pop();
+              userLogout();
+            },
+          );
+        });
+  }
+
+  void userLogout() async {
+    await removeValuesPreference(key: PreferenceConstants.accessToken);
+    await removeValuesPreference(key: PreferenceConstants.userId);
+    await addBoolToPreference(
+        key: PreferenceConstants.isLoggedIn, value: false);
+    AutoRouter.of(context)
+        .pushAndPopUntil(RouteGuestDashboard(), predicate: (route) => false);
   }
 }

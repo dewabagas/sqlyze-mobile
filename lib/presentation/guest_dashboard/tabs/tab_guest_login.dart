@@ -48,6 +48,8 @@ class _TabGuestLoginState extends State<TabGuestLogin> {
                 EasyLoading.dismiss();
                 await addBoolToPreference(
                     key: PreferenceConstants.isLoggedIn, value: true);
+                await addIntToPreference(
+                    key: PreferenceConstants.userId, value: value.user!.id!);
                 AutoRouter.of(context).pushAndPopUntil(
                     const RouteStudentDashboard(),
                     predicate: (route) => false);
