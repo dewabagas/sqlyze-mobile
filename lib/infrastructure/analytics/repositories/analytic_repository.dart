@@ -22,7 +22,7 @@ class AnalyticRepository implements IAnalyticRepository {
       int userId) async {
     try {
       LearningAnalytic? learningAnalytic;
-      debugPrint('lessonRepo');
+      debugPrint('analytics REpo');
       var response = await analyticApiService.getLearningAnalytics(userId);
       debugPrint('response repo');
       debugPrint('${response.data}');

@@ -4,10 +4,12 @@ import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sqlyze/application/analytics/learning_analytic_bloc/learning_analytic_bloc.dart';
+import 'package:sqlyze/domain/analytics/entities/learning_analytic.dart';
 import 'package:sqlyze/domain/core/constants/preference_constants.dart';
 import 'package:sqlyze/domain/core/helpers/preference_helper.dart';
 import 'package:sqlyze/injection.dart';
 import 'package:sqlyze/presentation/core/styles/app_colors.dart';
+import 'package:sqlyze/presentation/shared/widgets/errors/error_page.dart';
 import 'package:sqlyze/presentation/shared/widgets/others/indicator.dart';
 import 'package:sqlyze/presentation/shared/widgets/pages/page_decoration_top.dart';
 
@@ -29,9 +31,10 @@ class _TabStudentAnalyticsState extends State<TabStudentAnalytics> {
   }
 
   getUserId() async {
-    int userId = await getIntValuesPreference(key: PreferenceConstants.userId);
+    int tempUserId =
+        await getIntValuesPreference(key: PreferenceConstants.userId);
     setState(() {
-      userId = userId;
+      userId = tempUserId;
     });
   }
 
@@ -42,23 +45,26 @@ class _TabStudentAnalyticsState extends State<TabStudentAnalytics> {
         appBarTitle: 'Learning Analysis',
         child: BlocProvider<LearningAnalyticBloc>(
           create: (context) => getIt<LearningAnalyticBloc>()
-            ..add(LearningAnalyticEvent.getLearningAnalytic(1)),
+            ..add(LearningAnalyticEvent.getLearningAnalytic(userId)),
           child: BlocBuilder<LearningAnalyticBloc, LearningAnalyticState>(
             builder: (context, state) {
               return state.map(
                   initial: (value) => const SizedBox.shrink(),
                   loadInProgress: (value) => const SizedBox.shrink(),
                   loadSuccess: (value) {
-                    log('analytic ${value.learningAnalytic}');
-                    return buildAnalytic();
+                    debugPrint('analytic value ${value.learningAnalytic}');
+                    return buildAnalytic(value.learningAnalytic!);
                   },
-                  loadFailure: (value) => const SizedBox.shrink());
+                  loadFailure: (value) {
+                    return ErrorPage(message: value.message);
+                  });
             },
           ),
         ));
   }
 
-  Widget buildAnalytic() {
+  Widget buildAnalytic(LearningAnalytic learningAnalytic) {
+    debugPrint('buildAnalytic $learningAnalytic');
     return AspectRatio(
       aspectRatio: 1.3,
       child: Row(
@@ -90,7 +96,7 @@ class _TabStudentAnalyticsState extends State<TabStudentAnalytics> {
                   ),
                   sectionsSpace: 0,
                   centerSpaceRadius: 40,
-                  sections: showingSections(),
+                  sections: showingSections(learningAnalytic),
                 ),
               ),
             ),
@@ -141,68 +147,43 @@ class _TabStudentAnalyticsState extends State<TabStudentAnalytics> {
     );
   }
 
-  List<PieChartSectionData> showingSections() {
-    return List.generate(4, (i) {
-      final isTouched = i == touchedIndex;
-      final fontSize = isTouched ? 25.0 : 16.0;
-      final radius = isTouched ? 60.0 : 50.0;
-      const shadows = [Shadow(color: Colors.black, blurRadius: 2)];
-      switch (i) {
-        case 0:
-          return PieChartSectionData(
-            color: AppColors.softBlue2,
-            value: 40,
-            title: '40%',
-            radius: radius,
-            titleStyle: TextStyle(
-              fontSize: fontSize,
-              fontWeight: FontWeight.bold,
-              color: AppColors.secondary,
-              shadows: shadows,
-            ),
-          );
-        case 1:
-          return PieChartSectionData(
-            color: AppColors.red,
-            value: 30,
-            title: '30%',
-            radius: radius,
-            titleStyle: TextStyle(
-              fontSize: fontSize,
-              fontWeight: FontWeight.bold,
-              color: AppColors.secondary,
-              shadows: shadows,
-            ),
-          );
-        case 2:
-          return PieChartSectionData(
-            color: AppColors.blue,
-            value: 15,
-            title: '15%',
-            radius: radius,
-            titleStyle: TextStyle(
-              fontSize: fontSize,
-              fontWeight: FontWeight.bold,
-              color: AppColors.charcoal,
-              shadows: shadows,
-            ),
-          );
-        case 3:
-          return PieChartSectionData(
-            color: AppColors.secondary,
-            value: 15,
-            title: '15%',
-            radius: radius,
-            titleStyle: TextStyle(
-              fontSize: fontSize,
-              fontWeight: FontWeight.bold,
-              color: AppColors.primary,
-              shadows: shadows,
-            ),
-          );
-        default:
-          throw Error();
-      }
-    });
+  List<PieChartSectionData> showingSections(LearningAnalytic analytics) {
+    debugPrint('total Anwer');
+    debugPrint('${analytics.totalCorrectAnswers}');
+    final totalAnswers = (analytics.totalCorrectAnswers ?? 0) +
+        (analytics.totalIncorrectAnswers ?? 0);
+
+    // Convert the answer totals to percentages
+    final correctPercentage = ((analytics.totalCorrectAnswers ?? 0) /
+            (totalAnswers == 0 ? 1 : totalAnswers)) *
+        100;
+    final incorrectPercentage = ((analytics.totalIncorrectAnswers ?? 0) /
+            (totalAnswers == 0 ? 1 : totalAnswers)) *
+        100;
+
+    return [
+      PieChartSectionData(
+        color: Colors.green, // Color for correct answers
+        value: correctPercentage,
+        title: '${correctPercentage.toStringAsFixed(1)}%',
+        radius: 50.0,
+        titleStyle: TextStyle(
+          fontSize: 16.0,
+          fontWeight: FontWeight.bold,
+          color: AppColors.primary,
+        ),
+      ),
+      PieChartSectionData(
+        color: Colors.red, // Color for incorrect answers
+        value: incorrectPercentage,
+        title: '${incorrectPercentage.toStringAsFixed(1)}%',
+        radius: 50.0,
+        titleStyle: TextStyle(
+          fontSize: 16.0,
+          fontWeight: FontWeight.bold,
+          color: AppColors.secondary,
+        ),
+      ),
+    ];
   }
 }

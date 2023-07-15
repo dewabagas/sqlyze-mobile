@@ -27,12 +27,12 @@ mixin _$LearningAnalyticDto {
   int? get totalQuizzesTaken => throw _privateConstructorUsedError;
   @JsonKey(name: 'total_score')
   int? get totalScore => throw _privateConstructorUsedError;
-  @JsonKey(name: 'total_correct_answer')
+  @JsonKey(name: 'total_correct_answers')
   int? get totalCorrectAnswers => throw _privateConstructorUsedError;
-  @JsonKey(name: 'total_incorrect_answer')
+  @JsonKey(name: 'total_incorrect_answers')
   int? get totalIncorrectAnswers => throw _privateConstructorUsedError;
   @JsonKey(name: 'total_duration')
-  int? get totalDuration => throw _privateConstructorUsedError;
+  String? get totalDuration => throw _privateConstructorUsedError;
   String? get createdAt => throw _privateConstructorUsedError;
   String? get updatedAt => throw _privateConstructorUsedError;
 
@@ -53,9 +53,9 @@ abstract class $LearningAnalyticDtoCopyWith<$Res> {
       @JsonKey(name: 'user_id') int? userId,
       @JsonKey(name: 'total_quizzes_taken') int? totalQuizzesTaken,
       @JsonKey(name: 'total_score') int? totalScore,
-      @JsonKey(name: 'total_correct_answer') int? totalCorrectAnswers,
-      @JsonKey(name: 'total_incorrect_answer') int? totalIncorrectAnswers,
-      @JsonKey(name: 'total_duration') int? totalDuration,
+      @JsonKey(name: 'total_correct_answers') int? totalCorrectAnswers,
+      @JsonKey(name: 'total_incorrect_answers') int? totalIncorrectAnswers,
+      @JsonKey(name: 'total_duration') String? totalDuration,
       String? createdAt,
       String? updatedAt});
 }
@@ -111,7 +111,7 @@ class _$LearningAnalyticDtoCopyWithImpl<$Res, $Val extends LearningAnalyticDto>
       totalDuration: freezed == totalDuration
           ? _value.totalDuration
           : totalDuration // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as String?,
       createdAt: freezed == createdAt
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
@@ -137,9 +137,9 @@ abstract class _$$_LearningAnalyticDtoCopyWith<$Res>
       @JsonKey(name: 'user_id') int? userId,
       @JsonKey(name: 'total_quizzes_taken') int? totalQuizzesTaken,
       @JsonKey(name: 'total_score') int? totalScore,
-      @JsonKey(name: 'total_correct_answer') int? totalCorrectAnswers,
-      @JsonKey(name: 'total_incorrect_answer') int? totalIncorrectAnswers,
-      @JsonKey(name: 'total_duration') int? totalDuration,
+      @JsonKey(name: 'total_correct_answers') int? totalCorrectAnswers,
+      @JsonKey(name: 'total_incorrect_answers') int? totalIncorrectAnswers,
+      @JsonKey(name: 'total_duration') String? totalDuration,
       String? createdAt,
       String? updatedAt});
 }
@@ -193,7 +193,7 @@ class __$$_LearningAnalyticDtoCopyWithImpl<$Res>
       totalDuration: freezed == totalDuration
           ? _value.totalDuration
           : totalDuration // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as String?,
       createdAt: freezed == createdAt
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
@@ -214,8 +214,8 @@ class _$_LearningAnalyticDto extends _LearningAnalyticDto {
       @JsonKey(name: 'user_id') this.userId,
       @JsonKey(name: 'total_quizzes_taken') this.totalQuizzesTaken,
       @JsonKey(name: 'total_score') this.totalScore,
-      @JsonKey(name: 'total_correct_answer') this.totalCorrectAnswers,
-      @JsonKey(name: 'total_incorrect_answer') this.totalIncorrectAnswers,
+      @JsonKey(name: 'total_correct_answers') this.totalCorrectAnswers,
+      @JsonKey(name: 'total_incorrect_answers') this.totalIncorrectAnswers,
       @JsonKey(name: 'total_duration') this.totalDuration,
       this.createdAt,
       this.updatedAt})
@@ -236,14 +236,14 @@ class _$_LearningAnalyticDto extends _LearningAnalyticDto {
   @JsonKey(name: 'total_score')
   final int? totalScore;
   @override
-  @JsonKey(name: 'total_correct_answer')
+  @JsonKey(name: 'total_correct_answers')
   final int? totalCorrectAnswers;
   @override
-  @JsonKey(name: 'total_incorrect_answer')
+  @JsonKey(name: 'total_incorrect_answers')
   final int? totalIncorrectAnswers;
   @override
   @JsonKey(name: 'total_duration')
-  final int? totalDuration;
+  final String? totalDuration;
   @override
   final String? createdAt;
   @override
@@ -312,9 +312,10 @@ abstract class _LearningAnalyticDto extends LearningAnalyticDto {
       @JsonKey(name: 'user_id') final int? userId,
       @JsonKey(name: 'total_quizzes_taken') final int? totalQuizzesTaken,
       @JsonKey(name: 'total_score') final int? totalScore,
-      @JsonKey(name: 'total_correct_answer') final int? totalCorrectAnswers,
-      @JsonKey(name: 'total_incorrect_answer') final int? totalIncorrectAnswers,
-      @JsonKey(name: 'total_duration') final int? totalDuration,
+      @JsonKey(name: 'total_correct_answers') final int? totalCorrectAnswers,
+      @JsonKey(name: 'total_incorrect_answers')
+      final int? totalIncorrectAnswers,
+      @JsonKey(name: 'total_duration') final String? totalDuration,
       final String? createdAt,
       final String? updatedAt}) = _$_LearningAnalyticDto;
   const _LearningAnalyticDto._() : super._();
@@ -334,14 +335,14 @@ abstract class _LearningAnalyticDto extends LearningAnalyticDto {
   @JsonKey(name: 'total_score')
   int? get totalScore;
   @override
-  @JsonKey(name: 'total_correct_answer')
+  @JsonKey(name: 'total_correct_answers')
   int? get totalCorrectAnswers;
   @override
-  @JsonKey(name: 'total_incorrect_answer')
+  @JsonKey(name: 'total_incorrect_answers')
   int? get totalIncorrectAnswers;
   @override
   @JsonKey(name: 'total_duration')
-  int? get totalDuration;
+  String? get totalDuration;
   @override
   String? get createdAt;
   @override

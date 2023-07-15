@@ -14,9 +14,9 @@ class LearningAnalyticDto with _$LearningAnalyticDto {
     @JsonKey(name: 'user_id') int? userId,
     @JsonKey(name: 'total_quizzes_taken') int? totalQuizzesTaken,
     @JsonKey(name: 'total_score') int? totalScore,
-    @JsonKey(name: 'total_correct_answer') int? totalCorrectAnswers,
-    @JsonKey(name: 'total_incorrect_answer') int? totalIncorrectAnswers,
-    @JsonKey(name: 'total_duration') int? totalDuration,
+    @JsonKey(name: 'total_correct_answers') int? totalCorrectAnswers,
+    @JsonKey(name: 'total_incorrect_answers') int? totalIncorrectAnswers,
+    @JsonKey(name: 'total_duration') String? totalDuration,
     String? createdAt,
     String? updatedAt,
   }) = _LearningAnalyticDto;
