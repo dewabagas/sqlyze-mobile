@@ -45,7 +45,7 @@ class _ChapterDetailBodyState extends State<ChapterDetailBody> {
     const player = YoutubePlayerIFrame();
     final LessonDetail lessonDetail = widget.lessonDetail;
     return PageDecorationTop(
-        appBarTitle: lessonDetail.title ?? 'Title',
+        appBarTitle: 'SQLyze',
         child: SingleChildScrollView(
           child: YoutubePlayerControllerProvider(
             controller: youtubePlayerController,

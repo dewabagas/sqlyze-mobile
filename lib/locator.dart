@@ -5,6 +5,7 @@ import 'package:sqlyze/infrastructure/analytics/data_sources/remotes/analytic_ap
 import 'package:sqlyze/infrastructure/auth/data_sources/remotes/auth_api_service.dart';
 import 'package:sqlyze/infrastructure/lessons/data_sources/remotes/lesson_api_service.dart';
 import 'package:sqlyze/infrastructure/network/rest_api/api_service.dart';
+import 'package:sqlyze/infrastructure/quizzes/data_sources/remotes/quiz_api_service.dart';
 import 'package:sqlyze/infrastructure/user/data_sources/remotes/user_api_service.dart';
 
 GetIt locator = GetIt.instance;
@@ -13,7 +14,6 @@ Alice alice = Alice(showNotification: true);
 Future<void> initializeDependencies() async {
   final apiService = ApiService();
 
-  // Add Alice to Dio interceptors
   apiService.dioUnauthorizedClient.interceptors.add(alice.getDioInterceptor());
   apiService.dioAuthorizedClient.interceptors.add(alice.getDioInterceptor());
 
@@ -28,4 +28,6 @@ Future<void> initializeDependencies() async {
       LessonApiService(locator.get<Dio>(instanceName: 'AuthorizedClient')));
   locator.registerSingleton<AnalyticApiService>(
       AnalyticApiService(locator.get<Dio>(instanceName: 'AuthorizedClient')));
+  locator.registerSingleton<QuizApiService>(
+      QuizApiService(locator.get<Dio>(instanceName: 'AuthorizedClient')));
 }
