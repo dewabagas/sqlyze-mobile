@@ -8,10 +8,20 @@ import 'package:sqlyze/presentation/core/styles/app_colors.dart';
 class CardQuiz extends StatefulWidget {
   final String? title;
   final String? subtitle;
+  final int? questionCount;
+  final int? duration;
+  final int? passingScore;
   final String? image;
   final Function()? onTap;
   const CardQuiz(
-      {super.key, this.title, this.subtitle, this.image, this.onTap});
+      {super.key,
+      this.title,
+      this.subtitle,
+      this.image,
+      this.onTap,
+      this.questionCount,
+      this.duration,
+      this.passingScore});
 
   @override
   State<CardQuiz> createState() => _CardQuizState();
@@ -54,7 +64,39 @@ class _CardQuizState extends State<CardQuiz> {
                 children: [
                   Text('${widget.title}', style: TextStyles.labelMedium),
                   SizedBox(height: 2.h),
-                  Text('10 Questions', style: TextStyles.bodyVerySmall),
+                  Text('${widget.questionCount} Soal',
+                      style: TextStyles.bodyVerySmall),
+                  Row(
+                    children: [
+                      Expanded(
+                        flex: 1,
+                        child: Text('Durasi', style: TextStyles.bodyVerySmall),
+                      ),
+                      Expanded(
+                        flex: 1,
+                        child: Text(': ${widget.duration} Menit',
+                            style: TextStyles.bodyVerySmall.copyWith(
+                                fontWeight: FontWeight.w700,
+                                color: AppColors.softBlue2)),
+                      ),
+                    ],
+                  ),
+                  Row(
+                    children: [
+                      Expanded(
+                        flex: 1,
+                        child: Text('Passing Grade',
+                            style: TextStyles.bodyVerySmall),
+                      ),
+                      Expanded(
+                        flex: 1,
+                        child: Text(': ${widget.passingScore}',
+                            style: TextStyles.bodyVerySmall.copyWith(
+                                fontWeight: FontWeight.w700,
+                                color: AppColors.softBlue2)),
+                      ),
+                    ],
+                  ),
                 ],
               ),
             ),

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sqlyze/application/lessons/lesson_detail_bloc/lesson_detail_bloc.dart';
+import 'package:sqlyze/application/quizzes/quiz_detail_bloc/quiz_detail_bloc.dart';
 import 'package:sqlyze/injection.dart';
 import 'package:sqlyze/presentation/lessons/chapter_detail/chapter_detail_body.dart';
 import 'package:sqlyze/presentation/lessons/chapter_detail/components/shimmer_chapter_detail.dart';
@@ -27,9 +28,15 @@ class _PageChapterDetailState extends State<PageChapterDetail> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider<LessonDetailBloc>(
-        create: (context) => getIt<LessonDetailBloc>()
-          ..add(LessonDetailEvent.getLessonDetail(widget.materialId)),
+    return MultiBlocProvider(
+        providers: [
+          BlocProvider(
+              create: (context) => getIt<LessonDetailBloc>()
+                ..add(LessonDetailEvent.getLessonDetail(widget.materialId))),
+          BlocProvider(
+              create: (context) => getIt<QuizDetailBloc>()
+                ..add(QuizDetailEvent.getQuizByMaterialId(widget.materialId))),
+        ],
         child: BlocBuilder<LessonDetailBloc, LessonDetailState>(
           builder: (context, state) {
             return state.map(
