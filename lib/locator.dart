@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
 import 'package:alice/alice.dart';
+import 'package:sqlyze/infrastructure/analytics/data_sources/remotes/analytic_api_service.dart';
 import 'package:sqlyze/infrastructure/auth/data_sources/remotes/auth_api_service.dart';
 import 'package:sqlyze/infrastructure/lessons/data_sources/remotes/lesson_api_service.dart';
 import 'package:sqlyze/infrastructure/network/rest_api/api_service.dart';
@@ -25,4 +26,6 @@ Future<void> initializeDependencies() async {
       UserApiService(locator.get<Dio>(instanceName: 'AuthorizedClient')));
   locator.registerSingleton<LessonApiService>(
       LessonApiService(locator.get<Dio>(instanceName: 'AuthorizedClient')));
+  locator.registerSingleton<AnalyticApiService>(
+      AnalyticApiService(locator.get<Dio>(instanceName: 'AuthorizedClient')));
 }
