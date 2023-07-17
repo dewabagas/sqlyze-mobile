@@ -17,13 +17,9 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$User {
   int? get id => throw _privateConstructorUsedError;
-  String? get fullName => throw _privateConstructorUsedError;
   String? get email => throw _privateConstructorUsedError;
-  String? get nis => throw _privateConstructorUsedError;
-  int? get roleId => throw _privateConstructorUsedError;
-  int? get classId => throw _privateConstructorUsedError;
-  String? get profileImage => throw _privateConstructorUsedError;
-  int? get msisdn => throw _privateConstructorUsedError;
+  String? get password => throw _privateConstructorUsedError;
+  String? get role => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $UserCopyWith<User> get copyWith => throw _privateConstructorUsedError;
@@ -34,15 +30,7 @@ abstract class $UserCopyWith<$Res> {
   factory $UserCopyWith(User value, $Res Function(User) then) =
       _$UserCopyWithImpl<$Res, User>;
   @useResult
-  $Res call(
-      {int? id,
-      String? fullName,
-      String? email,
-      String? nis,
-      int? roleId,
-      int? classId,
-      String? profileImage,
-      int? msisdn});
+  $Res call({int? id, String? email, String? password, String? role});
 }
 
 /// @nodoc
@@ -59,47 +47,27 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
   @override
   $Res call({
     Object? id = freezed,
-    Object? fullName = freezed,
     Object? email = freezed,
-    Object? nis = freezed,
-    Object? roleId = freezed,
-    Object? classId = freezed,
-    Object? profileImage = freezed,
-    Object? msisdn = freezed,
+    Object? password = freezed,
+    Object? role = freezed,
   }) {
     return _then(_value.copyWith(
       id: freezed == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as int?,
-      fullName: freezed == fullName
-          ? _value.fullName
-          : fullName // ignore: cast_nullable_to_non_nullable
-              as String?,
       email: freezed == email
           ? _value.email
           : email // ignore: cast_nullable_to_non_nullable
               as String?,
-      nis: freezed == nis
-          ? _value.nis
-          : nis // ignore: cast_nullable_to_non_nullable
+      password: freezed == password
+          ? _value.password
+          : password // ignore: cast_nullable_to_non_nullable
               as String?,
-      roleId: freezed == roleId
-          ? _value.roleId
-          : roleId // ignore: cast_nullable_to_non_nullable
-              as int?,
-      classId: freezed == classId
-          ? _value.classId
-          : classId // ignore: cast_nullable_to_non_nullable
-              as int?,
-      profileImage: freezed == profileImage
-          ? _value.profileImage
-          : profileImage // ignore: cast_nullable_to_non_nullable
+      role: freezed == role
+          ? _value.role
+          : role // ignore: cast_nullable_to_non_nullable
               as String?,
-      msisdn: freezed == msisdn
-          ? _value.msisdn
-          : msisdn // ignore: cast_nullable_to_non_nullable
-              as int?,
     ) as $Val);
   }
 }
@@ -110,15 +78,7 @@ abstract class _$$_UserCopyWith<$Res> implements $UserCopyWith<$Res> {
       __$$_UserCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call(
-      {int? id,
-      String? fullName,
-      String? email,
-      String? nis,
-      int? roleId,
-      int? classId,
-      String? profileImage,
-      int? msisdn});
+  $Res call({int? id, String? email, String? password, String? role});
 }
 
 /// @nodoc
@@ -131,47 +91,27 @@ class __$$_UserCopyWithImpl<$Res> extends _$UserCopyWithImpl<$Res, _$_User>
   @override
   $Res call({
     Object? id = freezed,
-    Object? fullName = freezed,
     Object? email = freezed,
-    Object? nis = freezed,
-    Object? roleId = freezed,
-    Object? classId = freezed,
-    Object? profileImage = freezed,
-    Object? msisdn = freezed,
+    Object? password = freezed,
+    Object? role = freezed,
   }) {
     return _then(_$_User(
       id: freezed == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as int?,
-      fullName: freezed == fullName
-          ? _value.fullName
-          : fullName // ignore: cast_nullable_to_non_nullable
-              as String?,
       email: freezed == email
           ? _value.email
           : email // ignore: cast_nullable_to_non_nullable
               as String?,
-      nis: freezed == nis
-          ? _value.nis
-          : nis // ignore: cast_nullable_to_non_nullable
+      password: freezed == password
+          ? _value.password
+          : password // ignore: cast_nullable_to_non_nullable
               as String?,
-      roleId: freezed == roleId
-          ? _value.roleId
-          : roleId // ignore: cast_nullable_to_non_nullable
-              as int?,
-      classId: freezed == classId
-          ? _value.classId
-          : classId // ignore: cast_nullable_to_non_nullable
-              as int?,
-      profileImage: freezed == profileImage
-          ? _value.profileImage
-          : profileImage // ignore: cast_nullable_to_non_nullable
+      role: freezed == role
+          ? _value.role
+          : role // ignore: cast_nullable_to_non_nullable
               as String?,
-      msisdn: freezed == msisdn
-          ? _value.msisdn
-          : msisdn // ignore: cast_nullable_to_non_nullable
-              as int?,
     ));
   }
 }
@@ -179,36 +119,20 @@ class __$$_UserCopyWithImpl<$Res> extends _$UserCopyWithImpl<$Res, _$_User>
 /// @nodoc
 
 class _$_User implements _User {
-  _$_User(
-      {this.id,
-      this.fullName,
-      this.email,
-      this.nis,
-      this.roleId,
-      this.classId,
-      this.profileImage,
-      this.msisdn});
+  _$_User({this.id, this.email, this.password, this.role});
 
   @override
   final int? id;
   @override
-  final String? fullName;
-  @override
   final String? email;
   @override
-  final String? nis;
+  final String? password;
   @override
-  final int? roleId;
-  @override
-  final int? classId;
-  @override
-  final String? profileImage;
-  @override
-  final int? msisdn;
+  final String? role;
 
   @override
   String toString() {
-    return 'User(id: $id, fullName: $fullName, email: $email, nis: $nis, roleId: $roleId, classId: $classId, profileImage: $profileImage, msisdn: $msisdn)';
+    return 'User(id: $id, email: $email, password: $password, role: $role)';
   }
 
   @override
@@ -217,20 +141,14 @@ class _$_User implements _User {
         (other.runtimeType == runtimeType &&
             other is _$_User &&
             (identical(other.id, id) || other.id == id) &&
-            (identical(other.fullName, fullName) ||
-                other.fullName == fullName) &&
             (identical(other.email, email) || other.email == email) &&
-            (identical(other.nis, nis) || other.nis == nis) &&
-            (identical(other.roleId, roleId) || other.roleId == roleId) &&
-            (identical(other.classId, classId) || other.classId == classId) &&
-            (identical(other.profileImage, profileImage) ||
-                other.profileImage == profileImage) &&
-            (identical(other.msisdn, msisdn) || other.msisdn == msisdn));
+            (identical(other.password, password) ||
+                other.password == password) &&
+            (identical(other.role, role) || other.role == role));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, id, fullName, email, nis, roleId,
-      classId, profileImage, msisdn);
+  int get hashCode => Object.hash(runtimeType, id, email, password, role);
 
   @JsonKey(ignore: true)
   @override
@@ -242,30 +160,18 @@ class _$_User implements _User {
 abstract class _User implements User {
   factory _User(
       {final int? id,
-      final String? fullName,
       final String? email,
-      final String? nis,
-      final int? roleId,
-      final int? classId,
-      final String? profileImage,
-      final int? msisdn}) = _$_User;
+      final String? password,
+      final String? role}) = _$_User;
 
   @override
   int? get id;
   @override
-  String? get fullName;
-  @override
   String? get email;
   @override
-  String? get nis;
+  String? get password;
   @override
-  int? get roleId;
-  @override
-  int? get classId;
-  @override
-  String? get profileImage;
-  @override
-  int? get msisdn;
+  String? get role;
   @override
   @JsonKey(ignore: true)
   _$$_UserCopyWith<_$_User> get copyWith => throw _privateConstructorUsedError;

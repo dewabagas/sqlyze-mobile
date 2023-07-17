@@ -121,6 +121,9 @@ class $AssetsIconsGen {
   /// File path: assets/icons/ic_eye_off_blue.svg
   String get icEyeOffBlue => 'assets/icons/ic_eye_off_blue.svg';
 
+  /// File path: assets/icons/ic_eye_off_grey.svg
+  String get icEyeOffGrey => 'assets/icons/ic_eye_off_grey.svg';
+
   /// File path: assets/icons/ic_eye_off_red.svg
   String get icEyeOffRed => 'assets/icons/ic_eye_off_red.svg';
 
@@ -129,6 +132,9 @@ class $AssetsIconsGen {
 
   /// File path: assets/icons/ic_eye_on_blue.svg
   String get icEyeOnBlue => 'assets/icons/ic_eye_on_blue.svg';
+
+  /// File path: assets/icons/ic_eye_on_grey.svg
+  String get icEyeOnGrey => 'assets/icons/ic_eye_on_grey.svg';
 
   /// File path: assets/icons/ic_facebook_round.svg
   String get icFacebookRound => 'assets/icons/ic_facebook_round.svg';
@@ -246,9 +252,11 @@ class $AssetsIconsGen {
         icDashboard,
         icDashboardActive,
         icEyeOffBlue,
+        icEyeOffGrey,
         icEyeOffRed,
         icEyeOn,
         icEyeOnBlue,
+        icEyeOnGrey,
         icFacebookRound,
         icFilter,
         icGoogleRound,

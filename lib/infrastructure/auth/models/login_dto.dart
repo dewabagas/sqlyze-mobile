@@ -10,39 +10,23 @@ class LoginDto with _$LoginDto {
   const LoginDto._();
 
   const factory LoginDto(
-      {int? id,
-      @JsonKey(name: 'full_name') String? fullName,
-      @JsonKey(name: 'email') String? email,
-      String? nis,
-      @JsonKey(name: 'role_id') int? roleId,
-      @JsonKey(name: 'class_id') int? classId,
-      @JsonKey(name: 'profile_image') String? profileImage,
-      @JsonKey(name: 'msisdn') int? msisdn,
-      String? flag}) = _LoginDto;
+      {int? id, String? email, String? password, String? role}) = _LoginDto;
 
   factory LoginDto.fromDomain(User? user) {
     return LoginDto(
       id: user?.id,
-      fullName: user?.fullName,
       email: user?.email,
-      nis: user?.nis,
-      roleId: user?.roleId,
-      classId: user?.classId,
-      profileImage: user?.profileImage,
-      msisdn: user?.msisdn,
+      password: user?.password,
+      role: user?.role,
     );
   }
 
   User toDomain() {
     return User(
       id: id,
-      fullName: fullName,
       email: email,
-      nis: nis,
-      roleId: roleId,
-      classId: classId,
-      profileImage: profileImage,
-      msisdn: msisdn,
+      password: password,
+      role: role,
     );
   }
 

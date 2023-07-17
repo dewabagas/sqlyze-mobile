@@ -6,7 +6,7 @@ import 'package:sqlyze/presentation/core/constants/assets.dart';
 import 'package:sqlyze/presentation/core/constants/styles.dart';
 import 'package:sqlyze/presentation/core/styles/app_colors.dart';
 
-class InputSecondary extends StatefulWidget {
+class InputSecured extends StatefulWidget {
   final String label;
   final String? initialValue;
   final String? hintText;
@@ -23,6 +23,7 @@ class InputSecondary extends StatefulWidget {
   final bool isValidated;
   final bool isFocused;
   final bool isEnabled;
+  final bool obscureText;
   final EdgeInsetsGeometry? contentPadding;
   final EdgeInsetsGeometry? labelPadding;
   final TextEditingController? controller;
@@ -32,7 +33,9 @@ class InputSecondary extends StatefulWidget {
   final int? minLines;
   final int? maxLines;
   final TextCapitalization textCapitalization;
-  const InputSecondary(
+  final Color? fillColor;
+  final Color? borderColor;
+  const InputSecured(
       {Key? key,
       this.validator,
       this.label = '',
@@ -52,20 +55,23 @@ class InputSecondary extends StatefulWidget {
       this.isFocused = false,
       this.isValidated = false,
       this.isEnabled = true,
+      this.obscureText = true,
       this.onClear,
       this.textStyles,
       this.controller,
       this.maxLength,
       this.minLines,
       this.maxLines,
-      this.textCapitalization = TextCapitalization.none})
+      this.textCapitalization = TextCapitalization.none,
+      this.fillColor,
+      this.borderColor})
       : super(key: key);
 
   @override
-  State<InputSecondary> createState() => _InputSecondaryState();
+  State<InputSecured> createState() => _InputSecuredState();
 }
 
-class _InputSecondaryState extends State<InputSecondary> {
+class _InputSecuredState extends State<InputSecured> {
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -82,24 +88,25 @@ class _InputSecondaryState extends State<InputSecondary> {
         Focus(
           onFocusChange: widget.onFocusChange,
           child: TextFormField(
-            textCapitalization: widget.textCapitalization,
-            maxLength: widget.maxLength,
+            textCapitalization: TextCapitalization.none,
             controller: widget.controller,
             initialValue: widget.initialValue,
             textAlign: TextAlign.left,
             enabled: widget.isEnabled,
             focusNode: widget.focusNode,
             autocorrect: false,
+            obscureText: widget.obscureText,
             decoration: InputDecoration(
                 hintText: widget.hintText,
                 hintStyle: TextStyles.labelMedium.copyWith(
                     fontWeight: FontWeight.w400, color: AppColors.grey),
-                fillColor: AppColors.lightGrey4,
+                fillColor: widget.fillColor ?? AppColors.white,
                 filled: true,
                 counter: const SizedBox.shrink(),
                 enabledBorder: OutlineInputBorder(
-                  borderSide:
-                      const BorderSide(color: AppColors.lightGrey4, width: 1.0),
+                  borderSide: BorderSide(
+                      color: widget.borderColor ?? AppColors.lightGrey7,
+                      width: 1.0),
                   borderRadius: BorderRadius.circular(10.r),
                 ),
                 focusedBorder: OutlineInputBorder(
@@ -118,8 +125,9 @@ class _InputSecondaryState extends State<InputSecondary> {
                   borderRadius: BorderRadius.circular(10.r),
                 ),
                 disabledBorder: OutlineInputBorder(
-                  borderSide:
-                      const BorderSide(color: AppColors.lightGrey4, width: 1.0),
+                  borderSide: BorderSide(
+                      color: widget.borderColor ?? AppColors.lightGrey7,
+                      width: 1.0),
                   borderRadius: BorderRadius.circular(10.r),
                 ),
                 contentPadding: widget.contentPadding ??
@@ -128,7 +136,7 @@ class _InputSecondaryState extends State<InputSecondary> {
                         horizontal: screenWidth * 0.038889),
                 isDense: widget.isDense,
                 prefixIcon: widget.prefixIcon,
-                suffixIcon: suffixIcons()),
+                suffixIcon: widget.suffixIcon),
             style: widget.textStyles ??
                 TextStyles.labelLarge.copyWith(
                     color: widget.isEnabled
@@ -140,8 +148,6 @@ class _InputSecondaryState extends State<InputSecondary> {
             validator: widget.validator,
             onSaved: widget.onSaved,
             onChanged: widget.onChanged,
-            // minLines: widget.minLines,
-            // maxLines: widget.maxLines,
           ),
         ),
       ],

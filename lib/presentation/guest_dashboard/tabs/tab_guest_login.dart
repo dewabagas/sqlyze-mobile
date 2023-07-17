@@ -2,17 +2,20 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:sqlyze/application/auth_bloc/auth_bloc.dart';
 import 'package:sqlyze/domain/auth/requests/auth_request.dart';
 import 'package:sqlyze/domain/core/constants/preference_constants.dart';
 import 'package:sqlyze/domain/core/helpers/preference_helper.dart';
 import 'package:sqlyze/injection.dart';
+import 'package:sqlyze/presentation/core/constants/assets.dart';
 import 'package:sqlyze/presentation/core/constants/styles.dart';
 import 'package:sqlyze/presentation/core/styles/app_colors.dart';
 import 'package:sqlyze/presentation/routes/router.gr.dart';
 import 'package:sqlyze/presentation/shared/widgets/buttons/button_gradient.dart';
 import 'package:sqlyze/presentation/shared/widgets/buttons/button_primary.dart';
 import 'package:sqlyze/presentation/shared/widgets/inputs/input_secondary.dart';
+import 'package:sqlyze/presentation/shared/widgets/inputs/input_secured.dart';
 import 'package:sqlyze/presentation/shared/widgets/others/show_dialog.dart';
 import 'package:sqlyze/presentation/shared/widgets/pages/page_decoration_top.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -26,7 +29,7 @@ class TabGuestLogin extends StatefulWidget {
 
 class _TabGuestLoginState extends State<TabGuestLogin> {
   String? email, password;
-  bool? isSecured;
+  bool isSecured = true;
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
 
@@ -83,27 +86,47 @@ class _TabGuestLoginState extends State<TabGuestLogin> {
                           onFocusChange: (hasFocus) {},
                           onClear: () {},
                         ),
-                        InputSecondary(
-                          label: 'Password',
-                          hintText: 'Enter Your Password',
-                          keyboardType: TextInputType.visiblePassword,
-                          onChanged: (String? val) {
-                            setState(() {
-                              password = val;
-                            });
-                          },
-                          onFocusChange: (hasFocus) {},
-                          onClear: () {},
-                          suffixIcon: isSecured == true
-                              ? Icon(Icons.remove_red_eye_outlined)
-                              : Icon(Icons.remove_red_eye_rounded),
-                        ),
+                        InputSecured(
+                            label: 'Password',
+                            hintText: 'Enter Your Password',
+                            keyboardType: TextInputType.visiblePassword,
+                            onChanged: (String? val) {
+                              setState(() {
+                                password = val;
+                              });
+                            },
+                            onFocusChange: (hasFocus) {},
+                            onClear: () {},
+                            obscureText: isSecured,
+                            suffixIcon: isSecured
+                                ? GestureDetector(
+                                    onTap: () {
+                                      setState(() {
+                                        isSecured = !isSecured;
+                                      });
+                                    },
+                                    child: SvgPicture.asset(
+                                        AppIcons.icEyeOnGrey,
+                                        height: 12.8.h,
+                                        width: 16.w,
+                                        fit: BoxFit.scaleDown))
+                                : GestureDetector(
+                                    onTap: () {
+                                      setState(() {
+                                        isSecured = !isSecured;
+                                      });
+                                    },
+                                    child: SvgPicture.asset(
+                                        AppIcons.icEyeOffGrey,
+                                        height: 12.8.h,
+                                        width: 16.w,
+                                        fit: BoxFit.scaleDown))),
                         SizedBox(height: 30.h),
                         Align(
                           alignment: Alignment.centerRight,
                           child: InkWell(
                             child: Text(
-                              'Forgot Password?',
+                              'Lupa Password?',
                               textAlign: TextAlign.right,
                               style: TextStyles.labelMedium
                                   .copyWith(color: AppColors.primary),
@@ -117,7 +140,7 @@ class _TabGuestLoginState extends State<TabGuestLogin> {
                       child: Column(
                         children: [
                           ButtonGradient(
-                              title: 'Login',
+                              title: 'Masuk',
                               onPressed: () {
                                 context.read<AuthBloc>().add(AuthEvent.login(
                                     AuthRequest(
@@ -132,7 +155,7 @@ class _TabGuestLoginState extends State<TabGuestLogin> {
                                 color: AppColors.dividerColor,
                               )),
                               SizedBox(width: 7.w),
-                              Text('OR',
+                              Text('ATAU',
                                   style: TextStyles.bodySmall
                                       .copyWith(color: AppColors.dividerColor)),
                               SizedBox(width: 7.w),
@@ -145,7 +168,7 @@ class _TabGuestLoginState extends State<TabGuestLogin> {
                           ),
                           SizedBox(height: 20.w),
                           ButtonPrimary(
-                            title: 'Register',
+                            title: 'Daftar',
                             onPressed: () {
                               AutoRouter.of(context)
                                   .push(const RouteRegister());

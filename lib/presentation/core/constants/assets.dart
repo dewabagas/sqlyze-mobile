@@ -39,6 +39,8 @@ class AppIcons {
   static const String icPodcastColorful =
       'assets/icons/ic_podcast_colorful.svg';
   static const String icPodcastTosca = 'assets/icons/ic_podcast_tosca.svg';
+  static const String icEyeOnGrey = 'assets/icons/ic_eye_on_grey.svg';
+  static const String icEyeOffGrey = 'assets/icons/ic_eye_off_grey.svg';
 }
 
 class AppLogo {

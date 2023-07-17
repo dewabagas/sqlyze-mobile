@@ -6,12 +6,8 @@ part 'user.freezed.dart';
 class User with _$User {
   factory User({
     int? id,
-    String? fullName,
     String? email,
-    String? nis,
-    int? roleId,
-    int? classId,
-    String? profileImage,
-    int? msisdn,
+    String? password,
+    String? role,
   }) = _User;
 }

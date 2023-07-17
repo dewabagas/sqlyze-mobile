@@ -21,20 +21,9 @@ LoginDto _$LoginDtoFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$LoginDto {
   int? get id => throw _privateConstructorUsedError;
-  @JsonKey(name: 'full_name')
-  String? get fullName => throw _privateConstructorUsedError;
-  @JsonKey(name: 'email')
   String? get email => throw _privateConstructorUsedError;
-  String? get nis => throw _privateConstructorUsedError;
-  @JsonKey(name: 'role_id')
-  int? get roleId => throw _privateConstructorUsedError;
-  @JsonKey(name: 'class_id')
-  int? get classId => throw _privateConstructorUsedError;
-  @JsonKey(name: 'profile_image')
-  String? get profileImage => throw _privateConstructorUsedError;
-  @JsonKey(name: 'msisdn')
-  int? get msisdn => throw _privateConstructorUsedError;
-  String? get flag => throw _privateConstructorUsedError;
+  String? get password => throw _privateConstructorUsedError;
+  String? get role => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -47,16 +36,7 @@ abstract class $LoginDtoCopyWith<$Res> {
   factory $LoginDtoCopyWith(LoginDto value, $Res Function(LoginDto) then) =
       _$LoginDtoCopyWithImpl<$Res, LoginDto>;
   @useResult
-  $Res call(
-      {int? id,
-      @JsonKey(name: 'full_name') String? fullName,
-      @JsonKey(name: 'email') String? email,
-      String? nis,
-      @JsonKey(name: 'role_id') int? roleId,
-      @JsonKey(name: 'class_id') int? classId,
-      @JsonKey(name: 'profile_image') String? profileImage,
-      @JsonKey(name: 'msisdn') int? msisdn,
-      String? flag});
+  $Res call({int? id, String? email, String? password, String? role});
 }
 
 /// @nodoc
@@ -73,51 +53,26 @@ class _$LoginDtoCopyWithImpl<$Res, $Val extends LoginDto>
   @override
   $Res call({
     Object? id = freezed,
-    Object? fullName = freezed,
     Object? email = freezed,
-    Object? nis = freezed,
-    Object? roleId = freezed,
-    Object? classId = freezed,
-    Object? profileImage = freezed,
-    Object? msisdn = freezed,
-    Object? flag = freezed,
+    Object? password = freezed,
+    Object? role = freezed,
   }) {
     return _then(_value.copyWith(
       id: freezed == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as int?,
-      fullName: freezed == fullName
-          ? _value.fullName
-          : fullName // ignore: cast_nullable_to_non_nullable
-              as String?,
       email: freezed == email
           ? _value.email
           : email // ignore: cast_nullable_to_non_nullable
               as String?,
-      nis: freezed == nis
-          ? _value.nis
-          : nis // ignore: cast_nullable_to_non_nullable
+      password: freezed == password
+          ? _value.password
+          : password // ignore: cast_nullable_to_non_nullable
               as String?,
-      roleId: freezed == roleId
-          ? _value.roleId
-          : roleId // ignore: cast_nullable_to_non_nullable
-              as int?,
-      classId: freezed == classId
-          ? _value.classId
-          : classId // ignore: cast_nullable_to_non_nullable
-              as int?,
-      profileImage: freezed == profileImage
-          ? _value.profileImage
-          : profileImage // ignore: cast_nullable_to_non_nullable
-              as String?,
-      msisdn: freezed == msisdn
-          ? _value.msisdn
-          : msisdn // ignore: cast_nullable_to_non_nullable
-              as int?,
-      flag: freezed == flag
-          ? _value.flag
-          : flag // ignore: cast_nullable_to_non_nullable
+      role: freezed == role
+          ? _value.role
+          : role // ignore: cast_nullable_to_non_nullable
               as String?,
     ) as $Val);
   }
@@ -130,16 +85,7 @@ abstract class _$$_LoginDtoCopyWith<$Res> implements $LoginDtoCopyWith<$Res> {
       __$$_LoginDtoCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call(
-      {int? id,
-      @JsonKey(name: 'full_name') String? fullName,
-      @JsonKey(name: 'email') String? email,
-      String? nis,
-      @JsonKey(name: 'role_id') int? roleId,
-      @JsonKey(name: 'class_id') int? classId,
-      @JsonKey(name: 'profile_image') String? profileImage,
-      @JsonKey(name: 'msisdn') int? msisdn,
-      String? flag});
+  $Res call({int? id, String? email, String? password, String? role});
 }
 
 /// @nodoc
@@ -154,51 +100,26 @@ class __$$_LoginDtoCopyWithImpl<$Res>
   @override
   $Res call({
     Object? id = freezed,
-    Object? fullName = freezed,
     Object? email = freezed,
-    Object? nis = freezed,
-    Object? roleId = freezed,
-    Object? classId = freezed,
-    Object? profileImage = freezed,
-    Object? msisdn = freezed,
-    Object? flag = freezed,
+    Object? password = freezed,
+    Object? role = freezed,
   }) {
     return _then(_$_LoginDto(
       id: freezed == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as int?,
-      fullName: freezed == fullName
-          ? _value.fullName
-          : fullName // ignore: cast_nullable_to_non_nullable
-              as String?,
       email: freezed == email
           ? _value.email
           : email // ignore: cast_nullable_to_non_nullable
               as String?,
-      nis: freezed == nis
-          ? _value.nis
-          : nis // ignore: cast_nullable_to_non_nullable
+      password: freezed == password
+          ? _value.password
+          : password // ignore: cast_nullable_to_non_nullable
               as String?,
-      roleId: freezed == roleId
-          ? _value.roleId
-          : roleId // ignore: cast_nullable_to_non_nullable
-              as int?,
-      classId: freezed == classId
-          ? _value.classId
-          : classId // ignore: cast_nullable_to_non_nullable
-              as int?,
-      profileImage: freezed == profileImage
-          ? _value.profileImage
-          : profileImage // ignore: cast_nullable_to_non_nullable
-              as String?,
-      msisdn: freezed == msisdn
-          ? _value.msisdn
-          : msisdn // ignore: cast_nullable_to_non_nullable
-              as int?,
-      flag: freezed == flag
-          ? _value.flag
-          : flag // ignore: cast_nullable_to_non_nullable
+      role: freezed == role
+          ? _value.role
+          : role // ignore: cast_nullable_to_non_nullable
               as String?,
     ));
   }
@@ -207,16 +128,7 @@ class __$$_LoginDtoCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$_LoginDto extends _LoginDto {
-  const _$_LoginDto(
-      {this.id,
-      @JsonKey(name: 'full_name') this.fullName,
-      @JsonKey(name: 'email') this.email,
-      this.nis,
-      @JsonKey(name: 'role_id') this.roleId,
-      @JsonKey(name: 'class_id') this.classId,
-      @JsonKey(name: 'profile_image') this.profileImage,
-      @JsonKey(name: 'msisdn') this.msisdn,
-      this.flag})
+  const _$_LoginDto({this.id, this.email, this.password, this.role})
       : super._();
 
   factory _$_LoginDto.fromJson(Map<String, dynamic> json) =>
@@ -225,31 +137,15 @@ class _$_LoginDto extends _LoginDto {
   @override
   final int? id;
   @override
-  @JsonKey(name: 'full_name')
-  final String? fullName;
-  @override
-  @JsonKey(name: 'email')
   final String? email;
   @override
-  final String? nis;
+  final String? password;
   @override
-  @JsonKey(name: 'role_id')
-  final int? roleId;
-  @override
-  @JsonKey(name: 'class_id')
-  final int? classId;
-  @override
-  @JsonKey(name: 'profile_image')
-  final String? profileImage;
-  @override
-  @JsonKey(name: 'msisdn')
-  final int? msisdn;
-  @override
-  final String? flag;
+  final String? role;
 
   @override
   String toString() {
-    return 'LoginDto(id: $id, fullName: $fullName, email: $email, nis: $nis, roleId: $roleId, classId: $classId, profileImage: $profileImage, msisdn: $msisdn, flag: $flag)';
+    return 'LoginDto(id: $id, email: $email, password: $password, role: $role)';
   }
 
   @override
@@ -258,22 +154,15 @@ class _$_LoginDto extends _LoginDto {
         (other.runtimeType == runtimeType &&
             other is _$_LoginDto &&
             (identical(other.id, id) || other.id == id) &&
-            (identical(other.fullName, fullName) ||
-                other.fullName == fullName) &&
             (identical(other.email, email) || other.email == email) &&
-            (identical(other.nis, nis) || other.nis == nis) &&
-            (identical(other.roleId, roleId) || other.roleId == roleId) &&
-            (identical(other.classId, classId) || other.classId == classId) &&
-            (identical(other.profileImage, profileImage) ||
-                other.profileImage == profileImage) &&
-            (identical(other.msisdn, msisdn) || other.msisdn == msisdn) &&
-            (identical(other.flag, flag) || other.flag == flag));
+            (identical(other.password, password) ||
+                other.password == password) &&
+            (identical(other.role, role) || other.role == role));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, id, fullName, email, nis, roleId,
-      classId, profileImage, msisdn, flag);
+  int get hashCode => Object.hash(runtimeType, id, email, password, role);
 
   @JsonKey(ignore: true)
   @override
@@ -292,14 +181,9 @@ class _$_LoginDto extends _LoginDto {
 abstract class _LoginDto extends LoginDto {
   const factory _LoginDto(
       {final int? id,
-      @JsonKey(name: 'full_name') final String? fullName,
-      @JsonKey(name: 'email') final String? email,
-      final String? nis,
-      @JsonKey(name: 'role_id') final int? roleId,
-      @JsonKey(name: 'class_id') final int? classId,
-      @JsonKey(name: 'profile_image') final String? profileImage,
-      @JsonKey(name: 'msisdn') final int? msisdn,
-      final String? flag}) = _$_LoginDto;
+      final String? email,
+      final String? password,
+      final String? role}) = _$_LoginDto;
   const _LoginDto._() : super._();
 
   factory _LoginDto.fromJson(Map<String, dynamic> json) = _$_LoginDto.fromJson;
@@ -307,27 +191,11 @@ abstract class _LoginDto extends LoginDto {
   @override
   int? get id;
   @override
-  @JsonKey(name: 'full_name')
-  String? get fullName;
-  @override
-  @JsonKey(name: 'email')
   String? get email;
   @override
-  String? get nis;
+  String? get password;
   @override
-  @JsonKey(name: 'role_id')
-  int? get roleId;
-  @override
-  @JsonKey(name: 'class_id')
-  int? get classId;
-  @override
-  @JsonKey(name: 'profile_image')
-  String? get profileImage;
-  @override
-  @JsonKey(name: 'msisdn')
-  int? get msisdn;
-  @override
-  String? get flag;
+  String? get role;
   @override
   @JsonKey(ignore: true)
   _$$_LoginDtoCopyWith<_$_LoginDto> get copyWith =>
