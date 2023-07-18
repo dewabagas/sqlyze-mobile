@@ -12,7 +12,7 @@ class OptionContainer extends StatefulWidget {
   final Function submitAnswer;
   final String answerOption;
   final BoxConstraints constraints;
-  final String correctOptionId;
+  final bool correctOptionId;
   final String submittedAnswerId;
   final bool showAnswerCorrectness;
   OptionContainer({
@@ -104,21 +104,17 @@ class _OptionContainerState extends State<OptionContainer>
 
   void _onTapOptionContainer() {
     if (widget.showAnswerCorrectness) {
-      //if user has submitted the answer then do not show correctness of the answer
       if (!widget.hasSubmittedAnswerForCurrentQuestion()) {
-        widget.submitAnswer(widget.answerOption);
-
+        widget.submitAnswer(widget.answerOption, widget.correctOptionId);
         topContainerAnimationController.forward();
-
-        //play sound
-        if (widget.correctOptionId == widget.answerOption) {
+        if (widget.correctOptionId) {
           playSound(AppSounds.right);
         } else {
           playSound(AppSounds.wrong);
         }
       }
     } else {
-      widget.submitAnswer(widget.answerOption);
+      widget.submitAnswer(widget.answerOption, widget.correctOptionId);
       playSound(AppSounds.click);
     }
   }

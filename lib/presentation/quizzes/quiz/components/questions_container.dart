@@ -19,6 +19,7 @@ class QuestionsContainer extends StatefulWidget {
   final Animation<double> questionContentAnimation;
   final AnimationController timerAnimationController;
   final bool? showAnswerCorrectness;
+  final Function(int) onQuestionAnswered;
   const QuestionsContainer(
       {super.key,
       required this.questions,
@@ -30,7 +31,8 @@ class QuestionsContainer extends StatefulWidget {
       required this.questionScaleDownAnimation,
       required this.questionContentAnimation,
       required this.timerAnimationController,
-      this.showAnswerCorrectness});
+      this.showAnswerCorrectness,
+      required this.onQuestionAnswered});
 
   @override
   State<QuestionsContainer> createState() => _QuestionsContainerState();
@@ -167,15 +169,17 @@ class _QuestionsContainerState extends State<QuestionsContainer> {
       children: question.quizAnswers!.map((answer) {
         return OptionContainer(
           submittedAnswerId: '',
-          showAnswerCorrectness: true,
+          showAnswerCorrectness: false,
           hasSubmittedAnswerForCurrentQuestion: () {
             return false;
           },
           constraints: constraints,
           answerOption: '${answer.answer}',
-          correctOptionId: answer.answer!,
-          submitAnswer: (String selectedOption) {
+          correctOptionId: answer.isCorrect!,
+          submitAnswer: (String selectedOption, bool isCorrect) {
             print('User selected: $selectedOption');
+            print('Is the answer correct: $isCorrect');
+            widget.onQuestionAnswered(widget.currentQuestionIndex + 1);
           },
         );
       }).toList(),

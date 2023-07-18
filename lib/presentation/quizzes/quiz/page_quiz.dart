@@ -121,6 +121,7 @@ class _PageQuizState extends State<PageQuiz> with TickerProviderStateMixin {
                     questionContentAnimationController,
                 questions: quizQuestions,
                 timerAnimationController: timerAnimationController,
+                onQuestionAnswered: handleQuestionAnswered,
               )),
           Align(
             alignment: Alignment.bottomCenter,
@@ -151,6 +152,12 @@ class _PageQuizState extends State<PageQuiz> with TickerProviderStateMixin {
         ],
       ),
     );
+  }
+
+  void handleQuestionAnswered(int nextQuestionIndex) {
+    _buildContext
+        .read<QuizQuestionsBloc>()
+        .add(QuizQuestionsEvent.nextQuestion());
   }
 
   Widget buildTopMenu() {
