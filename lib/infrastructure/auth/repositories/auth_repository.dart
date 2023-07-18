@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:developer';
 
 import 'package:dartz/dartz.dart';
+import 'package:flutter/material.dart';
 import 'package:injectable/injectable.dart';
 import 'package:sqlyze/domain/auth/entities/user.dart';
 import 'package:sqlyze/domain/auth/interfaces/i_auth_repository.dart';
@@ -51,8 +52,8 @@ class AuthRepository implements IAuthRepository {
     try {
       User? user;
       var response = await authApiService.register(registerRequest);
-      log('response repo');
-      log('${response.data}');
+      debugPrint('response repo');
+      debugPrint('${response.data}');
       if (response.data['code'] == 200) {
         final body = response.data;
         final result = body is String ? jsonDecode(body) : body;
@@ -63,12 +64,12 @@ class AuthRepository implements IAuthRepository {
         await addBoolToPreference(
             key: PreferenceConstants.isLoggedIn, value: true);
       } else {
-        log('error woy');
+        debugPrint('error woy');
         throw GeneralException(message: 'Invalid Request');
       }
       return Right(user);
     } on GeneralException catch (e) {
-      log('general ${e.message}');
+      debugPrint('general ${e.message}');
       return Left(GeneralFailure(message: e.message));
     }
   }

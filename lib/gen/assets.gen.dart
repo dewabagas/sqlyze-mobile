@@ -76,6 +76,9 @@ class $AssetsIconsGen {
   /// File path: assets/icons/ic_calendar.svg
   String get icCalendar => 'assets/icons/ic_calendar.svg';
 
+  /// File path: assets/icons/ic_calendar_dark.svg
+  String get icCalendarDark => 'assets/icons/ic_calendar_dark.svg';
+
   /// File path: assets/icons/ic_case.svg
   String get icCase => 'assets/icons/ic_case.svg';
 
@@ -117,6 +120,9 @@ class $AssetsIconsGen {
 
   /// File path: assets/icons/ic_dashboard_active.svg
   String get icDashboardActive => 'assets/icons/ic_dashboard_active.svg';
+
+  /// File path: assets/icons/ic_date_grey.svg
+  String get icDateGrey => 'assets/icons/ic_date_grey.svg';
 
   /// File path: assets/icons/ic_eye_off_blue.svg
   String get icEyeOffBlue => 'assets/icons/ic_eye_off_blue.svg';
@@ -237,6 +243,7 @@ class $AssetsIconsGen {
   List<dynamic> get values => [
         icArrowRight,
         icCalendar,
+        icCalendarDark,
         icCase,
         icCheck,
         icChecklist,
@@ -251,6 +258,7 @@ class $AssetsIconsGen {
         icCrossRed,
         icDashboard,
         icDashboardActive,
+        icDateGrey,
         icEyeOffBlue,
         icEyeOffGrey,
         icEyeOffRed,
@@ -377,6 +385,28 @@ class $AssetsImagesGen {
       [bnrDdl, bnrDml, bnrWelcomePng, bnrWelcomeSvg, bnrWelcome2];
 }
 
+class $AssetsSoundsGen {
+  const $AssetsSoundsGen();
+
+  /// File path: assets/sounds/click.mp3
+  String get click => 'assets/sounds/click.mp3';
+
+  /// File path: assets/sounds/right.mp3
+  String get right => 'assets/sounds/right.mp3';
+
+  /// File path: assets/sounds/snd_bg.mp3
+  String get sndBg => 'assets/sounds/snd_bg.mp3';
+
+  /// File path: assets/sounds/timer.mp3
+  String get timer => 'assets/sounds/timer.mp3';
+
+  /// File path: assets/sounds/wrong.mp3
+  String get wrong => 'assets/sounds/wrong.mp3';
+
+  /// List of all assets
+  List<String> get values => [click, right, sndBg, timer, wrong];
+}
+
 class Assets {
   Assets._();
 
@@ -386,6 +416,7 @@ class Assets {
   static const $AssetsIllustrationsGen illustrations =
       $AssetsIllustrationsGen();
   static const $AssetsImagesGen images = $AssetsImagesGen();
+  static const $AssetsSoundsGen sounds = $AssetsSoundsGen();
 }
 
 class AssetGenImage {

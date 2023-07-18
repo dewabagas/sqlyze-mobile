@@ -1,14 +1,16 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:sqlyze/domain/quizzes/entitites/quiz_question.dart';
 import 'package:sqlyze/presentation/core/constants/styles.dart';
 import 'package:sqlyze/presentation/core/styles/app_colors.dart';
-import 'package:sqlyze/presentation/quizzes/quiz/components/horizontal_timer_container.dart';
 import 'package:sqlyze/presentation/quizzes/quiz/components/option_container.dart';
 import 'package:sqlyze/presentation/quizzes/quiz/components/question_background_card.dart';
 
 class QuestionsContainer extends StatefulWidget {
   final int currentQuestionIndex;
-  final List<String> questions;
+  final List<QuizQuestion> questions;
   final AnimationController questionContentAnimationController;
   final AnimationController questionAnimationController;
   final Animation<double> questionSlideAnimation;
@@ -55,15 +57,15 @@ class _QuestionsContainerState extends State<QuestionsContainer> {
             heightPercentage: 0.725,
             opacity: 0.7,
             topMarginPercentage: 0.02,
-            widthPercentage: 0.75,
+            widthPercentage: 0.8,
           ),
           QuestionBackgroundCard(
             heightPercentage: 0.725,
             opacity: 0.85,
             topMarginPercentage: 0.01,
-            widthPercentage: 0.85,
+            widthPercentage: 0.9,
           ),
-          ..._buildQuestions(context)
+          ..._buildQuestions(context),
         ],
       ),
     );
@@ -71,155 +73,112 @@ class _QuestionsContainerState extends State<QuestionsContainer> {
 
   List<Widget> _buildQuestions(BuildContext context) {
     List<Widget> children = [];
-    for (var i = 0; i < getQuestionsLength(); i++) {
-      children.add(_buildQuestion(i, context));
+    if (widget.questions != null && widget.questions.isNotEmpty) {
+      children.add(_buildQuestion(widget.currentQuestionIndex, context,
+          widget.questions[widget.currentQuestionIndex]));
     }
-    children = children.reversed.toList();
 
     return children;
   }
 
-  Widget _buildQuestion(int questionIndex, BuildContext context) {
-    if (widget.currentQuestionIndex == questionIndex) {
-      return FadeTransition(
-          opacity: widget.questionSlideAnimation
-              .drive(Tween<double>(begin: 1.0, end: 0.0)),
-          child: SlideTransition(
-              child: _buildQuesitonContainer(1.0, questionIndex, true, context),
-              position: widget.questionSlideAnimation.drive(
-                  Tween<Offset>(begin: Offset.zero, end: Offset(-1.5, 0.0)))));
-    } else if (questionIndex > widget.currentQuestionIndex &&
-        (questionIndex == widget.currentQuestionIndex + 1)) {
-      return AnimatedBuilder(
-          animation: widget.questionAnimationController,
-          builder: (context, child) {
-            double scale = 0.95 +
-                widget.questionScaleUpAnimation.value -
-                widget.questionScaleDownAnimation.value;
-            return _buildQuesitonContainer(
-                scale, questionIndex, false, context);
-          });
-    } else if (questionIndex > widget.currentQuestionIndex) {
-      return _buildQuesitonContainer(1.0, questionIndex, false, context);
-    }
-    return Container();
+  Widget _buildQuestion(
+      int questionIndex, BuildContext context, QuizQuestion question) {
+    debugPrint('Question: ${question.question}');
+    debugPrint('Question Index: ${questionIndex}');
+
+    // we will always show the current question
+    return FadeTransition(
+      opacity: widget.questionSlideAnimation
+          .drive(Tween<double>(begin: 1.0, end: 0.0)),
+      child: SlideTransition(
+        child: _buildQuestionContainer(
+            1.0, questionIndex, true, context, question),
+        position: widget.questionSlideAnimation
+            .drive(Tween<Offset>(begin: Offset.zero, end: Offset(-1.5, 0.0))),
+      ),
+    );
   }
 
-  Widget _buildQuesitonContainer(
-      double scale, int index, bool showContent, BuildContext context) {
-    return SingleChildScrollView(
-      child: Column(
-        children: [
-          SizedBox(height: 17.5.h),
-          HorizontalTimerContainer(
-              timerAnimationController: widget.timerAnimationController),
-          SizedBox(height: 15.h),
-          Container(
-            child: Stack(
+  Widget _buildQuestionContainer(double scale, int index, bool showContent,
+      BuildContext context, QuizQuestion question) {
+    return LayoutBuilder(builder: (context, constraints) {
+      debugPrint('constraints $constraints');
+      return SingleChildScrollView(
+        child: Column(
+          children: [
+            SizedBox(height: 24.h),
+            Stack(
               alignment: Alignment.center,
               children: [
                 _buildCurrentQuestionIndex(),
               ],
             ),
-          ),
-          Divider(
-            color: AppColors.white,
-          ),
-          SizedBox(
-            height: 5.0,
-          ),
-          Container(
-            alignment: Alignment.center,
-            child: _buildQuestionText(
-              questionText: 'question',
-              questionType: 'question type',
+            SizedBox(height: 4.h),
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 60.w),
+              child: Divider(
+                  color: AppColors.primary.withOpacity(0.8), thickness: 0.5),
             ),
-          ),
-          // question.imageUrl != null && question.imageUrl!.isNotEmpty
-          //     ? SizedBox(
-          //         height: constraints.maxHeight * (0.0175),
-          //       )
-          //     : SizedBox(
-          //         height: constraints.maxHeight * (0.02),
-          //       ),
-          // question.imageUrl != null && question.imageUrl!.isNotEmpty
-          //     ? Container(
-          //         width: MediaQuery.of(context).size.width,
-          //         height: constraints.maxHeight * (0.225),
-          //         alignment: Alignment.center,
-          //         decoration: BoxDecoration(
-          //           borderRadius: BorderRadius.circular(25.0),
-          //         ),
-          //         child: ClipRRect(
-          //           borderRadius: BorderRadius.circular(25.0),
-          //           child: CachedNetworkImage(
-          //             placeholder: (context, _) {
-          //               return Center(
-          //                 child: CircularProgressContainer(
-          //                   useWhiteLoader: false,
-          //                 ),
-          //               );
-          //             },
-          //             imageUrl: question.imageUrl!,
-          //             imageBuilder: (context, imageProvider) {
-          //               return Container(
-          //                 decoration: BoxDecoration(
-          //                   image: DecorationImage(
-          //                       image: imageProvider, fit: BoxFit.cover),
-          //                   borderRadius: BorderRadius.circular(25.0),
-          //                 ),
-          //               );
-          //             },
-          //             errorWidget: (context, image, error) {
-          //               return Center(
-          //                 child: Icon(
-          //                   Icons.error,
-          //                   color: Theme.of(context).primaryColor,
-          //                 ),
-          //               );
-          //             },
-          //           ),
-          //         ),
-          //       )
-          //     : Container(),
-          _buildOptions('question', BoxConstraints()),
-          SizedBox(
-            height: 15.0,
-          ),
-        ],
-      ),
-    );
+            SizedBox(height: 10.h),
+            Container(
+              width: screenWidth / 1.35,
+              child: Column(
+                children: [
+                  _buildQuestionText(question),
+                  SizedBox(height: 14.h),
+                  Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 4.w),
+                    child: _buildOptions(question, constraints),
+                  ),
+                ],
+              ),
+            ),
+            SizedBox(height: 18.h),
+          ],
+        ),
+      );
+    });
   }
 
   Widget _buildCurrentQuestionIndex() {
     return Align(
       alignment: AlignmentDirectional.center,
       child: Text(
-        "${widget.currentQuestionIndex + 1} | ${widget.questions.length}",
-        style: TextStyle(color: Theme.of(context).colorScheme.secondary),
+        '${widget.currentQuestionIndex + 1} | ${widget.questions.length}',
+        style: TextStyles.bodyVerySmall.copyWith(fontWeight: FontWeight.w600),
       ),
     );
   }
 
-  Widget _buildQuestionText(
-      {required String questionText, required String questionType}) {
+  Widget _buildQuestionText(QuizQuestion question) {
     return Text(
-      questionText,
-      style: TextStyles.labelMedium,
+      '${question.question}',
+      textAlign: TextAlign.center,
+      style: TextStyles.labelLarge,
     );
   }
 
-  Widget _buildOptions(String question, BoxConstraints constraints) {
-    return OptionContainer(
-      submittedAnswerId: '1',
-      showAnswerCorrectness: widget.showAnswerCorrectness!,
-      showAudiencePoll: true,
-      audiencePollPercentage: 1,
-      hasSubmittedAnswerForCurrentQuestion: () {},
-      constraints: constraints,
-      answerOption: 'option',
-      correctOptionId: '',
-      submitAnswer: () {},
+  Widget _buildOptions(QuizQuestion question, BoxConstraints constraints) {
+    if (question.quizAnswers == null || question.quizAnswers!.isEmpty) {
+      return const SizedBox();
+    }
+
+    return Column(
+      children: question.quizAnswers!.map((answer) {
+        return OptionContainer(
+          submittedAnswerId: '',
+          showAnswerCorrectness: true,
+          hasSubmittedAnswerForCurrentQuestion: () {
+            return false;
+          },
+          constraints: constraints,
+          answerOption: '${answer.answer}',
+          correctOptionId: answer.answer!,
+          submitAnswer: (String selectedOption) {
+            print('User selected: $selectedOption');
+          },
+        );
+      }).toList(),
     );
   }
 }

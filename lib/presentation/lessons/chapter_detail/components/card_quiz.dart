@@ -9,7 +9,7 @@ class CardQuiz extends StatefulWidget {
   final String? title;
   final String? subtitle;
   final int? questionCount;
-  final int? duration;
+  final String? duration;
   final int? passingScore;
   final String? image;
   final Function()? onTap;
@@ -74,7 +74,7 @@ class _CardQuizState extends State<CardQuiz> {
                       ),
                       Expanded(
                         flex: 1,
-                        child: Text(': ${widget.duration} Menit',
+                        child: Text(': ${widget.duration}',
                             style: TextStyles.bodyVerySmall.copyWith(
                                 fontWeight: FontWeight.w700,
                                 color: AppColors.softBlue2)),

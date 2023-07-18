@@ -41,6 +41,8 @@ class AppIcons {
   static const String icPodcastTosca = 'assets/icons/ic_podcast_tosca.svg';
   static const String icEyeOnGrey = 'assets/icons/ic_eye_on_grey.svg';
   static const String icEyeOffGrey = 'assets/icons/ic_eye_off_grey.svg';
+  static const String icDateGrey = 'assets/icons/ic_date_grey.svg';
+  static const String icCalendarDark = 'assets/icons/ic_calendar_dark.svg';
 }
 
 class AppLogo {
@@ -100,4 +102,12 @@ class BottomNavBar {
   static const String icConsultation = 'assets/icons/ic_consultation_blue.svg';
   static const String icProfileGrey = 'assets/icons/ic_profile_grey.svg';
   static const String icProfile = 'assets/icons/ic_profile_blue.svg';
+}
+
+class AppSounds {
+  static const String click = 'assets/sounds/click.mp3';
+  static const String right = 'assets/sounds/right.mp3';
+  static const String timer = 'assets/sounds/timer.mp3';
+  static const String wrong = 'assets/sounds/wrong.mp3';
+  static const String sendBg = 'assets/sounds/snd_bg.mp3';
 }

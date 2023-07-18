@@ -1,19 +1,29 @@
+import 'dart:math';
+
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:sqlyze/application/quizzes/quiz_questions_bloc/quiz_questions_bloc.dart';
+import 'package:sqlyze/domain/quizzes/entitites/quiz_question.dart';
+import 'package:sqlyze/injection.dart';
 import 'package:sqlyze/presentation/core/styles/app_colors.dart';
 import 'package:sqlyze/presentation/quizzes/quiz/components/questions_container.dart';
 import 'package:sqlyze/presentation/quizzes/quiz/components/quiz_background.dart';
 import 'package:sqlyze/presentation/shared/widgets/buttons/button_circle.dart';
+import 'package:sqlyze/presentation/shared/widgets/errors/error_page.dart';
 
 class PageQuiz extends StatefulWidget {
-  const PageQuiz({super.key});
+  final int quizId;
+  const PageQuiz({super.key, required this.quizId});
 
   @override
   State<PageQuiz> createState() => _PageQuizState();
 }
 
 class _PageQuizState extends State<PageQuiz> with TickerProviderStateMixin {
+  int currentQuestionIndex = 0;
+  late BuildContext _buildContext;
   late AnimationController questionAnimationController;
   late AnimationController questionContentAnimationController;
   late AnimationController timerAnimationController = AnimationController(
@@ -61,6 +71,35 @@ class _PageQuizState extends State<PageQuiz> with TickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
+    return BlocProvider<QuizQuestionsBloc>(
+        create: (context) => getIt<QuizQuestionsBloc>()
+          ..add(QuizQuestionsEvent.getQuizQuestions(widget.quizId)),
+        child: BlocBuilder<QuizQuestionsBloc, QuizQuestionsState>(
+          builder: (context, state) {
+            return state.map(
+                initial: (value) => const SizedBox(),
+                loadInProgress: (value) => const CircularProgressIndicator(),
+                loadSuccess: (value) {
+                  debugPrint('questions ${value.quizQuestions}');
+                  return Builder(builder: (context) {
+                    _buildContext = context;
+                    return buildQuiz(
+                        value.currentQuestionIndex, value.quizQuestions);
+                  });
+                },
+                loadFailure: (value) {
+                  return ErrorPage(message: value.message);
+                });
+          },
+        ));
+  }
+
+  Widget buildQuiz(
+      int currentQuestionIndex, List<QuizQuestion>? quizQuestions) {
+    if (quizQuestions == null || quizQuestions.isEmpty) {
+      return const SizedBox();
+    }
+
     return Scaffold(
       body: Stack(
         children: [
@@ -72,7 +111,7 @@ class _PageQuizState extends State<PageQuiz> with TickerProviderStateMixin {
           Align(
               alignment: Alignment.topCenter,
               child: QuestionsContainer(
-                currentQuestionIndex: 1,
+                currentQuestionIndex: currentQuestionIndex,
                 questionContentAnimation: questionContentAnimation,
                 questionScaleDownAnimation: questionScaleDownAnimation,
                 questionScaleUpAnimation: questionScaleUpAnimation,
@@ -80,7 +119,7 @@ class _PageQuizState extends State<PageQuiz> with TickerProviderStateMixin {
                 questionAnimationController: questionAnimationController,
                 questionContentAnimationController:
                     questionContentAnimationController,
-                questions: [],
+                questions: quizQuestions,
                 timerAnimationController: timerAnimationController,
               )),
           Align(
@@ -88,11 +127,21 @@ class _PageQuizState extends State<PageQuiz> with TickerProviderStateMixin {
             child: Container(
               padding: EdgeInsets.only(bottom: 20.h, right: 20.w, left: 20.w),
               child: Row(
-                mainAxisAlignment: MainAxisAlignment.end,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
+                  ButtonCircle(
+                    child: Icon(Icons.skip_previous, color: AppColors.white),
+                    color: AppColors.primary,
+                    onTap: () => _buildContext
+                        .read<QuizQuestionsBloc>()
+                        .add(QuizQuestionsEvent.previousQuestion()),
+                  ),
                   ButtonCircle(
                     child: Icon(Icons.skip_next, color: AppColors.white),
                     color: AppColors.primary,
+                    onTap: () => _buildContext
+                        .read<QuizQuestionsBloc>()
+                        .add(QuizQuestionsEvent.nextQuestion()),
                   )
                 ],
               ),

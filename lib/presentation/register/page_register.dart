@@ -16,8 +16,10 @@ import 'package:sqlyze/injection.dart';
 import 'package:sqlyze/presentation/core/constants/assets.dart';
 import 'package:sqlyze/presentation/core/constants/styles.dart';
 import 'package:sqlyze/presentation/core/styles/app_colors.dart';
+import 'package:sqlyze/presentation/core/utils/common_utils.dart';
 import 'package:sqlyze/presentation/routes/router.gr.dart';
 import 'package:sqlyze/presentation/shared/widgets/buttons/button_gradient.dart';
+import 'package:sqlyze/presentation/shared/widgets/buttons/button_selection.dart';
 import 'package:sqlyze/presentation/shared/widgets/inputs/input_secondary.dart';
 import 'package:sqlyze/presentation/shared/widgets/inputs/input_secured.dart';
 import 'package:sqlyze/presentation/shared/widgets/others/show_dialog.dart';
@@ -40,6 +42,7 @@ class _PageRegisterState extends State<PageRegister> {
   String? nis;
   String? phoneNumber;
   String? gender;
+  String? birthdate;
   bool isSecured = true;
 
   final TextEditingController fullNameController = TextEditingController();
@@ -47,23 +50,65 @@ class _PageRegisterState extends State<PageRegister> {
   final TextEditingController passwordController = TextEditingController();
   final TextEditingController nisController = TextEditingController();
   final TextEditingController phoneController = TextEditingController();
+  final TextEditingController birthdateController = TextEditingController();
 
   bool isFullNameValid = false;
   bool isEmailValid = false;
   bool isPasswordValid = false;
   bool isNisValid = false;
   bool isPhoneValid = false;
+  bool isBirthdateValid = false;
 
   bool isFullNameFocused = false;
   bool isEmailFocused = false;
   bool isPasswordFocused = false;
   bool isNisFocused = false;
   bool isPhoneFocused = false;
+  bool isBirthdateFocused = false;
+
+  late DateTime selectedDate;
 
   @override
   void initState() {
     gender = 'Male';
+    selectedDate = DateTime.now();
     super.initState();
+  }
+
+  _selectDate(BuildContext context) async {
+    FocusScope.of(context).requestFocus(FocusNode());
+    var dateTimeNow = DateTime.now().toString();
+    var currentYear = getYearFromDateTime(dateTimeNow);
+
+    final DateTime? picked = await showDatePicker(
+      context: context,
+      initialDate: selectedDate,
+      firstDate: DateTime(1900),
+      lastDate: DateTime(int.parse(currentYear) + 1),
+      builder: (context, child) {
+        return Theme(
+          data: ThemeData.light().copyWith(
+              primaryColor: AppColors.primary,
+              colorScheme: const ColorScheme.light(primary: AppColors.primary),
+              buttonTheme:
+                  const ButtonThemeData(textTheme: ButtonTextTheme.primary)),
+          child: child!,
+        );
+      },
+    );
+    if (picked != null && picked != selectedDate) {
+      setState(() {
+        isBirthdateValid = validationRequired(
+                convertDateFromString('${picked.toLocal()}'.split(' ')[0]),
+                "Tanggal Lahir") ==
+            null;
+        selectedDate = picked;
+        birthdateController.text =
+            convertDateFromString('${picked.toLocal()}'.split(' ')[0]);
+        birthdate =
+            convertFormatDefaultDate('${picked.toLocal()}'.split(' ')[0]);
+      });
+    }
   }
 
   @override
@@ -111,7 +156,6 @@ class _PageRegisterState extends State<PageRegister> {
                               controller: fullNameController,
                               label: 'Nama Lengkap',
                               hintText: 'Isi Nama Lengkap Kamu',
-                              keyboardType: TextInputType.emailAddress,
                               validator: validationName,
                               onChanged: (String? val) {
                                 localSetState(() {
@@ -198,7 +242,12 @@ class _PageRegisterState extends State<PageRegister> {
                           InputSecondary(
                             label: 'NIS (Opsional)',
                             hintText: 'Isi NIS Kamu Jika Ada',
-                            onChanged: (String? val) {},
+                            keyboardType: TextInputType.phone,
+                            onChanged: (String? val) {
+                              setState(() {
+                                nis = val;
+                              });
+                            },
                             onFocusChange: (hasFocus) {},
                             onClear: () {},
                           ),
@@ -229,6 +278,21 @@ class _PageRegisterState extends State<PageRegister> {
                               isValidated: isPhoneValid,
                             );
                           }),
+                          ButtonSelection(
+                            title: "Tanggal Lahir",
+                            controller: birthdateController,
+                            onTap: () => _selectDate(context),
+                            isValidated: isBirthdateValid,
+                            labelText: "Tanggal Lahir",
+                            validator: (value) {
+                              return validationRequired(
+                                  value!, 'Tanggal Lahir');
+                            },
+                            suffixIcon: SvgPicture.asset(
+                                AppIcons.icCalendarDark,
+                                width: 14.w,
+                                height: 16.h),
+                          ),
                           Padding(
                             padding: EdgeInsets.only(top: 24.h, bottom: 12.h),
                             child: Text(
@@ -307,16 +371,18 @@ class _PageRegisterState extends State<PageRegister> {
                       ),
                       child: ButtonGradient(
                         onPressed: () {
-                          _buildContext
-                              .read<RegisterBloc>()
-                              .add(RegisterEvent.register(RegisterRequest(
-                                fullName: fullName,
-                                email: email,
-                                password: password,
-                                nis: nis,
-                                msisdn: phoneNumber,
-                                gender: gender,
-                              )));
+                          _buildContext.read<RegisterBloc>().add(
+                              RegisterEvent.register(RegisterRequest(
+                                  fullName: fullName,
+                                  email: email,
+                                  password: password,
+                                  nis: '$nis',
+                                  msisdn: phoneNumber.toString(),
+                                  gender: gender,
+                                  role: 'student',
+                                  birthdate: birthdate,
+                                  profileImageUrl:
+                                      'https://static-00.iconduck.com/assets.00/avatar-default-symbolic-icon-2048x1949-pq9uiebg.png')));
                         },
                         title: 'Daftar',
                       ),

@@ -9,7 +9,7 @@ class QuizDetail with _$QuizDetail {
     int? materialId,
     String? title,
     bool? isFinalExam,
-    int? duration,
+    String? duration,
     int? passingScore,
     int? questionCount,
     String? createdAt,

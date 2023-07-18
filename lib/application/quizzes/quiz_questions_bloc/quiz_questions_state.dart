@@ -5,6 +5,7 @@ class QuizQuestionsState with _$QuizQuestionsState {
   const factory QuizQuestionsState.initial() = _Initial;
   const factory QuizQuestionsState.loadInProgress() = _LoadInProgress;
   const factory QuizQuestionsState.loadSuccess(
-      List<QuizQuestion>? quizQuestions) = _LoadSuccess;
+          int currentQuestionIndex, List<QuizQuestion>? quizQuestions) =
+      _LoadSuccess;
   const factory QuizQuestionsState.loadFailure(String? message) = _LoadFailure;
 }

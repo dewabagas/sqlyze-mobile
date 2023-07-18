@@ -16,42 +16,49 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$QuizQuestionsEvent {
-  int get quizId => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(int quizId) getQuizQuestions,
+    required TResult Function() nextQuestion,
+    required TResult Function() previousQuestion,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(int quizId)? getQuizQuestions,
+    TResult? Function()? nextQuestion,
+    TResult? Function()? previousQuestion,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(int quizId)? getQuizQuestions,
+    TResult Function()? nextQuestion,
+    TResult Function()? previousQuestion,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_GetQuizQuestions value) getQuizQuestions,
+    required TResult Function(_NextQuestion value) nextQuestion,
+    required TResult Function(_PreviousQuestion value) previousQuestion,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_GetQuizQuestions value)? getQuizQuestions,
+    TResult? Function(_NextQuestion value)? nextQuestion,
+    TResult? Function(_PreviousQuestion value)? previousQuestion,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_GetQuizQuestions value)? getQuizQuestions,
+    TResult Function(_NextQuestion value)? nextQuestion,
+    TResult Function(_PreviousQuestion value)? previousQuestion,
     required TResult orElse(),
   }) =>
-      throw _privateConstructorUsedError;
-
-  @JsonKey(ignore: true)
-  $QuizQuestionsEventCopyWith<QuizQuestionsEvent> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -60,8 +67,6 @@ abstract class $QuizQuestionsEventCopyWith<$Res> {
   factory $QuizQuestionsEventCopyWith(
           QuizQuestionsEvent value, $Res Function(QuizQuestionsEvent) then) =
       _$QuizQuestionsEventCopyWithImpl<$Res, QuizQuestionsEvent>;
-  @useResult
-  $Res call({int quizId});
 }
 
 /// @nodoc
@@ -73,28 +78,13 @@ class _$QuizQuestionsEventCopyWithImpl<$Res, $Val extends QuizQuestionsEvent>
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
-
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? quizId = null,
-  }) {
-    return _then(_value.copyWith(
-      quizId: null == quizId
-          ? _value.quizId
-          : quizId // ignore: cast_nullable_to_non_nullable
-              as int,
-    ) as $Val);
-  }
 }
 
 /// @nodoc
-abstract class _$$_GetQuizQuestionsCopyWith<$Res>
-    implements $QuizQuestionsEventCopyWith<$Res> {
+abstract class _$$_GetQuizQuestionsCopyWith<$Res> {
   factory _$$_GetQuizQuestionsCopyWith(
           _$_GetQuizQuestions value, $Res Function(_$_GetQuizQuestions) then) =
       __$$_GetQuizQuestionsCopyWithImpl<$Res>;
-  @override
   @useResult
   $Res call({int quizId});
 }
@@ -155,6 +145,8 @@ class _$_GetQuizQuestions implements _GetQuizQuestions {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(int quizId) getQuizQuestions,
+    required TResult Function() nextQuestion,
+    required TResult Function() previousQuestion,
   }) {
     return getQuizQuestions(quizId);
   }
@@ -163,6 +155,8 @@ class _$_GetQuizQuestions implements _GetQuizQuestions {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(int quizId)? getQuizQuestions,
+    TResult? Function()? nextQuestion,
+    TResult? Function()? previousQuestion,
   }) {
     return getQuizQuestions?.call(quizId);
   }
@@ -171,6 +165,8 @@ class _$_GetQuizQuestions implements _GetQuizQuestions {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(int quizId)? getQuizQuestions,
+    TResult Function()? nextQuestion,
+    TResult Function()? previousQuestion,
     required TResult orElse(),
   }) {
     if (getQuizQuestions != null) {
@@ -183,6 +179,8 @@ class _$_GetQuizQuestions implements _GetQuizQuestions {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_GetQuizQuestions value) getQuizQuestions,
+    required TResult Function(_NextQuestion value) nextQuestion,
+    required TResult Function(_PreviousQuestion value) previousQuestion,
   }) {
     return getQuizQuestions(this);
   }
@@ -191,6 +189,8 @@ class _$_GetQuizQuestions implements _GetQuizQuestions {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_GetQuizQuestions value)? getQuizQuestions,
+    TResult? Function(_NextQuestion value)? nextQuestion,
+    TResult? Function(_PreviousQuestion value)? previousQuestion,
   }) {
     return getQuizQuestions?.call(this);
   }
@@ -199,6 +199,8 @@ class _$_GetQuizQuestions implements _GetQuizQuestions {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_GetQuizQuestions value)? getQuizQuestions,
+    TResult Function(_NextQuestion value)? nextQuestion,
+    TResult Function(_PreviousQuestion value)? previousQuestion,
     required TResult orElse(),
   }) {
     if (getQuizQuestions != null) {
@@ -211,12 +213,226 @@ class _$_GetQuizQuestions implements _GetQuizQuestions {
 abstract class _GetQuizQuestions implements QuizQuestionsEvent {
   const factory _GetQuizQuestions(final int quizId) = _$_GetQuizQuestions;
 
-  @override
   int get quizId;
-  @override
   @JsonKey(ignore: true)
   _$$_GetQuizQuestionsCopyWith<_$_GetQuizQuestions> get copyWith =>
       throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$_NextQuestionCopyWith<$Res> {
+  factory _$$_NextQuestionCopyWith(
+          _$_NextQuestion value, $Res Function(_$_NextQuestion) then) =
+      __$$_NextQuestionCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$_NextQuestionCopyWithImpl<$Res>
+    extends _$QuizQuestionsEventCopyWithImpl<$Res, _$_NextQuestion>
+    implements _$$_NextQuestionCopyWith<$Res> {
+  __$$_NextQuestionCopyWithImpl(
+      _$_NextQuestion _value, $Res Function(_$_NextQuestion) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$_NextQuestion implements _NextQuestion {
+  const _$_NextQuestion();
+
+  @override
+  String toString() {
+    return 'QuizQuestionsEvent.nextQuestion()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$_NextQuestion);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(int quizId) getQuizQuestions,
+    required TResult Function() nextQuestion,
+    required TResult Function() previousQuestion,
+  }) {
+    return nextQuestion();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(int quizId)? getQuizQuestions,
+    TResult? Function()? nextQuestion,
+    TResult? Function()? previousQuestion,
+  }) {
+    return nextQuestion?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(int quizId)? getQuizQuestions,
+    TResult Function()? nextQuestion,
+    TResult Function()? previousQuestion,
+    required TResult orElse(),
+  }) {
+    if (nextQuestion != null) {
+      return nextQuestion();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_GetQuizQuestions value) getQuizQuestions,
+    required TResult Function(_NextQuestion value) nextQuestion,
+    required TResult Function(_PreviousQuestion value) previousQuestion,
+  }) {
+    return nextQuestion(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_GetQuizQuestions value)? getQuizQuestions,
+    TResult? Function(_NextQuestion value)? nextQuestion,
+    TResult? Function(_PreviousQuestion value)? previousQuestion,
+  }) {
+    return nextQuestion?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_GetQuizQuestions value)? getQuizQuestions,
+    TResult Function(_NextQuestion value)? nextQuestion,
+    TResult Function(_PreviousQuestion value)? previousQuestion,
+    required TResult orElse(),
+  }) {
+    if (nextQuestion != null) {
+      return nextQuestion(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _NextQuestion implements QuizQuestionsEvent {
+  const factory _NextQuestion() = _$_NextQuestion;
+}
+
+/// @nodoc
+abstract class _$$_PreviousQuestionCopyWith<$Res> {
+  factory _$$_PreviousQuestionCopyWith(
+          _$_PreviousQuestion value, $Res Function(_$_PreviousQuestion) then) =
+      __$$_PreviousQuestionCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$_PreviousQuestionCopyWithImpl<$Res>
+    extends _$QuizQuestionsEventCopyWithImpl<$Res, _$_PreviousQuestion>
+    implements _$$_PreviousQuestionCopyWith<$Res> {
+  __$$_PreviousQuestionCopyWithImpl(
+      _$_PreviousQuestion _value, $Res Function(_$_PreviousQuestion) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$_PreviousQuestion implements _PreviousQuestion {
+  const _$_PreviousQuestion();
+
+  @override
+  String toString() {
+    return 'QuizQuestionsEvent.previousQuestion()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$_PreviousQuestion);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(int quizId) getQuizQuestions,
+    required TResult Function() nextQuestion,
+    required TResult Function() previousQuestion,
+  }) {
+    return previousQuestion();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(int quizId)? getQuizQuestions,
+    TResult? Function()? nextQuestion,
+    TResult? Function()? previousQuestion,
+  }) {
+    return previousQuestion?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(int quizId)? getQuizQuestions,
+    TResult Function()? nextQuestion,
+    TResult Function()? previousQuestion,
+    required TResult orElse(),
+  }) {
+    if (previousQuestion != null) {
+      return previousQuestion();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_GetQuizQuestions value) getQuizQuestions,
+    required TResult Function(_NextQuestion value) nextQuestion,
+    required TResult Function(_PreviousQuestion value) previousQuestion,
+  }) {
+    return previousQuestion(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_GetQuizQuestions value)? getQuizQuestions,
+    TResult? Function(_NextQuestion value)? nextQuestion,
+    TResult? Function(_PreviousQuestion value)? previousQuestion,
+  }) {
+    return previousQuestion?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_GetQuizQuestions value)? getQuizQuestions,
+    TResult Function(_NextQuestion value)? nextQuestion,
+    TResult Function(_PreviousQuestion value)? previousQuestion,
+    required TResult orElse(),
+  }) {
+    if (previousQuestion != null) {
+      return previousQuestion(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _PreviousQuestion implements QuizQuestionsEvent {
+  const factory _PreviousQuestion() = _$_PreviousQuestion;
 }
 
 /// @nodoc
@@ -225,7 +441,9 @@ mixin _$QuizQuestionsState {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loadInProgress,
-    required TResult Function(List<QuizQuestion>? quizQuestions) loadSuccess,
+    required TResult Function(
+            int currentQuestionIndex, List<QuizQuestion>? quizQuestions)
+        loadSuccess,
     required TResult Function(String? message) loadFailure,
   }) =>
       throw _privateConstructorUsedError;
@@ -233,7 +451,9 @@ mixin _$QuizQuestionsState {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loadInProgress,
-    TResult? Function(List<QuizQuestion>? quizQuestions)? loadSuccess,
+    TResult? Function(
+            int currentQuestionIndex, List<QuizQuestion>? quizQuestions)?
+        loadSuccess,
     TResult? Function(String? message)? loadFailure,
   }) =>
       throw _privateConstructorUsedError;
@@ -241,7 +461,9 @@ mixin _$QuizQuestionsState {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loadInProgress,
-    TResult Function(List<QuizQuestion>? quizQuestions)? loadSuccess,
+    TResult Function(
+            int currentQuestionIndex, List<QuizQuestion>? quizQuestions)?
+        loadSuccess,
     TResult Function(String? message)? loadFailure,
     required TResult orElse(),
   }) =>
@@ -330,7 +552,9 @@ class _$_Initial implements _Initial {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loadInProgress,
-    required TResult Function(List<QuizQuestion>? quizQuestions) loadSuccess,
+    required TResult Function(
+            int currentQuestionIndex, List<QuizQuestion>? quizQuestions)
+        loadSuccess,
     required TResult Function(String? message) loadFailure,
   }) {
     return initial();
@@ -341,7 +565,9 @@ class _$_Initial implements _Initial {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loadInProgress,
-    TResult? Function(List<QuizQuestion>? quizQuestions)? loadSuccess,
+    TResult? Function(
+            int currentQuestionIndex, List<QuizQuestion>? quizQuestions)?
+        loadSuccess,
     TResult? Function(String? message)? loadFailure,
   }) {
     return initial?.call();
@@ -352,7 +578,9 @@ class _$_Initial implements _Initial {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loadInProgress,
-    TResult Function(List<QuizQuestion>? quizQuestions)? loadSuccess,
+    TResult Function(
+            int currentQuestionIndex, List<QuizQuestion>? quizQuestions)?
+        loadSuccess,
     TResult Function(String? message)? loadFailure,
     required TResult orElse(),
   }) {
@@ -444,7 +672,9 @@ class _$_LoadInProgress implements _LoadInProgress {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loadInProgress,
-    required TResult Function(List<QuizQuestion>? quizQuestions) loadSuccess,
+    required TResult Function(
+            int currentQuestionIndex, List<QuizQuestion>? quizQuestions)
+        loadSuccess,
     required TResult Function(String? message) loadFailure,
   }) {
     return loadInProgress();
@@ -455,7 +685,9 @@ class _$_LoadInProgress implements _LoadInProgress {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loadInProgress,
-    TResult? Function(List<QuizQuestion>? quizQuestions)? loadSuccess,
+    TResult? Function(
+            int currentQuestionIndex, List<QuizQuestion>? quizQuestions)?
+        loadSuccess,
     TResult? Function(String? message)? loadFailure,
   }) {
     return loadInProgress?.call();
@@ -466,7 +698,9 @@ class _$_LoadInProgress implements _LoadInProgress {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loadInProgress,
-    TResult Function(List<QuizQuestion>? quizQuestions)? loadSuccess,
+    TResult Function(
+            int currentQuestionIndex, List<QuizQuestion>? quizQuestions)?
+        loadSuccess,
     TResult Function(String? message)? loadFailure,
     required TResult orElse(),
   }) {
@@ -524,7 +758,7 @@ abstract class _$$_LoadSuccessCopyWith<$Res> {
           _$_LoadSuccess value, $Res Function(_$_LoadSuccess) then) =
       __$$_LoadSuccessCopyWithImpl<$Res>;
   @useResult
-  $Res call({List<QuizQuestion>? quizQuestions});
+  $Res call({int currentQuestionIndex, List<QuizQuestion>? quizQuestions});
 }
 
 /// @nodoc
@@ -538,9 +772,14 @@ class __$$_LoadSuccessCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? currentQuestionIndex = null,
     Object? quizQuestions = freezed,
   }) {
     return _then(_$_LoadSuccess(
+      null == currentQuestionIndex
+          ? _value.currentQuestionIndex
+          : currentQuestionIndex // ignore: cast_nullable_to_non_nullable
+              as int,
       freezed == quizQuestions
           ? _value._quizQuestions
           : quizQuestions // ignore: cast_nullable_to_non_nullable
@@ -552,9 +791,12 @@ class __$$_LoadSuccessCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_LoadSuccess implements _LoadSuccess {
-  const _$_LoadSuccess(final List<QuizQuestion>? quizQuestions)
+  const _$_LoadSuccess(
+      this.currentQuestionIndex, final List<QuizQuestion>? quizQuestions)
       : _quizQuestions = quizQuestions;
 
+  @override
+  final int currentQuestionIndex;
   final List<QuizQuestion>? _quizQuestions;
   @override
   List<QuizQuestion>? get quizQuestions {
@@ -567,7 +809,7 @@ class _$_LoadSuccess implements _LoadSuccess {
 
   @override
   String toString() {
-    return 'QuizQuestionsState.loadSuccess(quizQuestions: $quizQuestions)';
+    return 'QuizQuestionsState.loadSuccess(currentQuestionIndex: $currentQuestionIndex, quizQuestions: $quizQuestions)';
   }
 
   @override
@@ -575,13 +817,15 @@ class _$_LoadSuccess implements _LoadSuccess {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_LoadSuccess &&
+            (identical(other.currentQuestionIndex, currentQuestionIndex) ||
+                other.currentQuestionIndex == currentQuestionIndex) &&
             const DeepCollectionEquality()
                 .equals(other._quizQuestions, _quizQuestions));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType, const DeepCollectionEquality().hash(_quizQuestions));
+  int get hashCode => Object.hash(runtimeType, currentQuestionIndex,
+      const DeepCollectionEquality().hash(_quizQuestions));
 
   @JsonKey(ignore: true)
   @override
@@ -594,10 +838,12 @@ class _$_LoadSuccess implements _LoadSuccess {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loadInProgress,
-    required TResult Function(List<QuizQuestion>? quizQuestions) loadSuccess,
+    required TResult Function(
+            int currentQuestionIndex, List<QuizQuestion>? quizQuestions)
+        loadSuccess,
     required TResult Function(String? message) loadFailure,
   }) {
-    return loadSuccess(quizQuestions);
+    return loadSuccess(currentQuestionIndex, quizQuestions);
   }
 
   @override
@@ -605,10 +851,12 @@ class _$_LoadSuccess implements _LoadSuccess {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loadInProgress,
-    TResult? Function(List<QuizQuestion>? quizQuestions)? loadSuccess,
+    TResult? Function(
+            int currentQuestionIndex, List<QuizQuestion>? quizQuestions)?
+        loadSuccess,
     TResult? Function(String? message)? loadFailure,
   }) {
-    return loadSuccess?.call(quizQuestions);
+    return loadSuccess?.call(currentQuestionIndex, quizQuestions);
   }
 
   @override
@@ -616,12 +864,14 @@ class _$_LoadSuccess implements _LoadSuccess {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loadInProgress,
-    TResult Function(List<QuizQuestion>? quizQuestions)? loadSuccess,
+    TResult Function(
+            int currentQuestionIndex, List<QuizQuestion>? quizQuestions)?
+        loadSuccess,
     TResult Function(String? message)? loadFailure,
     required TResult orElse(),
   }) {
     if (loadSuccess != null) {
-      return loadSuccess(quizQuestions);
+      return loadSuccess(currentQuestionIndex, quizQuestions);
     }
     return orElse();
   }
@@ -665,9 +915,10 @@ class _$_LoadSuccess implements _LoadSuccess {
 }
 
 abstract class _LoadSuccess implements QuizQuestionsState {
-  const factory _LoadSuccess(final List<QuizQuestion>? quizQuestions) =
-      _$_LoadSuccess;
+  const factory _LoadSuccess(final int currentQuestionIndex,
+      final List<QuizQuestion>? quizQuestions) = _$_LoadSuccess;
 
+  int get currentQuestionIndex;
   List<QuizQuestion>? get quizQuestions;
   @JsonKey(ignore: true)
   _$$_LoadSuccessCopyWith<_$_LoadSuccess> get copyWith =>
@@ -740,7 +991,9 @@ class _$_LoadFailure implements _LoadFailure {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loadInProgress,
-    required TResult Function(List<QuizQuestion>? quizQuestions) loadSuccess,
+    required TResult Function(
+            int currentQuestionIndex, List<QuizQuestion>? quizQuestions)
+        loadSuccess,
     required TResult Function(String? message) loadFailure,
   }) {
     return loadFailure(message);
@@ -751,7 +1004,9 @@ class _$_LoadFailure implements _LoadFailure {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loadInProgress,
-    TResult? Function(List<QuizQuestion>? quizQuestions)? loadSuccess,
+    TResult? Function(
+            int currentQuestionIndex, List<QuizQuestion>? quizQuestions)?
+        loadSuccess,
     TResult? Function(String? message)? loadFailure,
   }) {
     return loadFailure?.call(message);
@@ -762,7 +1017,9 @@ class _$_LoadFailure implements _LoadFailure {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loadInProgress,
-    TResult Function(List<QuizQuestion>? quizQuestions)? loadSuccess,
+    TResult Function(
+            int currentQuestionIndex, List<QuizQuestion>? quizQuestions)?
+        loadSuccess,
     TResult Function(String? message)? loadFailure,
     required TResult orElse(),
   }) {

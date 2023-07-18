@@ -20,7 +20,7 @@ mixin _$QuizDetail {
   int? get materialId => throw _privateConstructorUsedError;
   String? get title => throw _privateConstructorUsedError;
   bool? get isFinalExam => throw _privateConstructorUsedError;
-  int? get duration => throw _privateConstructorUsedError;
+  String? get duration => throw _privateConstructorUsedError;
   int? get passingScore => throw _privateConstructorUsedError;
   int? get questionCount => throw _privateConstructorUsedError;
   String? get createdAt => throw _privateConstructorUsedError;
@@ -42,7 +42,7 @@ abstract class $QuizDetailCopyWith<$Res> {
       int? materialId,
       String? title,
       bool? isFinalExam,
-      int? duration,
+      String? duration,
       int? passingScore,
       int? questionCount,
       String? createdAt,
@@ -92,7 +92,7 @@ class _$QuizDetailCopyWithImpl<$Res, $Val extends QuizDetail>
       duration: freezed == duration
           ? _value.duration
           : duration // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as String?,
       passingScore: freezed == passingScore
           ? _value.passingScore
           : passingScore // ignore: cast_nullable_to_non_nullable
@@ -126,7 +126,7 @@ abstract class _$$_QuizDetailCopyWith<$Res>
       int? materialId,
       String? title,
       bool? isFinalExam,
-      int? duration,
+      String? duration,
       int? passingScore,
       int? questionCount,
       String? createdAt,
@@ -174,7 +174,7 @@ class __$$_QuizDetailCopyWithImpl<$Res>
       duration: freezed == duration
           ? _value.duration
           : duration // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as String?,
       passingScore: freezed == passingScore
           ? _value.passingScore
           : passingScore // ignore: cast_nullable_to_non_nullable
@@ -218,7 +218,7 @@ class _$_QuizDetail implements _QuizDetail {
   @override
   final bool? isFinalExam;
   @override
-  final int? duration;
+  final String? duration;
   @override
   final int? passingScore;
   @override
@@ -273,7 +273,7 @@ abstract class _QuizDetail implements QuizDetail {
       final int? materialId,
       final String? title,
       final bool? isFinalExam,
-      final int? duration,
+      final String? duration,
       final int? passingScore,
       final int? questionCount,
       final String? createdAt,
@@ -288,7 +288,7 @@ abstract class _QuizDetail implements QuizDetail {
   @override
   bool? get isFinalExam;
   @override
-  int? get duration;
+  String? get duration;
   @override
   int? get passingScore;
   @override

@@ -13,7 +13,7 @@ class QuizDetailDto with _$QuizDetailDto {
     @JsonKey(name: 'material_id') int? materialId,
     String? title,
     @JsonKey(name: 'is_final_exam') bool? isFinalExam,
-    int? duration,
+    String? duration,
     @JsonKey(name: 'passing_score') int? passingScore,
     @JsonKey(name: 'question_count') int? questionCount,
     String? createdAt,

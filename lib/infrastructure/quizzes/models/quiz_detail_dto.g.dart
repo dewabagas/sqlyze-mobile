@@ -12,7 +12,7 @@ _$_QuizDetailDto _$$_QuizDetailDtoFromJson(Map<String, dynamic> json) =>
       materialId: json['material_id'] as int?,
       title: json['title'] as String?,
       isFinalExam: json['is_final_exam'] as bool?,
-      duration: json['duration'] as int?,
+      duration: json['duration'] as String?,
       passingScore: json['passing_score'] as int?,
       questionCount: json['question_count'] as int?,
       createdAt: json['createdAt'] as String?,

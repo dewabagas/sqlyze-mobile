@@ -1,6 +1,10 @@
 import 'package:assets_audio_player/assets_audio_player.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:sqlyze/presentation/core/constants/assets.dart';
+import 'package:sqlyze/presentation/core/constants/styles.dart';
+import 'package:sqlyze/presentation/core/styles/app_colors.dart';
 // Import package
 
 class OptionContainer extends StatefulWidget {
@@ -10,21 +14,17 @@ class OptionContainer extends StatefulWidget {
   final BoxConstraints constraints;
   final String correctOptionId;
   final String submittedAnswerId;
-  final bool showAudiencePoll;
-  final int? audiencePollPercentage;
   final bool showAnswerCorrectness;
-  OptionContainer(
-      {Key? key,
-      required this.showAnswerCorrectness,
-      required this.showAudiencePoll,
-      required this.hasSubmittedAnswerForCurrentQuestion,
-      required this.constraints,
-      required this.answerOption,
-      required this.correctOptionId,
-      required this.submitAnswer,
-      required this.submittedAnswerId,
-      this.audiencePollPercentage})
-      : super(key: key);
+  OptionContainer({
+    Key? key,
+    required this.showAnswerCorrectness,
+    required this.hasSubmittedAnswerForCurrentQuestion,
+    required this.constraints,
+    required this.answerOption,
+    required this.correctOptionId,
+    required this.submitAnswer,
+    required this.submittedAnswerId,
+  }) : super(key: key);
 
   @override
   _OptionContainerState createState() => _OptionContainerState();
@@ -59,12 +59,8 @@ class _OptionContainerState extends State<OptionContainer>
   late double heightPercentage = 0.105;
   late AssetsAudioPlayer assetsAudioPlayer = AssetsAudioPlayer();
 
-  late TextSpan textSpan = TextSpan(
-      text: widget.answerOption,
-      style: TextStyle(
-          color: Theme.of(context).backgroundColor,
-          height: 1.0,
-          fontSize: 16.0));
+  late TextSpan textSpan =
+      TextSpan(text: widget.answerOption, style: TextStyles.labelSmall);
 
   @override
   void dispose() {
@@ -95,15 +91,15 @@ class _OptionContainerState extends State<OptionContainer>
 
   Color _buildOptionBackgroundColor() {
     if (widget.showAnswerCorrectness) {
-      return Theme.of(context).colorScheme.secondary;
+      return AppColors.pink;
     }
     if (widget.hasSubmittedAnswerForCurrentQuestion() &&
         widget.submittedAnswerId == widget.answerOption) {
       print("Submitted answer id is : ${widget.submittedAnswerId}");
       print("Stop here");
-      return Theme.of(context).primaryColor;
+      return AppColors.softGreen;
     }
-    return Theme.of(context).colorScheme.secondary;
+    return AppColors.pink;
   }
 
   void _onTapOptionContainer() {
@@ -116,15 +112,14 @@ class _OptionContainerState extends State<OptionContainer>
 
         //play sound
         if (widget.correctOptionId == widget.answerOption) {
-          playSound("assets/sounds/right.mp3");
+          playSound(AppSounds.right);
         } else {
-          playSound("assets/sounds/wrong.mp3");
+          playSound(AppSounds.wrong);
         }
       }
     } else {
       widget.submitAnswer(widget.answerOption);
-      //play sound
-      playSound("assets/sounds/click.mp3");
+      playSound(AppSounds.click);
     }
   }
 
@@ -145,20 +140,22 @@ class _OptionContainerState extends State<OptionContainer>
         );
       },
       child: Container(
-        margin: EdgeInsets.only(top: widget.constraints.maxHeight * (0.015)),
-        height: widget.constraints.maxHeight * heightPercentage,
+        margin: EdgeInsets.only(top: widget.constraints.maxHeight * (0.02)),
+        height: widget.constraints.maxHeight * heightPercentage / 1.4,
         width: optionWidth,
         child: ClipRRect(
-          borderRadius: BorderRadius.circular(20.0),
+          borderRadius: BorderRadius.circular(20.r),
           child: Stack(
             alignment: Alignment.center,
             children: [
               Container(
                 padding: EdgeInsets.symmetric(
-                    horizontal: 15.0, vertical: maxLines > 2 ? 7.50 : 0),
+                    horizontal: 16.w, vertical: maxLines > 2 ? 7.50.h : 0),
                 color: _buildOptionBackgroundColor(),
                 alignment: AlignmentDirectional.centerStart,
-                child: RichText(text: textSpan),
+                child: Text(widget.answerOption,
+                    style: TextStyles.labelMedium
+                        .copyWith(color: AppColors.white)),
               ),
               widget.showAnswerCorrectness
                   ? IgnorePointer(
@@ -176,7 +173,6 @@ class _OptionContainerState extends State<OptionContainer>
                           final borderRadius = topContainerAnimation
                               .drive(Tween<double>(begin: 40.0, end: 20))
                               .value;
-
                           return Opacity(
                             opacity: topContainerOpacityAnimation.value,
                             child: Container(
@@ -188,15 +184,13 @@ class _OptionContainerState extends State<OptionContainer>
                                   child: widget.answerOption ==
                                           widget.correctOptionId
                                       ? Icon(Icons.check,
-                                          color:
-                                              Theme.of(context).backgroundColor)
+                                          color: AppColors.primary)
                                       : Icon(Icons.close,
-                                          color: Theme.of(context)
-                                              .backgroundColor),
+                                          color: AppColors.primary),
                                 ),
                               ),
                               decoration: BoxDecoration(
-                                  color: Theme.of(context).primaryColor,
+                                  color: AppColors.softGreen,
                                   borderRadius:
                                       BorderRadius.circular(borderRadius)),
                               width: optionWidth * width,
@@ -235,22 +229,7 @@ class _OptionContainerState extends State<OptionContainer>
         //
         animationController.forward();
       },
-      child: widget.showAudiencePoll
-          ? Row(
-              children: [
-                _buildOptionDetails(widget.constraints.maxWidth * (0.85)),
-                SizedBox(
-                  width: 4,
-                ),
-                Text(
-                  "${widget.audiencePollPercentage}%",
-                  style: TextStyle(
-                      color: Theme.of(context).colorScheme.secondary,
-                      fontSize: 16.0),
-                ),
-              ],
-            )
-          : _buildOptionDetails(widget.constraints.maxWidth),
+      child: _buildOptionDetails(widget.constraints.maxWidth),
     );
   }
 }

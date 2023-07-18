@@ -26,7 +26,7 @@ mixin _$QuizDetailDto {
   String? get title => throw _privateConstructorUsedError;
   @JsonKey(name: 'is_final_exam')
   bool? get isFinalExam => throw _privateConstructorUsedError;
-  int? get duration => throw _privateConstructorUsedError;
+  String? get duration => throw _privateConstructorUsedError;
   @JsonKey(name: 'passing_score')
   int? get passingScore => throw _privateConstructorUsedError;
   @JsonKey(name: 'question_count')
@@ -51,7 +51,7 @@ abstract class $QuizDetailDtoCopyWith<$Res> {
       @JsonKey(name: 'material_id') int? materialId,
       String? title,
       @JsonKey(name: 'is_final_exam') bool? isFinalExam,
-      int? duration,
+      String? duration,
       @JsonKey(name: 'passing_score') int? passingScore,
       @JsonKey(name: 'question_count') int? questionCount,
       String? createdAt,
@@ -101,7 +101,7 @@ class _$QuizDetailDtoCopyWithImpl<$Res, $Val extends QuizDetailDto>
       duration: freezed == duration
           ? _value.duration
           : duration // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as String?,
       passingScore: freezed == passingScore
           ? _value.passingScore
           : passingScore // ignore: cast_nullable_to_non_nullable
@@ -135,7 +135,7 @@ abstract class _$$_QuizDetailDtoCopyWith<$Res>
       @JsonKey(name: 'material_id') int? materialId,
       String? title,
       @JsonKey(name: 'is_final_exam') bool? isFinalExam,
-      int? duration,
+      String? duration,
       @JsonKey(name: 'passing_score') int? passingScore,
       @JsonKey(name: 'question_count') int? questionCount,
       String? createdAt,
@@ -183,7 +183,7 @@ class __$$_QuizDetailDtoCopyWithImpl<$Res>
       duration: freezed == duration
           ? _value.duration
           : duration // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as String?,
       passingScore: freezed == passingScore
           ? _value.passingScore
           : passingScore // ignore: cast_nullable_to_non_nullable
@@ -233,7 +233,7 @@ class _$_QuizDetailDto extends _QuizDetailDto {
   @JsonKey(name: 'is_final_exam')
   final bool? isFinalExam;
   @override
-  final int? duration;
+  final String? duration;
   @override
   @JsonKey(name: 'passing_score')
   final int? passingScore;
@@ -298,7 +298,7 @@ abstract class _QuizDetailDto extends QuizDetailDto {
       @JsonKey(name: 'material_id') final int? materialId,
       final String? title,
       @JsonKey(name: 'is_final_exam') final bool? isFinalExam,
-      final int? duration,
+      final String? duration,
       @JsonKey(name: 'passing_score') final int? passingScore,
       @JsonKey(name: 'question_count') final int? questionCount,
       final String? createdAt,
@@ -319,7 +319,7 @@ abstract class _QuizDetailDto extends QuizDetailDto {
   @JsonKey(name: 'is_final_exam')
   bool? get isFinalExam;
   @override
-  int? get duration;
+  String? get duration;
   @override
   @JsonKey(name: 'passing_score')
   int? get passingScore;

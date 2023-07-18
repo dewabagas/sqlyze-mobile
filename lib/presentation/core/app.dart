@@ -16,6 +16,7 @@ final alice = Alice(
     navigatorKey: GlobalKey<NavigatorState>());
 
 final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
+final scaffoldMessengerKey = GlobalKey<ScaffoldMessengerState>();
 
 final appRouter = AppRouter();
 final routerDelegate = appRouter.delegate();
@@ -35,10 +36,9 @@ class _AppState extends State<App> {
       designSize: const Size(360, 640),
       builder: (context, child) {
         return MaterialApp.router(
+          scaffoldMessengerKey: scaffoldMessengerKey,
           routerDelegate: appRouter.delegate(
-            navigatorObservers: () => [
-              AutoRouterObserver(),
-            ],
+            navigatorObservers: () => [AutoRouterObserver()],
           ),
           routeInformationParser: appRouter.defaultRouteParser(),
           title: AppConstants.appName,

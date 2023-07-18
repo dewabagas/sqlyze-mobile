@@ -107,9 +107,13 @@ class AppRouter extends _i12.RootStackRouter {
       );
     },
     RouteQuiz.name: (routeData) {
+      final args = routeData.argsAs<RouteQuizArgs>();
       return _i12.MaterialPageX<dynamic>(
         routeData: routeData,
-        child: const _i11.PageQuiz(),
+        child: _i11.PageQuiz(
+          key: args.key,
+          quizId: args.quizId,
+        ),
       );
     },
   };
@@ -357,12 +361,34 @@ class RouteLessonStepDetailArgs {
 
 /// generated route for
 /// [_i11.PageQuiz]
-class RouteQuiz extends _i12.PageRouteInfo<void> {
-  const RouteQuiz()
-      : super(
+class RouteQuiz extends _i12.PageRouteInfo<RouteQuizArgs> {
+  RouteQuiz({
+    _i13.Key? key,
+    required int quizId,
+  }) : super(
           RouteQuiz.name,
           path: '/page-quiz',
+          args: RouteQuizArgs(
+            key: key,
+            quizId: quizId,
+          ),
         );
 
   static const String name = 'RouteQuiz';
+}
+
+class RouteQuizArgs {
+  const RouteQuizArgs({
+    this.key,
+    required this.quizId,
+  });
+
+  final _i13.Key? key;
+
+  final int quizId;
+
+  @override
+  String toString() {
+    return 'RouteQuizArgs{key: $key, quizId: $quizId}';
+  }
 }

@@ -47,10 +47,10 @@ class _ChapterExerciseBodyState extends State<ChapterExerciseBody> {
             title: '${quizDetail!.title}',
             image: AppIllustrations.illLearning1,
             questionCount: quizDetail.questionCount ?? 0,
-            duration: quizDetail.duration ?? 0,
+            duration: quizDetail.duration ?? '0',
             passingScore: quizDetail.passingScore ?? 0,
             onTap: () {
-              AutoRouter.of(context).push(const RouteQuiz());
+              AutoRouter.of(context).push(RouteQuiz(quizId: quizDetail.id!));
             },
             subtitle: 'General Quiz',
           )
