@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:retrofit/retrofit.dart';
+import 'package:sqlyze/domain/quizzes/requests/quiz_submission_request.dart';
 
 part 'quiz_api_service.g.dart';
 
@@ -16,4 +17,7 @@ abstract class QuizApiService {
   @GET('/quizzes/quiz/{quiz_id}/result/{user_id}')
   Future<HttpResponse> getQuizResult(
       @Path('quiz_id') int quizId, @Path('user_id') int userId);
+
+  @POST('/quizzes/quiz/submit')
+  Future<HttpResponse> submitQuizAnswer(@Body() QuizSubmissionRequest request);
 }

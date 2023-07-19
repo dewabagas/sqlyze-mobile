@@ -13,22 +13,24 @@ import 'package:get_it/get_it.dart' as _i1;
 import 'package:injectable/injectable.dart' as _i2;
 import 'package:sqlyze/application/analytics/learning_analytic_bloc/learning_analytic_bloc.dart'
     as _i13;
-import 'package:sqlyze/application/auth_bloc/auth_bloc.dart' as _i22;
+import 'package:sqlyze/application/auth_bloc/auth_bloc.dart' as _i23;
 import 'package:sqlyze/application/lessons/lesson_detail_bloc/lesson_detail_bloc.dart'
     as _i14;
 import 'package:sqlyze/application/lessons/lesson_list_bloc/lesson_list_bloc.dart'
     as _i15;
-import 'package:sqlyze/application/quizzes/quiz_detail_bloc/quiz_detail_bloc.dart'
+import 'package:sqlyze/application/quizzes/quiz_answer_submission_cubit/quiz_answer_submission_cubit.dart'
     as _i16;
-import 'package:sqlyze/application/quizzes/quiz_questions_bloc/quiz_questions_bloc.dart'
+import 'package:sqlyze/application/quizzes/quiz_detail_bloc/quiz_detail_bloc.dart'
     as _i17;
-import 'package:sqlyze/application/quizzes/quiz_result_bloc/quiz_result_bloc.dart'
+import 'package:sqlyze/application/quizzes/quiz_questions_bloc/quiz_questions_bloc.dart'
     as _i18;
-import 'package:sqlyze/application/register_bloc/register_bloc.dart' as _i19;
+import 'package:sqlyze/application/quizzes/quiz_result_bloc/quiz_result_bloc.dart'
+    as _i19;
+import 'package:sqlyze/application/register_bloc/register_bloc.dart' as _i20;
 import 'package:sqlyze/application/splashscreen_bloc/splashscreen_bloc.dart'
-    as _i20;
-import 'package:sqlyze/application/user_profile_bloc/user_profile_bloc.dart'
     as _i21;
+import 'package:sqlyze/application/user_profile_bloc/user_profile_bloc.dart'
+    as _i22;
 import 'package:sqlyze/domain/analytics/interfaces/i_analytic_repository.dart'
     as _i3;
 import 'package:sqlyze/domain/auth/interfaces/i_auth_repository.dart' as _i5;
@@ -69,18 +71,20 @@ extension GetItInjectableX on _i1.GetIt {
         () => _i14.LessonDetailBloc(gh<_i7.ILessonRepository>()));
     gh.factory<_i15.LessonListBloc>(
         () => _i15.LessonListBloc(gh<_i7.ILessonRepository>()));
-    gh.factory<_i16.QuizDetailBloc>(
-        () => _i16.QuizDetailBloc(gh<_i9.IQuizRepository>()));
-    gh.factory<_i17.QuizQuestionsBloc>(
-        () => _i17.QuizQuestionsBloc(gh<_i9.IQuizRepository>()));
-    gh.factory<_i18.QuizResultBloc>(
-        () => _i18.QuizResultBloc(gh<_i9.IQuizRepository>()));
-    gh.factory<_i19.RegisterBloc>(
-        () => _i19.RegisterBloc(gh<_i5.IAuthRepository>()));
-    gh.factory<_i20.SplashscreenBloc>(() => _i20.SplashscreenBloc());
-    gh.factory<_i21.UserProfileBloc>(
-        () => _i21.UserProfileBloc(gh<_i11.IUserRepository>()));
-    gh.factory<_i22.AuthBloc>(() => _i22.AuthBloc(gh<_i5.IAuthRepository>()));
+    gh.factory<_i16.QuizAnswerSubmissionCubit>(
+        () => _i16.QuizAnswerSubmissionCubit(gh<_i9.IQuizRepository>()));
+    gh.factory<_i17.QuizDetailBloc>(
+        () => _i17.QuizDetailBloc(gh<_i9.IQuizRepository>()));
+    gh.factory<_i18.QuizQuestionsBloc>(
+        () => _i18.QuizQuestionsBloc(gh<_i9.IQuizRepository>()));
+    gh.factory<_i19.QuizResultBloc>(
+        () => _i19.QuizResultBloc(gh<_i9.IQuizRepository>()));
+    gh.factory<_i20.RegisterBloc>(
+        () => _i20.RegisterBloc(gh<_i5.IAuthRepository>()));
+    gh.factory<_i21.SplashscreenBloc>(() => _i21.SplashscreenBloc());
+    gh.factory<_i22.UserProfileBloc>(
+        () => _i22.UserProfileBloc(gh<_i11.IUserRepository>()));
+    gh.factory<_i23.AuthBloc>(() => _i23.AuthBloc(gh<_i5.IAuthRepository>()));
     return this;
   }
 }

@@ -46,7 +46,7 @@ class _TabGuestLoginState extends State<TabGuestLogin> {
         listener: (context, state) {
           state.map(
               initial: (value) => const SizedBox.shrink(),
-              loadInProgress: (value) => EasyLoading.show(status: 'loading...'),
+              loadInProgress: (value) => EasyLoading.show(status: 'Loading...'),
               loadSuccess: (value) async {
                 EasyLoading.dismiss();
                 await addBoolToPreference(

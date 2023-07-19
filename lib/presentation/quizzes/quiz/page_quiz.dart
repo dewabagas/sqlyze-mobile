@@ -1,17 +1,20 @@
-import 'dart:math';
-
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:sqlyze/application/quizzes/quiz_answer_submission_cubit/quiz_answer_submission_cubit.dart';
 import 'package:sqlyze/application/quizzes/quiz_questions_bloc/quiz_questions_bloc.dart';
 import 'package:sqlyze/domain/quizzes/entitites/quiz_question.dart';
+import 'package:sqlyze/domain/quizzes/requests/quiz_submission_request.dart';
 import 'package:sqlyze/injection.dart';
 import 'package:sqlyze/presentation/core/styles/app_colors.dart';
 import 'package:sqlyze/presentation/quizzes/quiz/components/questions_container.dart';
 import 'package:sqlyze/presentation/quizzes/quiz/components/quiz_background.dart';
+import 'package:sqlyze/presentation/quizzes/quiz/components/shimmer_question_container.dart';
 import 'package:sqlyze/presentation/shared/widgets/buttons/button_circle.dart';
 import 'package:sqlyze/presentation/shared/widgets/errors/error_page.dart';
+import 'package:sqlyze/presentation/shared/widgets/others/show_dialog.dart';
 
 class PageQuiz extends StatefulWidget {
   final int quizId;
@@ -35,8 +38,8 @@ class _PageQuizState extends State<PageQuiz> with TickerProviderStateMixin {
   late Animation<double> questionContentAnimation;
   late AnimationController animationController;
   late AnimationController topContainerAnimationController;
-  late AnimationController showOptionAnimationController =
-      AnimationController(vsync: this, duration: Duration(milliseconds: 500));
+  late AnimationController showOptionAnimationController = AnimationController(
+      vsync: this, duration: const Duration(milliseconds: 500));
   late Animation<double> showOptionAnimation =
       Tween<double>(begin: 0.0, end: 1.0).animate(CurvedAnimation(
           parent: showOptionAnimationController, curve: Curves.easeInOut));
@@ -48,17 +51,17 @@ class _PageQuizState extends State<PageQuiz> with TickerProviderStateMixin {
   }
 
   void initializeAnimation() {
-    questionContentAnimationController =
-        AnimationController(vsync: this, duration: Duration(milliseconds: 250));
-    questionAnimationController =
-        AnimationController(vsync: this, duration: Duration(milliseconds: 525));
+    questionContentAnimationController = AnimationController(
+        vsync: this, duration: const Duration(milliseconds: 250));
+    questionAnimationController = AnimationController(
+        vsync: this, duration: const Duration(milliseconds: 525));
     questionSlideAnimation = Tween<double>(begin: 0.0, end: 1.0).animate(
         CurvedAnimation(
             parent: questionAnimationController, curve: Curves.easeInOut));
     questionScaleUpAnimation = Tween<double>(begin: 0.0, end: 0.1).animate(
         CurvedAnimation(
             parent: questionAnimationController,
-            curve: Interval(0.0, 0.5, curve: Curves.easeInQuad)));
+            curve: const Interval(0.0, 0.5, curve: Curves.easeInQuad)));
     questionContentAnimation = Tween<double>(begin: 0.0, end: 1.0).animate(
         CurvedAnimation(
             parent: questionContentAnimationController,
@@ -66,21 +69,27 @@ class _PageQuizState extends State<PageQuiz> with TickerProviderStateMixin {
     questionScaleDownAnimation = Tween<double>(begin: 0.0, end: 0.05).animate(
         CurvedAnimation(
             parent: questionAnimationController,
-            curve: Interval(0.5, 1.0, curve: Curves.easeOutQuad)));
+            curve: const Interval(0.5, 1.0, curve: Curves.easeOutQuad)));
   }
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider<QuizQuestionsBloc>(
-        create: (context) => getIt<QuizQuestionsBloc>()
-          ..add(QuizQuestionsEvent.getQuizQuestions(widget.quizId)),
+    return MultiBlocProvider(
+        providers: [
+          BlocProvider(
+              create: (context) => getIt<QuizQuestionsBloc>()
+                ..add(QuizQuestionsEvent.getQuizQuestions(widget.quizId))),
+          BlocProvider<QuizAnswerSubmissionCubit>(
+            create: (BuildContext context) =>
+                getIt<QuizAnswerSubmissionCubit>(),
+          ),
+        ],
         child: BlocBuilder<QuizQuestionsBloc, QuizQuestionsState>(
           builder: (context, state) {
             return state.map(
-                initial: (value) => const SizedBox(),
-                loadInProgress: (value) => const CircularProgressIndicator(),
+                initial: (value) => const ShimmerQuestionContainer(),
+                loadInProgress: (value) => const ShimmerQuestionContainer(),
                 loadSuccess: (value) {
-                  debugPrint('questions ${value.quizQuestions}');
                   return Builder(builder: (context) {
                     _buildContext = context;
                     return buildQuiz(
@@ -100,64 +109,85 @@ class _PageQuizState extends State<PageQuiz> with TickerProviderStateMixin {
       return const SizedBox();
     }
 
-    return Scaffold(
-      body: Stack(
-        children: [
-          Align(
-              alignment: Alignment.topCenter,
-              child: QuizBackground(
-                heightPercentage: 0.885,
-              )),
-          Align(
-              alignment: Alignment.topCenter,
-              child: QuestionsContainer(
-                currentQuestionIndex: currentQuestionIndex,
-                questionContentAnimation: questionContentAnimation,
-                questionScaleDownAnimation: questionScaleDownAnimation,
-                questionScaleUpAnimation: questionScaleUpAnimation,
-                questionSlideAnimation: questionSlideAnimation,
-                questionAnimationController: questionAnimationController,
-                questionContentAnimationController:
-                    questionContentAnimationController,
-                questions: quizQuestions,
-                timerAnimationController: timerAnimationController,
-                onQuestionAnswered: handleQuestionAnswered,
-              )),
-          Align(
-            alignment: Alignment.bottomCenter,
-            child: Container(
-              padding: EdgeInsets.only(bottom: 20.h, right: 20.w, left: 20.w),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  ButtonCircle(
-                    child: Icon(Icons.skip_previous, color: AppColors.white),
-                    color: AppColors.primary,
-                    onTap: () => _buildContext
-                        .read<QuizQuestionsBloc>()
-                        .add(QuizQuestionsEvent.previousQuestion()),
-                  ),
-                  ButtonCircle(
-                    child: Icon(Icons.skip_next, color: AppColors.white),
-                    color: AppColors.primary,
-                    onTap: () => _buildContext
-                        .read<QuizQuestionsBloc>()
-                        .add(QuizQuestionsEvent.nextQuestion()),
-                  )
-                ],
+    return BlocListener<QuizAnswerSubmissionCubit, QuizAnswerSubmissionState>(
+      listener: (context, state) {
+        state.map(
+            initial: (value) => const SizedBox.shrink(),
+            loadInProgress: (value) => EasyLoading.show(status: 'Loading...'),
+            loadSuccess: (value) {
+              EasyLoading.dismiss();
+              _buildContext
+                  .read<QuizQuestionsBloc>()
+                  .add(const QuizQuestionsEvent.nextQuestion());
+            },
+            loadFailure: (value) {
+              EasyLoading.dismiss();
+              showErrorDialog(
+                  context: context, message: value.message ?? 'Error');
+            });
+      },
+      child: Scaffold(
+        backgroundColor: AppColors.white,
+        body: Stack(
+          children: [
+            Align(
+                alignment: Alignment.topCenter,
+                child: QuizBackground(
+                  heightPercentage: 0.885,
+                )),
+            Align(
+                alignment: Alignment.topCenter,
+                child: QuestionsContainer(
+                  currentQuestionIndex: currentQuestionIndex,
+                  questionContentAnimation: questionContentAnimation,
+                  questionScaleDownAnimation: questionScaleDownAnimation,
+                  questionScaleUpAnimation: questionScaleUpAnimation,
+                  questionSlideAnimation: questionSlideAnimation,
+                  questionAnimationController: questionAnimationController,
+                  questionContentAnimationController:
+                      questionContentAnimationController,
+                  questions: quizQuestions,
+                  timerAnimationController: timerAnimationController,
+                  onQuestionAnswered: handleQuestionAnswered,
+                )),
+            Align(
+              alignment: Alignment.bottomCenter,
+              child: Container(
+                padding: EdgeInsets.only(bottom: 20.h, right: 30.w, left: 30.w),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    ButtonCircle(
+                      color: AppColors.primary,
+                      onTap: () => _buildContext
+                          .read<QuizQuestionsBloc>()
+                          .add(const QuizQuestionsEvent.previousQuestion()),
+                      child: const Icon(Icons.skip_previous,
+                          color: AppColors.white),
+                    ),
+                    ButtonCircle(
+                      color: AppColors.primary,
+                      onTap: () => _buildContext
+                          .read<QuizQuestionsBloc>()
+                          .add(const QuizQuestionsEvent.nextQuestion()),
+                      child:
+                          const Icon(Icons.skip_next, color: AppColors.white),
+                    )
+                  ],
+                ),
               ),
             ),
-          ),
-          buildTopMenu()
-        ],
+            buildTopMenu()
+          ],
+        ),
       ),
     );
   }
 
   void handleQuestionAnswered(int nextQuestionIndex) {
-    _buildContext
-        .read<QuizQuestionsBloc>()
-        .add(QuizQuestionsEvent.nextQuestion());
+    _buildContext.read<QuizAnswerSubmissionCubit>().submitQuizAnswer(
+        QuizSubmissionRequest(
+            answerId: 13, questionId: 1, quizId: 1, userId: 1));
   }
 
   Widget buildTopMenu() {
