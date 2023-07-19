@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:sqlyze/domain/quizzes/entitites/quiz_answer.dart';
 import 'package:sqlyze/domain/quizzes/entitites/quiz_question.dart';
 import 'package:sqlyze/presentation/core/constants/styles.dart';
 import 'package:sqlyze/presentation/core/styles/app_colors.dart';
@@ -17,7 +18,7 @@ class QuestionsContainer extends StatefulWidget {
   final Animation<double> questionContentAnimation;
   final AnimationController timerAnimationController;
   final bool? showAnswerCorrectness;
-  final Function(int) onQuestionAnswered;
+  final Function(int, QuizAnswer) onQuestionAnswered;
   const QuestionsContainer(
       {super.key,
       required this.questions,
@@ -170,9 +171,9 @@ class _QuestionsContainerState extends State<QuestionsContainer> {
           answerOption: '${answer.answer}',
           correctOptionId: answer.isCorrect!,
           submitAnswer: (String selectedOption, bool isCorrect) {
-            print('User selected: $selectedOption');
+            print('User selected: $selectedOption | ${answer.answer}');
             print('Is the answer correct: $isCorrect');
-            widget.onQuestionAnswered(widget.currentQuestionIndex + 1);
+            widget.onQuestionAnswered(widget.currentQuestionIndex + 1, answer);
           },
         );
       }).toList(),

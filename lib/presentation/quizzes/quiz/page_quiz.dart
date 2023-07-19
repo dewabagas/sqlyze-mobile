@@ -5,6 +5,9 @@ import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:sqlyze/application/quizzes/quiz_answer_submission_cubit/quiz_answer_submission_cubit.dart';
 import 'package:sqlyze/application/quizzes/quiz_questions_bloc/quiz_questions_bloc.dart';
+import 'package:sqlyze/domain/core/constants/preference_constants.dart';
+import 'package:sqlyze/domain/core/helpers/preference_helper.dart';
+import 'package:sqlyze/domain/quizzes/entitites/quiz_answer.dart';
 import 'package:sqlyze/domain/quizzes/entitites/quiz_question.dart';
 import 'package:sqlyze/domain/quizzes/requests/quiz_submission_request.dart';
 import 'package:sqlyze/injection.dart';
@@ -28,6 +31,7 @@ class PageQuiz extends StatefulWidget {
 
 class _PageQuizState extends State<PageQuiz> with TickerProviderStateMixin {
   int currentQuestionIndex = 0;
+  late int userId;
   late BuildContext _buildContext;
   late AnimationController questionAnimationController;
   late AnimationController questionContentAnimationController;
@@ -49,7 +53,16 @@ class _PageQuizState extends State<PageQuiz> with TickerProviderStateMixin {
   @override
   void initState() {
     initializeAnimation();
+    getUserId();
     super.initState();
+  }
+
+  getUserId() async {
+    int tempUserId =
+        await getIntValuesPreference(key: PreferenceConstants.userId);
+    setState(() {
+      userId = tempUserId;
+    });
   }
 
   void initializeAnimation() {
@@ -150,8 +163,8 @@ class _PageQuizState extends State<PageQuiz> with TickerProviderStateMixin {
                     questionContentAnimationController,
                 questions: quizQuestions,
                 timerAnimationController: timerAnimationController,
-                onQuestionAnswered: (index) =>
-                    handleQuestionAnswered(index, quizQuestions),
+                onQuestionAnswered: (index, answer) =>
+                    handleQuestionAnswered(index, answer, quizQuestions),
               ),
             ),
             Align(
@@ -188,15 +201,19 @@ class _PageQuizState extends State<PageQuiz> with TickerProviderStateMixin {
     );
   }
 
-  void handleQuestionAnswered(int index, List<QuizQuestion>? quizQuestions) {
+  void handleQuestionAnswered(
+      int index, QuizAnswer quizAnswer, List<QuizQuestion>? quizQuestions) {
     debugPrint('currentQuestionIndex $currentQuestionIndex');
     debugPrint('questions length ${quizQuestions?.length}');
+    debugPrint('selected anwwer ${quizAnswer}');
     _buildContext.read<QuizAnswerSubmissionCubit>().submitQuizAnswer(
         QuizSubmissionRequest(
-            answerId: 13, questionId: 1, quizId: 1, userId: 1));
+            answerId: quizAnswer.id,
+            questionId: quizAnswer.questionId,
+            quizId: widget.quizId,
+            userId: userId));
     if (index == quizQuestions?.length) {
-      // Navigate to the "Done" screen
-      AutoRouter.of(context).push(const RouteQuizResult());
+      AutoRouter.of(context).push(RouteQuizResult(quizId: widget.quizId));
     }
   }
 

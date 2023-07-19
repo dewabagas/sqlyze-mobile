@@ -103,6 +103,9 @@ class $AssetsIconsGen {
   /// File path: assets/icons/ic_consultation_grey.svg
   String get icConsultationGrey => 'assets/icons/ic_consultation_grey.svg';
 
+  /// File path: assets/icons/ic_correct.svg
+  String get icCorrect => 'assets/icons/ic_correct.svg';
+
   /// File path: assets/icons/ic_course.svg
   String get icCourse => 'assets/icons/ic_course.svg';
 
@@ -223,6 +226,9 @@ class $AssetsIconsGen {
   /// File path: assets/icons/ic_tips_grey.svg
   String get icTipsGrey => 'assets/icons/ic_tips_grey.svg';
 
+  /// File path: assets/icons/ic_wrong.svg
+  String get icWrong => 'assets/icons/ic_wrong.svg';
+
   /// File path: assets/icons/sqlyze.png
   AssetGenImage get sqlyzePng => const AssetGenImage('assets/icons/sqlyze.png');
 
@@ -252,6 +258,7 @@ class $AssetsIconsGen {
         icClock,
         icConsultationBlue,
         icConsultationGrey,
+        icCorrect,
         icCourse,
         icCourseActive,
         icCrossGrey,
@@ -292,6 +299,7 @@ class $AssetsIconsGen {
         icStar,
         icTipsBlue,
         icTipsGrey,
+        icWrong,
         sqlyzePng,
         sqlyzeSvg,
         sqlyzeHorizontalPng,
@@ -305,6 +313,13 @@ class $AssetsIllustrationsGen {
 
   /// File path: assets/illustrations/ill_assessment.svg
   String get illAssessment => 'assets/illustrations/ill_assessment.svg';
+
+  /// File path: assets/illustrations/ill_celebration.svg
+  String get illCelebration => 'assets/illustrations/ill_celebration.svg';
+
+  /// File path: assets/illustrations/ill_celebration_loss.svg
+  String get illCelebrationLoss =>
+      'assets/illustrations/ill_celebration_loss.svg';
 
   /// File path: assets/illustrations/ill_consultation.svg
   String get illConsultation => 'assets/illustrations/ill_consultation.svg';
@@ -346,6 +361,8 @@ class $AssetsIllustrationsGen {
   /// List of all assets
   List<String> get values => [
         illAssessment,
+        illCelebration,
+        illCelebrationLoss,
         illConsultation,
         illEducation1,
         illLearning1,

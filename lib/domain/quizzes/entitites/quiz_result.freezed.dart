@@ -20,6 +20,7 @@ mixin _$QuizResult {
   String? get quizName => throw _privateConstructorUsedError;
   int? get userId => throw _privateConstructorUsedError;
   String? get fullName => throw _privateConstructorUsedError;
+  String? get profileImageUrl => throw _privateConstructorUsedError;
   int? get totalQuestions => throw _privateConstructorUsedError;
   int? get correctAnswers => throw _privateConstructorUsedError;
   int? get incorrectAnswers => throw _privateConstructorUsedError;
@@ -44,6 +45,7 @@ abstract class $QuizResultCopyWith<$Res> {
       String? quizName,
       int? userId,
       String? fullName,
+      String? profileImageUrl,
       int? totalQuestions,
       int? correctAnswers,
       int? incorrectAnswers,
@@ -70,6 +72,7 @@ class _$QuizResultCopyWithImpl<$Res, $Val extends QuizResult>
     Object? quizName = freezed,
     Object? userId = freezed,
     Object? fullName = freezed,
+    Object? profileImageUrl = freezed,
     Object? totalQuestions = freezed,
     Object? correctAnswers = freezed,
     Object? incorrectAnswers = freezed,
@@ -94,6 +97,10 @@ class _$QuizResultCopyWithImpl<$Res, $Val extends QuizResult>
       fullName: freezed == fullName
           ? _value.fullName
           : fullName // ignore: cast_nullable_to_non_nullable
+              as String?,
+      profileImageUrl: freezed == profileImageUrl
+          ? _value.profileImageUrl
+          : profileImageUrl // ignore: cast_nullable_to_non_nullable
               as String?,
       totalQuestions: freezed == totalQuestions
           ? _value.totalQuestions
@@ -140,6 +147,7 @@ abstract class _$$_QuizResultCopyWith<$Res>
       String? quizName,
       int? userId,
       String? fullName,
+      String? profileImageUrl,
       int? totalQuestions,
       int? correctAnswers,
       int? incorrectAnswers,
@@ -164,6 +172,7 @@ class __$$_QuizResultCopyWithImpl<$Res>
     Object? quizName = freezed,
     Object? userId = freezed,
     Object? fullName = freezed,
+    Object? profileImageUrl = freezed,
     Object? totalQuestions = freezed,
     Object? correctAnswers = freezed,
     Object? incorrectAnswers = freezed,
@@ -188,6 +197,10 @@ class __$$_QuizResultCopyWithImpl<$Res>
       fullName: freezed == fullName
           ? _value.fullName
           : fullName // ignore: cast_nullable_to_non_nullable
+              as String?,
+      profileImageUrl: freezed == profileImageUrl
+          ? _value.profileImageUrl
+          : profileImageUrl // ignore: cast_nullable_to_non_nullable
               as String?,
       totalQuestions: freezed == totalQuestions
           ? _value.totalQuestions
@@ -229,6 +242,7 @@ class _$_QuizResult implements _QuizResult {
       this.quizName,
       this.userId,
       this.fullName,
+      this.profileImageUrl,
       this.totalQuestions,
       this.correctAnswers,
       this.incorrectAnswers,
@@ -246,6 +260,8 @@ class _$_QuizResult implements _QuizResult {
   @override
   final String? fullName;
   @override
+  final String? profileImageUrl;
+  @override
   final int? totalQuestions;
   @override
   final int? correctAnswers;
@@ -262,7 +278,7 @@ class _$_QuizResult implements _QuizResult {
 
   @override
   String toString() {
-    return 'QuizResult(quizId: $quizId, quizName: $quizName, userId: $userId, fullName: $fullName, totalQuestions: $totalQuestions, correctAnswers: $correctAnswers, incorrectAnswers: $incorrectAnswers, score: $score, startTime: $startTime, endTime: $endTime, totalDuration: $totalDuration)';
+    return 'QuizResult(quizId: $quizId, quizName: $quizName, userId: $userId, fullName: $fullName, profileImageUrl: $profileImageUrl, totalQuestions: $totalQuestions, correctAnswers: $correctAnswers, incorrectAnswers: $incorrectAnswers, score: $score, startTime: $startTime, endTime: $endTime, totalDuration: $totalDuration)';
   }
 
   @override
@@ -276,6 +292,8 @@ class _$_QuizResult implements _QuizResult {
             (identical(other.userId, userId) || other.userId == userId) &&
             (identical(other.fullName, fullName) ||
                 other.fullName == fullName) &&
+            (identical(other.profileImageUrl, profileImageUrl) ||
+                other.profileImageUrl == profileImageUrl) &&
             (identical(other.totalQuestions, totalQuestions) ||
                 other.totalQuestions == totalQuestions) &&
             (identical(other.correctAnswers, correctAnswers) ||
@@ -297,6 +315,7 @@ class _$_QuizResult implements _QuizResult {
       quizName,
       userId,
       fullName,
+      profileImageUrl,
       totalQuestions,
       correctAnswers,
       incorrectAnswers,
@@ -318,6 +337,7 @@ abstract class _QuizResult implements QuizResult {
       final String? quizName,
       final int? userId,
       final String? fullName,
+      final String? profileImageUrl,
       final int? totalQuestions,
       final int? correctAnswers,
       final int? incorrectAnswers,
@@ -334,6 +354,8 @@ abstract class _QuizResult implements QuizResult {
   int? get userId;
   @override
   String? get fullName;
+  @override
+  String? get profileImageUrl;
   @override
   int? get totalQuestions;
   @override

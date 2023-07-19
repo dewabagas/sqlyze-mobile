@@ -9,6 +9,7 @@ class QuizResult with _$QuizResult {
     String? quizName,
     int? userId,
     String? fullName,
+    String? profileImageUrl,
     int? totalQuestions,
     int? correctAnswers,
     int? incorrectAnswers,

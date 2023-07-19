@@ -28,6 +28,8 @@ mixin _$QuizResultDto {
   int? get userId => throw _privateConstructorUsedError;
   @JsonKey(name: 'full_name')
   String? get fullName => throw _privateConstructorUsedError;
+  @JsonKey(name: 'profile_image_url')
+  String? get profileImageUrl => throw _privateConstructorUsedError;
   @JsonKey(name: 'total_questions')
   int? get totalQuestions => throw _privateConstructorUsedError;
   @JsonKey(name: 'correct_answers')
@@ -59,6 +61,7 @@ abstract class $QuizResultDtoCopyWith<$Res> {
       @JsonKey(name: 'quiz_name') String? quizName,
       @JsonKey(name: 'user_id') int? userId,
       @JsonKey(name: 'full_name') String? fullName,
+      @JsonKey(name: 'profile_image_url') String? profileImageUrl,
       @JsonKey(name: 'total_questions') int? totalQuestions,
       @JsonKey(name: 'correct_answers') int? correctAnswers,
       @JsonKey(name: 'incorrect_answers') int? incorrectAnswers,
@@ -85,6 +88,7 @@ class _$QuizResultDtoCopyWithImpl<$Res, $Val extends QuizResultDto>
     Object? quizName = freezed,
     Object? userId = freezed,
     Object? fullName = freezed,
+    Object? profileImageUrl = freezed,
     Object? totalQuestions = freezed,
     Object? correctAnswers = freezed,
     Object? incorrectAnswers = freezed,
@@ -109,6 +113,10 @@ class _$QuizResultDtoCopyWithImpl<$Res, $Val extends QuizResultDto>
       fullName: freezed == fullName
           ? _value.fullName
           : fullName // ignore: cast_nullable_to_non_nullable
+              as String?,
+      profileImageUrl: freezed == profileImageUrl
+          ? _value.profileImageUrl
+          : profileImageUrl // ignore: cast_nullable_to_non_nullable
               as String?,
       totalQuestions: freezed == totalQuestions
           ? _value.totalQuestions
@@ -155,6 +163,7 @@ abstract class _$$_QuizResultDtoCopyWith<$Res>
       @JsonKey(name: 'quiz_name') String? quizName,
       @JsonKey(name: 'user_id') int? userId,
       @JsonKey(name: 'full_name') String? fullName,
+      @JsonKey(name: 'profile_image_url') String? profileImageUrl,
       @JsonKey(name: 'total_questions') int? totalQuestions,
       @JsonKey(name: 'correct_answers') int? correctAnswers,
       @JsonKey(name: 'incorrect_answers') int? incorrectAnswers,
@@ -179,6 +188,7 @@ class __$$_QuizResultDtoCopyWithImpl<$Res>
     Object? quizName = freezed,
     Object? userId = freezed,
     Object? fullName = freezed,
+    Object? profileImageUrl = freezed,
     Object? totalQuestions = freezed,
     Object? correctAnswers = freezed,
     Object? incorrectAnswers = freezed,
@@ -203,6 +213,10 @@ class __$$_QuizResultDtoCopyWithImpl<$Res>
       fullName: freezed == fullName
           ? _value.fullName
           : fullName // ignore: cast_nullable_to_non_nullable
+              as String?,
+      profileImageUrl: freezed == profileImageUrl
+          ? _value.profileImageUrl
+          : profileImageUrl // ignore: cast_nullable_to_non_nullable
               as String?,
       totalQuestions: freezed == totalQuestions
           ? _value.totalQuestions
@@ -244,6 +258,7 @@ class _$_QuizResultDto extends _QuizResultDto {
       @JsonKey(name: 'quiz_name') this.quizName,
       @JsonKey(name: 'user_id') this.userId,
       @JsonKey(name: 'full_name') this.fullName,
+      @JsonKey(name: 'profile_image_url') this.profileImageUrl,
       @JsonKey(name: 'total_questions') this.totalQuestions,
       @JsonKey(name: 'correct_answers') this.correctAnswers,
       @JsonKey(name: 'incorrect_answers') this.incorrectAnswers,
@@ -269,6 +284,9 @@ class _$_QuizResultDto extends _QuizResultDto {
   @JsonKey(name: 'full_name')
   final String? fullName;
   @override
+  @JsonKey(name: 'profile_image_url')
+  final String? profileImageUrl;
+  @override
   @JsonKey(name: 'total_questions')
   final int? totalQuestions;
   @override
@@ -291,7 +309,7 @@ class _$_QuizResultDto extends _QuizResultDto {
 
   @override
   String toString() {
-    return 'QuizResultDto(quizId: $quizId, quizName: $quizName, userId: $userId, fullName: $fullName, totalQuestions: $totalQuestions, correctAnswers: $correctAnswers, incorrectAnswers: $incorrectAnswers, score: $score, startTime: $startTime, endTime: $endTime, totalDuration: $totalDuration)';
+    return 'QuizResultDto(quizId: $quizId, quizName: $quizName, userId: $userId, fullName: $fullName, profileImageUrl: $profileImageUrl, totalQuestions: $totalQuestions, correctAnswers: $correctAnswers, incorrectAnswers: $incorrectAnswers, score: $score, startTime: $startTime, endTime: $endTime, totalDuration: $totalDuration)';
   }
 
   @override
@@ -305,6 +323,8 @@ class _$_QuizResultDto extends _QuizResultDto {
             (identical(other.userId, userId) || other.userId == userId) &&
             (identical(other.fullName, fullName) ||
                 other.fullName == fullName) &&
+            (identical(other.profileImageUrl, profileImageUrl) ||
+                other.profileImageUrl == profileImageUrl) &&
             (identical(other.totalQuestions, totalQuestions) ||
                 other.totalQuestions == totalQuestions) &&
             (identical(other.correctAnswers, correctAnswers) ||
@@ -327,6 +347,7 @@ class _$_QuizResultDto extends _QuizResultDto {
       quizName,
       userId,
       fullName,
+      profileImageUrl,
       totalQuestions,
       correctAnswers,
       incorrectAnswers,
@@ -355,6 +376,7 @@ abstract class _QuizResultDto extends QuizResultDto {
           @JsonKey(name: 'quiz_name') final String? quizName,
           @JsonKey(name: 'user_id') final int? userId,
           @JsonKey(name: 'full_name') final String? fullName,
+          @JsonKey(name: 'profile_image_url') final String? profileImageUrl,
           @JsonKey(name: 'total_questions') final int? totalQuestions,
           @JsonKey(name: 'correct_answers') final int? correctAnswers,
           @JsonKey(name: 'incorrect_answers') final int? incorrectAnswers,
@@ -380,6 +402,9 @@ abstract class _QuizResultDto extends QuizResultDto {
   @override
   @JsonKey(name: 'full_name')
   String? get fullName;
+  @override
+  @JsonKey(name: 'profile_image_url')
+  String? get profileImageUrl;
   @override
   @JsonKey(name: 'total_questions')
   int? get totalQuestions;

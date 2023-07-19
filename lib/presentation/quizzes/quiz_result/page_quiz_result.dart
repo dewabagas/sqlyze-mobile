@@ -2,14 +2,18 @@ import 'dart:io';
 
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:screenshot/screenshot.dart';
 import 'package:share_plus/share_plus.dart';
+import 'package:sqlyze/application/quizzes/quiz_result_bloc/quiz_result_bloc.dart';
 import 'package:sqlyze/domain/core/constants/preference_constants.dart';
 import 'package:sqlyze/domain/core/helpers/preference_helper.dart';
 import 'package:sqlyze/domain/core/utils/ui_utils.dart';
+import 'package:sqlyze/domain/quizzes/entitites/quiz_result.dart';
+import 'package:sqlyze/injection.dart';
 import 'package:sqlyze/presentation/core/constants/assets.dart';
 import 'package:sqlyze/presentation/core/constants/styles.dart';
 import 'package:sqlyze/presentation/core/styles/app_colors.dart';
@@ -22,7 +26,8 @@ import 'package:sqlyze/presentation/shared/widgets/others/show_dialog.dart';
 import 'package:sqlyze/presentation/shared/widgets/pages/page_decoration_top.dart';
 
 class PageQuizResult extends StatefulWidget {
-  const PageQuizResult({super.key});
+  final int quizId;
+  const PageQuizResult({super.key, required this.quizId});
 
   @override
   State<PageQuizResult> createState() => _PageQuizResultState();
@@ -48,6 +53,25 @@ class _PageQuizResultState extends State<PageQuizResult> {
 
   @override
   Widget build(BuildContext context) {
+    return BlocProvider<QuizResultBloc>(
+      create: (context) => getIt<QuizResultBloc>()
+        ..add(QuizResultEvent.getQuizResult(widget.quizId, userId)),
+      child: BlocBuilder<QuizResultBloc, QuizResultState>(
+        builder: (context, state) {
+          return state.map(
+              initial: (value) => const SizedBox.shrink(),
+              loadInProgress: (value) => const SizedBox.shrink(),
+              loadSuccess: (value) {
+                debugPrint('result quiz ${value.quizResult}');
+                return buildQuizResult(value.quizResult);
+              },
+              loadFailure: (value) => const SizedBox.shrink());
+        },
+      ),
+    );
+  }
+
+  Widget buildQuizResult(QuizResult? quizResult) {
     return PageDecorationTop(
         appBarTitle: 'Quiz Result',
         hasBack: false,
@@ -58,7 +82,7 @@ class _PageQuizResultState extends State<PageQuizResult> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   SizedBox(height: 40.h),
-                  Center(child: _buildResultContainer(context)),
+                  Center(child: _buildResultContainer(context, quizResult)),
                   SizedBox(height: 30.0.h),
                   Container(
                     width: screenWidth * (0.85),
@@ -111,7 +135,7 @@ class _PageQuizResultState extends State<PageQuizResult> {
     );
   }
 
-  Widget _buildResultContainer(BuildContext context) {
+  Widget _buildResultContainer(BuildContext context, QuizResult? quizResult) {
     return Screenshot(
       controller: screenshotController,
       child: Container(
@@ -122,12 +146,18 @@ class _PageQuizResultState extends State<PageQuizResult> {
           color: AppColors.primary,
           borderRadius: BorderRadius.circular(20.r),
         ),
-        child: _buildResultDetails(),
+        child: _buildResultDetails(quizResult),
       ),
     );
   }
 
-  Widget _buildResultDetails() {
+  double calculatePercentage(int? correctAnswers, int? totalQuestions) {
+    return (correctAnswers! / totalQuestions!) * 100;
+  }
+
+  Widget _buildResultDetails(QuizResult? quizResult) {
+    final percentage = calculatePercentage(
+        quizResult?.correctAnswers, quizResult?.incorrectAnswers);
     return Stack(
       clipBehavior: Clip.none,
       children: [
@@ -157,7 +187,8 @@ class _PageQuizResultState extends State<PageQuizResult> {
               return Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
-                  _buildGreetingMessage('Bagas Dewanggono', 'Hasil Quiz'),
+                  _buildGreetingMessage(
+                      '${quizResult?.fullName}', 'Hasil Quiz'),
                   SizedBox(height: 16.h),
                   Stack(
                     alignment: Alignment.center,
@@ -182,8 +213,7 @@ class _PageQuizResultState extends State<PageQuizResult> {
                       ),
                       Center(
                         child: ImageCircle(
-                            image:
-                                'https://upload.wikimedia.org/wikipedia/commons/thumb/8/85/Oppenheimer_%28cropped%29.jpg/1280px-Oppenheimer_%28cropped%29.jpg',
+                            image: quizResult?.profileImageUrl,
                             height: constraints.maxHeight *
                                 (profileRadiusPercentage - 0.05),
                             width: constraints.maxWidth *
@@ -208,7 +238,7 @@ class _PageQuizResultState extends State<PageQuizResult> {
                 child: Align(
                   alignment: AlignmentDirectional.bottomStart,
                   child: _buildResultDataWithIconContainer(
-                      '5/10',
+                      '${quizResult?.incorrectAnswers}/${quizResult?.totalQuestions}',
                       AppIcons.icWrong,
                       EdgeInsetsDirectional.only(start: 15.w, bottom: 30.h)),
                 ),
@@ -231,8 +261,9 @@ class _PageQuizResultState extends State<PageQuizResult> {
                         arcStrokeWidth: 10.0,
                         circleStrokeWidth: 10.0,
                         radiusPercentage: 0.27,
-                        percentage: 100,
-                        timeTakenToCompleteQuizInSeconds: 1,
+                        percentage: percentage,
+                        timeTakenToCompleteQuizInSeconds:
+                            quizResult?.totalDuration,
                         size: Size(
                             constraints.maxHeight * radialSizePercentage,
                             constraints.maxHeight *
@@ -246,7 +277,7 @@ class _PageQuizResultState extends State<PageQuizResult> {
                 child: Align(
                   alignment: AlignmentDirectional.bottomEnd,
                   child: _buildResultDataWithIconContainer(
-                      '5/10',
+                      '${quizResult?.correctAnswers}/${quizResult?.totalQuestions}',
                       AppIcons.icCorrect,
                       EdgeInsetsDirectional.only(end: 15.w, bottom: 30.h)),
                 ),

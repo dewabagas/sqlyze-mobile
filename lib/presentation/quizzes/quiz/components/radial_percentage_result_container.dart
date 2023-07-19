@@ -2,6 +2,8 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:sqlyze/domain/core/utils/normalize_number.dart';
+import 'package:sqlyze/presentation/core/constants/styles.dart';
+import 'package:sqlyze/presentation/core/styles/app_colors.dart';
 
 class RadialPercentageResultContainer extends StatefulWidget {
   final Size size;
@@ -12,7 +14,7 @@ class RadialPercentageResultContainer extends StatefulWidget {
   final Color? arcColor;
   final double? textFontSize;
   final int? timeTakenToCompleteQuizInSeconds;
-  final double radiusPercentage; //respect to width
+  final double radiusPercentage;
 
   const RadialPercentageResultContainer({
     Key? key,
@@ -65,20 +67,20 @@ class _RadialPercentageResultContainerState
   String _getTimeInMinutesAndSeconds() {
     int totalTime = widget.timeTakenToCompleteQuizInSeconds ?? 0;
     if (totalTime == 0) {
-      return "00:00";
+      return '00:00';
     }
     int seconds = totalTime % 60;
     int minutes = totalTime ~/ 60;
-    print("----------------------------");
-    print("Time taken to complete ${widget.timeTakenToCompleteQuizInSeconds}");
-    return "${minutes < 10 ? 0 : ''}$minutes:${seconds < 10 ? 0 : ''}$seconds";
+    print('----------------------------');
+    print('Time taken to complete ${widget.timeTakenToCompleteQuizInSeconds}');
+    return '${minutes < 10 ? 0 : ''}$minutes:${seconds < 10 ? 0 : ''}$seconds';
   }
 
   @override
   Widget build(BuildContext context) {
     return Stack(
       children: [
-        Container(
+        SizedBox(
           height: widget.size.height,
           width: widget.size.width,
           child: CustomPaint(
@@ -89,12 +91,18 @@ class _RadialPercentageResultContainerState
             ),
           ),
         ),
-        Container(
+        SizedBox(
           height: widget.size.height,
           width: widget.size.width,
           child: AnimatedBuilder(
               builder: (context, _) {
                 return CustomPaint(
+                  willChange: false,
+                  painter: ArcCustomPainter(
+                      sweepAngle: animation.value,
+                      color: AppColors.softGreen,
+                      radiusPercentage: widget.radiusPercentage,
+                      strokeWidth: widget.arcStrokeWidth),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.center,
@@ -102,34 +110,19 @@ class _RadialPercentageResultContainerState
                       Transform.translate(
                         offset: Offset(0, 2.5),
                         child: Text(
-                          "${widget.percentage.toStringAsFixed(0)}%",
-                          style: TextStyle(
-                              fontSize: widget.textFontSize ?? 17.0,
-                              color: Theme.of(context).backgroundColor,
-                              fontWeight: FontWeight.w500),
+                          '${widget.percentage.toStringAsFixed(0)}%',
+                          style: TextStyles.bodySmall.copyWith(
+                              color: AppColors.white,
+                              fontWeight: FontWeight.w600),
                         ),
                       ),
                       _getTimeInMinutesAndSeconds().isNotEmpty
-                          ? Text(
-                              _getTimeInMinutesAndSeconds(),
-                              style: TextStyle(
-                                  fontSize: widget.textFontSize != null
-                                      ? (widget.textFontSize! - 5)
-                                      : 12,
-                                  color: Theme.of(context)
-                                      .backgroundColor
-                                      .withOpacity(0.8),
-                                  fontWeight: FontWeight.w500),
-                            )
+                          ? Text(_getTimeInMinutesAndSeconds(),
+                              style: TextStyles.bodyVerySmall
+                                  .copyWith(color: AppColors.white))
                           : Container(),
                     ],
                   ),
-                  willChange: false,
-                  painter: ArcCustomPainter(
-                      sweepAngle: animation.value,
-                      color: Theme.of(context).backgroundColor,
-                      radiusPercentage: widget.radiusPercentage,
-                      strokeWidth: widget.arcStrokeWidth),
                 );
               },
               animation: animationController),
