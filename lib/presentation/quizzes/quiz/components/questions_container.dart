@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:sqlyze/domain/quizzes/entitites/quiz_question.dart';
@@ -85,10 +83,6 @@ class _QuestionsContainerState extends State<QuestionsContainer> {
 
   Widget _buildQuestion(
       int questionIndex, BuildContext context, QuizQuestion question) {
-    debugPrint('Question: ${question.question}');
-    debugPrint('Question Index: ${questionIndex}');
-
-    // we will always show the current question
     return FadeTransition(
       opacity: widget.questionSlideAnimation
           .drive(Tween<double>(begin: 1.0, end: 0.0)),
@@ -104,7 +98,6 @@ class _QuestionsContainerState extends State<QuestionsContainer> {
   Widget _buildQuestionContainer(double scale, int index, bool showContent,
       BuildContext context, QuizQuestion question) {
     return LayoutBuilder(builder: (context, constraints) {
-      debugPrint('constraints $constraints');
       return SingleChildScrollView(
         child: Column(
           children: [
@@ -122,7 +115,7 @@ class _QuestionsContainerState extends State<QuestionsContainer> {
                   color: AppColors.primary.withOpacity(0.8), thickness: 0.5),
             ),
             SizedBox(height: 10.h),
-            Container(
+            SizedBox(
               width: screenWidth / 1.35,
               child: Column(
                 children: [

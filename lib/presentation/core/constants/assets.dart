@@ -43,6 +43,8 @@ class AppIcons {
   static const String icEyeOffGrey = 'assets/icons/ic_eye_off_grey.svg';
   static const String icDateGrey = 'assets/icons/ic_date_grey.svg';
   static const String icCalendarDark = 'assets/icons/ic_calendar_dark.svg';
+  static const String icCorrect = 'assets/icons/ic_correct.svg';
+  static const String icWrong = 'assets/icons/ic_wrong.svg';
 }
 
 class AppLogo {
@@ -77,6 +79,10 @@ class AppIllustrations {
   static const String illSad = 'assets/illustrations/ill_sad.svg';
   static const String illSmile = 'assets/illustrations/ill_smile.svg';
   static const String illAssessment = 'assets/illustrations/ill_assessment.svg';
+  static const String illCelebration =
+      'assets/illustrations/ill_celebration.svg';
+  static const String illCelebrationLoss =
+      'assets/illustrations/ill_celebration_loss.svg';
 }
 
 class AppImages {

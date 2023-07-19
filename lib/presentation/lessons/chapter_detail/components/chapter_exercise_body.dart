@@ -25,7 +25,6 @@ class _ChapterExerciseBodyState extends State<ChapterExerciseBody> {
             initial: (value) => const SizedBox.shrink(),
             loadInProgress: (value) => const SizedBox.shrink(),
             loadSuccess: (value) {
-              debugPrint('quiss ${value.quizDetail}');
               return buildQuizSuccess(value.quizDetail);
             },
             loadFailure: (value) {
@@ -51,6 +50,7 @@ class _ChapterExerciseBodyState extends State<ChapterExerciseBody> {
             passingScore: quizDetail.passingScore ?? 0,
             onTap: () {
               AutoRouter.of(context).push(RouteQuiz(quizId: quizDetail.id!));
+              // AutoRouter.of(context).push(RouteQuizResult());
             },
             subtitle: 'General Quiz',
           )

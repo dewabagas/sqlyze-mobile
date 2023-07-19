@@ -35,6 +35,7 @@ class AppColors {
   static const Color borderColor = Color(0xFFE8E8E8);
   static const Color paragraphColor = Color(0xFF555555);
   static const Color dividerColor = Color(0xFFE0E0E0);
+  static const Color shadowColor = Color(0xFF3A3A3A);
   static const Color navy = Color(0xFF172441);
   static const Color blue = Color(0xFF376AED);
   static const Color softBlue = Color(0xFF9ADCFF);

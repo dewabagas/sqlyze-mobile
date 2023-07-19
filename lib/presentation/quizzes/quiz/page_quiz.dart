@@ -12,7 +12,9 @@ import 'package:sqlyze/presentation/core/styles/app_colors.dart';
 import 'package:sqlyze/presentation/quizzes/quiz/components/questions_container.dart';
 import 'package:sqlyze/presentation/quizzes/quiz/components/quiz_background.dart';
 import 'package:sqlyze/presentation/quizzes/quiz/components/shimmer_question_container.dart';
+import 'package:sqlyze/presentation/routes/router.gr.dart';
 import 'package:sqlyze/presentation/shared/widgets/buttons/button_circle.dart';
+import 'package:sqlyze/presentation/shared/widgets/dialogs/custom_dialog_confirmation.dart';
 import 'package:sqlyze/presentation/shared/widgets/errors/error_page.dart';
 import 'package:sqlyze/presentation/shared/widgets/others/show_dialog.dart';
 
@@ -136,20 +138,22 @@ class _PageQuizState extends State<PageQuiz> with TickerProviderStateMixin {
                   heightPercentage: 0.885,
                 )),
             Align(
-                alignment: Alignment.topCenter,
-                child: QuestionsContainer(
-                  currentQuestionIndex: currentQuestionIndex,
-                  questionContentAnimation: questionContentAnimation,
-                  questionScaleDownAnimation: questionScaleDownAnimation,
-                  questionScaleUpAnimation: questionScaleUpAnimation,
-                  questionSlideAnimation: questionSlideAnimation,
-                  questionAnimationController: questionAnimationController,
-                  questionContentAnimationController:
-                      questionContentAnimationController,
-                  questions: quizQuestions,
-                  timerAnimationController: timerAnimationController,
-                  onQuestionAnswered: handleQuestionAnswered,
-                )),
+              alignment: Alignment.topCenter,
+              child: QuestionsContainer(
+                currentQuestionIndex: currentQuestionIndex,
+                questionContentAnimation: questionContentAnimation,
+                questionScaleDownAnimation: questionScaleDownAnimation,
+                questionScaleUpAnimation: questionScaleUpAnimation,
+                questionSlideAnimation: questionSlideAnimation,
+                questionAnimationController: questionAnimationController,
+                questionContentAnimationController:
+                    questionContentAnimationController,
+                questions: quizQuestions,
+                timerAnimationController: timerAnimationController,
+                onQuestionAnswered: (index) =>
+                    handleQuestionAnswered(index, quizQuestions),
+              ),
+            ),
             Align(
               alignment: Alignment.bottomCenter,
               child: Container(
@@ -184,10 +188,16 @@ class _PageQuizState extends State<PageQuiz> with TickerProviderStateMixin {
     );
   }
 
-  void handleQuestionAnswered(int nextQuestionIndex) {
+  void handleQuestionAnswered(int index, List<QuizQuestion>? quizQuestions) {
+    debugPrint('currentQuestionIndex $currentQuestionIndex');
+    debugPrint('questions length ${quizQuestions?.length}');
     _buildContext.read<QuizAnswerSubmissionCubit>().submitQuizAnswer(
         QuizSubmissionRequest(
             answerId: 13, questionId: 1, quizId: 1, userId: 1));
+    if (index == quizQuestions?.length) {
+      // Navigate to the "Done" screen
+      AutoRouter.of(context).push(const RouteQuizResult());
+    }
   }
 
   Widget buildTopMenu() {
@@ -195,15 +205,13 @@ class _PageQuizState extends State<PageQuiz> with TickerProviderStateMixin {
       alignment: Alignment.topCenter,
       child: Container(
         margin: EdgeInsets.only(
-            top: MediaQuery.of(context).padding.top, left: 16.w),
+            top: MediaQuery.of(context).padding.top * 1.2, left: 16.w),
         child: Row(
           children: [
             InkWell(
-              onTap: () {
-                AutoRouter.of(context).pop();
-              },
+              onTap: showQuitPopup,
               child: Icon(
-                Icons.chevron_left,
+                Icons.cancel,
                 color: AppColors.white,
                 size: 30.w,
               ),
@@ -212,5 +220,25 @@ class _PageQuizState extends State<PageQuiz> with TickerProviderStateMixin {
         ),
       ),
     );
+  }
+
+  void showQuitPopup() {
+    showDialog(
+        context: context,
+        builder: (context) {
+          return CustomDialogConfirmation(
+            title: 'Keluar dari Quiz',
+            message: 'Apakah anda yakin ingin keluar dari Quiz?',
+            positiveText: 'Ya',
+            negativeText: 'Batal',
+            actionNegative: () {
+              Navigator.pop(context);
+            },
+            actionPositiveButton: () async {
+              Navigator.of(context).pop();
+              AutoRouter.of(context).pop();
+            },
+          );
+        });
   }
 }
