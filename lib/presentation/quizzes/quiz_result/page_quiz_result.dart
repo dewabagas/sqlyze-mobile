@@ -152,12 +152,14 @@ class _PageQuizResultState extends State<PageQuizResult> {
   }
 
   double calculatePercentage(int? correctAnswers, int? totalQuestions) {
-    return (correctAnswers! / totalQuestions!) * 100;
+    return totalQuestions != null && totalQuestions != 0
+        ? (correctAnswers! / totalQuestions) * 100
+        : 0;
   }
 
   Widget _buildResultDetails(QuizResult? quizResult) {
     final percentage = calculatePercentage(
-        quizResult?.correctAnswers, quizResult?.incorrectAnswers);
+        quizResult?.correctAnswers, quizResult?.totalQuestions);
     return Stack(
       clipBehavior: Clip.none,
       children: [
