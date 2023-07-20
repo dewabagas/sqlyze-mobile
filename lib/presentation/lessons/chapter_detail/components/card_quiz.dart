@@ -13,6 +13,7 @@ class CardQuiz extends StatefulWidget {
   final int? passingScore;
   final String? image;
   final Function()? onTap;
+  final bool? hasAttempted;
   const CardQuiz(
       {super.key,
       this.title,
@@ -21,7 +22,8 @@ class CardQuiz extends StatefulWidget {
       this.onTap,
       this.questionCount,
       this.duration,
-      this.passingScore});
+      this.passingScore,
+      this.hasAttempted});
 
   @override
   State<CardQuiz> createState() => _CardQuizState();
@@ -100,7 +102,12 @@ class _CardQuizState extends State<CardQuiz> {
                 ],
               ),
             ),
-            const Icon(Icons.chevron_right)
+            widget.hasAttempted == true
+                ? const Icon(
+                    Icons.check_circle,
+                    color: AppColors.green,
+                  )
+                : const Icon(Icons.chevron_right)
           ],
         ),
       ),

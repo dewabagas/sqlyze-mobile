@@ -15,6 +15,7 @@ _$_QuizDetailDto _$$_QuizDetailDtoFromJson(Map<String, dynamic> json) =>
       duration: json['duration'] as String?,
       passingScore: json['passing_score'] as int?,
       questionCount: json['question_count'] as int?,
+      hasAttempted: json['has_attempted'] as bool?,
       createdAt: json['createdAt'] as String?,
       updatedAt: json['updatedAt'] as String?,
     );
@@ -28,6 +29,7 @@ Map<String, dynamic> _$$_QuizDetailDtoToJson(_$_QuizDetailDto instance) =>
       'duration': instance.duration,
       'passing_score': instance.passingScore,
       'question_count': instance.questionCount,
+      'has_attempted': instance.hasAttempted,
       'createdAt': instance.createdAt,
       'updatedAt': instance.updatedAt,
     };

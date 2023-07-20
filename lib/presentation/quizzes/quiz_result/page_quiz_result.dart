@@ -319,42 +319,13 @@ class _PageQuizResultState extends State<PageQuizResult> {
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         SizedBox(height: 15.h),
-        Platform.isIOS
-            ? Stack(children: [
-                Align(
-                    alignment: Alignment.topLeft,
-                    child: Padding(
-                      padding: const EdgeInsets.only(
-                        left: 15.0,
-                      ),
-                      child: InkWell(
-                          onTap: () {
-                            Navigator.pop(context);
-                          },
-                          child: Container(
-                              padding: EdgeInsets.all(5.0),
-                              decoration: BoxDecoration(
-                                  border:
-                                      Border.all(color: Colors.transparent)),
-                              child: Icon(
-                                Icons.arrow_back_ios,
-                                color: Theme.of(context).backgroundColor,
-                              ))),
-                    )),
-                Container(
-                    alignment: Alignment.center,
-                    child: Text(
-                      message,
-                      style: TextStyles.labelLarge,
-                    )),
-              ])
-            : Container(
-                alignment: Alignment.center,
-                child: Text(
-                  message,
-                  textAlign: TextAlign.center,
-                  style: TextStyles.labelLarge.copyWith(color: AppColors.white),
-                )),
+        Container(
+            alignment: Alignment.center,
+            child: Text(
+              message,
+              textAlign: TextAlign.center,
+              style: TextStyles.labelLarge.copyWith(color: AppColors.white),
+            )),
         SizedBox(height: 5.h),
         Container(
           padding: EdgeInsets.symmetric(horizontal: 5.w),

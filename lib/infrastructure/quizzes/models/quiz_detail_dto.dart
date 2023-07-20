@@ -16,6 +16,7 @@ class QuizDetailDto with _$QuizDetailDto {
     String? duration,
     @JsonKey(name: 'passing_score') int? passingScore,
     @JsonKey(name: 'question_count') int? questionCount,
+    @JsonKey(name: 'has_attempted') bool? hasAttempted,
     String? createdAt,
     String? updatedAt,
   }) = _QuizDetailDto;
@@ -29,6 +30,7 @@ class QuizDetailDto with _$QuizDetailDto {
         duration: quizDetail?.duration,
         passingScore: quizDetail?.passingScore,
         questionCount: quizDetail?.questionCount,
+        hasAttempted: quizDetail?.hasAttempted,
         createdAt: quizDetail?.createdAt,
         updatedAt: quizDetail?.updatedAt);
   }
@@ -42,6 +44,7 @@ class QuizDetailDto with _$QuizDetailDto {
         duration: duration,
         passingScore: passingScore,
         questionCount: questionCount,
+        hasAttempted: hasAttempted,
         createdAt: createdAt,
         updatedAt: updatedAt);
   }
