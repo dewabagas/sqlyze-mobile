@@ -1,22 +1,22 @@
 import 'dart:async';
-import 'dart:convert';
 import 'dart:developer';
+import 'dart:io';
 
 import 'package:auto_route/auto_route.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/flutter_svg.dart';
+import 'package:path_provider/path_provider.dart';
+import 'package:screenshot/screenshot.dart';
+import 'package:share_plus/share_plus.dart';
 import 'package:sqlyze/domain/lessons/entities/lesson_detail.dart';
-import 'package:sqlyze/presentation/core/constants/assets.dart';
 import 'package:sqlyze/presentation/core/constants/styles.dart';
 import 'package:sqlyze/presentation/core/styles/app_colors.dart';
 import 'package:sqlyze/presentation/shared/widgets/buttons/button_gradient.dart';
 import 'package:sqlyze/presentation/shared/widgets/buttons/button_primary.dart';
-import 'package:sqlyze/presentation/shared/widgets/others/expandable_page_view/expandable_page_view.dart';
+import 'package:sqlyze/presentation/shared/widgets/others/show_dialog.dart';
 import 'package:sqlyze/presentation/shared/widgets/pages/loop_page_view/loop_page_view.dart';
 import 'package:sqlyze/presentation/shared/widgets/pages/page_decoration_top.dart';
 import 'package:story/story_page_view.dart';
@@ -51,6 +51,7 @@ class _PageLessonStepDetailState extends State<PageLessonStepDetail>
   double webViewHeight = 1;
   String? htmlData;
   List<WebViewController> controllers = [];
+  List<ScreenshotController> screenshotControllers = [];
 
   @override
   void initState() {
@@ -59,6 +60,7 @@ class _PageLessonStepDetailState extends State<PageLessonStepDetail>
     loadingProgress = ValueNotifier<dynamic>(0.0);
 
     for (var i = 0; i < widget.lessonDetail.learningSteps!.length; i++) {
+      var screenshotController = ScreenshotController();
       var controller = WebViewController()
         ..setJavaScriptMode(JavaScriptMode.unrestricted)
         ..setBackgroundColor(const Color(0x00000000))
@@ -81,6 +83,7 @@ class _PageLessonStepDetailState extends State<PageLessonStepDetail>
         )
         ..loadRequest(Uri.parse(widget.lessonDetail.learningSteps![i].url!));
       controllers.add(controller);
+      screenshotControllers.add(screenshotController);
     }
 
     super.initState();
@@ -98,6 +101,32 @@ class _PageLessonStepDetailState extends State<PageLessonStepDetail>
 
     return PageDecorationTop(
       appBarTitle: 'SQLyze',
+      appBarActions: [
+        Padding(
+          padding: EdgeInsets.only(right: 16.w),
+          child: InkWell(
+            onTap: () async {
+              try {
+                final image = await screenshotControllers[currentIndex].capture();
+                final directory =
+                    (await getApplicationDocumentsDirectory()).path;
+
+                String fileName =
+                    DateTime.now().microsecondsSinceEpoch.toString();
+                File file = await File("$directory/$fileName.png").create();
+                await file.writeAsBytes(image!.buffer.asUint8List());
+                await Share.shareFiles(
+                  [file.path],
+                  text: '${widget.lessonDetail.learningSteps![currentIndex].title}',
+                );
+              } catch (e) {
+                showErrorDialog(context: context, message: e.toString());
+              }
+            },
+            child: const Icon(Icons.share_rounded),
+          ),
+        )
+      ],
       child: Stack(
         children: [
           LoopPageView.builder(
@@ -161,9 +190,12 @@ class _PageLessonStepDetailState extends State<PageLessonStepDetail>
                     ),
                     Expanded(
                       child: ClipRRect(
-                        child: WebViewWidget(
-                          gestureRecognizers: gestureRecognizers,
-                          controller: controllers[index],
+                        child: Screenshot(
+                          controller: screenshotControllers[index],
+                          child: WebViewWidget(
+                            gestureRecognizers: gestureRecognizers,
+                            controller: controllers[index],
+                          ),
                         ),
                       ),
                     ),
