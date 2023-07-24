@@ -1,4 +1,4 @@
-package com.example.sqlyze
+package com.brilliant.sqlyze
 
 import io.flutter.embedding.android.FlutterActivity
 

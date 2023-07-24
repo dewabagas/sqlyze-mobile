@@ -69,7 +69,7 @@ class DefaultFirebaseOptions {
     storageBucket: 'sqlyze-7eaca.appspot.com',
     iosClientId:
         '593989439104-mfnmlmreaehj547ikkabv1hrlf6vr7sj.apps.googleusercontent.com',
-    iosBundleId: 'com.example.sqlyze',
+    iosBundleId: 'com.brilliant.sqlyze',
   );
 
   static const FirebaseOptions macos = FirebaseOptions(
@@ -80,6 +80,6 @@ class DefaultFirebaseOptions {
     storageBucket: 'sqlyze-7eaca.appspot.com',
     iosClientId:
         '593989439104-mfnmlmreaehj547ikkabv1hrlf6vr7sj.apps.googleusercontent.com',
-    iosBundleId: 'com.example.sqlyze',
+    iosBundleId: 'com.brilliant.sqlyze',
   );
 }
