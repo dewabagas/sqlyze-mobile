@@ -103,6 +103,7 @@ class QuizRepository implements IQuizRepository {
     try {
       QuizSubmissionResponse? quizResult;
       debugPrint('submitQuizAnswer repo');
+      debugPrint('${quizSubmissionRequest}');
       var response =
           await quizApiService.submitQuizAnswer(quizSubmissionRequest);
       debugPrint('response repo');

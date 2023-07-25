@@ -11,14 +11,14 @@ class CardLesson extends StatefulWidget {
   final String? subtitle;
   final String? image;
   final Function()? onTap;
-  final bool? isLocked;
+  final bool? isUnlocked;
   const CardLesson(
       {super.key,
       this.title,
       this.subtitle,
       this.image,
       required this.onTap,
-      this.isLocked});
+      this.isUnlocked});
 
   @override
   State<CardLesson> createState() => _CardLessonState();
@@ -28,7 +28,7 @@ class _CardLessonState extends State<CardLesson> {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: widget.isLocked == true
+      onTap: widget.isUnlocked == false
           ? () {
               showErrorDialog(
                   context: context,
@@ -40,10 +40,10 @@ class _CardLessonState extends State<CardLesson> {
         padding: EdgeInsets.symmetric(vertical: 6.h, horizontal: 8.h),
         decoration: BoxDecoration(
             color:
-                widget.isLocked == true ? AppColors.dividerColor : Colors.white,
+                widget.isUnlocked == false ? AppColors.dividerColor : Colors.white,
             borderRadius: BorderRadius.circular(8.r),
             boxShadow: [
-              widget.isLocked == false
+              widget.isUnlocked == true
                   ? BoxShadow(
                       offset: const Offset(0, 0),
                       blurRadius: 4,
@@ -83,7 +83,7 @@ class _CardLessonState extends State<CardLesson> {
                 )
               ],
             ),
-            if (widget.isLocked == true)
+            if (widget.isUnlocked == false)
               Positioned(
                 right: 0,
                 top: 0,

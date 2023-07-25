@@ -20,7 +20,7 @@ mixin _$LessonDetail {
   String? get title => throw _privateConstructorUsedError;
   String? get description => throw _privateConstructorUsedError;
   int? get materialType => throw _privateConstructorUsedError;
-  bool? get isLocked => throw _privateConstructorUsedError;
+  bool? get isUnlocked => throw _privateConstructorUsedError;
   String? get createdAt => throw _privateConstructorUsedError;
   String? get updatedAt => throw _privateConstructorUsedError;
   LearningVideo? get video => throw _privateConstructorUsedError;
@@ -46,7 +46,7 @@ abstract class $LessonDetailCopyWith<$Res> {
       String? title,
       String? description,
       int? materialType,
-      bool? isLocked,
+      bool? isUnlocked,
       String? createdAt,
       String? updatedAt,
       LearningVideo? video,
@@ -78,7 +78,7 @@ class _$LessonDetailCopyWithImpl<$Res, $Val extends LessonDetail>
     Object? title = freezed,
     Object? description = freezed,
     Object? materialType = freezed,
-    Object? isLocked = freezed,
+    Object? isUnlocked = freezed,
     Object? createdAt = freezed,
     Object? updatedAt = freezed,
     Object? video = freezed,
@@ -104,9 +104,9 @@ class _$LessonDetailCopyWithImpl<$Res, $Val extends LessonDetail>
           ? _value.materialType
           : materialType // ignore: cast_nullable_to_non_nullable
               as int?,
-      isLocked: freezed == isLocked
-          ? _value.isLocked
-          : isLocked // ignore: cast_nullable_to_non_nullable
+      isUnlocked: freezed == isUnlocked
+          ? _value.isUnlocked
+          : isUnlocked // ignore: cast_nullable_to_non_nullable
               as bool?,
       createdAt: freezed == createdAt
           ? _value.createdAt
@@ -202,7 +202,7 @@ abstract class _$$_LessonDetailCopyWith<$Res>
       String? title,
       String? description,
       int? materialType,
-      bool? isLocked,
+      bool? isUnlocked,
       String? createdAt,
       String? updatedAt,
       LearningVideo? video,
@@ -236,7 +236,7 @@ class __$$_LessonDetailCopyWithImpl<$Res>
     Object? title = freezed,
     Object? description = freezed,
     Object? materialType = freezed,
-    Object? isLocked = freezed,
+    Object? isUnlocked = freezed,
     Object? createdAt = freezed,
     Object? updatedAt = freezed,
     Object? video = freezed,
@@ -262,9 +262,9 @@ class __$$_LessonDetailCopyWithImpl<$Res>
           ? _value.materialType
           : materialType // ignore: cast_nullable_to_non_nullable
               as int?,
-      isLocked: freezed == isLocked
-          ? _value.isLocked
-          : isLocked // ignore: cast_nullable_to_non_nullable
+      isUnlocked: freezed == isUnlocked
+          ? _value.isUnlocked
+          : isUnlocked // ignore: cast_nullable_to_non_nullable
               as bool?,
       createdAt: freezed == createdAt
           ? _value.createdAt
@@ -306,7 +306,7 @@ class _$_LessonDetail implements _LessonDetail {
       this.title,
       this.description,
       this.materialType,
-      this.isLocked,
+      this.isUnlocked,
       this.createdAt,
       this.updatedAt,
       this.video,
@@ -325,7 +325,7 @@ class _$_LessonDetail implements _LessonDetail {
   @override
   final int? materialType;
   @override
-  final bool? isLocked;
+  final bool? isUnlocked;
   @override
   final String? createdAt;
   @override
@@ -350,7 +350,7 @@ class _$_LessonDetail implements _LessonDetail {
 
   @override
   String toString() {
-    return 'LessonDetail(id: $id, title: $title, description: $description, materialType: $materialType, isLocked: $isLocked, createdAt: $createdAt, updatedAt: $updatedAt, video: $video, podcast: $podcast, learningDocument: $learningDocument, learningPresentation: $learningPresentation, learningSteps: $learningSteps)';
+    return 'LessonDetail(id: $id, title: $title, description: $description, materialType: $materialType, isUnlocked: $isUnlocked, createdAt: $createdAt, updatedAt: $updatedAt, video: $video, podcast: $podcast, learningDocument: $learningDocument, learningPresentation: $learningPresentation, learningSteps: $learningSteps)';
   }
 
   @override
@@ -364,8 +364,8 @@ class _$_LessonDetail implements _LessonDetail {
                 other.description == description) &&
             (identical(other.materialType, materialType) ||
                 other.materialType == materialType) &&
-            (identical(other.isLocked, isLocked) ||
-                other.isLocked == isLocked) &&
+            (identical(other.isUnlocked, isUnlocked) ||
+                other.isUnlocked == isUnlocked) &&
             (identical(other.createdAt, createdAt) ||
                 other.createdAt == createdAt) &&
             (identical(other.updatedAt, updatedAt) ||
@@ -387,7 +387,7 @@ class _$_LessonDetail implements _LessonDetail {
       title,
       description,
       materialType,
-      isLocked,
+      isUnlocked,
       createdAt,
       updatedAt,
       video,
@@ -409,7 +409,7 @@ abstract class _LessonDetail implements LessonDetail {
       final String? title,
       final String? description,
       final int? materialType,
-      final bool? isLocked,
+      final bool? isUnlocked,
       final String? createdAt,
       final String? updatedAt,
       final LearningVideo? video,
@@ -427,7 +427,7 @@ abstract class _LessonDetail implements LessonDetail {
   @override
   int? get materialType;
   @override
-  bool? get isLocked;
+  bool? get isUnlocked;
   @override
   String? get createdAt;
   @override

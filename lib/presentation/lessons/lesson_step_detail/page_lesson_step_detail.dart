@@ -123,7 +123,7 @@ class _PageLessonStepDetailState extends State<PageLessonStepDetail>
                 showErrorDialog(context: context, message: e.toString());
               }
             },
-            child: const Icon(Icons.share_rounded),
+            child: const Icon(Icons.share_rounded, color: AppColors.white),
           ),
         )
       ],
