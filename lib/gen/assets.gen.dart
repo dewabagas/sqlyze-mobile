@@ -9,6 +9,30 @@
 
 import 'package:flutter/widgets.dart';
 
+class $AssetsBannersGen {
+  const $AssetsBannersGen();
+
+  /// File path: assets/banners/bnr_colored_1.png
+  AssetGenImage get bnrColored1 =>
+      const AssetGenImage('assets/banners/bnr_colored_1.png');
+
+  /// File path: assets/banners/bnr_colored_2.png
+  AssetGenImage get bnrColored2 =>
+      const AssetGenImage('assets/banners/bnr_colored_2.png');
+
+  /// File path: assets/banners/bnr_intro.png
+  AssetGenImage get bnrIntro =>
+      const AssetGenImage('assets/banners/bnr_intro.png');
+
+  /// File path: assets/banners/bnr_intro_2.png
+  AssetGenImage get bnrIntro2 =>
+      const AssetGenImage('assets/banners/bnr_intro_2.png');
+
+  /// List of all assets
+  List<AssetGenImage> get values =>
+      [bnrColored1, bnrColored2, bnrIntro, bnrIntro2];
+}
+
 class $AssetsFontsGen {
   const $AssetsFontsGen();
 
@@ -427,6 +451,7 @@ class $AssetsSoundsGen {
 class Assets {
   Assets._();
 
+  static const $AssetsBannersGen banners = $AssetsBannersGen();
   static const $AssetsFontsGen fonts = $AssetsFontsGen();
   static const $AssetsHtmlsGen htmls = $AssetsHtmlsGen();
   static const $AssetsIconsGen icons = $AssetsIconsGen();

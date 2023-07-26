@@ -103,6 +103,7 @@ flutter:
     - assets/icons/
     - assets/images/
     - assets/illustrations/
+    - assets/banners/
     - assets/htmls/
     - assets/sounds/
 

@@ -39,8 +39,9 @@ class _CardLessonState extends State<CardLesson> {
       child: Container(
         padding: EdgeInsets.symmetric(vertical: 6.h, horizontal: 8.h),
         decoration: BoxDecoration(
-            color:
-                widget.isUnlocked == false ? AppColors.dividerColor : Colors.white,
+            color: widget.isUnlocked == false
+                ? AppColors.dividerColor
+                : Colors.white,
             borderRadius: BorderRadius.circular(8.r),
             boxShadow: [
               widget.isUnlocked == true

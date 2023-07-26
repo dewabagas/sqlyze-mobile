@@ -96,6 +96,10 @@ class AppBanners {
   static const String bnrWelcome = 'assets/images/bnr_welcome.png';
   static const String bnrDdl = 'assets/images/bnr_ddl.svg';
   static const String bnrDml = 'assets/images/bnr_dml.svg';
+  static const String bnrIntro = 'assets/banners/bnr_intro.png';
+  static const String bnrIntro2 = 'assets/banners/bnr_intro_2.png';
+  static const String bnrColored1 = 'assets/banners/bnr_colored_1.png';
+  static const String bnrColored2 = 'assets/banners/bnr_colored_2.png';
 }
 
 class BottomNavBar {

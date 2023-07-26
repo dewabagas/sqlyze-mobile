@@ -107,7 +107,8 @@ class _PageLessonStepDetailState extends State<PageLessonStepDetail>
           child: InkWell(
             onTap: () async {
               try {
-                final image = await screenshotControllers[currentIndex].capture();
+                final image =
+                    await screenshotControllers[currentIndex].capture();
                 final directory =
                     (await getApplicationDocumentsDirectory()).path;
 
@@ -117,7 +118,8 @@ class _PageLessonStepDetailState extends State<PageLessonStepDetail>
                 await file.writeAsBytes(image!.buffer.asUint8List());
                 await Share.shareFiles(
                   [file.path],
-                  text: '${widget.lessonDetail.learningSteps![currentIndex].title}',
+                  text:
+                      '${widget.lessonDetail.learningSteps![currentIndex].title}',
                 );
               } catch (e) {
                 showErrorDialog(context: context, message: e.toString());

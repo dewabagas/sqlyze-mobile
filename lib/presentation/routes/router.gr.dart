@@ -11,12 +11,13 @@
 // ignore_for_file: type=lint
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
-import 'package:auto_route/auto_route.dart' as _i13;
-import 'package:flutter/material.dart' as _i14;
+import 'package:auto_route/auto_route.dart' as _i14;
+import 'package:flutter/material.dart' as _i15;
 
-import '../../domain/lessons/entities/lesson_detail.dart' as _i15;
+import '../../domain/lessons/entities/lesson_detail.dart' as _i16;
 import '../core/pages/page_onboarding.dart' as _i2;
 import '../core/pages/page_splash.dart' as _i1;
+import '../discussions/page_discussion.dart' as _i13;
 import '../guest_dashboard/page_guest_dashboard.dart' as _i3;
 import '../lessons/chapter_detail/page_chapter_detail.dart' as _i9;
 import '../lessons/lesson_detail/page_lesson_detail.dart' as _i8;
@@ -28,57 +29,57 @@ import '../quizzes/quiz_result/page_quiz_result.dart' as _i12;
 import '../register/page_register.dart' as _i5;
 import '../student_dashboard/page_student_dashboard.dart' as _i4;
 
-class AppRouter extends _i13.RootStackRouter {
-  AppRouter([_i14.GlobalKey<_i14.NavigatorState>? navigatorKey])
+class AppRouter extends _i14.RootStackRouter {
+  AppRouter([_i15.GlobalKey<_i15.NavigatorState>? navigatorKey])
       : super(navigatorKey);
 
   @override
-  final Map<String, _i13.PageFactory> pagesMap = {
+  final Map<String, _i14.PageFactory> pagesMap = {
     RouteSplash.name: (routeData) {
-      return _i13.MaterialPageX<dynamic>(
+      return _i14.MaterialPageX<dynamic>(
         routeData: routeData,
         child: const _i1.PageSplash(),
       );
     },
     RouteOnboarding.name: (routeData) {
-      return _i13.MaterialPageX<dynamic>(
+      return _i14.MaterialPageX<dynamic>(
         routeData: routeData,
         child: const _i2.PageOnboarding(),
       );
     },
     RouteGuestDashboard.name: (routeData) {
-      return _i13.MaterialPageX<dynamic>(
+      return _i14.MaterialPageX<dynamic>(
         routeData: routeData,
         child: const _i3.PageGuestDashboard(),
       );
     },
     RouteStudentDashboard.name: (routeData) {
-      return _i13.MaterialPageX<dynamic>(
+      return _i14.MaterialPageX<dynamic>(
         routeData: routeData,
         child: const _i4.PageStudentDashboard(),
       );
     },
     RouteRegister.name: (routeData) {
-      return _i13.MaterialPageX<dynamic>(
+      return _i14.MaterialPageX<dynamic>(
         routeData: routeData,
         child: const _i5.PageRegister(),
       );
     },
     RouteOtp.name: (routeData) {
-      return _i13.MaterialPageX<dynamic>(
+      return _i14.MaterialPageX<dynamic>(
         routeData: routeData,
         child: const _i6.PageOtp(),
       );
     },
     RouteLessonList.name: (routeData) {
-      return _i13.MaterialPageX<dynamic>(
+      return _i14.MaterialPageX<dynamic>(
         routeData: routeData,
         child: const _i7.PageLessonList(),
       );
     },
     RouteLessonDetail.name: (routeData) {
       final args = routeData.argsAs<RouteLessonDetailArgs>();
-      return _i13.MaterialPageX<dynamic>(
+      return _i14.MaterialPageX<dynamic>(
         routeData: routeData,
         child: _i8.PageLessonDetail(
           key: args.key,
@@ -89,7 +90,7 @@ class AppRouter extends _i13.RootStackRouter {
     },
     RouteChapterDetail.name: (routeData) {
       final args = routeData.argsAs<RouteChapterDetailArgs>();
-      return _i13.MaterialPageX<dynamic>(
+      return _i14.MaterialPageX<dynamic>(
         routeData: routeData,
         child: _i9.PageChapterDetail(
           key: args.key,
@@ -99,7 +100,7 @@ class AppRouter extends _i13.RootStackRouter {
     },
     RouteLessonStepDetail.name: (routeData) {
       final args = routeData.argsAs<RouteLessonStepDetailArgs>();
-      return _i13.MaterialPageX<dynamic>(
+      return _i14.MaterialPageX<dynamic>(
         routeData: routeData,
         child: _i10.PageLessonStepDetail(
           key: args.key,
@@ -109,7 +110,7 @@ class AppRouter extends _i13.RootStackRouter {
     },
     RouteQuiz.name: (routeData) {
       final args = routeData.argsAs<RouteQuizArgs>();
-      return _i13.MaterialPageX<dynamic>(
+      return _i14.MaterialPageX<dynamic>(
         routeData: routeData,
         child: _i11.PageQuiz(
           key: args.key,
@@ -119,7 +120,7 @@ class AppRouter extends _i13.RootStackRouter {
     },
     RouteQuizResult.name: (routeData) {
       final args = routeData.argsAs<RouteQuizResultArgs>();
-      return _i13.MaterialPageX<dynamic>(
+      return _i14.MaterialPageX<dynamic>(
         routeData: routeData,
         child: _i12.PageQuizResult(
           key: args.key,
@@ -127,64 +128,74 @@ class AppRouter extends _i13.RootStackRouter {
         ),
       );
     },
+    RouteDiscussion.name: (routeData) {
+      return _i14.MaterialPageX<dynamic>(
+        routeData: routeData,
+        child: const _i13.PageDiscussion(),
+      );
+    },
   };
 
   @override
-  List<_i13.RouteConfig> get routes => [
-        _i13.RouteConfig(
+  List<_i14.RouteConfig> get routes => [
+        _i14.RouteConfig(
           RouteSplash.name,
           path: '/',
         ),
-        _i13.RouteConfig(
+        _i14.RouteConfig(
           RouteOnboarding.name,
           path: '/page-onboarding',
         ),
-        _i13.RouteConfig(
+        _i14.RouteConfig(
           RouteGuestDashboard.name,
           path: '/page-guest-dashboard',
         ),
-        _i13.RouteConfig(
+        _i14.RouteConfig(
           RouteStudentDashboard.name,
           path: '/page-student-dashboard',
         ),
-        _i13.RouteConfig(
+        _i14.RouteConfig(
           RouteRegister.name,
           path: '/page-register',
         ),
-        _i13.RouteConfig(
+        _i14.RouteConfig(
           RouteOtp.name,
           path: '/page-otp',
         ),
-        _i13.RouteConfig(
+        _i14.RouteConfig(
           RouteLessonList.name,
           path: '/page-lesson-list',
         ),
-        _i13.RouteConfig(
+        _i14.RouteConfig(
           RouteLessonDetail.name,
           path: '/page-lesson-detail',
         ),
-        _i13.RouteConfig(
+        _i14.RouteConfig(
           RouteChapterDetail.name,
           path: '/page-chapter-detail',
         ),
-        _i13.RouteConfig(
+        _i14.RouteConfig(
           RouteLessonStepDetail.name,
           path: '/page-lesson-step-detail',
         ),
-        _i13.RouteConfig(
+        _i14.RouteConfig(
           RouteQuiz.name,
           path: '/page-quiz',
         ),
-        _i13.RouteConfig(
+        _i14.RouteConfig(
           RouteQuizResult.name,
           path: '/page-quiz-result',
+        ),
+        _i14.RouteConfig(
+          RouteDiscussion.name,
+          path: '/page-discussion',
         ),
       ];
 }
 
 /// generated route for
 /// [_i1.PageSplash]
-class RouteSplash extends _i13.PageRouteInfo<void> {
+class RouteSplash extends _i14.PageRouteInfo<void> {
   const RouteSplash()
       : super(
           RouteSplash.name,
@@ -196,7 +207,7 @@ class RouteSplash extends _i13.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i2.PageOnboarding]
-class RouteOnboarding extends _i13.PageRouteInfo<void> {
+class RouteOnboarding extends _i14.PageRouteInfo<void> {
   const RouteOnboarding()
       : super(
           RouteOnboarding.name,
@@ -208,7 +219,7 @@ class RouteOnboarding extends _i13.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i3.PageGuestDashboard]
-class RouteGuestDashboard extends _i13.PageRouteInfo<void> {
+class RouteGuestDashboard extends _i14.PageRouteInfo<void> {
   const RouteGuestDashboard()
       : super(
           RouteGuestDashboard.name,
@@ -220,7 +231,7 @@ class RouteGuestDashboard extends _i13.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i4.PageStudentDashboard]
-class RouteStudentDashboard extends _i13.PageRouteInfo<void> {
+class RouteStudentDashboard extends _i14.PageRouteInfo<void> {
   const RouteStudentDashboard()
       : super(
           RouteStudentDashboard.name,
@@ -232,7 +243,7 @@ class RouteStudentDashboard extends _i13.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i5.PageRegister]
-class RouteRegister extends _i13.PageRouteInfo<void> {
+class RouteRegister extends _i14.PageRouteInfo<void> {
   const RouteRegister()
       : super(
           RouteRegister.name,
@@ -244,7 +255,7 @@ class RouteRegister extends _i13.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i6.PageOtp]
-class RouteOtp extends _i13.PageRouteInfo<void> {
+class RouteOtp extends _i14.PageRouteInfo<void> {
   const RouteOtp()
       : super(
           RouteOtp.name,
@@ -256,7 +267,7 @@ class RouteOtp extends _i13.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i7.PageLessonList]
-class RouteLessonList extends _i13.PageRouteInfo<void> {
+class RouteLessonList extends _i14.PageRouteInfo<void> {
   const RouteLessonList()
       : super(
           RouteLessonList.name,
@@ -268,9 +279,9 @@ class RouteLessonList extends _i13.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i8.PageLessonDetail]
-class RouteLessonDetail extends _i13.PageRouteInfo<RouteLessonDetailArgs> {
+class RouteLessonDetail extends _i14.PageRouteInfo<RouteLessonDetailArgs> {
   RouteLessonDetail({
-    _i14.Key? key,
+    _i15.Key? key,
     required String lessonName,
     required int lessonType,
   }) : super(
@@ -293,7 +304,7 @@ class RouteLessonDetailArgs {
     required this.lessonType,
   });
 
-  final _i14.Key? key;
+  final _i15.Key? key;
 
   final String lessonName;
 
@@ -307,9 +318,9 @@ class RouteLessonDetailArgs {
 
 /// generated route for
 /// [_i9.PageChapterDetail]
-class RouteChapterDetail extends _i13.PageRouteInfo<RouteChapterDetailArgs> {
+class RouteChapterDetail extends _i14.PageRouteInfo<RouteChapterDetailArgs> {
   RouteChapterDetail({
-    _i14.Key? key,
+    _i15.Key? key,
     required int materialId,
   }) : super(
           RouteChapterDetail.name,
@@ -329,7 +340,7 @@ class RouteChapterDetailArgs {
     required this.materialId,
   });
 
-  final _i14.Key? key;
+  final _i15.Key? key;
 
   final int materialId;
 
@@ -342,10 +353,10 @@ class RouteChapterDetailArgs {
 /// generated route for
 /// [_i10.PageLessonStepDetail]
 class RouteLessonStepDetail
-    extends _i13.PageRouteInfo<RouteLessonStepDetailArgs> {
+    extends _i14.PageRouteInfo<RouteLessonStepDetailArgs> {
   RouteLessonStepDetail({
-    _i14.Key? key,
-    required _i15.LessonDetail lessonDetail,
+    _i15.Key? key,
+    required _i16.LessonDetail lessonDetail,
   }) : super(
           RouteLessonStepDetail.name,
           path: '/page-lesson-step-detail',
@@ -364,9 +375,9 @@ class RouteLessonStepDetailArgs {
     required this.lessonDetail,
   });
 
-  final _i14.Key? key;
+  final _i15.Key? key;
 
-  final _i15.LessonDetail lessonDetail;
+  final _i16.LessonDetail lessonDetail;
 
   @override
   String toString() {
@@ -376,9 +387,9 @@ class RouteLessonStepDetailArgs {
 
 /// generated route for
 /// [_i11.PageQuiz]
-class RouteQuiz extends _i13.PageRouteInfo<RouteQuizArgs> {
+class RouteQuiz extends _i14.PageRouteInfo<RouteQuizArgs> {
   RouteQuiz({
-    _i14.Key? key,
+    _i15.Key? key,
     required int quizId,
   }) : super(
           RouteQuiz.name,
@@ -398,7 +409,7 @@ class RouteQuizArgs {
     required this.quizId,
   });
 
-  final _i14.Key? key;
+  final _i15.Key? key;
 
   final int quizId;
 
@@ -410,9 +421,9 @@ class RouteQuizArgs {
 
 /// generated route for
 /// [_i12.PageQuizResult]
-class RouteQuizResult extends _i13.PageRouteInfo<RouteQuizResultArgs> {
+class RouteQuizResult extends _i14.PageRouteInfo<RouteQuizResultArgs> {
   RouteQuizResult({
-    _i14.Key? key,
+    _i15.Key? key,
     required int quizId,
   }) : super(
           RouteQuizResult.name,
@@ -432,7 +443,7 @@ class RouteQuizResultArgs {
     required this.quizId,
   });
 
-  final _i14.Key? key;
+  final _i15.Key? key;
 
   final int quizId;
 
@@ -440,4 +451,16 @@ class RouteQuizResultArgs {
   String toString() {
     return 'RouteQuizResultArgs{key: $key, quizId: $quizId}';
   }
+}
+
+/// generated route for
+/// [_i13.PageDiscussion]
+class RouteDiscussion extends _i14.PageRouteInfo<void> {
+  const RouteDiscussion()
+      : super(
+          RouteDiscussion.name,
+          path: '/page-discussion',
+        );
+
+  static const String name = 'RouteDiscussion';
 }
