@@ -1,6 +1,8 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:sqlyze/presentation/core/constants/assets.dart';
 import 'package:sqlyze/presentation/core/styles/app_colors.dart';
+import 'package:sqlyze/presentation/routes/router.gr.dart';
 import 'package:sqlyze/presentation/shared/widgets/others/icon_bottom_nav_bar_student.dart';
 import 'package:sqlyze/presentation/student_dashboard/tabs/tab_student_analytics.dart';
 import 'package:sqlyze/presentation/student_dashboard/tabs/tab_student_home.dart';
@@ -72,7 +74,9 @@ class _PageStudentDashboardState extends State<PageStudentDashboard> {
         visible: _currentIndex == 0,
         child: FloatingActionButton(
           backgroundColor: AppColors.primary,
-          onPressed: () {},
+          onPressed: () {
+            AutoRouter.of(context).push(const RouteDiscussion());
+          },
           child: const Icon(Icons.wechat, color: AppColors.white),
         ),
       ),
