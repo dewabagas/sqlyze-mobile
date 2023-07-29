@@ -122,4 +122,27 @@ class QuizRepository implements IQuizRepository {
       return Left(GeneralFailure(message: e.message));
     }
   }
+
+  @override
+  Future<Either<Failure, String?>> unlockQuiz(int materialId) async {
+    try {
+      String? unlockResponse;
+      debugPrint('submitQuizAnswer repo');
+      var response = await quizApiService.unlockQuiz(materialId);
+      debugPrint('response repo');
+      debugPrint('${response.data}');
+      if (response.data['code'] == 200) {
+        final body = response.data;
+        final result = body is String ? jsonDecode(body) : body;
+        unlockResponse = result['message'];
+      } else {
+        debugPrint('error woy');
+        throw GeneralException(message: 'Invalid Request');
+      }
+      return Right(unlockResponse);
+    } on GeneralException catch (e) {
+      debugPrint('general ${e.message}');
+      return Left(GeneralFailure(message: e.message));
+    }
+  }
 }

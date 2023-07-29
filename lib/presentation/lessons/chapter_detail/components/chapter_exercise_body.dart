@@ -49,6 +49,7 @@ class _ChapterExerciseBodyState extends State<ChapterExerciseBody> {
             duration: quizDetail.duration ?? '0',
             passingScore: quizDetail.passingScore ?? 0,
             hasAttempted: quizDetail.hasAttempted,
+            isUnlocked: quizDetail.isUnlocked,
             onTap: () {
               if (quizDetail.hasAttempted == true) {
                 AutoRouter.of(context)

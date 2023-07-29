@@ -57,8 +57,7 @@ class _ChapterLearnBodyState extends State<ChapterLearnBody> {
               Container(
                 height: 500.h,
                 child: PDFViewer(
-                  url:
-                      'https://drive.google.com/uc?id=1dQflASwaosA_R2oOfTvsimoB1Rxtvgra',
+                  url: '${lessonDetail.learningDocument?.url}',
                 ),
               ),
             ],
@@ -81,9 +80,8 @@ class _ChapterLearnBodyState extends State<ChapterLearnBody> {
             Container(
                 margin: EdgeInsets.symmetric(horizontal: 8.w, vertical: 6.h),
                 child: PodcastPlayer(
-                    title: 'Data Definition Language',
-                    audioUrl:
-                        'https://d3ctxlq1ktw2nl.cloudfront.net/staging/2023-4-1/326982564-22050-1-b3f2b4a2326c3.m4a'))
+                    title: '${lessonDetail.podcast?.title}',
+                    audioUrl: '${lessonDetail.podcast?.url}'))
           ])
         ],
       ),

@@ -13,6 +13,7 @@ class QuizDetail with _$QuizDetail {
     int? passingScore,
     int? questionCount,
     bool? hasAttempted,
+    bool? isUnlocked,
     String? createdAt,
     String? updatedAt,
   }) = _QuizDetail;

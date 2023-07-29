@@ -12,4 +12,5 @@ abstract class IQuizRepository {
   Future<Either<Failure, QuizResult?>> getQuizResult(int quizId, int userId);
   Future<Either<Failure, QuizSubmissionResponse?>> submitQuizAnswer(
       QuizSubmissionRequest quizSubmissionRequest);
+  Future<Either<Failure, String?>> unlockQuiz(int materialId);
 }

@@ -168,8 +168,7 @@ class _PageOnboardingState extends State<PageOnboarding>
                           borderRadius: BorderRadius.circular(100.r),
                           onPressed: () {
                             log('heee');
-                            AutoRouter.of(context)
-                                .push(const RouteLogin());
+                            AutoRouter.of(context).push(const RouteLogin());
                             // AutoRouter.of(context)
                             //     .push(const RouteStudentDashboard());
                           }),

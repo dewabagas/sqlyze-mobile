@@ -20,4 +20,7 @@ abstract class QuizApiService {
 
   @POST('/quizzes/quiz/submit')
   Future<HttpResponse> submitQuizAnswer(@Body() QuizSubmissionRequest request);
+
+  @PUT('/quizzes//quiz/{material_id}/unlock')
+  Future<HttpResponse> unlockQuiz(@Path('material_id') int materialId);
 }

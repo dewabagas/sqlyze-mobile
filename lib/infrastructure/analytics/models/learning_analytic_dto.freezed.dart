@@ -22,7 +22,7 @@ LearningAnalyticDto _$LearningAnalyticDtoFromJson(Map<String, dynamic> json) {
 mixin _$LearningAnalyticDto {
   int? get id => throw _privateConstructorUsedError;
   @JsonKey(name: 'user_id')
-  int? get userId => throw _privateConstructorUsedError;
+  String? get userId => throw _privateConstructorUsedError;
   @JsonKey(name: 'total_quizzes_taken')
   int? get totalQuizzesTaken => throw _privateConstructorUsedError;
   @JsonKey(name: 'total_score')
@@ -33,8 +33,17 @@ mixin _$LearningAnalyticDto {
   int? get totalIncorrectAnswers => throw _privateConstructorUsedError;
   @JsonKey(name: 'total_duration')
   String? get totalDuration => throw _privateConstructorUsedError;
-  String? get createdAt => throw _privateConstructorUsedError;
-  String? get updatedAt => throw _privateConstructorUsedError;
+  @JsonKey(name: 'total_quizzes')
+  int? get totalQuizzes => throw _privateConstructorUsedError;
+  @JsonKey(name: 'total_questions')
+  int? get totalQuestions => throw _privateConstructorUsedError;
+  @JsonKey(name: 'quiz_percentage')
+  int? get quizPercentage => throw _privateConstructorUsedError;
+  @JsonKey(name: 'performance_percentage')
+  double? get performancePercentage => throw _privateConstructorUsedError;
+  @JsonKey(name: 'answers_per_quiz_attempt')
+  List<AnswerAnalyticDto>? get answersPerQuizAttempt =>
+      throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -50,14 +59,18 @@ abstract class $LearningAnalyticDtoCopyWith<$Res> {
   @useResult
   $Res call(
       {int? id,
-      @JsonKey(name: 'user_id') int? userId,
+      @JsonKey(name: 'user_id') String? userId,
       @JsonKey(name: 'total_quizzes_taken') int? totalQuizzesTaken,
       @JsonKey(name: 'total_score') int? totalScore,
       @JsonKey(name: 'total_correct_answers') int? totalCorrectAnswers,
       @JsonKey(name: 'total_incorrect_answers') int? totalIncorrectAnswers,
       @JsonKey(name: 'total_duration') String? totalDuration,
-      String? createdAt,
-      String? updatedAt});
+      @JsonKey(name: 'total_quizzes') int? totalQuizzes,
+      @JsonKey(name: 'total_questions') int? totalQuestions,
+      @JsonKey(name: 'quiz_percentage') int? quizPercentage,
+      @JsonKey(name: 'performance_percentage') double? performancePercentage,
+      @JsonKey(name: 'answers_per_quiz_attempt')
+      List<AnswerAnalyticDto>? answersPerQuizAttempt});
 }
 
 /// @nodoc
@@ -80,8 +93,11 @@ class _$LearningAnalyticDtoCopyWithImpl<$Res, $Val extends LearningAnalyticDto>
     Object? totalCorrectAnswers = freezed,
     Object? totalIncorrectAnswers = freezed,
     Object? totalDuration = freezed,
-    Object? createdAt = freezed,
-    Object? updatedAt = freezed,
+    Object? totalQuizzes = freezed,
+    Object? totalQuestions = freezed,
+    Object? quizPercentage = freezed,
+    Object? performancePercentage = freezed,
+    Object? answersPerQuizAttempt = freezed,
   }) {
     return _then(_value.copyWith(
       id: freezed == id
@@ -91,7 +107,7 @@ class _$LearningAnalyticDtoCopyWithImpl<$Res, $Val extends LearningAnalyticDto>
       userId: freezed == userId
           ? _value.userId
           : userId // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as String?,
       totalQuizzesTaken: freezed == totalQuizzesTaken
           ? _value.totalQuizzesTaken
           : totalQuizzesTaken // ignore: cast_nullable_to_non_nullable
@@ -112,14 +128,26 @@ class _$LearningAnalyticDtoCopyWithImpl<$Res, $Val extends LearningAnalyticDto>
           ? _value.totalDuration
           : totalDuration // ignore: cast_nullable_to_non_nullable
               as String?,
-      createdAt: freezed == createdAt
-          ? _value.createdAt
-          : createdAt // ignore: cast_nullable_to_non_nullable
-              as String?,
-      updatedAt: freezed == updatedAt
-          ? _value.updatedAt
-          : updatedAt // ignore: cast_nullable_to_non_nullable
-              as String?,
+      totalQuizzes: freezed == totalQuizzes
+          ? _value.totalQuizzes
+          : totalQuizzes // ignore: cast_nullable_to_non_nullable
+              as int?,
+      totalQuestions: freezed == totalQuestions
+          ? _value.totalQuestions
+          : totalQuestions // ignore: cast_nullable_to_non_nullable
+              as int?,
+      quizPercentage: freezed == quizPercentage
+          ? _value.quizPercentage
+          : quizPercentage // ignore: cast_nullable_to_non_nullable
+              as int?,
+      performancePercentage: freezed == performancePercentage
+          ? _value.performancePercentage
+          : performancePercentage // ignore: cast_nullable_to_non_nullable
+              as double?,
+      answersPerQuizAttempt: freezed == answersPerQuizAttempt
+          ? _value.answersPerQuizAttempt
+          : answersPerQuizAttempt // ignore: cast_nullable_to_non_nullable
+              as List<AnswerAnalyticDto>?,
     ) as $Val);
   }
 }
@@ -134,14 +162,18 @@ abstract class _$$_LearningAnalyticDtoCopyWith<$Res>
   @useResult
   $Res call(
       {int? id,
-      @JsonKey(name: 'user_id') int? userId,
+      @JsonKey(name: 'user_id') String? userId,
       @JsonKey(name: 'total_quizzes_taken') int? totalQuizzesTaken,
       @JsonKey(name: 'total_score') int? totalScore,
       @JsonKey(name: 'total_correct_answers') int? totalCorrectAnswers,
       @JsonKey(name: 'total_incorrect_answers') int? totalIncorrectAnswers,
       @JsonKey(name: 'total_duration') String? totalDuration,
-      String? createdAt,
-      String? updatedAt});
+      @JsonKey(name: 'total_quizzes') int? totalQuizzes,
+      @JsonKey(name: 'total_questions') int? totalQuestions,
+      @JsonKey(name: 'quiz_percentage') int? quizPercentage,
+      @JsonKey(name: 'performance_percentage') double? performancePercentage,
+      @JsonKey(name: 'answers_per_quiz_attempt')
+      List<AnswerAnalyticDto>? answersPerQuizAttempt});
 }
 
 /// @nodoc
@@ -162,8 +194,11 @@ class __$$_LearningAnalyticDtoCopyWithImpl<$Res>
     Object? totalCorrectAnswers = freezed,
     Object? totalIncorrectAnswers = freezed,
     Object? totalDuration = freezed,
-    Object? createdAt = freezed,
-    Object? updatedAt = freezed,
+    Object? totalQuizzes = freezed,
+    Object? totalQuestions = freezed,
+    Object? quizPercentage = freezed,
+    Object? performancePercentage = freezed,
+    Object? answersPerQuizAttempt = freezed,
   }) {
     return _then(_$_LearningAnalyticDto(
       id: freezed == id
@@ -173,7 +208,7 @@ class __$$_LearningAnalyticDtoCopyWithImpl<$Res>
       userId: freezed == userId
           ? _value.userId
           : userId // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as String?,
       totalQuizzesTaken: freezed == totalQuizzesTaken
           ? _value.totalQuizzesTaken
           : totalQuizzesTaken // ignore: cast_nullable_to_non_nullable
@@ -194,14 +229,26 @@ class __$$_LearningAnalyticDtoCopyWithImpl<$Res>
           ? _value.totalDuration
           : totalDuration // ignore: cast_nullable_to_non_nullable
               as String?,
-      createdAt: freezed == createdAt
-          ? _value.createdAt
-          : createdAt // ignore: cast_nullable_to_non_nullable
-              as String?,
-      updatedAt: freezed == updatedAt
-          ? _value.updatedAt
-          : updatedAt // ignore: cast_nullable_to_non_nullable
-              as String?,
+      totalQuizzes: freezed == totalQuizzes
+          ? _value.totalQuizzes
+          : totalQuizzes // ignore: cast_nullable_to_non_nullable
+              as int?,
+      totalQuestions: freezed == totalQuestions
+          ? _value.totalQuestions
+          : totalQuestions // ignore: cast_nullable_to_non_nullable
+              as int?,
+      quizPercentage: freezed == quizPercentage
+          ? _value.quizPercentage
+          : quizPercentage // ignore: cast_nullable_to_non_nullable
+              as int?,
+      performancePercentage: freezed == performancePercentage
+          ? _value.performancePercentage
+          : performancePercentage // ignore: cast_nullable_to_non_nullable
+              as double?,
+      answersPerQuizAttempt: freezed == answersPerQuizAttempt
+          ? _value._answersPerQuizAttempt
+          : answersPerQuizAttempt // ignore: cast_nullable_to_non_nullable
+              as List<AnswerAnalyticDto>?,
     ));
   }
 }
@@ -217,9 +264,14 @@ class _$_LearningAnalyticDto extends _LearningAnalyticDto {
       @JsonKey(name: 'total_correct_answers') this.totalCorrectAnswers,
       @JsonKey(name: 'total_incorrect_answers') this.totalIncorrectAnswers,
       @JsonKey(name: 'total_duration') this.totalDuration,
-      this.createdAt,
-      this.updatedAt})
-      : super._();
+      @JsonKey(name: 'total_quizzes') this.totalQuizzes,
+      @JsonKey(name: 'total_questions') this.totalQuestions,
+      @JsonKey(name: 'quiz_percentage') this.quizPercentage,
+      @JsonKey(name: 'performance_percentage') this.performancePercentage,
+      @JsonKey(name: 'answers_per_quiz_attempt')
+      final List<AnswerAnalyticDto>? answersPerQuizAttempt})
+      : _answersPerQuizAttempt = answersPerQuizAttempt,
+        super._();
 
   factory _$_LearningAnalyticDto.fromJson(Map<String, dynamic> json) =>
       _$$_LearningAnalyticDtoFromJson(json);
@@ -228,7 +280,7 @@ class _$_LearningAnalyticDto extends _LearningAnalyticDto {
   final int? id;
   @override
   @JsonKey(name: 'user_id')
-  final int? userId;
+  final String? userId;
   @override
   @JsonKey(name: 'total_quizzes_taken')
   final int? totalQuizzesTaken;
@@ -245,13 +297,32 @@ class _$_LearningAnalyticDto extends _LearningAnalyticDto {
   @JsonKey(name: 'total_duration')
   final String? totalDuration;
   @override
-  final String? createdAt;
+  @JsonKey(name: 'total_quizzes')
+  final int? totalQuizzes;
   @override
-  final String? updatedAt;
+  @JsonKey(name: 'total_questions')
+  final int? totalQuestions;
+  @override
+  @JsonKey(name: 'quiz_percentage')
+  final int? quizPercentage;
+  @override
+  @JsonKey(name: 'performance_percentage')
+  final double? performancePercentage;
+  final List<AnswerAnalyticDto>? _answersPerQuizAttempt;
+  @override
+  @JsonKey(name: 'answers_per_quiz_attempt')
+  List<AnswerAnalyticDto>? get answersPerQuizAttempt {
+    final value = _answersPerQuizAttempt;
+    if (value == null) return null;
+    if (_answersPerQuizAttempt is EqualUnmodifiableListView)
+      return _answersPerQuizAttempt;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(value);
+  }
 
   @override
   String toString() {
-    return 'LearningAnalyticDto(id: $id, userId: $userId, totalQuizzesTaken: $totalQuizzesTaken, totalScore: $totalScore, totalCorrectAnswers: $totalCorrectAnswers, totalIncorrectAnswers: $totalIncorrectAnswers, totalDuration: $totalDuration, createdAt: $createdAt, updatedAt: $updatedAt)';
+    return 'LearningAnalyticDto(id: $id, userId: $userId, totalQuizzesTaken: $totalQuizzesTaken, totalScore: $totalScore, totalCorrectAnswers: $totalCorrectAnswers, totalIncorrectAnswers: $totalIncorrectAnswers, totalDuration: $totalDuration, totalQuizzes: $totalQuizzes, totalQuestions: $totalQuestions, quizPercentage: $quizPercentage, performancePercentage: $performancePercentage, answersPerQuizAttempt: $answersPerQuizAttempt)';
   }
 
   @override
@@ -271,10 +342,16 @@ class _$_LearningAnalyticDto extends _LearningAnalyticDto {
                 other.totalIncorrectAnswers == totalIncorrectAnswers) &&
             (identical(other.totalDuration, totalDuration) ||
                 other.totalDuration == totalDuration) &&
-            (identical(other.createdAt, createdAt) ||
-                other.createdAt == createdAt) &&
-            (identical(other.updatedAt, updatedAt) ||
-                other.updatedAt == updatedAt));
+            (identical(other.totalQuizzes, totalQuizzes) ||
+                other.totalQuizzes == totalQuizzes) &&
+            (identical(other.totalQuestions, totalQuestions) ||
+                other.totalQuestions == totalQuestions) &&
+            (identical(other.quizPercentage, quizPercentage) ||
+                other.quizPercentage == quizPercentage) &&
+            (identical(other.performancePercentage, performancePercentage) ||
+                other.performancePercentage == performancePercentage) &&
+            const DeepCollectionEquality()
+                .equals(other._answersPerQuizAttempt, _answersPerQuizAttempt));
   }
 
   @JsonKey(ignore: true)
@@ -288,8 +365,11 @@ class _$_LearningAnalyticDto extends _LearningAnalyticDto {
       totalCorrectAnswers,
       totalIncorrectAnswers,
       totalDuration,
-      createdAt,
-      updatedAt);
+      totalQuizzes,
+      totalQuestions,
+      quizPercentage,
+      performancePercentage,
+      const DeepCollectionEquality().hash(_answersPerQuizAttempt));
 
   @JsonKey(ignore: true)
   @override
@@ -309,15 +389,21 @@ class _$_LearningAnalyticDto extends _LearningAnalyticDto {
 abstract class _LearningAnalyticDto extends LearningAnalyticDto {
   const factory _LearningAnalyticDto(
       {final int? id,
-      @JsonKey(name: 'user_id') final int? userId,
+      @JsonKey(name: 'user_id') final String? userId,
       @JsonKey(name: 'total_quizzes_taken') final int? totalQuizzesTaken,
       @JsonKey(name: 'total_score') final int? totalScore,
       @JsonKey(name: 'total_correct_answers') final int? totalCorrectAnswers,
       @JsonKey(name: 'total_incorrect_answers')
       final int? totalIncorrectAnswers,
       @JsonKey(name: 'total_duration') final String? totalDuration,
-      final String? createdAt,
-      final String? updatedAt}) = _$_LearningAnalyticDto;
+      @JsonKey(name: 'total_quizzes') final int? totalQuizzes,
+      @JsonKey(name: 'total_questions') final int? totalQuestions,
+      @JsonKey(name: 'quiz_percentage') final int? quizPercentage,
+      @JsonKey(name: 'performance_percentage')
+      final double? performancePercentage,
+      @JsonKey(name: 'answers_per_quiz_attempt')
+      final List<AnswerAnalyticDto>?
+          answersPerQuizAttempt}) = _$_LearningAnalyticDto;
   const _LearningAnalyticDto._() : super._();
 
   factory _LearningAnalyticDto.fromJson(Map<String, dynamic> json) =
@@ -327,7 +413,7 @@ abstract class _LearningAnalyticDto extends LearningAnalyticDto {
   int? get id;
   @override
   @JsonKey(name: 'user_id')
-  int? get userId;
+  String? get userId;
   @override
   @JsonKey(name: 'total_quizzes_taken')
   int? get totalQuizzesTaken;
@@ -344,9 +430,20 @@ abstract class _LearningAnalyticDto extends LearningAnalyticDto {
   @JsonKey(name: 'total_duration')
   String? get totalDuration;
   @override
-  String? get createdAt;
+  @JsonKey(name: 'total_quizzes')
+  int? get totalQuizzes;
   @override
-  String? get updatedAt;
+  @JsonKey(name: 'total_questions')
+  int? get totalQuestions;
+  @override
+  @JsonKey(name: 'quiz_percentage')
+  int? get quizPercentage;
+  @override
+  @JsonKey(name: 'performance_percentage')
+  double? get performancePercentage;
+  @override
+  @JsonKey(name: 'answers_per_quiz_attempt')
+  List<AnswerAnalyticDto>? get answersPerQuizAttempt;
   @override
   @JsonKey(ignore: true)
   _$$_LearningAnalyticDtoCopyWith<_$_LearningAnalyticDto> get copyWith =>

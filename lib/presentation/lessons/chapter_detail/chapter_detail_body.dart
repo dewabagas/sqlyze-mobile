@@ -1,7 +1,10 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:sqlyze/application/quizzes/quiz_detail_bloc/quiz_detail_bloc.dart';
 import 'package:sqlyze/domain/lessons/entities/lesson_detail.dart';
+import 'package:sqlyze/injection.dart';
 import 'package:sqlyze/presentation/lessons/chapter_detail/components/tab_chapter_detail.dart';
 import 'package:sqlyze/presentation/shared/widgets/others/expandable_page_view/expandable_page_view.dart';
 import 'package:sqlyze/presentation/shared/widgets/pages/page_decoration_top.dart';

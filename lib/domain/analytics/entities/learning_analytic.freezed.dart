@@ -17,14 +17,18 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$LearningAnalytic {
   int? get id => throw _privateConstructorUsedError;
-  int? get userId => throw _privateConstructorUsedError;
+  String? get userId => throw _privateConstructorUsedError;
   int? get totalQuizzesTaken => throw _privateConstructorUsedError;
   int? get totalScore => throw _privateConstructorUsedError;
   int? get totalCorrectAnswers => throw _privateConstructorUsedError;
   int? get totalIncorrectAnswers => throw _privateConstructorUsedError;
   String? get totalDuration => throw _privateConstructorUsedError;
-  String? get createdAt => throw _privateConstructorUsedError;
-  String? get updatedAt => throw _privateConstructorUsedError;
+  int? get totalQuizzes => throw _privateConstructorUsedError;
+  int? get totalQuestions => throw _privateConstructorUsedError;
+  int? get quizPercentage => throw _privateConstructorUsedError;
+  double? get performancePercentage => throw _privateConstructorUsedError;
+  List<AnswerAnalytic>? get answersPerQuizAttempt =>
+      throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $LearningAnalyticCopyWith<LearningAnalytic> get copyWith =>
@@ -39,14 +43,17 @@ abstract class $LearningAnalyticCopyWith<$Res> {
   @useResult
   $Res call(
       {int? id,
-      int? userId,
+      String? userId,
       int? totalQuizzesTaken,
       int? totalScore,
       int? totalCorrectAnswers,
       int? totalIncorrectAnswers,
       String? totalDuration,
-      String? createdAt,
-      String? updatedAt});
+      int? totalQuizzes,
+      int? totalQuestions,
+      int? quizPercentage,
+      double? performancePercentage,
+      List<AnswerAnalytic>? answersPerQuizAttempt});
 }
 
 /// @nodoc
@@ -69,8 +76,11 @@ class _$LearningAnalyticCopyWithImpl<$Res, $Val extends LearningAnalytic>
     Object? totalCorrectAnswers = freezed,
     Object? totalIncorrectAnswers = freezed,
     Object? totalDuration = freezed,
-    Object? createdAt = freezed,
-    Object? updatedAt = freezed,
+    Object? totalQuizzes = freezed,
+    Object? totalQuestions = freezed,
+    Object? quizPercentage = freezed,
+    Object? performancePercentage = freezed,
+    Object? answersPerQuizAttempt = freezed,
   }) {
     return _then(_value.copyWith(
       id: freezed == id
@@ -80,7 +90,7 @@ class _$LearningAnalyticCopyWithImpl<$Res, $Val extends LearningAnalytic>
       userId: freezed == userId
           ? _value.userId
           : userId // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as String?,
       totalQuizzesTaken: freezed == totalQuizzesTaken
           ? _value.totalQuizzesTaken
           : totalQuizzesTaken // ignore: cast_nullable_to_non_nullable
@@ -101,14 +111,26 @@ class _$LearningAnalyticCopyWithImpl<$Res, $Val extends LearningAnalytic>
           ? _value.totalDuration
           : totalDuration // ignore: cast_nullable_to_non_nullable
               as String?,
-      createdAt: freezed == createdAt
-          ? _value.createdAt
-          : createdAt // ignore: cast_nullable_to_non_nullable
-              as String?,
-      updatedAt: freezed == updatedAt
-          ? _value.updatedAt
-          : updatedAt // ignore: cast_nullable_to_non_nullable
-              as String?,
+      totalQuizzes: freezed == totalQuizzes
+          ? _value.totalQuizzes
+          : totalQuizzes // ignore: cast_nullable_to_non_nullable
+              as int?,
+      totalQuestions: freezed == totalQuestions
+          ? _value.totalQuestions
+          : totalQuestions // ignore: cast_nullable_to_non_nullable
+              as int?,
+      quizPercentage: freezed == quizPercentage
+          ? _value.quizPercentage
+          : quizPercentage // ignore: cast_nullable_to_non_nullable
+              as int?,
+      performancePercentage: freezed == performancePercentage
+          ? _value.performancePercentage
+          : performancePercentage // ignore: cast_nullable_to_non_nullable
+              as double?,
+      answersPerQuizAttempt: freezed == answersPerQuizAttempt
+          ? _value.answersPerQuizAttempt
+          : answersPerQuizAttempt // ignore: cast_nullable_to_non_nullable
+              as List<AnswerAnalytic>?,
     ) as $Val);
   }
 }
@@ -123,14 +145,17 @@ abstract class _$$_LearningAnalyticCopyWith<$Res>
   @useResult
   $Res call(
       {int? id,
-      int? userId,
+      String? userId,
       int? totalQuizzesTaken,
       int? totalScore,
       int? totalCorrectAnswers,
       int? totalIncorrectAnswers,
       String? totalDuration,
-      String? createdAt,
-      String? updatedAt});
+      int? totalQuizzes,
+      int? totalQuestions,
+      int? quizPercentage,
+      double? performancePercentage,
+      List<AnswerAnalytic>? answersPerQuizAttempt});
 }
 
 /// @nodoc
@@ -151,8 +176,11 @@ class __$$_LearningAnalyticCopyWithImpl<$Res>
     Object? totalCorrectAnswers = freezed,
     Object? totalIncorrectAnswers = freezed,
     Object? totalDuration = freezed,
-    Object? createdAt = freezed,
-    Object? updatedAt = freezed,
+    Object? totalQuizzes = freezed,
+    Object? totalQuestions = freezed,
+    Object? quizPercentage = freezed,
+    Object? performancePercentage = freezed,
+    Object? answersPerQuizAttempt = freezed,
   }) {
     return _then(_$_LearningAnalytic(
       id: freezed == id
@@ -162,7 +190,7 @@ class __$$_LearningAnalyticCopyWithImpl<$Res>
       userId: freezed == userId
           ? _value.userId
           : userId // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as String?,
       totalQuizzesTaken: freezed == totalQuizzesTaken
           ? _value.totalQuizzesTaken
           : totalQuizzesTaken // ignore: cast_nullable_to_non_nullable
@@ -183,14 +211,26 @@ class __$$_LearningAnalyticCopyWithImpl<$Res>
           ? _value.totalDuration
           : totalDuration // ignore: cast_nullable_to_non_nullable
               as String?,
-      createdAt: freezed == createdAt
-          ? _value.createdAt
-          : createdAt // ignore: cast_nullable_to_non_nullable
-              as String?,
-      updatedAt: freezed == updatedAt
-          ? _value.updatedAt
-          : updatedAt // ignore: cast_nullable_to_non_nullable
-              as String?,
+      totalQuizzes: freezed == totalQuizzes
+          ? _value.totalQuizzes
+          : totalQuizzes // ignore: cast_nullable_to_non_nullable
+              as int?,
+      totalQuestions: freezed == totalQuestions
+          ? _value.totalQuestions
+          : totalQuestions // ignore: cast_nullable_to_non_nullable
+              as int?,
+      quizPercentage: freezed == quizPercentage
+          ? _value.quizPercentage
+          : quizPercentage // ignore: cast_nullable_to_non_nullable
+              as int?,
+      performancePercentage: freezed == performancePercentage
+          ? _value.performancePercentage
+          : performancePercentage // ignore: cast_nullable_to_non_nullable
+              as double?,
+      answersPerQuizAttempt: freezed == answersPerQuizAttempt
+          ? _value._answersPerQuizAttempt
+          : answersPerQuizAttempt // ignore: cast_nullable_to_non_nullable
+              as List<AnswerAnalytic>?,
     ));
   }
 }
@@ -206,13 +246,17 @@ class _$_LearningAnalytic implements _LearningAnalytic {
       this.totalCorrectAnswers,
       this.totalIncorrectAnswers,
       this.totalDuration,
-      this.createdAt,
-      this.updatedAt});
+      this.totalQuizzes,
+      this.totalQuestions,
+      this.quizPercentage,
+      this.performancePercentage,
+      final List<AnswerAnalytic>? answersPerQuizAttempt})
+      : _answersPerQuizAttempt = answersPerQuizAttempt;
 
   @override
   final int? id;
   @override
-  final int? userId;
+  final String? userId;
   @override
   final int? totalQuizzesTaken;
   @override
@@ -224,13 +268,27 @@ class _$_LearningAnalytic implements _LearningAnalytic {
   @override
   final String? totalDuration;
   @override
-  final String? createdAt;
+  final int? totalQuizzes;
   @override
-  final String? updatedAt;
+  final int? totalQuestions;
+  @override
+  final int? quizPercentage;
+  @override
+  final double? performancePercentage;
+  final List<AnswerAnalytic>? _answersPerQuizAttempt;
+  @override
+  List<AnswerAnalytic>? get answersPerQuizAttempt {
+    final value = _answersPerQuizAttempt;
+    if (value == null) return null;
+    if (_answersPerQuizAttempt is EqualUnmodifiableListView)
+      return _answersPerQuizAttempt;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(value);
+  }
 
   @override
   String toString() {
-    return 'LearningAnalytic(id: $id, userId: $userId, totalQuizzesTaken: $totalQuizzesTaken, totalScore: $totalScore, totalCorrectAnswers: $totalCorrectAnswers, totalIncorrectAnswers: $totalIncorrectAnswers, totalDuration: $totalDuration, createdAt: $createdAt, updatedAt: $updatedAt)';
+    return 'LearningAnalytic(id: $id, userId: $userId, totalQuizzesTaken: $totalQuizzesTaken, totalScore: $totalScore, totalCorrectAnswers: $totalCorrectAnswers, totalIncorrectAnswers: $totalIncorrectAnswers, totalDuration: $totalDuration, totalQuizzes: $totalQuizzes, totalQuestions: $totalQuestions, quizPercentage: $quizPercentage, performancePercentage: $performancePercentage, answersPerQuizAttempt: $answersPerQuizAttempt)';
   }
 
   @override
@@ -250,10 +308,16 @@ class _$_LearningAnalytic implements _LearningAnalytic {
                 other.totalIncorrectAnswers == totalIncorrectAnswers) &&
             (identical(other.totalDuration, totalDuration) ||
                 other.totalDuration == totalDuration) &&
-            (identical(other.createdAt, createdAt) ||
-                other.createdAt == createdAt) &&
-            (identical(other.updatedAt, updatedAt) ||
-                other.updatedAt == updatedAt));
+            (identical(other.totalQuizzes, totalQuizzes) ||
+                other.totalQuizzes == totalQuizzes) &&
+            (identical(other.totalQuestions, totalQuestions) ||
+                other.totalQuestions == totalQuestions) &&
+            (identical(other.quizPercentage, quizPercentage) ||
+                other.quizPercentage == quizPercentage) &&
+            (identical(other.performancePercentage, performancePercentage) ||
+                other.performancePercentage == performancePercentage) &&
+            const DeepCollectionEquality()
+                .equals(other._answersPerQuizAttempt, _answersPerQuizAttempt));
   }
 
   @override
@@ -266,8 +330,11 @@ class _$_LearningAnalytic implements _LearningAnalytic {
       totalCorrectAnswers,
       totalIncorrectAnswers,
       totalDuration,
-      createdAt,
-      updatedAt);
+      totalQuizzes,
+      totalQuestions,
+      quizPercentage,
+      performancePercentage,
+      const DeepCollectionEquality().hash(_answersPerQuizAttempt));
 
   @JsonKey(ignore: true)
   @override
@@ -279,19 +346,22 @@ class _$_LearningAnalytic implements _LearningAnalytic {
 abstract class _LearningAnalytic implements LearningAnalytic {
   factory _LearningAnalytic(
       {final int? id,
-      final int? userId,
+      final String? userId,
       final int? totalQuizzesTaken,
       final int? totalScore,
       final int? totalCorrectAnswers,
       final int? totalIncorrectAnswers,
       final String? totalDuration,
-      final String? createdAt,
-      final String? updatedAt}) = _$_LearningAnalytic;
+      final int? totalQuizzes,
+      final int? totalQuestions,
+      final int? quizPercentage,
+      final double? performancePercentage,
+      final List<AnswerAnalytic>? answersPerQuizAttempt}) = _$_LearningAnalytic;
 
   @override
   int? get id;
   @override
-  int? get userId;
+  String? get userId;
   @override
   int? get totalQuizzesTaken;
   @override
@@ -303,9 +373,15 @@ abstract class _LearningAnalytic implements LearningAnalytic {
   @override
   String? get totalDuration;
   @override
-  String? get createdAt;
+  int? get totalQuizzes;
   @override
-  String? get updatedAt;
+  int? get totalQuestions;
+  @override
+  int? get quizPercentage;
+  @override
+  double? get performancePercentage;
+  @override
+  List<AnswerAnalytic>? get answersPerQuizAttempt;
   @override
   @JsonKey(ignore: true)
   _$$_LearningAnalyticCopyWith<_$_LearningAnalytic> get copyWith =>

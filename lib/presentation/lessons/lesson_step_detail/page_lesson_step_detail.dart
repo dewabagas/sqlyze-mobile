@@ -7,13 +7,18 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:screenshot/screenshot.dart';
 import 'package:share_plus/share_plus.dart';
+import 'package:sqlyze/application/quizzes/quiz_unlock_cubit/quiz_unlock_cubit.dart';
 import 'package:sqlyze/domain/lessons/entities/lesson_detail.dart';
+import 'package:sqlyze/injection.dart';
 import 'package:sqlyze/presentation/core/constants/styles.dart';
 import 'package:sqlyze/presentation/core/styles/app_colors.dart';
+import 'package:sqlyze/presentation/routes/router.gr.dart';
 import 'package:sqlyze/presentation/shared/widgets/buttons/button_gradient.dart';
 import 'package:sqlyze/presentation/shared/widgets/buttons/button_primary.dart';
 import 'package:sqlyze/presentation/shared/widgets/others/show_dialog.dart';
@@ -47,6 +52,7 @@ class _PageLessonStepDetailState extends State<PageLessonStepDetail>
   ValueNotifier loadingProgress = ValueNotifier<dynamic>(0.0);
   CarouselController buttonCarouselController = CarouselController();
   int currentIndex = 0;
+  late BuildContext _buildContext;
 
   double webViewHeight = 1;
   String? htmlData;
@@ -99,176 +105,232 @@ class _PageLessonStepDetailState extends State<PageLessonStepDetail>
   Widget build(BuildContext context) {
     final LessonDetail lessonDetail = widget.lessonDetail;
 
-    return PageDecorationTop(
-      appBarTitle: 'SQLyze',
-      appBarActions: [
-        Padding(
-          padding: EdgeInsets.only(right: 16.w),
-          child: InkWell(
-            onTap: () async {
-              try {
-                final image =
-                    await screenshotControllers[currentIndex].capture();
-                final directory =
-                    (await getApplicationDocumentsDirectory()).path;
-
-                String fileName =
-                    DateTime.now().microsecondsSinceEpoch.toString();
-                File file = await File("$directory/$fileName.png").create();
-                await file.writeAsBytes(image!.buffer.asUint8List());
-                await Share.shareFiles(
-                  [file.path],
-                  text:
-                      '${widget.lessonDetail.learningSteps![currentIndex].title}',
+    return BlocProvider<QuizUnlockCubit>(
+      create: (BuildContext context) => getIt<QuizUnlockCubit>(),
+      child: BlocListener<QuizUnlockCubit, QuizUnlockState>(
+        listener: (context, state) {
+          state.map(
+              initial: (value) => const SizedBox.shrink(),
+              loadInProgress: (value) => EasyLoading.show(status: 'Loading...'),
+              loadSuccess: (value) {
+                EasyLoading.dismiss();
+                // AutoRouter.of(context).replace(
+                //   RouteChapterDetail(materialId: lessonDetail.id!),
+                // );
+                AutoRouter.of(context).popAndPush(
+                  RouteChapterDetail(materialId: lessonDetail.id!),
                 );
-              } catch (e) {
-                showErrorDialog(context: context, message: e.toString());
-              }
-            },
-            child: const Icon(Icons.share_rounded, color: AppColors.white),
-          ),
-        )
-      ],
-      child: Stack(
-        children: [
-          LoopPageView.builder(
-            controller: pageController,
-            itemCount: lessonDetail.learningSteps!.length,
-            onPageChanged: (index) {
-              setState(() {
-                currentIndex = index;
+
+                // AutoRouter.of(context).replace(
+                //   RouteChapterDetail(materialId: lessonDetail.id!),
+                // );
+
+                // AutoRouter.of(context).replace(RouteChapterDetail(materialId: lessonDetail.id!));
+                // AutoRouter.of(context).pushAndRemoveUntil(
+                // AutoRouter.of(context).pushAndPopUntil(
+                //   RouteChapterDetail(materialId: lessonDetail.id!),
+                //   predicate: (route) =>
+                //       route.settings.name ==
+                //       RouteChapterDetail
+                //           .name, // Ganti '/list-lesson' dengan nama route halaman List Lesson
+                // );
+
+                // AutoRouter.of(context).popUntil((route) =>
+                //     route.settings.name ==
+                //     RouteChapterDetail
+                //         .name); // Ganti '/list-lesson' dengan nama route halaman List Lesson
+              },
+              loadFailure: (value) {
+                EasyLoading.dismiss();
+                showErrorDialog(
+                    context: context, message: value.message ?? 'Error');
               });
-            },
-            physics: ClampingScrollPhysics(),
-            itemBuilder: (context, index) {
-              final lessonStep = lessonDetail.learningSteps![index];
-              return Container(
-                padding: EdgeInsets.symmetric(horizontal: 6.w, vertical: 8.h),
-                width: screenWidth,
-                child: Column(
-                  children: [
-                    Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 10.w),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: lessonDetail.learningSteps!
-                            .asMap()
-                            .entries
-                            .map((entry) {
-                          return Expanded(
-                            child: GestureDetector(
-                              onTap: () => buttonCarouselController
-                                  .animateToPage(entry.key),
-                              child: Container(
-                                width: currentIndex == entry.key ? 43.w : 7.w,
-                                height: 7.w,
-                                margin: EdgeInsets.symmetric(horizontal: 3.w),
-                                decoration: BoxDecoration(
-                                  gradient: currentIndex >= entry.key
-                                      ? const LinearGradient(
-                                          begin: Alignment.topLeft,
-                                          end: Alignment.bottomRight,
-                                          colors: [
-                                            AppColors.primary,
-                                            AppColors.primary,
-                                            AppColors.secondary
-                                          ],
-                                        )
-                                      : const LinearGradient(
-                                          begin: Alignment.topLeft,
-                                          end: Alignment.bottomRight,
-                                          colors: [
-                                            AppColors.lightGrey5,
-                                            AppColors.lightGrey5
-                                          ],
-                                        ),
-                                  borderRadius: BorderRadius.circular(100.r),
+        },
+        child: Builder(builder: (context) {
+          _buildContext = context;
+          return PageDecorationTop(
+            appBarTitle: 'SQLyze',
+            appBarActions: [
+              Padding(
+                padding: EdgeInsets.only(right: 16.w),
+                child: InkWell(
+                  onTap: () async {
+                    try {
+                      final image =
+                          await screenshotControllers[currentIndex].capture();
+                      final directory =
+                          (await getApplicationDocumentsDirectory()).path;
+
+                      String fileName =
+                          DateTime.now().microsecondsSinceEpoch.toString();
+                      File file =
+                          await File("$directory/$fileName.png").create();
+                      await file.writeAsBytes(image!.buffer.asUint8List());
+                      await Share.shareFiles(
+                        [file.path],
+                        text:
+                            '${widget.lessonDetail.learningSteps![currentIndex].title}',
+                      );
+                    } catch (e) {
+                      showErrorDialog(context: context, message: e.toString());
+                    }
+                  },
+                  child:
+                      const Icon(Icons.share_rounded, color: AppColors.white),
+                ),
+              )
+            ],
+            child: Stack(
+              children: [
+                LoopPageView.builder(
+                  controller: pageController,
+                  itemCount: lessonDetail.learningSteps!.length,
+                  onPageChanged: (index) {
+                    setState(() {
+                      currentIndex = index;
+                    });
+                  },
+                  physics: ClampingScrollPhysics(),
+                  itemBuilder: (context, index) {
+                    final lessonStep = lessonDetail.learningSteps![index];
+                    return Container(
+                      padding:
+                          EdgeInsets.symmetric(horizontal: 6.w, vertical: 8.h),
+                      width: screenWidth,
+                      child: Column(
+                        children: [
+                          Padding(
+                            padding: EdgeInsets.symmetric(horizontal: 10.w),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: lessonDetail.learningSteps!
+                                  .asMap()
+                                  .entries
+                                  .map((entry) {
+                                return Expanded(
+                                  child: GestureDetector(
+                                    onTap: () => buttonCarouselController
+                                        .animateToPage(entry.key),
+                                    child: Container(
+                                      width: currentIndex == entry.key
+                                          ? 43.w
+                                          : 7.w,
+                                      height: 7.w,
+                                      margin:
+                                          EdgeInsets.symmetric(horizontal: 3.w),
+                                      decoration: BoxDecoration(
+                                        gradient: currentIndex >= entry.key
+                                            ? const LinearGradient(
+                                                begin: Alignment.topLeft,
+                                                end: Alignment.bottomRight,
+                                                colors: [
+                                                  AppColors.primary,
+                                                  AppColors.primary,
+                                                  AppColors.secondary
+                                                ],
+                                              )
+                                            : const LinearGradient(
+                                                begin: Alignment.topLeft,
+                                                end: Alignment.bottomRight,
+                                                colors: [
+                                                  AppColors.lightGrey5,
+                                                  AppColors.lightGrey5
+                                                ],
+                                              ),
+                                        borderRadius:
+                                            BorderRadius.circular(100.r),
+                                      ),
+                                    ),
+                                  ),
+                                );
+                              }).toList(),
+                            ),
+                          ),
+                          Expanded(
+                            child: ClipRRect(
+                              child: Screenshot(
+                                controller: screenshotControllers[index],
+                                child: WebViewWidget(
+                                  gestureRecognizers: gestureRecognizers,
+                                  controller: controllers[index],
                                 ),
                               ),
                             ),
-                          );
-                        }).toList(),
+                          ),
+                          SizedBox(height: 70.h)
+                        ],
+                      ),
+                    );
+                  },
+                ),
+                Align(
+                  alignment: Alignment.bottomCenter,
+                  child: Container(
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      boxShadow: [
+                        BoxShadow(
+                            offset: const Offset(0, 4),
+                            blurRadius: 8,
+                            color: Colors.grey.shade200)
+                      ],
+                      border: Border.all(color: Colors.grey.shade200),
+                      borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(15.r),
+                        topRight: Radius.circular(15.r),
                       ),
                     ),
-                    Expanded(
-                      child: ClipRRect(
-                        child: Screenshot(
-                          controller: screenshotControllers[index],
-                          child: WebViewWidget(
-                            gestureRecognizers: gestureRecognizers,
-                            controller: controllers[index],
+                    padding: EdgeInsets.only(
+                        left: 16.w, right: 16.w, bottom: 20.h, top: 10.h),
+                    child: Row(
+                      children: [
+                        Expanded(
+                          child: ButtonPrimary(
+                            enabled: currentIndex == 0 ? false : true,
+                            height: 30.h,
+                            title: 'Prev',
+                            onPressed: () {
+                              setState(() {
+                                currentIndex = currentIndex - 1;
+                              });
+                              pageController.animateToPage(currentIndex,
+                                  duration: Duration(milliseconds: 400),
+                                  curve: Curves.easeIn);
+                            },
                           ),
                         ),
-                      ),
-                    ),
-                    SizedBox(height: 70.h)
-                  ],
-                ),
-              );
-            },
-          ),
-          Align(
-            alignment: Alignment.bottomCenter,
-            child: Container(
-              decoration: BoxDecoration(
-                color: Colors.white,
-                boxShadow: [
-                  BoxShadow(
-                      offset: const Offset(0, 4),
-                      blurRadius: 8,
-                      color: Colors.grey.shade200)
-                ],
-                border: Border.all(color: Colors.grey.shade200),
-                borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(15.r),
-                  topRight: Radius.circular(15.r),
-                ),
-              ),
-              padding: EdgeInsets.only(
-                  left: 16.w, right: 16.w, bottom: 20.h, top: 10.h),
-              child: Row(
-                children: [
-                  Expanded(
-                    child: ButtonPrimary(
-                      enabled: currentIndex == 0 ? false : true,
-                      height: 30.h,
-                      title: 'Prev',
-                      onPressed: () {
-                        setState(() {
-                          currentIndex = currentIndex - 1;
-                        });
-                        pageController.animateToPage(currentIndex,
-                            duration: Duration(milliseconds: 400),
-                            curve: Curves.easeIn);
-                      },
+                        SizedBox(width: 10.w),
+                        Expanded(
+                          child: ButtonGradient(
+                            height: 30.h,
+                            title: currentIndex ==
+                                    lessonDetail.learningSteps!.length - 1
+                                ? 'Selesai'
+                                : 'Next',
+                            onPressed: () {
+                              if (currentIndex <
+                                  lessonDetail.learningSteps!.length - 1) {
+                                currentIndex = currentIndex + 1;
+                                pageController.animateToPage(currentIndex,
+                                    duration: Duration(milliseconds: 400),
+                                    curve: Curves.easeIn);
+                              } else {
+                                // AutoRouter.of(context).pop();
+                                _buildContext
+                                    .read<QuizUnlockCubit>()
+                                    .quizUnlock(lessonDetail.id!);
+                              }
+                            },
+                          ),
+                        ),
+                      ],
                     ),
                   ),
-                  SizedBox(width: 10.w),
-                  Expanded(
-                    child: ButtonGradient(
-                      height: 30.h,
-                      title:
-                          currentIndex == lessonDetail.learningSteps!.length - 1
-                              ? 'Selesai'
-                              : 'Next',
-                      onPressed: () {
-                        if (currentIndex <
-                            lessonDetail.learningSteps!.length - 1) {
-                          currentIndex = currentIndex + 1;
-                          pageController.animateToPage(currentIndex,
-                              duration: Duration(milliseconds: 400),
-                              curve: Curves.easeIn);
-                        } else {
-                          AutoRouter.of(context).pop();
-                        }
-                      },
-                    ),
-                  ),
-                ],
-              ),
+                ),
+              ],
             ),
-          ),
-        ],
+          );
+        }),
       ),
     );
   }

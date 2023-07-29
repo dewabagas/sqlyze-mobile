@@ -33,6 +33,8 @@ mixin _$QuizDetailDto {
   int? get questionCount => throw _privateConstructorUsedError;
   @JsonKey(name: 'has_attempted')
   bool? get hasAttempted => throw _privateConstructorUsedError;
+  @JsonKey(name: 'is_unlocked')
+  bool? get isUnlocked => throw _privateConstructorUsedError;
   String? get createdAt => throw _privateConstructorUsedError;
   String? get updatedAt => throw _privateConstructorUsedError;
 
@@ -57,6 +59,7 @@ abstract class $QuizDetailDtoCopyWith<$Res> {
       @JsonKey(name: 'passing_score') int? passingScore,
       @JsonKey(name: 'question_count') int? questionCount,
       @JsonKey(name: 'has_attempted') bool? hasAttempted,
+      @JsonKey(name: 'is_unlocked') bool? isUnlocked,
       String? createdAt,
       String? updatedAt});
 }
@@ -82,6 +85,7 @@ class _$QuizDetailDtoCopyWithImpl<$Res, $Val extends QuizDetailDto>
     Object? passingScore = freezed,
     Object? questionCount = freezed,
     Object? hasAttempted = freezed,
+    Object? isUnlocked = freezed,
     Object? createdAt = freezed,
     Object? updatedAt = freezed,
   }) {
@@ -118,6 +122,10 @@ class _$QuizDetailDtoCopyWithImpl<$Res, $Val extends QuizDetailDto>
           ? _value.hasAttempted
           : hasAttempted // ignore: cast_nullable_to_non_nullable
               as bool?,
+      isUnlocked: freezed == isUnlocked
+          ? _value.isUnlocked
+          : isUnlocked // ignore: cast_nullable_to_non_nullable
+              as bool?,
       createdAt: freezed == createdAt
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
@@ -147,6 +155,7 @@ abstract class _$$_QuizDetailDtoCopyWith<$Res>
       @JsonKey(name: 'passing_score') int? passingScore,
       @JsonKey(name: 'question_count') int? questionCount,
       @JsonKey(name: 'has_attempted') bool? hasAttempted,
+      @JsonKey(name: 'is_unlocked') bool? isUnlocked,
       String? createdAt,
       String? updatedAt});
 }
@@ -170,6 +179,7 @@ class __$$_QuizDetailDtoCopyWithImpl<$Res>
     Object? passingScore = freezed,
     Object? questionCount = freezed,
     Object? hasAttempted = freezed,
+    Object? isUnlocked = freezed,
     Object? createdAt = freezed,
     Object? updatedAt = freezed,
   }) {
@@ -206,6 +216,10 @@ class __$$_QuizDetailDtoCopyWithImpl<$Res>
           ? _value.hasAttempted
           : hasAttempted // ignore: cast_nullable_to_non_nullable
               as bool?,
+      isUnlocked: freezed == isUnlocked
+          ? _value.isUnlocked
+          : isUnlocked // ignore: cast_nullable_to_non_nullable
+              as bool?,
       createdAt: freezed == createdAt
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
@@ -230,6 +244,7 @@ class _$_QuizDetailDto extends _QuizDetailDto {
       @JsonKey(name: 'passing_score') this.passingScore,
       @JsonKey(name: 'question_count') this.questionCount,
       @JsonKey(name: 'has_attempted') this.hasAttempted,
+      @JsonKey(name: 'is_unlocked') this.isUnlocked,
       this.createdAt,
       this.updatedAt})
       : super._();
@@ -259,13 +274,16 @@ class _$_QuizDetailDto extends _QuizDetailDto {
   @JsonKey(name: 'has_attempted')
   final bool? hasAttempted;
   @override
+  @JsonKey(name: 'is_unlocked')
+  final bool? isUnlocked;
+  @override
   final String? createdAt;
   @override
   final String? updatedAt;
 
   @override
   String toString() {
-    return 'QuizDetailDto(id: $id, materialId: $materialId, title: $title, isFinalExam: $isFinalExam, duration: $duration, passingScore: $passingScore, questionCount: $questionCount, hasAttempted: $hasAttempted, createdAt: $createdAt, updatedAt: $updatedAt)';
+    return 'QuizDetailDto(id: $id, materialId: $materialId, title: $title, isFinalExam: $isFinalExam, duration: $duration, passingScore: $passingScore, questionCount: $questionCount, hasAttempted: $hasAttempted, isUnlocked: $isUnlocked, createdAt: $createdAt, updatedAt: $updatedAt)';
   }
 
   @override
@@ -287,6 +305,8 @@ class _$_QuizDetailDto extends _QuizDetailDto {
                 other.questionCount == questionCount) &&
             (identical(other.hasAttempted, hasAttempted) ||
                 other.hasAttempted == hasAttempted) &&
+            (identical(other.isUnlocked, isUnlocked) ||
+                other.isUnlocked == isUnlocked) &&
             (identical(other.createdAt, createdAt) ||
                 other.createdAt == createdAt) &&
             (identical(other.updatedAt, updatedAt) ||
@@ -305,6 +325,7 @@ class _$_QuizDetailDto extends _QuizDetailDto {
       passingScore,
       questionCount,
       hasAttempted,
+      isUnlocked,
       createdAt,
       updatedAt);
 
@@ -332,6 +353,7 @@ abstract class _QuizDetailDto extends QuizDetailDto {
       @JsonKey(name: 'passing_score') final int? passingScore,
       @JsonKey(name: 'question_count') final int? questionCount,
       @JsonKey(name: 'has_attempted') final bool? hasAttempted,
+      @JsonKey(name: 'is_unlocked') final bool? isUnlocked,
       final String? createdAt,
       final String? updatedAt}) = _$_QuizDetailDto;
   const _QuizDetailDto._() : super._();
@@ -360,6 +382,9 @@ abstract class _QuizDetailDto extends QuizDetailDto {
   @override
   @JsonKey(name: 'has_attempted')
   bool? get hasAttempted;
+  @override
+  @JsonKey(name: 'is_unlocked')
+  bool? get isUnlocked;
   @override
   String? get createdAt;
   @override

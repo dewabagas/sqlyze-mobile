@@ -6,13 +6,9 @@ import 'package:flutter_svg/svg.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:sqlyze/domain/core/helpers/validation_helper.dart';
 import 'package:sqlyze/domain/user/entities/user_profile.dart';
-import 'package:sqlyze/presentation/core/constants/assets.dart';
 import 'package:sqlyze/presentation/core/constants/styles.dart';
-import 'package:sqlyze/presentation/core/styles/app_colors.dart';
 import 'package:sqlyze/presentation/shared/widgets/buttons/button_gradient.dart';
-import 'package:sqlyze/presentation/shared/widgets/images/image_circle.dart';
 import 'package:sqlyze/presentation/shared/widgets/inputs/input_secondary.dart';
-import 'package:sqlyze/presentation/shared/widgets/inputs/input_secured.dart';
 import 'package:sqlyze/presentation/shared/widgets/pages/page_decoration_top.dart';
 
 class PageMyAccount extends StatefulWidget {
@@ -205,7 +201,6 @@ class _PageMyAccountState extends State<PageMyAccount> {
 
   Future<void> uploadImage(String imagePath) async {
     var url = 'http://your-server.com/upload'; // URL for your server
-  
   }
 
   Widget _containerUploadImage(String? capturedImagePath, String? placeholder) {

@@ -49,4 +49,3 @@ class FirebaseRemoteConfigService {
 
   String get getFeedbackUrl => _remoteConfig.getString(feedbackUrl);
 }
-

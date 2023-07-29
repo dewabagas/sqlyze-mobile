@@ -13,7 +13,7 @@ import 'package:get_it/get_it.dart' as _i1;
 import 'package:injectable/injectable.dart' as _i2;
 import 'package:sqlyze/application/analytics/learning_analytic_bloc/learning_analytic_bloc.dart'
     as _i14;
-import 'package:sqlyze/application/auth_bloc/auth_bloc.dart' as _i24;
+import 'package:sqlyze/application/auth_bloc/auth_bloc.dart' as _i25;
 import 'package:sqlyze/application/greetings_bloc/greetings_bloc.dart' as _i3;
 import 'package:sqlyze/application/lessons/lesson_detail_bloc/lesson_detail_bloc.dart'
     as _i15;
@@ -27,11 +27,13 @@ import 'package:sqlyze/application/quizzes/quiz_questions_bloc/quiz_questions_bl
     as _i19;
 import 'package:sqlyze/application/quizzes/quiz_result_bloc/quiz_result_bloc.dart'
     as _i20;
-import 'package:sqlyze/application/register_bloc/register_bloc.dart' as _i21;
+import 'package:sqlyze/application/quizzes/quiz_unlock_cubit/quiz_unlock_cubit.dart'
+    as _i21;
+import 'package:sqlyze/application/register_bloc/register_bloc.dart' as _i22;
 import 'package:sqlyze/application/splashscreen_bloc/splashscreen_bloc.dart'
-    as _i22;
-import 'package:sqlyze/application/user_profile_bloc/user_profile_bloc.dart'
     as _i23;
+import 'package:sqlyze/application/user_profile_bloc/user_profile_bloc.dart'
+    as _i24;
 import 'package:sqlyze/domain/analytics/interfaces/i_analytic_repository.dart'
     as _i4;
 import 'package:sqlyze/domain/auth/interfaces/i_auth_repository.dart' as _i6;
@@ -82,12 +84,14 @@ extension GetItInjectableX on _i1.GetIt {
         () => _i19.QuizQuestionsBloc(gh<_i10.IQuizRepository>()));
     gh.factory<_i20.QuizResultBloc>(
         () => _i20.QuizResultBloc(gh<_i10.IQuizRepository>()));
-    gh.factory<_i21.RegisterBloc>(
-        () => _i21.RegisterBloc(gh<_i6.IAuthRepository>()));
-    gh.factory<_i22.SplashscreenBloc>(() => _i22.SplashscreenBloc());
-    gh.factory<_i23.UserProfileBloc>(
-        () => _i23.UserProfileBloc(gh<_i12.IUserRepository>()));
-    gh.factory<_i24.AuthBloc>(() => _i24.AuthBloc(gh<_i6.IAuthRepository>()));
+    gh.factory<_i21.QuizUnlockCubit>(
+        () => _i21.QuizUnlockCubit(gh<_i10.IQuizRepository>()));
+    gh.factory<_i22.RegisterBloc>(
+        () => _i22.RegisterBloc(gh<_i6.IAuthRepository>()));
+    gh.factory<_i23.SplashscreenBloc>(() => _i23.SplashscreenBloc());
+    gh.factory<_i24.UserProfileBloc>(
+        () => _i24.UserProfileBloc(gh<_i12.IUserRepository>()));
+    gh.factory<_i25.AuthBloc>(() => _i25.AuthBloc(gh<_i6.IAuthRepository>()));
     return this;
   }
 }

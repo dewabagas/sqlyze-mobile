@@ -31,6 +31,7 @@ class AppColors {
   static const Color red = Color(0xFFD32710);
   static const Color red2 = Color(0xFFEC0000);
   static const Color pink = Color(0xFFFF5784);
+  static const Color alizarin = Color(0xFFe74c3c);
   static const Color charcoal = Color(0xFF1E1E1E);
   static const Color borderColor = Color(0xFFE8E8E8);
   static const Color paragraphColor = Color(0xFF555555);

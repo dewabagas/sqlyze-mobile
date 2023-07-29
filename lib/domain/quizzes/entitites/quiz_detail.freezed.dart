@@ -24,6 +24,7 @@ mixin _$QuizDetail {
   int? get passingScore => throw _privateConstructorUsedError;
   int? get questionCount => throw _privateConstructorUsedError;
   bool? get hasAttempted => throw _privateConstructorUsedError;
+  bool? get isUnlocked => throw _privateConstructorUsedError;
   String? get createdAt => throw _privateConstructorUsedError;
   String? get updatedAt => throw _privateConstructorUsedError;
 
@@ -47,6 +48,7 @@ abstract class $QuizDetailCopyWith<$Res> {
       int? passingScore,
       int? questionCount,
       bool? hasAttempted,
+      bool? isUnlocked,
       String? createdAt,
       String? updatedAt});
 }
@@ -72,6 +74,7 @@ class _$QuizDetailCopyWithImpl<$Res, $Val extends QuizDetail>
     Object? passingScore = freezed,
     Object? questionCount = freezed,
     Object? hasAttempted = freezed,
+    Object? isUnlocked = freezed,
     Object? createdAt = freezed,
     Object? updatedAt = freezed,
   }) {
@@ -108,6 +111,10 @@ class _$QuizDetailCopyWithImpl<$Res, $Val extends QuizDetail>
           ? _value.hasAttempted
           : hasAttempted // ignore: cast_nullable_to_non_nullable
               as bool?,
+      isUnlocked: freezed == isUnlocked
+          ? _value.isUnlocked
+          : isUnlocked // ignore: cast_nullable_to_non_nullable
+              as bool?,
       createdAt: freezed == createdAt
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
@@ -137,6 +144,7 @@ abstract class _$$_QuizDetailCopyWith<$Res>
       int? passingScore,
       int? questionCount,
       bool? hasAttempted,
+      bool? isUnlocked,
       String? createdAt,
       String? updatedAt});
 }
@@ -160,6 +168,7 @@ class __$$_QuizDetailCopyWithImpl<$Res>
     Object? passingScore = freezed,
     Object? questionCount = freezed,
     Object? hasAttempted = freezed,
+    Object? isUnlocked = freezed,
     Object? createdAt = freezed,
     Object? updatedAt = freezed,
   }) {
@@ -196,6 +205,10 @@ class __$$_QuizDetailCopyWithImpl<$Res>
           ? _value.hasAttempted
           : hasAttempted // ignore: cast_nullable_to_non_nullable
               as bool?,
+      isUnlocked: freezed == isUnlocked
+          ? _value.isUnlocked
+          : isUnlocked // ignore: cast_nullable_to_non_nullable
+              as bool?,
       createdAt: freezed == createdAt
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
@@ -220,6 +233,7 @@ class _$_QuizDetail implements _QuizDetail {
       this.passingScore,
       this.questionCount,
       this.hasAttempted,
+      this.isUnlocked,
       this.createdAt,
       this.updatedAt});
 
@@ -240,13 +254,15 @@ class _$_QuizDetail implements _QuizDetail {
   @override
   final bool? hasAttempted;
   @override
+  final bool? isUnlocked;
+  @override
   final String? createdAt;
   @override
   final String? updatedAt;
 
   @override
   String toString() {
-    return 'QuizDetail(id: $id, materialId: $materialId, title: $title, isFinalExam: $isFinalExam, duration: $duration, passingScore: $passingScore, questionCount: $questionCount, hasAttempted: $hasAttempted, createdAt: $createdAt, updatedAt: $updatedAt)';
+    return 'QuizDetail(id: $id, materialId: $materialId, title: $title, isFinalExam: $isFinalExam, duration: $duration, passingScore: $passingScore, questionCount: $questionCount, hasAttempted: $hasAttempted, isUnlocked: $isUnlocked, createdAt: $createdAt, updatedAt: $updatedAt)';
   }
 
   @override
@@ -268,6 +284,8 @@ class _$_QuizDetail implements _QuizDetail {
                 other.questionCount == questionCount) &&
             (identical(other.hasAttempted, hasAttempted) ||
                 other.hasAttempted == hasAttempted) &&
+            (identical(other.isUnlocked, isUnlocked) ||
+                other.isUnlocked == isUnlocked) &&
             (identical(other.createdAt, createdAt) ||
                 other.createdAt == createdAt) &&
             (identical(other.updatedAt, updatedAt) ||
@@ -285,6 +303,7 @@ class _$_QuizDetail implements _QuizDetail {
       passingScore,
       questionCount,
       hasAttempted,
+      isUnlocked,
       createdAt,
       updatedAt);
 
@@ -305,6 +324,7 @@ abstract class _QuizDetail implements QuizDetail {
       final int? passingScore,
       final int? questionCount,
       final bool? hasAttempted,
+      final bool? isUnlocked,
       final String? createdAt,
       final String? updatedAt}) = _$_QuizDetail;
 
@@ -324,6 +344,8 @@ abstract class _QuizDetail implements QuizDetail {
   int? get questionCount;
   @override
   bool? get hasAttempted;
+  @override
+  bool? get isUnlocked;
   @override
   String? get createdAt;
   @override
