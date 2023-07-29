@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:sqlyze/domain/core/constants/preference_constants.dart';
 import 'package:sqlyze/domain/core/helpers/preference_helper.dart';
+import 'package:sqlyze/presentation/shared/widgets/errors/error_page.dart';
+import 'package:sqlyze/presentation/student_dashboard/components/shimmer_analytics.dart';
 import 'package:sqlyze/presentation/student_dashboard/tabs/analytics_body.dart';
 
 class TabStudentAnalytics extends StatefulWidget {
@@ -12,26 +14,31 @@ class TabStudentAnalytics extends StatefulWidget {
 
 class _TabStudentAnalyticsState extends State<TabStudentAnalytics> {
   int touchedIndex = -1;
-  late int userId;
+  late Future<int> userIdFuture;
 
   @override
   void initState() {
-    WidgetsBinding.instance?.addPostFrameCallback((_) {
-      getUserId();
-    });
     super.initState();
+    userIdFuture = getUserId();
   }
 
-  getUserId() async {
-    int tempUserId =
-        await getIntValuesPreference(key: PreferenceConstants.userId);
-    setState(() {
-      userId = tempUserId;
-    });
+  Future<int> getUserId() async {
+    return await getIntValuesPreference(key: PreferenceConstants.userId);
   }
 
   @override
   Widget build(BuildContext context) {
-    return AnalyticsBody(userId: userId);
+    return FutureBuilder<int>(
+      future: userIdFuture,
+      builder: (BuildContext context, AsyncSnapshot<int> snapshot) {
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          return const ShimmerAnalytics();
+        } else if (snapshot.hasError) {
+          return ErrorPage(message: 'Error: ${snapshot.error}',); // Handle error
+        } else {
+          return AnalyticsBody(userId: snapshot.data!); // Render main UI
+        }
+      },
+    );
   }
 }

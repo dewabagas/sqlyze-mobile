@@ -1,7 +1,5 @@
-import 'dart:developer';
 
 import 'package:fl_chart/fl_chart.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -13,14 +11,12 @@ import 'package:sqlyze/injection.dart';
 import 'package:sqlyze/presentation/core/constants/assets.dart';
 import 'package:sqlyze/presentation/core/constants/styles.dart';
 import 'package:sqlyze/presentation/core/styles/app_colors.dart';
-import 'package:sqlyze/presentation/quizzes/quiz/components/radial_percentage_result_container.dart';
-import 'package:sqlyze/presentation/shared/widgets/charts/analytic_line_chart.dart';
 import 'package:sqlyze/presentation/shared/widgets/errors/error_page.dart';
 import 'package:sqlyze/presentation/shared/widgets/others/expandable_page_view/expandable_page_view.dart';
-import 'package:sqlyze/presentation/shared/widgets/others/indicator.dart';
 import 'package:sqlyze/presentation/shared/widgets/pages/page_decoration_top.dart';
 import 'package:sqlyze/presentation/student_dashboard/components/analytic_performance_body.dart';
 import 'package:sqlyze/presentation/student_dashboard/components/analytic_progress_body.dart';
+import 'package:sqlyze/presentation/student_dashboard/components/shimmer_analytics.dart';
 import 'package:sqlyze/presentation/student_dashboard/components/tab_analytics.dart';
 
 class AnalyticsBody extends StatefulWidget {
@@ -50,8 +46,8 @@ class _AnalyticsBodyState extends State<AnalyticsBody> {
       child: BlocBuilder<LearningAnalyticBloc, LearningAnalyticState>(
         builder: (context, state) {
           return state.map(
-              initial: (value) => const SizedBox.shrink(),
-              loadInProgress: (value) => const SizedBox.shrink(),
+              initial: (value) => const ShimmerAnalytics(),
+              loadInProgress: (value) => const ShimmerAnalytics(),
               loadSuccess: (value) {
                 debugPrint('analytic value ${value.learningAnalytic}');
                 return buildAnalytic(value.learningAnalytic!);
@@ -95,6 +91,7 @@ class _AnalyticsBodyState extends State<AnalyticsBody> {
     debugPrint('buildAnalytic $learningAnalytic');
     return PageDecorationTop(
         appBarTitle: 'Analisis Belajar',
+        hasBack: false,
         child: SingleChildScrollView(
           child: Column(
             children: [
