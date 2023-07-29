@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
 import 'package:alice/alice.dart';
+import 'package:sqlyze/domain/core/utils/firebase_remote_config.dart';
 import 'package:sqlyze/infrastructure/analytics/data_sources/remotes/analytic_api_service.dart';
 import 'package:sqlyze/infrastructure/auth/data_sources/remotes/auth_api_service.dart';
 import 'package:sqlyze/infrastructure/lessons/data_sources/remotes/lesson_api_service.dart';
@@ -30,4 +31,5 @@ Future<void> initializeDependencies() async {
       AnalyticApiService(locator.get<Dio>(instanceName: 'AuthorizedClient')));
   locator.registerSingleton<QuizApiService>(
       QuizApiService(locator.get<Dio>(instanceName: 'AuthorizedClient')));
+  locator.registerSingleton(FirebaseRemoteConfigService());
 }

@@ -7,6 +7,7 @@ import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:injectable/injectable.dart';
+import 'package:sqlyze/domain/core/utils/firebase_remote_config.dart';
 import 'package:sqlyze/injection.dart';
 import 'package:sqlyze/locator.dart';
 import 'package:sqlyze/presentation/core/app.dart';
@@ -18,6 +19,8 @@ void main() async {
   WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
   FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
   SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
+  // final FirebaseRemoteConfigService remoteConfigService = getIt<FirebaseRemoteConfigService>();
+  // remoteConfigService.initialize();
   await Firebase.initializeApp();
   await _initializeCrashlytics();
   await dotenv.load(fileName: ".env");

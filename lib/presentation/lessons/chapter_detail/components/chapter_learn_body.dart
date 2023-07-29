@@ -64,18 +64,18 @@ class _ChapterLearnBodyState extends State<ChapterLearnBody> {
             ],
           ),
           SizedBox(height: 10.h),
-          CardExpansion(
-            title: 'PPT',
-            children: [
-              Container(
-                height: 250.h,
-                child: PDFViewer(
-                  url:
-                      'https://drive.google.com/uc?id=1NcV5Pq0wje6xTO1taiWTGjqIP-uMXGO6',
-                ),
-              ),
-            ],
-          ),
+          // CardExpansion(
+          //   title: 'PPT',
+          //   children: [
+          //     Container(
+          //       height: 250.h,
+          //       child: PDFViewer(
+          //         url:
+          //             'https://drive.google.com/uc?id=1NcV5Pq0wje6xTO1taiWTGjqIP-uMXGO6',
+          //       ),
+          //     ),
+          //   ],
+          // ),
           SizedBox(height: 10.h),
           CardExpansion(title: 'Podcast', children: [
             Container(

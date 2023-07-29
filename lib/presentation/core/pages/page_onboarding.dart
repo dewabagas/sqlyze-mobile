@@ -169,7 +169,7 @@ class _PageOnboardingState extends State<PageOnboarding>
                           onPressed: () {
                             log('heee');
                             AutoRouter.of(context)
-                                .push(const RouteGuestDashboard());
+                                .push(const RouteLogin());
                             // AutoRouter.of(context)
                             //     .push(const RouteStudentDashboard());
                           }),

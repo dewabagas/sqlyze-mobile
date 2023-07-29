@@ -230,6 +230,7 @@ class _PageLessonStepDetailState extends State<PageLessonStepDetail>
                 children: [
                   Expanded(
                     child: ButtonPrimary(
+                      enabled: currentIndex == 0 ? false : true,
                       height: 30.h,
                       title: 'Prev',
                       onPressed: () {

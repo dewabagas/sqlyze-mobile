@@ -1,7 +1,7 @@
 name: sqlyze
 description: A new Flutter project.
 publish_to: "none" # Remove this line if you wish to publish to pub.dev
-version: 1.0.0+1
+version: 1.0.0+2
 
 environment:
   sdk: ">=2.19.6 <3.0.0"
@@ -38,7 +38,7 @@ dependencies:
   get_it: ^7.2.0
   google_fonts: ^3.0.1
   graphql_flutter: ^5.1.0
-  image_picker: ^0.8.6
+  image_picker: ^0.8.5+3
   injectable: ^2.0.1
   intl: ^0.18.0
   logger: ^1.4.0
@@ -74,6 +74,9 @@ dependencies:
   fl_chart: ^0.63.0
   screenshot: ^2.1.0
   share_plus: ^6.3.4
+  mixpanel_flutter: ^2.1.1
+  firebase_remote_config: ^4.2.4
+  store_redirect: ^2.0.1
 
 dev_dependencies:
   flutter_test:

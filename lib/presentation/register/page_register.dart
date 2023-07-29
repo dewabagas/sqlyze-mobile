@@ -376,13 +376,13 @@ class _PageRegisterState extends State<PageRegister> {
                                   fullName: fullName,
                                   email: email,
                                   password: password,
-                                  nis: '$nis',
+                                  nis: '$nis ?? 0',
                                   msisdn: phoneNumber.toString(),
                                   gender: gender,
                                   role: 'student',
                                   birthdate: birthdate,
                                   profileImageUrl:
-                                      'https://static-00.iconduck.com/assets.00/avatar-default-symbolic-icon-2048x1949-pq9uiebg.png')));
+                                      'https://img.freepik.com/free-psd/3d-illustration-person-with-sunglasses_23-2149436188.jpg?w=826&t=st=1690369069~exp=1690369669~hmac=9bc528300e718d6284744198c69029f61ded300d2a4b9674e50f6ecccc3809b0')));
                         },
                         title: 'Daftar',
                       ),

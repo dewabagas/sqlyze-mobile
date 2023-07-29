@@ -83,6 +83,8 @@ class AppIllustrations {
       'assets/illustrations/ill_celebration.svg';
   static const String illCelebrationLoss =
       'assets/illustrations/ill_celebration_loss.svg';
+  static const String illEmpty =
+      'assets/illustrations/ill_empty.svg';
 }
 
 class AppImages {

@@ -107,7 +107,8 @@ class _TabProfileState extends State<TabStudentProfile> {
             hasDivider: true,
             icon: AppIcons.icMyAccount,
             onTap: () {
-              // AutoRouter.of(context).push(const RouteMyAccount());
+              AutoRouter.of(context)
+                  .push(RouteMyAccount(userProfile: userProfile));
             },
           ),
           CardProfileItem(
@@ -163,6 +164,6 @@ class _TabProfileState extends State<TabStudentProfile> {
     await addBoolToPreference(
         key: PreferenceConstants.isLoggedIn, value: false);
     AutoRouter.of(context)
-        .pushAndPopUntil(RouteGuestDashboard(), predicate: (route) => false);
+        .pushAndPopUntil(RouteLogin(), predicate: (route) => false);
   }
 }

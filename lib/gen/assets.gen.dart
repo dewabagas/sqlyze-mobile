@@ -351,6 +351,9 @@ class $AssetsIllustrationsGen {
   /// File path: assets/illustrations/ill_education1.svg
   String get illEducation1 => 'assets/illustrations/ill_education1.svg';
 
+  /// File path: assets/illustrations/ill_empty.svg
+  String get illEmpty => 'assets/illustrations/ill_empty.svg';
+
   /// File path: assets/illustrations/ill_learning1.svg
   String get illLearning1 => 'assets/illustrations/ill_learning1.svg';
 
@@ -389,6 +392,7 @@ class $AssetsIllustrationsGen {
         illCelebrationLoss,
         illConsultation,
         illEducation1,
+        illEmpty,
         illLearning1,
         illLearning2,
         illLearning3,
