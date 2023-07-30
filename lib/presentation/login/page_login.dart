@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:package_info_plus/package_info_plus.dart';
 import 'package:sqlyze/application/auth_bloc/auth_bloc.dart';
 import 'package:sqlyze/domain/auth/requests/auth_request.dart';
 import 'package:sqlyze/domain/core/constants/preference_constants.dart';
@@ -32,10 +33,26 @@ class _PageLoginState extends State<PageLogin> {
   bool isSecured = true;
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
+  PackageInfo packageInfo = PackageInfo(
+    appName: 'Unknown',
+    packageName: 'Unknown',
+    version: 'Unknown',
+    buildNumber: 'Unknown',
+    buildSignature: 'Unknown',
+    installerStore: 'Unknown',
+  );
 
   @override
   void initState() {
+    initPackageInfo();
     super.initState();
+  }
+
+  Future<void> initPackageInfo() async {
+    final info = await PackageInfo.fromPlatform();
+    setState(() {
+      packageInfo = info;
+    });
   }
 
   @override
@@ -166,7 +183,7 @@ class _PageLoginState extends State<PageLogin> {
                               )),
                             ],
                           ),
-                          SizedBox(height: 20.w),
+                          SizedBox(height: 20.h),
                           ButtonPrimary(
                             title: 'Daftar',
                             onPressed: () {
@@ -177,6 +194,11 @@ class _PageLoginState extends State<PageLogin> {
                             textStyle: TextStyles.labelLarge.copyWith(
                                 color: AppColors.primary,
                                 fontWeight: FontWeight.w700),
+                          ),
+                          SizedBox(height: 20.h),
+                          Text(
+                            'Version ${packageInfo.version} (${packageInfo.buildNumber})',
+                            style: TextStyles.bodySmall.copyWith(color: AppColors.paragraphColor),
                           )
                         ],
                       ),

@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:mixpanel_flutter/mixpanel_flutter.dart';
+import 'package:package_info_plus/package_info_plus.dart';
 import 'package:sqlyze/application/user_profile_bloc/user_profile_bloc.dart';
 import 'package:sqlyze/domain/core/constants/preference_constants.dart';
 import 'package:sqlyze/domain/core/helpers/preference_helper.dart';
@@ -31,12 +32,28 @@ class TabStudentProfile extends StatefulWidget {
 }
 
 class _TabProfileState extends State<TabStudentProfile> {
+  PackageInfo packageInfo = PackageInfo(
+    appName: 'Unknown',
+    packageName: 'Unknown',
+    version: 'Unknown',
+    buildNumber: 'Unknown',
+    buildSignature: 'Unknown',
+    installerStore: 'Unknown',
+  );
 
   @override
   void initState() {
     final Mixpanel mixPanel = locator.get();
     mixPanel.track('Profile');
+    initPackageInfo();
     super.initState();
+  }
+
+  Future<void> initPackageInfo() async {
+    final info = await PackageInfo.fromPlatform();
+    setState(() {
+      packageInfo = info;
+    });
   }
 
   @override
@@ -143,6 +160,14 @@ class _TabProfileState extends State<TabStudentProfile> {
             icon: AppIcons.icLogout,
             onTap: showLogoutPopup,
           ),
+          SizedBox(height: 20.h),
+          Center(
+            child: Text(
+              'Version ${packageInfo.version} (${packageInfo.buildNumber})',
+              style:
+                  TextStyles.bodySmall.copyWith(color: AppColors.paragraphColor),
+            ),
+          )
         ],
       ),
     );

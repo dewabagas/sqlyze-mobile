@@ -28,6 +28,7 @@ class _AnalyticPerformanceBodyState extends State<AnalyticPerformanceBody> {
   @override
   Widget build(BuildContext context) {
     return Container(
+      color: AppColors.white,
       child: Column(
         children: [
           AnalyticPieChart(analyticsData: widget.analyticsData),

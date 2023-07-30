@@ -127,7 +127,7 @@ class _CardQuizState extends State<CardQuiz> {
                         Icons.check_circle,
                         color: AppColors.green,
                       )
-                    : const Icon(Icons.chevron_right)
+                    : const Icon(Icons.chevron_right, color: AppColors.charcoal)
               ],
             ),
             if (widget.isUnlocked == false)
