@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -12,6 +13,8 @@ import 'package:sqlyze/presentation/core/constants/assets.dart';
 import 'package:sqlyze/presentation/core/constants/strings.dart';
 import 'package:sqlyze/presentation/core/constants/styles.dart';
 import 'package:sqlyze/presentation/core/styles/app_colors.dart';
+import 'package:sqlyze/presentation/routes/router.gr.dart';
+import 'package:sqlyze/presentation/shared/widgets/buttons/button_primary.dart';
 import 'package:sqlyze/presentation/shared/widgets/errors/error_page.dart';
 import 'package:sqlyze/presentation/shared/widgets/pages/page_decoration_top.dart';
 import 'package:sqlyze/presentation/student_dashboard/components/greetings_section.dart';
@@ -97,7 +100,13 @@ class _TabStudentHomeState extends State<TabStudentHome> {
                           AppBanners.bnrWelcome,
                           width: double.infinity,
                         ),
-                        const SubjectSection()
+                        const SubjectSection(),
+                        // ButtonPrimary(
+                        //     title: 'Certificate',
+                        //     onPressed: () {
+                        //       AutoRouter.of(context).push(RouteCertificate(
+                        //           name: 'Bagas', date: DateTime.now()));
+                        //     })
                       ],
                     ),
                   ),

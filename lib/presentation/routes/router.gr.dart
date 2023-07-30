@@ -11,12 +11,13 @@
 // ignore_for_file: type=lint
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
-import 'package:auto_route/auto_route.dart' as _i17;
-import 'package:flutter/material.dart' as _i18;
+import 'package:auto_route/auto_route.dart' as _i18;
+import 'package:flutter/material.dart' as _i19;
 
-import '../../domain/lessons/entities/lesson_detail.dart' as _i19;
-import '../../domain/quizzes/entitites/quiz_detail.dart' as _i20;
-import '../../domain/user/entities/user_profile.dart' as _i21;
+import '../../domain/lessons/entities/lesson_detail.dart' as _i20;
+import '../../domain/quizzes/entitites/quiz_detail.dart' as _i21;
+import '../../domain/user/entities/user_profile.dart' as _i22;
+import '../certificate/page_certificate.dart' as _i17;
 import '../core/pages/page_onboarding.dart' as _i2;
 import '../core/pages/page_splash.dart' as _i1;
 import '../discussions/page_discussion.dart' as _i14;
@@ -34,63 +35,63 @@ import '../quizzes/quiz_result/page_quiz_result.dart' as _i13;
 import '../register/page_register.dart' as _i6;
 import '../student_dashboard/page_student_dashboard.dart' as _i4;
 
-class AppRouter extends _i17.RootStackRouter {
-  AppRouter([_i18.GlobalKey<_i18.NavigatorState>? navigatorKey])
+class AppRouter extends _i18.RootStackRouter {
+  AppRouter([_i19.GlobalKey<_i19.NavigatorState>? navigatorKey])
       : super(navigatorKey);
 
   @override
-  final Map<String, _i17.PageFactory> pagesMap = {
+  final Map<String, _i18.PageFactory> pagesMap = {
     RouteSplash.name: (routeData) {
-      return _i17.MaterialPageX<dynamic>(
+      return _i18.MaterialPageX<dynamic>(
         routeData: routeData,
         child: const _i1.PageSplash(),
       );
     },
     RouteOnboarding.name: (routeData) {
-      return _i17.MaterialPageX<dynamic>(
+      return _i18.MaterialPageX<dynamic>(
         routeData: routeData,
         child: const _i2.PageOnboarding(),
       );
     },
     RouteGuestDashboard.name: (routeData) {
-      return _i17.MaterialPageX<dynamic>(
+      return _i18.MaterialPageX<dynamic>(
         routeData: routeData,
         child: const _i3.PageGuestDashboard(),
       );
     },
     RouteStudentDashboard.name: (routeData) {
-      return _i17.MaterialPageX<dynamic>(
+      return _i18.MaterialPageX<dynamic>(
         routeData: routeData,
         child: const _i4.PageStudentDashboard(),
       );
     },
     RouteLogin.name: (routeData) {
-      return _i17.MaterialPageX<dynamic>(
+      return _i18.MaterialPageX<dynamic>(
         routeData: routeData,
         child: const _i5.PageLogin(),
       );
     },
     RouteRegister.name: (routeData) {
-      return _i17.MaterialPageX<dynamic>(
+      return _i18.MaterialPageX<dynamic>(
         routeData: routeData,
         child: const _i6.PageRegister(),
       );
     },
     RouteOtp.name: (routeData) {
-      return _i17.MaterialPageX<dynamic>(
+      return _i18.MaterialPageX<dynamic>(
         routeData: routeData,
         child: const _i7.PageOtp(),
       );
     },
     RouteLessonList.name: (routeData) {
-      return _i17.MaterialPageX<dynamic>(
+      return _i18.MaterialPageX<dynamic>(
         routeData: routeData,
         child: const _i8.PageLessonList(),
       );
     },
     RouteLessonDetail.name: (routeData) {
       final args = routeData.argsAs<RouteLessonDetailArgs>();
-      return _i17.MaterialPageX<dynamic>(
+      return _i18.MaterialPageX<dynamic>(
         routeData: routeData,
         child: _i9.PageLessonDetail(
           key: args.key,
@@ -101,7 +102,7 @@ class AppRouter extends _i17.RootStackRouter {
     },
     RouteChapterDetail.name: (routeData) {
       final args = routeData.argsAs<RouteChapterDetailArgs>();
-      return _i17.MaterialPageX<dynamic>(
+      return _i18.MaterialPageX<dynamic>(
         routeData: routeData,
         child: _i10.PageChapterDetail(
           key: args.key,
@@ -111,7 +112,7 @@ class AppRouter extends _i17.RootStackRouter {
     },
     RouteLessonStepDetail.name: (routeData) {
       final args = routeData.argsAs<RouteLessonStepDetailArgs>();
-      return _i17.MaterialPageX<dynamic>(
+      return _i18.MaterialPageX<dynamic>(
         routeData: routeData,
         child: _i11.PageLessonStepDetail(
           key: args.key,
@@ -121,7 +122,7 @@ class AppRouter extends _i17.RootStackRouter {
     },
     RouteQuiz.name: (routeData) {
       final args = routeData.argsAs<RouteQuizArgs>();
-      return _i17.MaterialPageX<dynamic>(
+      return _i18.MaterialPageX<dynamic>(
         routeData: routeData,
         child: _i12.PageQuiz(
           key: args.key,
@@ -131,7 +132,7 @@ class AppRouter extends _i17.RootStackRouter {
     },
     RouteQuizResult.name: (routeData) {
       final args = routeData.argsAs<RouteQuizResultArgs>();
-      return _i17.MaterialPageX<dynamic>(
+      return _i18.MaterialPageX<dynamic>(
         routeData: routeData,
         child: _i13.PageQuizResult(
           key: args.key,
@@ -140,20 +141,20 @@ class AppRouter extends _i17.RootStackRouter {
       );
     },
     RouteDiscussion.name: (routeData) {
-      return _i17.MaterialPageX<dynamic>(
+      return _i18.MaterialPageX<dynamic>(
         routeData: routeData,
         child: const _i14.PageDiscussion(),
       );
     },
     RouteForceUpdate.name: (routeData) {
-      return _i17.MaterialPageX<dynamic>(
+      return _i18.MaterialPageX<dynamic>(
         routeData: routeData,
         child: const _i15.PageForceUpdate(),
       );
     },
     RouteMyAccount.name: (routeData) {
       final args = routeData.argsAs<RouteMyAccountArgs>();
-      return _i17.MaterialPageX<dynamic>(
+      return _i18.MaterialPageX<dynamic>(
         routeData: routeData,
         child: _i16.PageMyAccount(
           key: args.key,
@@ -161,80 +162,94 @@ class AppRouter extends _i17.RootStackRouter {
         ),
       );
     },
+    RouteCertificate.name: (routeData) {
+      final args = routeData.argsAs<RouteCertificateArgs>();
+      return _i18.MaterialPageX<dynamic>(
+        routeData: routeData,
+        child: _i17.PageCertificate(
+          name: args.name,
+          date: args.date,
+        ),
+      );
+    },
   };
 
   @override
-  List<_i17.RouteConfig> get routes => [
-        _i17.RouteConfig(
+  List<_i18.RouteConfig> get routes => [
+        _i18.RouteConfig(
           RouteSplash.name,
           path: '/',
         ),
-        _i17.RouteConfig(
+        _i18.RouteConfig(
           RouteOnboarding.name,
           path: '/page-onboarding',
         ),
-        _i17.RouteConfig(
+        _i18.RouteConfig(
           RouteGuestDashboard.name,
           path: '/page-guest-dashboard',
         ),
-        _i17.RouteConfig(
+        _i18.RouteConfig(
           RouteStudentDashboard.name,
           path: '/page-student-dashboard',
         ),
-        _i17.RouteConfig(
+        _i18.RouteConfig(
           RouteLogin.name,
           path: '/page-login',
         ),
-        _i17.RouteConfig(
+        _i18.RouteConfig(
           RouteRegister.name,
           path: '/page-register',
         ),
-        _i17.RouteConfig(
+        _i18.RouteConfig(
           RouteOtp.name,
           path: '/page-otp',
         ),
-        _i17.RouteConfig(
+        _i18.RouteConfig(
           RouteLessonList.name,
           path: '/page-lesson-list',
         ),
-        _i17.RouteConfig(
+        _i18.RouteConfig(
           RouteLessonDetail.name,
           path: '/page-lesson-detail',
         ),
-        _i17.RouteConfig(
+        _i18.RouteConfig(
           RouteChapterDetail.name,
           path: '/page-chapter-detail',
         ),
-        _i17.RouteConfig(
+        _i18.RouteConfig(
           RouteLessonStepDetail.name,
           path: '/page-lesson-step-detail',
         ),
-        _i17.RouteConfig(
+        _i18.RouteConfig(
           RouteQuiz.name,
           path: '/page-quiz',
         ),
-        _i17.RouteConfig(
+        _i18.RouteConfig(
           RouteQuizResult.name,
           path: '/page-quiz-result',
         ),
-        _i17.RouteConfig(
+        _i18.RouteConfig(
           RouteDiscussion.name,
           path: '/page-discussion',
         ),
-        _i17.RouteConfig(
+        _i18.RouteConfig(
           RouteForceUpdate.name,
           path: '/page-force-update',
         ),
-        _i17.RouteConfig(
+        _i18.RouteConfig(
           RouteMyAccount.name,
           path: '/page-my-account',
+        ),
+        _i18.RouteConfig(
+          RouteCertificate.name,
+          path: '/page-certificate',
         ),
       ];
 }
 
 /// generated route for
 /// [_i1.PageSplash]
-class RouteSplash extends _i17.PageRouteInfo<void> {
+class RouteSplash extends _i18.PageRouteInfo<void> {
   const RouteSplash()
       : super(
           RouteSplash.name,
@@ -246,7 +261,7 @@ class RouteSplash extends _i17.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i2.PageOnboarding]
-class RouteOnboarding extends _i17.PageRouteInfo<void> {
+class RouteOnboarding extends _i18.PageRouteInfo<void> {
   const RouteOnboarding()
       : super(
           RouteOnboarding.name,
@@ -258,7 +273,7 @@ class RouteOnboarding extends _i17.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i3.PageGuestDashboard]
-class RouteGuestDashboard extends _i17.PageRouteInfo<void> {
+class RouteGuestDashboard extends _i18.PageRouteInfo<void> {
   const RouteGuestDashboard()
       : super(
           RouteGuestDashboard.name,
@@ -270,7 +285,7 @@ class RouteGuestDashboard extends _i17.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i4.PageStudentDashboard]
-class RouteStudentDashboard extends _i17.PageRouteInfo<void> {
+class RouteStudentDashboard extends _i18.PageRouteInfo<void> {
   const RouteStudentDashboard()
       : super(
           RouteStudentDashboard.name,
@@ -282,7 +297,7 @@ class RouteStudentDashboard extends _i17.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i5.PageLogin]
-class RouteLogin extends _i17.PageRouteInfo<void> {
+class RouteLogin extends _i18.PageRouteInfo<void> {
   const RouteLogin()
       : super(
           RouteLogin.name,
@@ -294,7 +309,7 @@ class RouteLogin extends _i17.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i6.PageRegister]
-class RouteRegister extends _i17.PageRouteInfo<void> {
+class RouteRegister extends _i18.PageRouteInfo<void> {
   const RouteRegister()
       : super(
           RouteRegister.name,
@@ -306,7 +321,7 @@ class RouteRegister extends _i17.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i7.PageOtp]
-class RouteOtp extends _i17.PageRouteInfo<void> {
+class RouteOtp extends _i18.PageRouteInfo<void> {
   const RouteOtp()
       : super(
           RouteOtp.name,
@@ -318,7 +333,7 @@ class RouteOtp extends _i17.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i8.PageLessonList]
-class RouteLessonList extends _i17.PageRouteInfo<void> {
+class RouteLessonList extends _i18.PageRouteInfo<void> {
   const RouteLessonList()
       : super(
           RouteLessonList.name,
@@ -330,9 +345,9 @@ class RouteLessonList extends _i17.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i9.PageLessonDetail]
-class RouteLessonDetail extends _i17.PageRouteInfo<RouteLessonDetailArgs> {
+class RouteLessonDetail extends _i18.PageRouteInfo<RouteLessonDetailArgs> {
   RouteLessonDetail({
-    _i18.Key? key,
+    _i19.Key? key,
     required String lessonName,
     required int lessonType,
   }) : super(
@@ -355,7 +370,7 @@ class RouteLessonDetailArgs {
     required this.lessonType,
   });
 
-  final _i18.Key? key;
+  final _i19.Key? key;
 
   final String lessonName;
 
@@ -369,9 +384,9 @@ class RouteLessonDetailArgs {
 
 /// generated route for
 /// [_i10.PageChapterDetail]
-class RouteChapterDetail extends _i17.PageRouteInfo<RouteChapterDetailArgs> {
+class RouteChapterDetail extends _i18.PageRouteInfo<RouteChapterDetailArgs> {
   RouteChapterDetail({
-    _i18.Key? key,
+    _i19.Key? key,
     required int materialId,
   }) : super(
           RouteChapterDetail.name,
@@ -391,7 +406,7 @@ class RouteChapterDetailArgs {
     required this.materialId,
   });
 
-  final _i18.Key? key;
+  final _i19.Key? key;
 
   final int materialId;
 
@@ -404,10 +419,10 @@ class RouteChapterDetailArgs {
 /// generated route for
 /// [_i11.PageLessonStepDetail]
 class RouteLessonStepDetail
-    extends _i17.PageRouteInfo<RouteLessonStepDetailArgs> {
+    extends _i18.PageRouteInfo<RouteLessonStepDetailArgs> {
   RouteLessonStepDetail({
-    _i18.Key? key,
-    required _i19.LessonDetail lessonDetail,
+    _i19.Key? key,
+    required _i20.LessonDetail lessonDetail,
   }) : super(
           RouteLessonStepDetail.name,
           path: '/page-lesson-step-detail',
@@ -426,9 +441,9 @@ class RouteLessonStepDetailArgs {
     required this.lessonDetail,
   });
 
-  final _i18.Key? key;
+  final _i19.Key? key;
 
-  final _i19.LessonDetail lessonDetail;
+  final _i20.LessonDetail lessonDetail;
 
   @override
   String toString() {
@@ -438,10 +453,10 @@ class RouteLessonStepDetailArgs {
 
 /// generated route for
 /// [_i12.PageQuiz]
-class RouteQuiz extends _i17.PageRouteInfo<RouteQuizArgs> {
+class RouteQuiz extends _i18.PageRouteInfo<RouteQuizArgs> {
   RouteQuiz({
-    _i18.Key? key,
-    required _i20.QuizDetail quizDetail,
+    _i19.Key? key,
+    required _i21.QuizDetail quizDetail,
   }) : super(
           RouteQuiz.name,
           path: '/page-quiz',
@@ -460,9 +475,9 @@ class RouteQuizArgs {
     required this.quizDetail,
   });
 
-  final _i18.Key? key;
+  final _i19.Key? key;
 
-  final _i20.QuizDetail quizDetail;
+  final _i21.QuizDetail quizDetail;
 
   @override
   String toString() {
@@ -472,10 +487,10 @@ class RouteQuizArgs {
 
 /// generated route for
 /// [_i13.PageQuizResult]
-class RouteQuizResult extends _i17.PageRouteInfo<RouteQuizResultArgs> {
+class RouteQuizResult extends _i18.PageRouteInfo<RouteQuizResultArgs> {
   RouteQuizResult({
-    _i18.Key? key,
-    required _i20.QuizDetail quizDetail,
+    _i19.Key? key,
+    required _i21.QuizDetail quizDetail,
   }) : super(
           RouteQuizResult.name,
           path: '/page-quiz-result',
@@ -494,9 +509,9 @@ class RouteQuizResultArgs {
     required this.quizDetail,
   });
 
-  final _i18.Key? key;
+  final _i19.Key? key;
 
-  final _i20.QuizDetail quizDetail;
+  final _i21.QuizDetail quizDetail;
 
   @override
   String toString() {
@@ -506,7 +521,7 @@ class RouteQuizResultArgs {
 
 /// generated route for
 /// [_i14.PageDiscussion]
-class RouteDiscussion extends _i17.PageRouteInfo<void> {
+class RouteDiscussion extends _i18.PageRouteInfo<void> {
   const RouteDiscussion()
       : super(
           RouteDiscussion.name,
@@ -518,7 +533,7 @@ class RouteDiscussion extends _i17.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i15.PageForceUpdate]
-class RouteForceUpdate extends _i17.PageRouteInfo<void> {
+class RouteForceUpdate extends _i18.PageRouteInfo<void> {
   const RouteForceUpdate()
       : super(
           RouteForceUpdate.name,
@@ -530,10 +545,10 @@ class RouteForceUpdate extends _i17.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i16.PageMyAccount]
-class RouteMyAccount extends _i17.PageRouteInfo<RouteMyAccountArgs> {
+class RouteMyAccount extends _i18.PageRouteInfo<RouteMyAccountArgs> {
   RouteMyAccount({
-    _i18.Key? key,
-    required _i21.UserProfile userProfile,
+    _i19.Key? key,
+    required _i22.UserProfile userProfile,
   }) : super(
           RouteMyAccount.name,
           path: '/page-my-account',
@@ -552,12 +567,46 @@ class RouteMyAccountArgs {
     required this.userProfile,
   });
 
-  final _i18.Key? key;
+  final _i19.Key? key;
 
-  final _i21.UserProfile userProfile;
+  final _i22.UserProfile userProfile;
 
   @override
   String toString() {
     return 'RouteMyAccountArgs{key: $key, userProfile: $userProfile}';
+  }
+}
+
+/// generated route for
+/// [_i17.PageCertificate]
+class RouteCertificate extends _i18.PageRouteInfo<RouteCertificateArgs> {
+  RouteCertificate({
+    required String name,
+    required DateTime date,
+  }) : super(
+          RouteCertificate.name,
+          path: '/page-certificate',
+          args: RouteCertificateArgs(
+            name: name,
+            date: date,
+          ),
+        );
+
+  static const String name = 'RouteCertificate';
+}
+
+class RouteCertificateArgs {
+  const RouteCertificateArgs({
+    required this.name,
+    required this.date,
+  });
+
+  final String name;
+
+  final DateTime date;
+
+  @override
+  String toString() {
+    return 'RouteCertificateArgs{name: $name, date: $date}';
   }
 }

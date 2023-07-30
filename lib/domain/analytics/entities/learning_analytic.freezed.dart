@@ -25,7 +25,7 @@ mixin _$LearningAnalytic {
   String? get totalDuration => throw _privateConstructorUsedError;
   int? get totalQuizzes => throw _privateConstructorUsedError;
   int? get totalQuestions => throw _privateConstructorUsedError;
-  int? get quizPercentage => throw _privateConstructorUsedError;
+  double? get quizPercentage => throw _privateConstructorUsedError;
   double? get performancePercentage => throw _privateConstructorUsedError;
   List<AnswerAnalytic>? get answersPerQuizAttempt =>
       throw _privateConstructorUsedError;
@@ -51,7 +51,7 @@ abstract class $LearningAnalyticCopyWith<$Res> {
       String? totalDuration,
       int? totalQuizzes,
       int? totalQuestions,
-      int? quizPercentage,
+      double? quizPercentage,
       double? performancePercentage,
       List<AnswerAnalytic>? answersPerQuizAttempt});
 }
@@ -122,7 +122,7 @@ class _$LearningAnalyticCopyWithImpl<$Res, $Val extends LearningAnalytic>
       quizPercentage: freezed == quizPercentage
           ? _value.quizPercentage
           : quizPercentage // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as double?,
       performancePercentage: freezed == performancePercentage
           ? _value.performancePercentage
           : performancePercentage // ignore: cast_nullable_to_non_nullable
@@ -153,7 +153,7 @@ abstract class _$$_LearningAnalyticCopyWith<$Res>
       String? totalDuration,
       int? totalQuizzes,
       int? totalQuestions,
-      int? quizPercentage,
+      double? quizPercentage,
       double? performancePercentage,
       List<AnswerAnalytic>? answersPerQuizAttempt});
 }
@@ -222,7 +222,7 @@ class __$$_LearningAnalyticCopyWithImpl<$Res>
       quizPercentage: freezed == quizPercentage
           ? _value.quizPercentage
           : quizPercentage // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as double?,
       performancePercentage: freezed == performancePercentage
           ? _value.performancePercentage
           : performancePercentage // ignore: cast_nullable_to_non_nullable
@@ -272,7 +272,7 @@ class _$_LearningAnalytic implements _LearningAnalytic {
   @override
   final int? totalQuestions;
   @override
-  final int? quizPercentage;
+  final double? quizPercentage;
   @override
   final double? performancePercentage;
   final List<AnswerAnalytic>? _answersPerQuizAttempt;
@@ -354,7 +354,7 @@ abstract class _LearningAnalytic implements LearningAnalytic {
       final String? totalDuration,
       final int? totalQuizzes,
       final int? totalQuestions,
-      final int? quizPercentage,
+      final double? quizPercentage,
       final double? performancePercentage,
       final List<AnswerAnalytic>? answersPerQuizAttempt}) = _$_LearningAnalytic;
 
@@ -377,7 +377,7 @@ abstract class _LearningAnalytic implements LearningAnalytic {
   @override
   int? get totalQuestions;
   @override
-  int? get quizPercentage;
+  double? get quizPercentage;
   @override
   double? get performancePercentage;
   @override

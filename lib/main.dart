@@ -8,6 +8,7 @@ import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:injectable/injectable.dart';
 import 'package:sqlyze/domain/core/utils/firebase_remote_config.dart';
+import 'package:sentry_flutter/sentry_flutter.dart';
 import 'package:sqlyze/injection.dart';
 import 'package:sqlyze/locator.dart';
 import 'package:sqlyze/presentation/core/app.dart';
@@ -27,7 +28,14 @@ void main() async {
   configureInjection(Environment.dev);
   await initializeDependencies();
   configLoading();
-  runApp(App());
+  await SentryFlutter.init(
+    (options) {
+      options.dsn = 'https://a29a8c9ae54e298b7ea741ad77ce04a5@o4505617706713088.ingest.sentry.io/4505617711890432';
+      options.tracesSampleRate = 1.0;
+    },
+    appRunner: () => runApp(App()),
+  );
+  
 }
 
 Future<void> _initializeCrashlytics() async {

@@ -15,7 +15,7 @@ class LearningAnalytic with _$LearningAnalytic {
     String? totalDuration,
     int? totalQuizzes,
     int? totalQuestions,
-    int? quizPercentage,
+    double? quizPercentage,
     double? performancePercentage,
     List<AnswerAnalytic>? answersPerQuizAttempt,
   }) = _LearningAnalytic;

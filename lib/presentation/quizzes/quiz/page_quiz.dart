@@ -151,14 +151,14 @@ class _PageQuizState extends State<PageQuiz> with TickerProviderStateMixin {
             });
       },
       child: Scaffold(
-        backgroundColor: AppColors.white,
+        backgroundColor: AppColors.primary,
         body: Stack(
           children: [
-            Align(
-                alignment: Alignment.topCenter,
-                child: QuizBackground(
-                  heightPercentage: 0.885,
-                )),
+            // Align(
+            //     alignment: Alignment.topCenter,
+            //     child: QuizBackground(
+            //       heightPercentage: 0.885,
+            //     )),
             Align(
               alignment: Alignment.topCenter,
               child: QuestionsContainer(
@@ -176,33 +176,33 @@ class _PageQuizState extends State<PageQuiz> with TickerProviderStateMixin {
                     handleQuestionAnswered(index, answer, quizQuestions),
               ),
             ),
-            Align(
-              alignment: Alignment.bottomCenter,
-              child: Container(
-                padding: EdgeInsets.only(bottom: 20.h, right: 30.w, left: 30.w),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    ButtonCircle(
-                      color: AppColors.primary,
-                      onTap: () => _buildContext
-                          .read<QuizQuestionsBloc>()
-                          .add(const QuizQuestionsEvent.previousQuestion()),
-                      child: const Icon(Icons.skip_previous,
-                          color: AppColors.white),
-                    ),
-                    ButtonCircle(
-                      color: AppColors.primary,
-                      onTap: () => _buildContext
-                          .read<QuizQuestionsBloc>()
-                          .add(const QuizQuestionsEvent.nextQuestion()),
-                      child:
-                          const Icon(Icons.skip_next, color: AppColors.white),
-                    )
-                  ],
-                ),
-              ),
-            ),
+            // Align(
+            //   alignment: Alignment.bottomCenter,
+            //   child: Container(
+            //     padding: EdgeInsets.only(bottom: 20.h, right: 30.w, left: 30.w),
+            //     child: Row(
+            //       mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            //       children: [
+            //         ButtonCircle(
+            //           color: AppColors.primary,
+            //           onTap: () => _buildContext
+            //               .read<QuizQuestionsBloc>()
+            //               .add(const QuizQuestionsEvent.previousQuestion()),
+            //           child: const Icon(Icons.skip_previous,
+            //               color: AppColors.white),
+            //         ),
+            //         ButtonCircle(
+            //           color: AppColors.primary,
+            //           onTap: () => _buildContext
+            //               .read<QuizQuestionsBloc>()
+            //               .add(const QuizQuestionsEvent.nextQuestion()),
+            //           child:
+            //               const Icon(Icons.skip_next, color: AppColors.white),
+            //         )
+            //       ],
+            //     ),
+            //   ),
+            // ),
             buildTopMenu()
           ],
         ),

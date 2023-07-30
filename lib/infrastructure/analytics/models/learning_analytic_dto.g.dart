@@ -18,7 +18,7 @@ _$_LearningAnalyticDto _$$_LearningAnalyticDtoFromJson(
       totalDuration: json['total_duration'] as String?,
       totalQuizzes: json['total_quizzes'] as int?,
       totalQuestions: json['total_questions'] as int?,
-      quizPercentage: json['quiz_percentage'] as int?,
+      quizPercentage: (json['quiz_percentage'] as num?)?.toDouble(),
       performancePercentage:
           (json['performance_percentage'] as num?)?.toDouble(),
       answersPerQuizAttempt: (json['answers_per_quiz_attempt']

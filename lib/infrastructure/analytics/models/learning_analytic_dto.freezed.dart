@@ -38,7 +38,7 @@ mixin _$LearningAnalyticDto {
   @JsonKey(name: 'total_questions')
   int? get totalQuestions => throw _privateConstructorUsedError;
   @JsonKey(name: 'quiz_percentage')
-  int? get quizPercentage => throw _privateConstructorUsedError;
+  double? get quizPercentage => throw _privateConstructorUsedError;
   @JsonKey(name: 'performance_percentage')
   double? get performancePercentage => throw _privateConstructorUsedError;
   @JsonKey(name: 'answers_per_quiz_attempt')
@@ -67,7 +67,7 @@ abstract class $LearningAnalyticDtoCopyWith<$Res> {
       @JsonKey(name: 'total_duration') String? totalDuration,
       @JsonKey(name: 'total_quizzes') int? totalQuizzes,
       @JsonKey(name: 'total_questions') int? totalQuestions,
-      @JsonKey(name: 'quiz_percentage') int? quizPercentage,
+      @JsonKey(name: 'quiz_percentage') double? quizPercentage,
       @JsonKey(name: 'performance_percentage') double? performancePercentage,
       @JsonKey(name: 'answers_per_quiz_attempt')
       List<AnswerAnalyticDto>? answersPerQuizAttempt});
@@ -139,7 +139,7 @@ class _$LearningAnalyticDtoCopyWithImpl<$Res, $Val extends LearningAnalyticDto>
       quizPercentage: freezed == quizPercentage
           ? _value.quizPercentage
           : quizPercentage // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as double?,
       performancePercentage: freezed == performancePercentage
           ? _value.performancePercentage
           : performancePercentage // ignore: cast_nullable_to_non_nullable
@@ -170,7 +170,7 @@ abstract class _$$_LearningAnalyticDtoCopyWith<$Res>
       @JsonKey(name: 'total_duration') String? totalDuration,
       @JsonKey(name: 'total_quizzes') int? totalQuizzes,
       @JsonKey(name: 'total_questions') int? totalQuestions,
-      @JsonKey(name: 'quiz_percentage') int? quizPercentage,
+      @JsonKey(name: 'quiz_percentage') double? quizPercentage,
       @JsonKey(name: 'performance_percentage') double? performancePercentage,
       @JsonKey(name: 'answers_per_quiz_attempt')
       List<AnswerAnalyticDto>? answersPerQuizAttempt});
@@ -240,7 +240,7 @@ class __$$_LearningAnalyticDtoCopyWithImpl<$Res>
       quizPercentage: freezed == quizPercentage
           ? _value.quizPercentage
           : quizPercentage // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as double?,
       performancePercentage: freezed == performancePercentage
           ? _value.performancePercentage
           : performancePercentage // ignore: cast_nullable_to_non_nullable
@@ -304,7 +304,7 @@ class _$_LearningAnalyticDto extends _LearningAnalyticDto {
   final int? totalQuestions;
   @override
   @JsonKey(name: 'quiz_percentage')
-  final int? quizPercentage;
+  final double? quizPercentage;
   @override
   @JsonKey(name: 'performance_percentage')
   final double? performancePercentage;
@@ -398,7 +398,7 @@ abstract class _LearningAnalyticDto extends LearningAnalyticDto {
       @JsonKey(name: 'total_duration') final String? totalDuration,
       @JsonKey(name: 'total_quizzes') final int? totalQuizzes,
       @JsonKey(name: 'total_questions') final int? totalQuestions,
-      @JsonKey(name: 'quiz_percentage') final int? quizPercentage,
+      @JsonKey(name: 'quiz_percentage') final double? quizPercentage,
       @JsonKey(name: 'performance_percentage')
       final double? performancePercentage,
       @JsonKey(name: 'answers_per_quiz_attempt')
@@ -437,7 +437,7 @@ abstract class _LearningAnalyticDto extends LearningAnalyticDto {
   int? get totalQuestions;
   @override
   @JsonKey(name: 'quiz_percentage')
-  int? get quizPercentage;
+  double? get quizPercentage;
   @override
   @JsonKey(name: 'performance_percentage')
   double? get performancePercentage;

@@ -49,19 +49,19 @@ class _QuestionsContainerState extends State<QuestionsContainer> {
   Widget build(BuildContext context) {
     return Padding(
       padding: EdgeInsets.only(
-        top: 60.h,
+        top: 80.h,
       ),
       child: Stack(
         alignment: Alignment.topCenter,
         children: [
           QuestionBackgroundCard(
-            heightPercentage: 0.725,
+            heightPercentage: 0.825,
             opacity: 0.7,
             topMarginPercentage: 0.02,
             widthPercentage: 0.8,
           ),
           QuestionBackgroundCard(
-            heightPercentage: 0.725,
+            heightPercentage: 0.825,
             opacity: 0.85,
             topMarginPercentage: 0.01,
             widthPercentage: 0.9,

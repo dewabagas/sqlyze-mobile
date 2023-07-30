@@ -1,4 +1,5 @@
 import 'package:auto_route/annotations.dart';
+import 'package:sqlyze/presentation/certificate/page_certificate.dart';
 import 'package:sqlyze/presentation/core/pages/page_onboarding.dart';
 import 'package:sqlyze/presentation/core/pages/page_splash.dart';
 import 'package:sqlyze/presentation/discussions/page_discussion.dart';
@@ -44,5 +45,7 @@ import 'package:sqlyze/presentation/student_dashboard/page_student_dashboard.dar
 
   AutoRoute(page: PageForceUpdate),
   AutoRoute(page: PageMyAccount),
+
+  AutoRoute(page: PageCertificate),
 ])
 class $AppRouter {}

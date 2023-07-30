@@ -19,7 +19,7 @@ class LearningAnalyticDto with _$LearningAnalyticDto {
     @JsonKey(name: 'total_duration') String? totalDuration,
     @JsonKey(name: 'total_quizzes') int? totalQuizzes,
     @JsonKey(name: 'total_questions') int? totalQuestions,
-    @JsonKey(name: 'quiz_percentage') int? quizPercentage,
+    @JsonKey(name: 'quiz_percentage') double? quizPercentage,
     @JsonKey(name: 'performance_percentage') double? performancePercentage,
     @JsonKey(name: 'answers_per_quiz_attempt')
     List<AnswerAnalyticDto>? answersPerQuizAttempt,
