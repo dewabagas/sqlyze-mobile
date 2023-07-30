@@ -53,9 +53,9 @@ class _ChapterExerciseBodyState extends State<ChapterExerciseBody> {
             onTap: () {
               if (quizDetail.hasAttempted == true) {
                 AutoRouter.of(context)
-                    .push(RouteQuizResult(quizId: quizDetail.id!));
+                    .push(RouteQuizResult(quizDetail: quizDetail));
               } else {
-                AutoRouter.of(context).push(RouteQuiz(quizId: quizDetail.id!));
+                AutoRouter.of(context).push(RouteQuiz(quizDetail: quizDetail));
               }
             },
             subtitle: 'General Quiz',

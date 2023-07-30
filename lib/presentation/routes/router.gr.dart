@@ -15,7 +15,8 @@ import 'package:auto_route/auto_route.dart' as _i17;
 import 'package:flutter/material.dart' as _i18;
 
 import '../../domain/lessons/entities/lesson_detail.dart' as _i19;
-import '../../domain/user/entities/user_profile.dart' as _i20;
+import '../../domain/quizzes/entitites/quiz_detail.dart' as _i20;
+import '../../domain/user/entities/user_profile.dart' as _i21;
 import '../core/pages/page_onboarding.dart' as _i2;
 import '../core/pages/page_splash.dart' as _i1;
 import '../discussions/page_discussion.dart' as _i14;
@@ -124,7 +125,7 @@ class AppRouter extends _i17.RootStackRouter {
         routeData: routeData,
         child: _i12.PageQuiz(
           key: args.key,
-          quizId: args.quizId,
+          quizDetail: args.quizDetail,
         ),
       );
     },
@@ -134,7 +135,7 @@ class AppRouter extends _i17.RootStackRouter {
         routeData: routeData,
         child: _i13.PageQuizResult(
           key: args.key,
-          quizId: args.quizId,
+          quizDetail: args.quizDetail,
         ),
       );
     },
@@ -440,13 +441,13 @@ class RouteLessonStepDetailArgs {
 class RouteQuiz extends _i17.PageRouteInfo<RouteQuizArgs> {
   RouteQuiz({
     _i18.Key? key,
-    required int quizId,
+    required _i20.QuizDetail quizDetail,
   }) : super(
           RouteQuiz.name,
           path: '/page-quiz',
           args: RouteQuizArgs(
             key: key,
-            quizId: quizId,
+            quizDetail: quizDetail,
           ),
         );
 
@@ -456,16 +457,16 @@ class RouteQuiz extends _i17.PageRouteInfo<RouteQuizArgs> {
 class RouteQuizArgs {
   const RouteQuizArgs({
     this.key,
-    required this.quizId,
+    required this.quizDetail,
   });
 
   final _i18.Key? key;
 
-  final int quizId;
+  final _i20.QuizDetail quizDetail;
 
   @override
   String toString() {
-    return 'RouteQuizArgs{key: $key, quizId: $quizId}';
+    return 'RouteQuizArgs{key: $key, quizDetail: $quizDetail}';
   }
 }
 
@@ -474,13 +475,13 @@ class RouteQuizArgs {
 class RouteQuizResult extends _i17.PageRouteInfo<RouteQuizResultArgs> {
   RouteQuizResult({
     _i18.Key? key,
-    required int quizId,
+    required _i20.QuizDetail quizDetail,
   }) : super(
           RouteQuizResult.name,
           path: '/page-quiz-result',
           args: RouteQuizResultArgs(
             key: key,
-            quizId: quizId,
+            quizDetail: quizDetail,
           ),
         );
 
@@ -490,16 +491,16 @@ class RouteQuizResult extends _i17.PageRouteInfo<RouteQuizResultArgs> {
 class RouteQuizResultArgs {
   const RouteQuizResultArgs({
     this.key,
-    required this.quizId,
+    required this.quizDetail,
   });
 
   final _i18.Key? key;
 
-  final int quizId;
+  final _i20.QuizDetail quizDetail;
 
   @override
   String toString() {
-    return 'RouteQuizResultArgs{key: $key, quizId: $quizId}';
+    return 'RouteQuizResultArgs{key: $key, quizDetail: $quizDetail}';
   }
 }
 
@@ -532,7 +533,7 @@ class RouteForceUpdate extends _i17.PageRouteInfo<void> {
 class RouteMyAccount extends _i17.PageRouteInfo<RouteMyAccountArgs> {
   RouteMyAccount({
     _i18.Key? key,
-    required _i20.UserProfile userProfile,
+    required _i21.UserProfile userProfile,
   }) : super(
           RouteMyAccount.name,
           path: '/page-my-account',
@@ -553,7 +554,7 @@ class RouteMyAccountArgs {
 
   final _i18.Key? key;
 
-  final _i20.UserProfile userProfile;
+  final _i21.UserProfile userProfile;
 
   @override
   String toString() {

@@ -1,17 +1,19 @@
 import 'dart:io';
 
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_pdfview/flutter_pdfview.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:http/http.dart' as http;
 import 'package:path_provider/path_provider.dart';
+import 'package:sqlyze/domain/lessons/entities/learning_document.dart';
 import 'package:sqlyze/presentation/core/constants/styles.dart';
 import 'package:sqlyze/presentation/core/styles/app_colors.dart';
 
 class PDFViewer extends StatefulWidget {
-  final String url;
+  final LearningDocument learningDocument;
 
-  const PDFViewer({Key? key, required this.url}) : super(key: key);
+  const PDFViewer({Key? key, required this.learningDocument}) : super(key: key);
 
   @override
   _PDFViewerState createState() => _PDFViewerState();
@@ -26,7 +28,7 @@ class _PDFViewerState extends State<PDFViewer> {
   @override
   void initState() {
     super.initState();
-    downloadPDFFile(widget.url).then((file) {
+    downloadPDFFile(widget.learningDocument.url!).then((file) {
       setState(() {
         _localPath = file.path;
       });
@@ -64,6 +66,27 @@ class _PDFViewerState extends State<PDFViewer> {
       return file;
     } else {
       throw Exception('Failed to download PDF file');
+    }
+  }
+
+  Future<void> downloadFile(String url, String filename) async {
+    try {
+      var dio = Dio();
+
+      var dir = await getApplicationDocumentsDirectory();
+      await dio.download(url, "${dir.path}/$filename");
+
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text("Downloaded successfully."),
+        ),
+      );
+    } catch (e) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text("Download failed."),
+        ),
+      );
     }
   }
 
@@ -114,13 +137,14 @@ class _PDFViewerState extends State<PDFViewer> {
                   ),
           ),
         ),
+        SizedBox(height: 10.h),
         Padding(
-          padding: EdgeInsets.symmetric(horizontal: 16.0),
+          padding: EdgeInsets.symmetric(horizontal: 16.w),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               MaterialButton(
-                color: Colors.purple, // Background color
+                color: AppColors.primary, // Background color
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(10.r), // Border radius
                 ),
@@ -133,9 +157,10 @@ class _PDFViewerState extends State<PDFViewer> {
                     style:
                         TextStyles.bodySmall.copyWith(color: AppColors.white)),
               ),
-              Text('Page $_currentPage / $_totalPages'),
+              Text('Page $_currentPage / $_totalPages',
+                  style: TextStyles.bodySmall),
               MaterialButton(
-                color: Colors.purple, // Background color
+                color: AppColors.primary, // Background color
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(10.r), // Border radius
                 ),
@@ -152,35 +177,26 @@ class _PDFViewerState extends State<PDFViewer> {
             ],
           ),
         ),
+        SizedBox(height: 10.h),
+        Padding(
+          padding:  EdgeInsets.symmetric(horizontal: 16.w),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text('Download PDF', style: TextStyles.bodyMedium),
+              IconButton(
+                icon: Icon(Icons.file_download),
+                onPressed: () {
+                  downloadFile(
+                    '${widget.learningDocument.url}',
+                    '${widget.learningDocument.title ?? 'Document'}.pdf',
+                  );
+                },
+              ),
+            ],
+          ),
+        ),
       ],
     );
   }
-
-  //   return Container(
-  //     width: double.infinity,
-  //     height: double.infinity,
-  //     child: PDFView(
-  //       filePath: _localPath!,
-  //       enableSwipe: true,
-  //       swipeHorizontal: true,
-  //       autoSpacing: false,
-  //       fitEachPage: true,
-  //       pageFling: true,
-
-  //       onRender: (_pages) {
-  //         setState(() {});
-  //       },
-  //       onError: (error) {
-  //         print(error.toString());
-  //       },
-  //       onPageError: (page, error) {
-  //         print('$page: ${error.toString()}');
-  //       },
-  //       onViewCreated: (PDFViewController pdfViewController) {},
-  //       onPageChanged: (int? page, int? total) {
-  //         print('page change: $page/$total');
-  //       },
-  //     ),
-  //   );
-  // }
 }

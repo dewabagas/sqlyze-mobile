@@ -35,13 +35,13 @@ class TabHeaderAnalytics extends StatelessWidget {
       curve: Curves.easeInToLinear,
       children: {
         0: Text(
-          'Perkembangan',
+          'Performa',
           style: TextStyles.bodySmall.copyWith(
               fontWeight:
                   selectedIndex == 0 ? FontWeight.w600 : FontWeight.w400),
         ),
         1: Text(
-          'Performa',
+          'Perkembangan',
           style: TextStyles.bodySmall.copyWith(
               fontWeight:
                   selectedIndex == 1 ? FontWeight.w600 : FontWeight.w400),

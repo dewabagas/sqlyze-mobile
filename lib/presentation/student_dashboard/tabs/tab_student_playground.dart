@@ -4,7 +4,9 @@ import 'package:date_format/date_format.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:mixpanel_flutter/mixpanel_flutter.dart';
 import 'package:sqflite/sqflite.dart';
+import 'package:sqlyze/locator.dart';
 import 'package:sqlyze/presentation/core/constants/styles.dart';
 import 'package:sqlyze/presentation/core/helpers/database_helper.dart';
 import 'package:sqlyze/presentation/core/styles/app_colors.dart';
@@ -38,6 +40,8 @@ class _TabStudentPlaygroundState extends State<TabStudentPlayground> {
 
   @override
   void initState() {
+    final Mixpanel mixPanel = locator.get();
+    mixPanel.track('SQL Playground');
     pageController = PageController(initialPage: 0);
     super.initState();
   }

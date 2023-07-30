@@ -3,14 +3,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:mixpanel_flutter/mixpanel_flutter.dart';
 import 'package:sqlyze/application/quizzes/quiz_answer_submission_cubit/quiz_answer_submission_cubit.dart';
 import 'package:sqlyze/application/quizzes/quiz_questions_bloc/quiz_questions_bloc.dart';
 import 'package:sqlyze/domain/core/constants/preference_constants.dart';
 import 'package:sqlyze/domain/core/helpers/preference_helper.dart';
 import 'package:sqlyze/domain/quizzes/entitites/quiz_answer.dart';
+import 'package:sqlyze/domain/quizzes/entitites/quiz_detail.dart';
 import 'package:sqlyze/domain/quizzes/entitites/quiz_question.dart';
 import 'package:sqlyze/domain/quizzes/requests/quiz_submission_request.dart';
 import 'package:sqlyze/injection.dart';
+import 'package:sqlyze/locator.dart';
 import 'package:sqlyze/presentation/core/styles/app_colors.dart';
 import 'package:sqlyze/presentation/quizzes/quiz/components/questions_container.dart';
 import 'package:sqlyze/presentation/quizzes/quiz/components/quiz_background.dart';
@@ -22,8 +25,8 @@ import 'package:sqlyze/presentation/shared/widgets/errors/error_page.dart';
 import 'package:sqlyze/presentation/shared/widgets/others/show_dialog.dart';
 
 class PageQuiz extends StatefulWidget {
-  final int quizId;
-  const PageQuiz({super.key, required this.quizId});
+  final QuizDetail quizDetail;
+  const PageQuiz({super.key, required this.quizDetail});
 
   @override
   State<PageQuiz> createState() => _PageQuizState();
@@ -31,6 +34,7 @@ class PageQuiz extends StatefulWidget {
 
 class _PageQuizState extends State<PageQuiz> with TickerProviderStateMixin {
   int currentQuestionIndex = 0;
+  final Mixpanel mixPanel = locator.get();
   late int userId;
   late BuildContext _buildContext;
   late AnimationController questionAnimationController;
@@ -52,6 +56,10 @@ class _PageQuizState extends State<PageQuiz> with TickerProviderStateMixin {
 
   @override
   void initState() {
+    mixPanel.track('Quiz');
+    mixPanel.registerSuperProperties(
+      {'Quiz Name': widget.quizDetail.title},
+    );
     initializeAnimation();
     getUserId();
     super.initState();
@@ -93,7 +101,8 @@ class _PageQuizState extends State<PageQuiz> with TickerProviderStateMixin {
         providers: [
           BlocProvider(
               create: (context) => getIt<QuizQuestionsBloc>()
-                ..add(QuizQuestionsEvent.getQuizQuestions(widget.quizId))),
+                ..add(QuizQuestionsEvent.getQuizQuestions(
+                    widget.quizDetail.id!))),
           BlocProvider<QuizAnswerSubmissionCubit>(
             create: (BuildContext context) =>
                 getIt<QuizAnswerSubmissionCubit>(),
@@ -210,10 +219,11 @@ class _PageQuizState extends State<PageQuiz> with TickerProviderStateMixin {
         QuizSubmissionRequest(
             answerId: quizAnswer.id,
             questionId: quizAnswer.questionId,
-            quizId: widget.quizId,
+            quizId: widget.quizDetail.id,
             userId: userId));
     if (index == quizQuestions?.length) {
-      AutoRouter.of(context).push(RouteQuizResult(quizId: widget.quizId));
+      AutoRouter.of(context)
+          .push(RouteQuizResult(quizDetail: widget.quizDetail));
     }
   }
 

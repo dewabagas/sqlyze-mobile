@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:mixpanel_flutter/mixpanel_flutter.dart';
 import 'package:screenshot/screenshot.dart';
 import 'package:sqlyze/domain/core/constants/preference_constants.dart';
 import 'package:sqlyze/domain/core/helpers/preference_helper.dart';
+import 'package:sqlyze/domain/quizzes/entitites/quiz_detail.dart';
+import 'package:sqlyze/locator.dart';
 import 'package:sqlyze/presentation/quizzes/quiz_result/quiz_result_body.dart';
 
 class PageQuizResult extends StatefulWidget {
-  final int quizId;
-  const PageQuizResult({super.key, required this.quizId});
+  final QuizDetail quizDetail;
+  const PageQuizResult({super.key, required this.quizDetail});
 
   @override
   State<PageQuizResult> createState() => _PageQuizResultState();
@@ -15,6 +18,7 @@ class PageQuizResult extends StatefulWidget {
 class _PageQuizResultState extends State<PageQuizResult> {
   final ScreenshotController screenshotController = ScreenshotController();
   late int userId;
+  final Mixpanel mixPanel = locator.get();
 
   @override
   void initState() {
@@ -38,6 +42,6 @@ class _PageQuizResultState extends State<PageQuizResult> {
         onWillPop: () async {
           return Future.value(false);
         },
-        child: QuizResultBody(quizId: widget.quizId, userId: userId));
+        child: QuizResultBody(quizDetail: widget.quizDetail, userId: userId));
   }
 }

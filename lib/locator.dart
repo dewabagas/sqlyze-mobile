@@ -8,6 +8,7 @@ import 'package:sqlyze/infrastructure/lessons/data_sources/remotes/lesson_api_se
 import 'package:sqlyze/infrastructure/network/rest_api/api_service.dart';
 import 'package:sqlyze/infrastructure/quizzes/data_sources/remotes/quiz_api_service.dart';
 import 'package:sqlyze/infrastructure/user/data_sources/remotes/user_api_service.dart';
+import 'package:mixpanel_flutter/mixpanel_flutter.dart';
 
 GetIt locator = GetIt.instance;
 Alice alice = Alice(showNotification: true);
@@ -32,4 +33,11 @@ Future<void> initializeDependencies() async {
   locator.registerSingleton<QuizApiService>(
       QuizApiService(locator.get<Dio>(instanceName: 'AuthorizedClient')));
   locator.registerSingleton(FirebaseRemoteConfigService());
+  _injectMixPanel();
+}
+
+Future<void> _injectMixPanel() async {
+  Mixpanel _mixpanel = await Mixpanel.init("bf4f94a9ffb596c0756624c050f73c2d",
+      optOutTrackingDefault: false, trackAutomaticEvents: true);
+  locator.registerSingleton(_mixpanel);
 }

@@ -54,12 +54,21 @@ class _AnalyticLineChartState extends State<AnalyticLineChart> {
   }
 
   List<ChartData> mapAnalyticsToChartData() {
-    return widget.analyticsData.answersPerQuizAttempt!.map((answerAnalytic) {
+    var chartData = widget.analyticsData.answersPerQuizAttempt!
+        // Map the data into ChartData
+        .map((answerAnalytic) {
       return ChartData(
         x: double.parse(answerAnalytic.quizId.toString()),
         y: double.parse(answerAnalytic.correctAnswersPercentage!.toString()),
       );
-    }).toList();
+    })
+        // Convert it to list
+        .toList();
+
+    // Sort the list by quizId
+    chartData.sort((a, b) => a.x.compareTo(b.x));
+
+    return chartData;
   }
 
   Widget bottomTitleWidgets(double value, TitleMeta meta) {
@@ -90,10 +99,10 @@ class _AnalyticLineChartState extends State<AnalyticLineChart> {
       case 10:
         text = 'Rendah';
         break;
-      case 40:
+      case 50:
         text = 'Sedang';
         break;
-      case 90:
+      case 100:
         text = 'Tinggi';
         break;
       default:
@@ -169,6 +178,8 @@ class _AnalyticLineChartState extends State<AnalyticLineChart> {
           dotData: const FlDotData(
             show: true,
           ),
+          preventCurveOverShooting: true,
+          isStrokeJoinRound: false,
           belowBarData: BarAreaData(
             show: true,
             gradient: LinearGradient(

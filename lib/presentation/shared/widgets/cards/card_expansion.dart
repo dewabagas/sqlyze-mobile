@@ -8,13 +8,14 @@ class CardExpansion extends StatelessWidget {
   final List<Widget> children;
   final bool hasShadow;
   final Color backgroundColor;
+  final Function(bool)? onExpansionChanged;
 
   const CardExpansion(
       {super.key,
       required this.title,
       required this.children,
       this.hasShadow = true,
-      this.backgroundColor = AppColors.white});
+      this.backgroundColor = AppColors.white, this.onExpansionChanged});
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -44,6 +45,7 @@ class CardExpansion extends StatelessWidget {
           backgroundColor: Colors.transparent,
           collapsedIconColor: AppColors.charcoal,
           iconColor: AppColors.primary,
+          onExpansionChanged: onExpansionChanged,
           children: children,
         ),
       ),

@@ -6,13 +6,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:mixpanel_flutter/mixpanel_flutter.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:screenshot/screenshot.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:sqlyze/application/quizzes/quiz_result_bloc/quiz_result_bloc.dart';
 import 'package:sqlyze/domain/core/utils/ui_utils.dart';
+import 'package:sqlyze/domain/quizzes/entitites/quiz_detail.dart';
 import 'package:sqlyze/domain/quizzes/entitites/quiz_result.dart';
 import 'package:sqlyze/injection.dart';
+import 'package:sqlyze/locator.dart';
 import 'package:sqlyze/presentation/core/constants/assets.dart';
 import 'package:sqlyze/presentation/core/constants/styles.dart';
 import 'package:sqlyze/presentation/core/styles/app_colors.dart';
@@ -27,9 +30,10 @@ import 'package:sqlyze/presentation/shared/widgets/others/show_dialog.dart';
 import 'package:sqlyze/presentation/shared/widgets/pages/page_decoration_top.dart';
 
 class QuizResultBody extends StatefulWidget {
-  final int quizId;
+  final QuizDetail quizDetail;
   final int userId;
-  const QuizResultBody({super.key, required this.quizId, required this.userId});
+  const QuizResultBody(
+      {super.key, required this.quizDetail, required this.userId});
 
   @override
   State<QuizResultBody> createState() => _QuizResultBodyState();
@@ -37,11 +41,14 @@ class QuizResultBody extends StatefulWidget {
 
 class _QuizResultBodyState extends State<QuizResultBody> {
   final ScreenshotController screenshotController = ScreenshotController();
+  final Mixpanel mixPanel = locator.get();
+
   @override
   Widget build(BuildContext context) {
     return BlocProvider<QuizResultBloc>(
       create: (context) => getIt<QuizResultBloc>()
-        ..add(QuizResultEvent.getQuizResult(widget.quizId, widget.userId)),
+        ..add(QuizResultEvent.getQuizResult(
+            widget.quizDetail.id!, widget.userId)),
       child: BlocBuilder<QuizResultBloc, QuizResultState>(
         builder: (context, state) {
           return state.map(
@@ -49,6 +56,15 @@ class _QuizResultBodyState extends State<QuizResultBody> {
               loadInProgress: (value) => const ShimmerQuizResult(),
               loadSuccess: (value) {
                 debugPrint('result quiz ${value.quizResult}');
+                mixPanel.track('Quiz Result');
+                mixPanel.registerSuperProperties(
+                  {
+                    'Quiz Name': widget.quizDetail.title,
+                    'Quiz Score': (value.quizResult!.correctAnswers! /
+                            widget.quizDetail.questionCount!) *
+                        100
+                  },
+                );
                 return buildQuizResult(value.quizResult!);
               },
               loadFailure: (value) {

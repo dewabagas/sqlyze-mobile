@@ -3,9 +3,11 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:mixpanel_flutter/mixpanel_flutter.dart';
 import 'package:sqlyze/application/user_profile_bloc/user_profile_bloc.dart';
 import 'package:sqlyze/domain/user/entities/user_profile.dart';
 import 'package:sqlyze/injection.dart';
+import 'package:sqlyze/locator.dart';
 import 'package:sqlyze/presentation/core/constants/assets.dart';
 import 'package:sqlyze/presentation/core/constants/strings.dart';
 import 'package:sqlyze/presentation/core/constants/styles.dart';
@@ -24,6 +26,13 @@ class TabStudentHome extends StatefulWidget {
 }
 
 class _TabStudentHomeState extends State<TabStudentHome> {
+  @override
+  void initState() {
+    final Mixpanel mixPanel = locator.get();
+    mixPanel.track('Student Dashboard');
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return BlocProvider<UserProfileBloc>(

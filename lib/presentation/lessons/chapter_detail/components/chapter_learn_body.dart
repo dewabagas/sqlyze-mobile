@@ -1,11 +1,11 @@
-import 'dart:async';
-import 'dart:convert';
-
 import 'package:auto_route/auto_route.dart';
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:mixpanel_flutter/mixpanel_flutter.dart';
+import 'package:path_provider/path_provider.dart';
 import 'package:sqlyze/domain/lessons/entities/lesson_detail.dart';
+import 'package:sqlyze/locator.dart';
 import 'package:sqlyze/presentation/core/constants/styles.dart';
 import 'package:sqlyze/presentation/core/styles/app_colors.dart';
 import 'package:sqlyze/presentation/routes/router.gr.dart';
@@ -53,11 +53,16 @@ class _ChapterLearnBodyState extends State<ChapterLearnBody> {
           SizedBox(height: 16.h),
           CardExpansion(
             title: 'Modul Materi',
+            onExpansionChanged: (value) {
+              debugPrint('onExpansionChanged $value');
+              final Mixpanel mixPanel = locator.get();
+              mixPanel.track('Lesson Steps - Belajar Sekarang');
+            },
             children: [
               Container(
                 height: 500.h,
                 child: PDFViewer(
-                  url: '${lessonDetail.learningDocument?.url}',
+                  learningDocument: lessonDetail.learningDocument!,
                 ),
               ),
             ],

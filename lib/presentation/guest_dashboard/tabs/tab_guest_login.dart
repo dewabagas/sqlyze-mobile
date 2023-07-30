@@ -3,11 +3,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:mixpanel_flutter/mixpanel_flutter.dart';
 import 'package:sqlyze/application/auth_bloc/auth_bloc.dart';
 import 'package:sqlyze/domain/auth/requests/auth_request.dart';
 import 'package:sqlyze/domain/core/constants/preference_constants.dart';
 import 'package:sqlyze/domain/core/helpers/preference_helper.dart';
 import 'package:sqlyze/injection.dart';
+import 'package:sqlyze/locator.dart';
 import 'package:sqlyze/presentation/core/constants/assets.dart';
 import 'package:sqlyze/presentation/core/constants/styles.dart';
 import 'package:sqlyze/presentation/core/styles/app_colors.dart';
@@ -35,6 +37,8 @@ class _TabGuestLoginState extends State<TabGuestLogin> {
 
   @override
   void initState() {
+    final Mixpanel mixPanel = locator.get();
+    mixPanel.track('Login');
     super.initState();
   }
 

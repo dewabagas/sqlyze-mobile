@@ -14,7 +14,7 @@ String? validationEmail(String? value) {
 String? validationPasswordUnique(String? value) {
   String pattern = r'^(?=.*\d)(?=.*[a-zA-Z])';
   RegExp regExp = RegExp(pattern);
-  if (value!.length < 10) {
+  if (value!.length < 6) {
     return "Password is too short";
   } else if (!regExp.hasMatch(value)) {
     return "Password must contain at least 1 number and 1 special character";

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:mixpanel_flutter/mixpanel_flutter.dart';
 import 'package:sqlyze/domain/analytics/entities/learning_analytic.dart';
+import 'package:sqlyze/locator.dart';
 import 'package:sqlyze/presentation/shared/widgets/charts/analytic_line_chart.dart';
 
 class AnalyticProgressBody extends StatefulWidget {
@@ -11,6 +13,14 @@ class AnalyticProgressBody extends StatefulWidget {
 }
 
 class _AnalyticProgressBodyState extends State<AnalyticProgressBody> {
+
+  @override
+  void initState() {
+    final Mixpanel mixPanel = locator.get();
+    mixPanel.track('Progress Analytics');
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(

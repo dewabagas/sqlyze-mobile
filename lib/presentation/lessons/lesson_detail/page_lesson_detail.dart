@@ -4,9 +4,11 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:mixpanel_flutter/mixpanel_flutter.dart';
 import 'package:sqlyze/application/lessons/lesson_list_bloc/lesson_list_bloc.dart';
 import 'package:sqlyze/domain/lessons/entities/lesson_detail.dart';
 import 'package:sqlyze/injection.dart';
+import 'package:sqlyze/locator.dart';
 import 'package:sqlyze/presentation/core/constants/styles.dart';
 import 'package:sqlyze/presentation/core/styles/app_colors.dart';
 import 'package:sqlyze/presentation/lessons/lesson_detail/components/card_lesson.dart';
@@ -27,6 +29,14 @@ class PageLessonDetail extends StatefulWidget {
 }
 
 class _PageLessonDetailState extends State<PageLessonDetail> {
+
+  @override
+  void initState() {
+    final Mixpanel mixPanel = locator.get();
+    mixPanel.track('Lesson List');
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return BlocProvider<LessonListBloc>(

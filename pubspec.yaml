@@ -77,6 +77,8 @@ dependencies:
   mixpanel_flutter: ^2.1.1
   firebase_remote_config: ^4.2.4
   store_redirect: ^2.0.1
+  sentry_flutter: ^7.9.0
+  syncfusion_flutter_charts: ^22.2.5
 
 dev_dependencies:
   flutter_test:

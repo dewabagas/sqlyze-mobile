@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:mixpanel_flutter/mixpanel_flutter.dart';
+import 'package:sqlyze/locator.dart';
 import 'package:sqlyze/presentation/shared/widgets/pages/page_decoration_top.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
@@ -16,7 +18,8 @@ class _PageDiscussionState extends State<PageDiscussion> {
 
   @override
   void initState() {
-    // TODO: implement initState
+    final Mixpanel mixPanel = locator.get();
+    mixPanel.track('Discussion');
     super.initState();
     controller = WebViewController()
       ..setJavaScriptMode(JavaScriptMode.unrestricted)
