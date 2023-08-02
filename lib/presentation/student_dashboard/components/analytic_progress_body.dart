@@ -14,7 +14,6 @@ class AnalyticProgressBody extends StatefulWidget {
 }
 
 class _AnalyticProgressBodyState extends State<AnalyticProgressBody> {
-
   @override
   void initState() {
     final Mixpanel mixPanel = locator.get();

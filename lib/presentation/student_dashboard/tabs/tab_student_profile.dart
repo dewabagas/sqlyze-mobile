@@ -164,8 +164,8 @@ class _TabProfileState extends State<TabStudentProfile> {
           Center(
             child: Text(
               'Version ${packageInfo.version} (${packageInfo.buildNumber})',
-              style:
-                  TextStyles.bodySmall.copyWith(color: AppColors.paragraphColor),
+              style: TextStyles.bodySmall
+                  .copyWith(color: AppColors.paragraphColor),
             ),
           )
         ],

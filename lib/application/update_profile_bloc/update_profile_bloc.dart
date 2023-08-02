@@ -15,11 +15,13 @@ part 'update_profile_bloc.freezed.dart';
 class UpdateProfileBloc extends Bloc<UpdateProfileEvent, UpdateProfileState> {
   final IUserRepository iUserRepository;
 
-  UpdateProfileBloc(this.iUserRepository) : super(const UpdateProfileState.initial()) {
+  UpdateProfileBloc(this.iUserRepository)
+      : super(const UpdateProfileState.initial()) {
     on<_$_UpdateProfile>((event, emit) async {
       try {
         emit(const UpdateProfileState.loadInProgress());
-        final data = await iUserRepository.updateProfile(event.profileUpdateRequest);
+        final data =
+            await iUserRepository.updateProfile(event.profileUpdateRequest);
         log('response bloc ${data}');
         data.fold(
           (l) => emit(UpdateProfileState.loadFailure(l.message)),

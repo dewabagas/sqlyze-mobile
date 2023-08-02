@@ -15,7 +15,8 @@ class CardExpansion extends StatelessWidget {
       required this.title,
       required this.children,
       this.hasShadow = true,
-      this.backgroundColor = AppColors.white, this.onExpansionChanged});
+      this.backgroundColor = AppColors.white,
+      this.onExpansionChanged});
   @override
   Widget build(BuildContext context) {
     return Container(

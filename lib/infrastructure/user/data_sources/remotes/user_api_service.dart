@@ -11,5 +11,6 @@ abstract class UserApiService {
   Future<HttpResponse> getProfile();
 
   @PUT('/users/profile/edit')
-  Future<HttpResponse> updateProfile(@Body() ProfileUpdateRequest profileUpdateRequest);
+  Future<HttpResponse> updateProfile(
+      @Body() ProfileUpdateRequest profileUpdateRequest);
 }

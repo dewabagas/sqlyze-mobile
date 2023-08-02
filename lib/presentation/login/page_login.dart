@@ -198,7 +198,8 @@ class _PageLoginState extends State<PageLogin> {
                           SizedBox(height: 20.h),
                           Text(
                             'Version ${packageInfo.version} (${packageInfo.buildNumber})',
-                            style: TextStyles.bodySmall.copyWith(color: AppColors.paragraphColor),
+                            style: TextStyles.bodySmall
+                                .copyWith(color: AppColors.paragraphColor),
                           )
                         ],
                       ),

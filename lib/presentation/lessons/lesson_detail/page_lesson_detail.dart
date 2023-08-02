@@ -29,7 +29,6 @@ class PageLessonDetail extends StatefulWidget {
 }
 
 class _PageLessonDetailState extends State<PageLessonDetail> {
-
   @override
   void initState() {
     final Mixpanel mixPanel = locator.get();

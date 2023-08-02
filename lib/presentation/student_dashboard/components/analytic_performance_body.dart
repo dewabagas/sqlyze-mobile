@@ -17,7 +17,6 @@ class AnalyticPerformanceBody extends StatefulWidget {
 }
 
 class _AnalyticPerformanceBodyState extends State<AnalyticPerformanceBody> {
-
   @override
   void initState() {
     final Mixpanel mixPanel = locator.get();

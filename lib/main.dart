@@ -30,12 +30,12 @@ void main() async {
   configLoading();
   await SentryFlutter.init(
     (options) {
-      options.dsn = 'https://a29a8c9ae54e298b7ea741ad77ce04a5@o4505617706713088.ingest.sentry.io/4505617711890432';
+      options.dsn =
+          'https://a29a8c9ae54e298b7ea741ad77ce04a5@o4505617706713088.ingest.sentry.io/4505617711890432';
       options.tracesSampleRate = 1.0;
     },
     appRunner: () => runApp(App()),
   );
-  
 }
 
 Future<void> _initializeCrashlytics() async {
