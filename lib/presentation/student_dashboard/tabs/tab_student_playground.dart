@@ -11,6 +11,7 @@ import 'package:sqlyze/presentation/core/constants/styles.dart';
 import 'package:sqlyze/presentation/core/helpers/database_helper.dart';
 import 'package:sqlyze/presentation/core/styles/app_colors.dart';
 import 'package:sqlyze/presentation/shared/widgets/buttons/button_primary.dart';
+import 'package:sqlyze/presentation/shared/widgets/inputs/input_big.dart';
 import 'package:sqlyze/presentation/shared/widgets/inputs/input_secondary.dart';
 import 'package:sqlyze/presentation/shared/widgets/others/expandable_page_view/expandable_page_view.dart';
 import 'package:sqlyze/presentation/shared/widgets/pages/page_decoration_top.dart';
@@ -117,7 +118,7 @@ class _TabStudentPlaygroundState extends State<TabStudentPlayground> {
                 Text('Or you can manually type it here !',
                     style: TextStyles.labelMedium
                         .copyWith(color: AppColors.charcoal)),
-                InputSecondary(
+                InputBig(
                   controller: queryController,
                   hintText: 'Enter SQL Query',
                   labelPadding: EdgeInsets.zero,

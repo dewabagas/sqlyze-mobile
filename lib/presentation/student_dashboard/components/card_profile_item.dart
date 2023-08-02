@@ -43,8 +43,8 @@ class CardProfileItem extends StatelessWidget {
                       SizedBox(width: 20.w),
                       Text(
                         label,
-                        style: TextStyles.bodyVerySmall
-                            .copyWith(fontWeight: FontWeight.w400),
+                        style: TextStyles.labelMedium
+                            .copyWith(fontWeight: FontWeight.w500),
                       ),
                     ],
                   ),

@@ -72,7 +72,7 @@ class _PageRegisterState extends State<PageRegister> {
 
   @override
   void initState() {
-    gender = 'Male';
+    gender = 'male';
     selectedDate = DateTime.now();
     final Mixpanel mixPanel = locator.get();
     mixPanel.track('Register');
@@ -400,8 +400,9 @@ class _PageRegisterState extends State<PageRegister> {
                                   gender: gender,
                                   role: 'student',
                                   birthdate: birthdate,
-                                  profileImageUrl:
-                                      'https://img.freepik.com/free-psd/3d-illustration-person-with-sunglasses_23-2149436188.jpg?w=826&t=st=1690369069~exp=1690369669~hmac=9bc528300e718d6284744198c69029f61ded300d2a4b9674e50f6ecccc3809b0')));
+                                  profileImageUrl: gender == 'male'
+                                      ? 'https://img.freepik.com/free-psd/3d-illustration-person-with-sunglasses_23-2149436188.jpg?w=826&t=st=1690369069~exp=1690369669~hmac=9bc528300e718d6284744198c69029f61ded300d2a4b9674e50f6ecccc3809b0'
+                                      : 'https://img.freepik.com/free-psd/3d-illustration-person-with-glasses_23-2149436191.jpg?w=826&t=st=1690739269~exp=1690739869~hmac=a6b72e80fa7d242d175c442b6c05de400876d2ebbc8b07f5d4b9e645be999fc9')));
                         },
                         title: 'Daftar',
                       ),

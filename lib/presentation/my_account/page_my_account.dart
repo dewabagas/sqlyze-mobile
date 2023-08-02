@@ -1,15 +1,28 @@
+import 'dart:convert';
 import 'dart:io';
 
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
+import 'package:flutter_image_compress/flutter_image_compress.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:sqlyze/application/update_profile_bloc/update_profile_bloc.dart';
 import 'package:sqlyze/domain/core/helpers/validation_helper.dart';
 import 'package:sqlyze/domain/user/entities/user_profile.dart';
+import 'package:sqlyze/domain/user/requests/profile_update_request.dart';
+import 'package:sqlyze/injection.dart';
 import 'package:sqlyze/presentation/core/constants/styles.dart';
+import 'package:sqlyze/presentation/routes/router.gr.dart';
 import 'package:sqlyze/presentation/shared/widgets/buttons/button_gradient.dart';
 import 'package:sqlyze/presentation/shared/widgets/inputs/input_secondary.dart';
+import 'package:sqlyze/presentation/shared/widgets/others/show_dialog.dart';
 import 'package:sqlyze/presentation/shared/widgets/pages/page_decoration_top.dart';
+import 'package:http/http.dart' as http;
+import 'package:dio/dio.dart' as dio;
+import 'package:image/image.dart' as img;
 
 class PageMyAccount extends StatefulWidget {
   final UserProfile userProfile;
@@ -24,6 +37,7 @@ class _PageMyAccountState extends State<PageMyAccount> {
   late BuildContext _buildContext;
 
   String? newProfileImage;
+  String? displayProfileImage;
   final ImagePicker _picker = ImagePicker();
 
   String? fullName;
@@ -77,126 +91,192 @@ class _PageMyAccountState extends State<PageMyAccount> {
   @override
   Widget build(BuildContext context) {
     debugPrint('${widget.userProfile.profileImageUrl}');
-    return PageDecorationTop(
-        appBarTitle: 'Akunku',
-        child: Stack(
-          children: [
-            Container(
-              padding: EdgeInsets.symmetric(horizontal: 16.w),
-              child: Form(
-                key: _key,
-                autovalidateMode: AutovalidateMode.onUserInteraction,
-                child: ListView(
-                  children: [
-                    SizedBox(height: 16.h),
-                    _containerUploadImage(newProfileImage,
-                        '${widget.userProfile.profileImageUrl}'),
-                    SizedBox(height: 16.h),
-                    StatefulBuilder(builder: (context, localSetState) {
-                      return InputSecondary(
-                        controller: fullNameController,
-                        label: 'Nama Lengkap',
-                        hintText: 'Isi Nama Lengkap Kamu',
-                        validator: validationName,
-                        onChanged: (String? val) {
-                          localSetState(() {
-                            isFullNameValid = validationName(val) == null;
-                            fullName = val;
-                          });
-                        },
-                        onFocusChange: (hasFocus) {
-                          localSetState(() {
-                            isFullNameFocused = hasFocus;
-                          });
-                        },
-                        onClear: () {
-                          fullNameController.clear();
-                          isFullNameValid = false;
-                        },
-                        isValidated: isFullNameValid,
-                        isFocused: isFullNameFocused,
-                      );
-                    }),
-                    StatefulBuilder(builder: (context, localSetState) {
-                      return InputSecondary(
-                        controller: emailController,
-                        label: 'Email Aktif',
-                        hintText: 'Isi Email Aktif Kamu',
-                        keyboardType: TextInputType.emailAddress,
-                        validator: validationEmail,
-                        onChanged: (String? val) {
-                          localSetState(() {
-                            isEmailValid = validationEmail(val) == null;
-                            email = val;
-                          });
-                        },
-                        onFocusChange: (hasFocus) {
-                          localSetState(() {
-                            isEmailFocused = hasFocus;
-                          });
-                        },
-                        onClear: () {
-                          emailController.clear();
-                          isEmailValid = false;
-                        },
-                        isValidated: isEmailValid,
-                        isFocused: isEmailFocused,
-                      );
-                    }),
-                    InputSecondary(
-                      label: 'NIS (Opsional)',
-                      hintText: 'Isi NIS Kamu Jika Ada',
-                      keyboardType: TextInputType.phone,
-                      onChanged: (String? val) {
-                        setState(() {
-                          nis = val;
-                        });
-                      },
-                      onFocusChange: (hasFocus) {},
-                      onClear: () {},
+    return BlocProvider<UpdateProfileBloc>(
+      create: (context) => getIt<UpdateProfileBloc>(),
+      child: BlocListener<UpdateProfileBloc, UpdateProfileState>(
+        listener: (context, state) {
+          state.map(
+              initial: (value) => const SizedBox.shrink(),
+              loadInProgress: (value) => EasyLoading.show(status: 'Loading...'),
+              loadSuccess: (value) {
+                EasyLoading.dismiss();
+                debugPrint('updateprofile success ${value.response}');
+                showPositiveDialog(
+                    context: context,
+                    message: value.response,
+                    onTap: () {
+                      AutoRouter.of(context).pushAndPopUntil(
+                          const RouteStudentDashboard(),
+                          predicate: (route) => false);
+                    });
+              },
+              loadFailure: (value) {
+                EasyLoading.dismiss();
+                showErrorDialog(context: context, message: value.message);
+              });
+        },
+        child: Builder(builder: (context) {
+          _buildContext = context;
+          return PageDecorationTop(
+              appBarTitle: 'Akunku',
+              child: Stack(
+                children: [
+                  Container(
+                    padding: EdgeInsets.symmetric(horizontal: 16.w),
+                    child: Form(
+                      key: _key,
+                      autovalidateMode: AutovalidateMode.onUserInteraction,
+                      child: ListView(
+                        children: [
+                          SizedBox(height: 16.h),
+                          _containerUploadImage(displayProfileImage,
+                              '${widget.userProfile.profileImageUrl}'),
+                          SizedBox(height: 16.h),
+                          StatefulBuilder(builder: (context, localSetState) {
+                            return InputSecondary(
+                              controller: fullNameController,
+                              label: 'Nama Lengkap',
+                              hintText: 'Isi Nama Lengkap Kamu',
+                              validator: validationName,
+                              onChanged: (String? val) {
+                                localSetState(() {
+                                  isFullNameValid = validationName(val) == null;
+                                  fullName = val;
+                                });
+                              },
+                              onFocusChange: (hasFocus) {
+                                localSetState(() {
+                                  isFullNameFocused = hasFocus;
+                                });
+                              },
+                              onClear: () {
+                                fullNameController.clear();
+                                isFullNameValid = false;
+                              },
+                              isValidated: isFullNameValid,
+                              isFocused: isFullNameFocused,
+                            );
+                          }),
+                          StatefulBuilder(builder: (context, localSetState) {
+                            return InputSecondary(
+                              controller: emailController,
+                              label: 'Email Aktif',
+                              hintText: 'Isi Email Aktif Kamu',
+                              keyboardType: TextInputType.emailAddress,
+                              validator: validationEmail,
+                              onChanged: (String? val) {
+                                localSetState(() {
+                                  isEmailValid = validationEmail(val) == null;
+                                  email = val;
+                                });
+                              },
+                              onFocusChange: (hasFocus) {
+                                localSetState(() {
+                                  isEmailFocused = hasFocus;
+                                });
+                              },
+                              onClear: () {
+                                emailController.clear();
+                                isEmailValid = false;
+                              },
+                              isValidated: isEmailValid,
+                              isFocused: isEmailFocused,
+                            );
+                          }),
+                          InputSecondary(
+                            label: 'NIS (Opsional)',
+                            hintText: 'Isi NIS Kamu Jika Ada',
+                            keyboardType: TextInputType.phone,
+                            onChanged: (String? val) {
+                              setState(() {
+                                nis = val;
+                              });
+                            },
+                            onFocusChange: (hasFocus) {},
+                            onClear: () {},
+                          ),
+                        ],
+                      ),
                     ),
-                  ],
-                ),
-              ),
-            ),
-            Align(
-              alignment: Alignment.bottomCenter,
-              child: Container(
-                padding: EdgeInsets.only(
-                    bottom: 20.h, top: 18.h, left: 20.w, right: 20.w),
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  boxShadow: [
-                    BoxShadow(
-                        offset: const Offset(0, 4),
-                        blurRadius: 8,
-                        color: Colors.grey.shade200)
-                  ],
-                  border: Border.all(color: Colors.grey.shade200),
-                  borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(30.r),
-                    topRight: Radius.circular(30.r),
                   ),
-                ),
-                child: ButtonGradient(
-                  onPressed: () {},
-                  title: 'Ubah Profil',
-                ),
-              ),
-            )
-          ],
-        ));
+                  Align(
+                    alignment: Alignment.bottomCenter,
+                    child: Container(
+                      padding: EdgeInsets.only(
+                          bottom: 20.h, top: 18.h, left: 20.w, right: 20.w),
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        boxShadow: [
+                          BoxShadow(
+                              offset: const Offset(0, 4),
+                              blurRadius: 8,
+                              color: Colors.grey.shade200)
+                        ],
+                        border: Border.all(color: Colors.grey.shade200),
+                        borderRadius: BorderRadius.only(
+                          topLeft: Radius.circular(30.r),
+                          topRight: Radius.circular(30.r),
+                        ),
+                      ),
+                      child: ButtonGradient(
+                        onPressed: () async {
+                          debugPrint('button update');
+                          if (newProfileImage != null) {}
+                          debugPrint('profileeee name ${fullName}');
+                          debugPrint('profileeee email ${email}');
+                          _buildContext.read<UpdateProfileBloc>().add(
+                                UpdateProfileEvent.updateProfile(
+                                  ProfileUpdateRequest(
+                                    fullName: fullNameController.text,
+                                    email: emailController.text,
+                                    nis: nisController.text,
+                                    msisdn: widget.userProfile.msisdn,
+                                    gender: widget.userProfile.gender,
+                                    birthdate: widget.userProfile.birthdate,
+                                    profileImage: newProfileImage,
+                                  ),
+                                ),
+                              );
+                        },
+                        title: 'Ubah Profil',
+                      ),
+                    ),
+                  )
+                ],
+              ));
+        }),
+      ),
+    );
+  }
+
+  Future<File> compressImage(File file) async {
+    img.Image? image = img.decodeImage(file.readAsBytesSync());
+
+    img.Image? smallerImage = img.copyResize(image!,
+        width:
+            100); // choose the width or height after resize here. it will maintain aspect ratio
+
+    File compressedFile = new File(file.path)
+      ..writeAsBytesSync(img.encodeJpg(smallerImage));
+
+    return compressedFile;
   }
 
   Future<void> _navigateAndDisplaySelection(BuildContext context) async {
-    final pickedFile = await _picker.getImage(source: ImageSource.gallery);
-    setState(() {
-      if (pickedFile != null) {
-        newProfileImage = pickedFile.path;
-      } else {
-        print('No image selected.');
-      }
-    });
+    final pickedFile = await _picker.pickImage(source: ImageSource.gallery);
+    if (pickedFile != null) {
+      debugPrint('pickedFile ${pickedFile.path}');
+      final file = File(pickedFile.path);
+      final compressedImage = await compressImage(file);
+
+      final bytes = compressedImage.readAsBytesSync();
+      setState(() {
+        newProfileImage = base64Encode(bytes);
+        displayProfileImage = pickedFile.path;
+      });
+    } else {
+      print('No image selected.');
+    }
   }
 
   Future<void> uploadImage(String imagePath) async {
