@@ -174,6 +174,7 @@ class _TabStudentPlaygroundState extends State<TabStudentPlayground> {
                     )
                   ],
                 ),
+                SizedBox(height: 50.h),
               ],
             ),
           ),
@@ -215,13 +216,13 @@ class _TabStudentPlaygroundState extends State<TabStudentPlayground> {
       List<Map<String, dynamic>> results = await db.rawQuery(query);
       setState(() {
         queryResults = Future.value(results);
-        // selectedIndex = 1;
+        selectedIndex = 0; 
       });
-      // pageController.animateToPage(
-      //   1,
-      //   duration: const Duration(milliseconds: 250),
-      //   curve: Curves.ease,
-      // );
+      pageController.animateToPage(
+        0,
+        duration: const Duration(milliseconds: 250),
+        curve: Curves.ease,
+      );
     } catch (e) {
       setState(() {
         queryResults = Future.error(e.toString());
